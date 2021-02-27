@@ -9,19 +9,28 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play onlyBans-draft.</tw-noscript></noscript></tw-story>
-<tw-storydata name="onlyBans-draft" startnode="1" creator="Twine" creator-version="2.3.12" ifid="FB0C27F8-0F9E-480D-B01C-B52C21B02882" zoom="1" format="Harlowe" format-version="3.2.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="opening-screen" tags="" position="299.5,97.5" size="100,100">{
+<tw-storydata name="onlyBans-draft" startnode="1" creator="Twine" creator-version="2.3.12" ifid="FB0C27F8-0F9E-480D-B01C-B52C21B02882" zoom="1" format="Harlowe" format-version="3.2.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="opening-screen" tags="" position="299,97" size="100,100">{
 &lt;!-- GLOBAL VARIABLES --!&gt;
+
 (set: $income to 10)
-(set: $incomePerFan to 10)
+(set: $incomePerFan to $incomePerFan)
 (set: $incomeTarget to 200)
 
 (set: $numPhotosPosted to 0)
-(set: $numPhotosDeleted to 0)
+(set: $numPhotosFlagged to 0)
 (set: $numFans to 0)
 
+(set: $flagLimit to 3)
 (set: $isSuspended to false)
+(set: $outingRisk to 3)
+(set: $outingLimit to 3)
 
 (set: $playerName to &#39;@quiteSaxy&#39;)
+
+(set: $numWeeks to 0)
+(set: $weekLimit to 5)
+(set: $suspensionWeek to 3)
+(set: $outingWeek to 4)
 
 &lt;!-- START OF GAME --!&gt; }
 Welcome to OnlyBans!
@@ -40,40 +49,169 @@ Want to play?
 
 
 
-</tw-passagedata><tw-passagedata pid="2" name="What-is-your-name" tags="" position="199.5,301.5" size="100,100">What name should your fans call you? 
+</tw-passagedata><tw-passagedata pid="2" name="What-is-your-name" tags="" position="199,301" size="100,100">What name should your fans call you? 
 (We suggest you use a pseudonym for security purposes.)
 
 Your name is
 (input-box:2bind $playerName,&quot;XXXX=&quot;,1)
 
-[[Ready?-&gt;motivation]]</tw-passagedata><tw-passagedata pid="3" name="content-warning" tags="" position="0,199.5" size="100,100">Here is a content warning, or maybe some options about hiding NSFW content.</tw-passagedata><tw-passagedata pid="4" name="ending" tags="" position="798.5,302.5" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="5" name="motivation" tags="" position="200.5,445.5" size="100,100">Lookin good, (print:$playerName)!
+[[Ready?-&gt;motivation]]</tw-passagedata><tw-passagedata pid="3" name="content-warning" tags="" position="0,199" size="100,100">Here is a content warning, or maybe some options about hiding NSFW content.</tw-passagedata><tw-passagedata pid="4" name="ending" tags="" position="1500,301" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="5" name="motivation" tags="" position="200,445" size="100,100">Lookin good, (print:$playerName)!
 
 You&#39;re hoping to earn $(print:$incomeTarget) to pay your bills this month. Every fan you get earns you $(print:$incomePerFan). If you&#39;re lucky, some of them may even tip you extra! 😘
 
-[[Let&#39;s get fans!-&gt;startDay]]</tw-passagedata><tw-passagedata pid="6" name="startDay" tags="" position="199.5,596.5" size="100,100">## Week 1
+[[Let&#39;s get fans!-&gt;startDay]]</tw-passagedata><tw-passagedata pid="6" name="startDay" tags="" position="199,596" size="100,100">{
+	(set: $numWeek to $numWeek + 1)
+}
+
+## Week $numWeek
 You have $numFans ($(print: $incomePerFan) per fan) and have earned $(print: $currentIncome) this month from subscriptions and tips.
 
 Only $(print: $incomeTarget - $currentIncome) to go!
 
-[[You roll up your sleeves and get to work making content-&gt;photo-selection]].</tw-passagedata><tw-passagedata pid="7" name="photo-selection" tags="" position="199.5,746.5" size="100,100">Which photo do you want to post?
+(if: $numWeek is $suspensionWeek)[[[You go to post a new photo and see a weird notification.-&gt;suspension-side-story]]]
+(else-if: $numWeek is $outingWeek)[Your phone buzzes. An email with the subject line &quot;SOMETHING THREATENING ABOUT OUTING.&quot; [[Take a breath and open it.-&gt;outing-side-story]]]
+(else-if: $numWeek &gt;= $weekLimit)[Those $weekLimits weeks passed //way// too quickly. [[Time to pay those bills.-&gt;money-ending]]]
+(else:)[[You roll up your sleeves and get to work making content.-&gt;photo-selection]]</tw-passagedata><tw-passagedata pid="7" name="photo-selection" tags="" position="199,746" size="100,100">(display: &quot;default-header&quot;)
+Which photo do you want to post?
 
 
 =|=
-Photo A
+&lt;img src=&quot;images/buttocks-cc0.jpg&quot; alt=&quot;buttocks and socks&quot; height=&quot;200&quot;&gt;
+(t8n-depart:&quot;slide-up&quot;)[[Photo A-&gt;photoOutcome]]
 =|=
-Photo B
+&lt;img src=&quot;images/bra-cc0.jpg&quot; alt=&quot;bra drama&quot; height=&quot;200&quot;&gt;
+[[Photo B-&gt;photoOutcome]]
 =|=
-Photo C
+&lt;img src=&quot;images/nude-cc0.jpg&quot; alt=&quot;nude outside&quot; height=&quot;200&quot;&gt;
+[[Photo C-&gt;photoOutcome]]
 |==|
 
+
 ---
+
+
+=||=
+&lt;img src=&quot;images/feet-cc0.jpg&quot; alt=&quot;feet&quot; height=&quot;200&quot;&gt;
+[[Photo D-&gt;photoOutcome]]
 =|=
-Photo D
+&lt;img src=&quot;images/towel-cc0.jpg&quot; alt=&quot;person in towel&quot; height=&quot;200&quot;&gt;
+[[Photo E-&gt;photoOutcome]]
+|==|
+
+
+</tw-passagedata><tw-passagedata pid="8" name="photoOutcome" tags="" position="199,996" size="100,100">(display: &quot;default-header&quot;)
+(put: (either: (either: &quot;flagged-too-sexy&quot;, &quot;flagged-no-reason&quot;, &quot;shadowbanned&quot;), &quot;newFans&quot;) into $photoOutcome)
+
+
+(display: $photoOutcome)
+
+
+[[Continue with your week.-&gt;communitySupport]]</tw-passagedata><tw-passagedata pid="9" name="newFans" tags="" position="402,898" size="100,100">{
+(set: _numNewFans to (random: 2, 4))
+(set: $numFans to ($numFans + _numNewFans))
+(set: $income to $income + ($_numNewFans * $incomePerFan))
+}
+Your photo got some attention and attracted _numNewFans new fans!
+
+
+(display: &quot;stats&quot;)
+
+
+Keep &#39;em coming!</tw-passagedata><tw-passagedata pid="10" name="flagged-too-sexy" tags="" position="542,896" size="100,100">(set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
+Your photo is *too* sexy. It&#39;s been flagged and taken down for Violating the Terms of Service. 
+
+Sorry, no new fans. No new money. Careful, if too many of your photos are flagged, your account may be suspended or deactivated altogether!
+
+
+(display: &quot;stats&quot;)</tw-passagedata><tw-passagedata pid="11" name="flagged-no-reason" tags="" position="544,1027" size="100,100">(set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
+The algorithm flagged your content even though you followed all the guidelines perfectly! 
+
+Sorry, no new fans. No new money.
+
+(display: &quot;stats&quot;)</tw-passagedata><tw-passagedata pid="12" name="shadowbanned" tags="" position="399,1033" size="100,100">Your photo was posted but there are barely any likes or comments. 🤔
+
+You’ve probably been &#39;&#39;shadowbanned&#39;&#39;. 
+
+Shadowbanned accounts have a harder time attracting followers. Platforms can quietly shadowban you for reasons such as: you follow other sex workers, you used hashtags like #asiangirl #curvygirls #sopretty #models #swole, you identified your gender as “female.” 
+
+Sorry, no new fans. No new money.
+
+(display: &quot;stats&quot;)</tw-passagedata><tw-passagedata pid="13" name="communitySupport" tags="" position="200,1200" size="100,100">(display: &quot;default-header&quot;)
+(put: (either: &quot;share4share&quot;, &quot;joinGroup&quot;, &quot;attendWorkshop&quot;, &quot;tip&quot;) into $communityOutcome)
+
+
+(display: $communityOutcome)
+
+[[Continue to the next week.-&gt;startDay]]</tw-passagedata><tw-passagedata pid="14" name="share4share" tags="" position="412,1209" size="100,100">{
+(set: _numNewFollowers to 2)
+(set: $numFollowers to $numFollowers + _numNewFollowers)
+(set: $income to $income + ($_numNewFans * $incomePerFan))
+}
+Another sex worker follows your account and asks you to do a &#39;&#39;share 4 share.&#39;&#39; Each of you promotes the others&#39; content to your own followers. _numNewFollowers new fans find your content!
+
+
+(display: &quot;stats&quot;)</tw-passagedata><tw-passagedata pid="15" name="stats" tags="" position="46,596" size="100,100">Fan Count: $numFans
+Income: $income
+Flagged Photos: $numFlaggedPhotos</tw-passagedata><tw-passagedata pid="16" name="joinGroup" tags="" position="542,1203" size="100,100">{
+(set: _numNewFans to 2)
+(set: $numFans to $numFans + _numNewFans)
+(set: $income to $income + ($_numNewFans * $incomePerFan))
+}
+You join a private Facebook/What’s App group where sex workers discuss best practices. You learn XYZ. 
+
+You also make friends who share your content with their fans, attracting _numNewFans new fans! 😎
+
+(display: &quot;stats&quot;)</tw-passagedata><tw-passagedata pid="17" name="attendWorkshop" tags="" position="408,1332" size="100,100">{
+(set: $outingRisk to $outingRisk - 2)
+}
+You attend a Hacking//Hustling workshop and learn how to stay safe(r) digitally. 
+
+These skills will come in handy to prevent your real identity from getting out.</tw-passagedata><tw-passagedata pid="18" name="tip" tags="" position="545,1333" size="100,100">{
+(set: _tip to (random: 10, 100))
+(set: $income to ($income + _tip))
+}
+Someone sent you a tip of $(print: _tip)! 🤑
+
+(display: &quot;stats&quot;)</tw-passagedata><tw-passagedata pid="19" name="outing-side-story" tags="" position="500,399.5" size="100,100">You might get outed. TODO
+
+[[Not outed. Let&#39;s get back to making content.-&gt;photo-selection]]
+
+[[Yes outed. :(-&gt;outed-ending]]</tw-passagedata><tw-passagedata pid="20" name="outed-ending" tags="" position="1197,398.5" size="100,100">You got outed. 
+
+[[Game over :(-&gt;ending]]</tw-passagedata><tw-passagedata pid="21" name="suspension-side-story" tags="" position="500,596.5" size="100,100">You might get suspended or your account disabled. TODO
+
+[[You get permabanned.-&gt;permabanned-ending]]
+
+[[You don&#39;t get suspended, phew. Let&#39;s get back to content.-&gt;photo-selection]]
+
+[[You do get suspended, so you can&#39;t post this week. This week was a bust.-&gt;startDay]]</tw-passagedata><tw-passagedata pid="22" name="permabanned-ending" tags="" position="1199,593.5" size="100,100">You are locked out of your accounts forever :( TODO
+
+[[Go to ending.-&gt;ending]]</tw-passagedata><tw-passagedata pid="23" name="got-money-ending" tags="" position="1344,791.5" size="100,100">You got enough money! :) TODO
+
+[[Go to ending.-&gt;ending]]</tw-passagedata><tw-passagedata pid="24" name="not-enough-money-ending" tags="" position="1345,972.5" size="100,100">You didn&#39;t get enough money in time :( TODO
+
+[[Go to ending.-&gt;ending]]</tw-passagedata><tw-passagedata pid="25" name="default-header" tags="" position="110,28.5" size="100,100">{
+(set: $globalStatic to
+  (dm: &quot;incomePerFan&quot;,	10,
+	  &quot;incomeTarget&quot;, 	200,
+	  
+	  &quot;flagLimit&quot;, 		3,	  
+	  &quot;outingLimit&quot;,	3,
+	  
+	  &quot;weekLimit&quot;,		5,
+	  &quot;suspensionWeek&quot;,	3,
+	  &quot;outingWeek&quot;,		4,
+  )
+)
+}
 =|=
-Photo E
+Week: $numWeek
 =|=
-Photo F
-|==|</tw-passagedata></tw-storydata>
+ 
+=|=
+Income: $(print:$income)
+|==|
+---</tw-passagedata><tw-passagedata pid="26" name="money-ending" tags="" position="1203,896.5" size="100,100">either you got [[enough money-&gt;got-money-ending]] or you [[didn&#39;t-&gt;not-enough-money-ending]] TODO</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,i=!1,a=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){i=!0,a=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw a}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
