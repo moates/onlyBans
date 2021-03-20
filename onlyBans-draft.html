@@ -32,7 +32,8 @@ tw-story {
 
 tw-sidebar {
      display: none;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="opening-screen" tags="" position="299,97" size="100,100">{&lt;video autoplay loop muted id=&quot;bgvid&quot;&gt;
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="opening-screen" tags="" position="299,97" size="100,100">{&lt;video autoplay loop muted id=&quot;bgvid&quot;&gt;
   &lt;source type=&quot;video/mp4&quot; src=&quot;images/pink-pan.mp4&quot;&gt;
 &lt;/video&gt;
 }
@@ -267,11 +268,10 @@ You&#39;ve earned $(print: _tip) tip!
 
 [[Go to ending.-&gt;ending]]</tw-passagedata><tw-passagedata pid="23" name="not-enough-money-ending" tags="" position="1588,936" size="100,100">You didn&#39;t get enough money in time :( TODO
 
-[[Go to ending.-&gt;ending]]</tw-passagedata><tw-passagedata pid="24" name="header1-stats-bar" tags="header" position="140,20" size="100,100">(background:#748ffc)[
+[[Go to ending.-&gt;ending]]</tw-passagedata><tw-passagedata pid="24" name="header1-stats-bar" tags="header" position="140,20" size="100,100">(background:$headerColor)[
 =|=
 (if: $numWeek &gt; 0)[Week $numWeek]
 =|=
- 
 =|=
 Wallet: $(print:$income)
 |==|
@@ -301,8 +301,12 @@ Wallet: $(print:$income)
 (set: $outingWeek to 2)
 
 (set: $fakeIDCost to 50)
+
+&lt;!-- ACCESSIBILITY VARIABLES --!&gt;
 (set: $playVideos to false)
 
+&lt;!-- STYLE VARIABLES --!&gt;
+(set: $headerColor to #748ffc)
 
 }</tw-passagedata><tw-passagedata pid="27" name="stolen-content" tags="" position="645,208" size="100,100">You fill out a form on PornHubba to report the stolen content.
 
