@@ -27,8 +27,11 @@
 
 tw-story {
     z-index: 0; 
-  
-  
+    padding: 5% 10%;
+}
+
+tw-sidebar {
+     display: none;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="opening-screen" tags="" position="299,97" size="100,100">{&lt;video autoplay loop muted id=&quot;bgvid&quot;&gt;
   &lt;source type=&quot;video/mp4&quot; src=&quot;images/pink-pan.mp4&quot;&gt;
 &lt;/video&gt;
@@ -298,6 +301,8 @@ Wallet: $(print:$income)
 (set: $outingWeek to 2)
 
 (set: $fakeIDCost to 50)
+(set: $playVideos to false)
+
 
 }</tw-passagedata><tw-passagedata pid="27" name="stolen-content" tags="" position="645,208" size="100,100">You fill out a form on PornHubba to report the stolen content.
 
@@ -338,7 +343,7 @@ You can’t use OnlyBans for the rest of the week. You’ve gained no new follow
 
 [[Give up.-&gt;locked-account]]</tw-passagedata><tw-passagedata pid="33" name="mismatch-ID" tags="" position="952,441" size="100,100">Your government ID doesn&#39;t match the name you&#39;ve been using for sex work.
 
-[[Pay for a fake ID. ($(print: $fakeIDCost))-&gt;buy-fake-ID]]
+|fakeID&gt;[[[Pay for a fake ID. ($(print: $fakeIDCost))-&gt;buy-fake-ID]]]
 
 [[Give up.-&gt;locked-account]]</tw-passagedata><tw-passagedata pid="34" name="legal-ID" tags="" position="952,303" size="100,100">You submit a copy of your ID and get your account back, but...using your real name publically for sex work is pretty dangerous. This may affect you later.
 
