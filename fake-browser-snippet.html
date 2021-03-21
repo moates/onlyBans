@@ -8,7 +8,7 @@ body {
 }
 
 
-.dot {
+.browser-dot {
   height: calc(var(--iconSize)/2);
   width: calc(var(--iconSize)/2);
   background-color: var(--iconColor);
@@ -17,7 +17,7 @@ body {
   vertical-align: middle;
 }
 
-.x-icon {
+.browser-x-icon {
 	box-sizing: border-box;
     position: absolute;
     right: calc(var(--iconSize)/2);
@@ -31,14 +31,14 @@ body {
         linear-gradient(135deg, var(--iconColor) 0%,var(--iconColor) 43%,var(--xColor) 45%,var(--xColor) 55%,var(--iconColor) 57%,var(--iconColor) 100%);
 }
 
-.bar-title {
+.browser-bar-title {
 	width: 80%;
     text-align: center;
     display: inline-block;
     color: var(--textColor);
 }
 
-.container {  
+.browser-container {  
   border: 3px solid var(--outlineColor);
   border-radius: 5px;
   
@@ -52,35 +52,58 @@ body {
   --iconSize: 30px;
 }
 
-.top {
+.browser-top {
   padding: 10px;
   background: var(--barColor);
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 3px solid var(--outlineColor);
 }
 
-.content {
+.browser-bottom {
   background: var(--backgroundColor);
-  color: var(--textColor);
   padding: 10px;
-  text-align: center;
+}
+
+.browser-content {
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-bottom: 3%;
+	padding-top: 3%;
+	text-align: center;
+	color: var(--textColor);
+}
+
+.browser-button {
+   padding: 5px;
+   color: var(--barColor);
+   background-color: var(--outlineColor);
+   border: none;
+   font-size: 1.5em;
 }
 
 </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="top">
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-    <span class="bar-title">solidarity.exe</span>
-    <span class="x-icon"></span>
+<div class="browser-container">
+  <div class="browser-top">
+    <span class="browser-dot"></span>
+    <span class="browser-dot"></span>
+    <span class="browser-dot"></span>
+    <span class="browser-bar-title">solidarity.exe</span>
+    <span class="browser-x-icon"></span>
   </div>
 
-  <div class="content">
-    <h3>Browser Window</h3>
-    <p>How to create a browser window look with CSS.</p>
+  <div class="browser-bottom">
+	<div class="browser-content">
+    <h4>BANNED!</h3>
+    <p>You're invited to join a private WhatsApp group where sex workers discuss best practices. You learn that you should watermark  your images. (Otherwise, impersonators could steal your content and set up fake social media accounts.)
+
+Your new friends also share your content with their followers and you get 2 new fans!"</p>
+	</br>
+	<button class="browser-button"> CONTINUE </button>
+	</div>
   </div>
 </div>
 
