@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial;
+}
+
+
+.dot {
+  height: calc(var(--iconSize)/2);
+  width: calc(var(--iconSize)/2);
+  background-color: var(--iconColor);
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.x-icon {
+	box-sizing: border-box;
+    position: absolute;
+    right: calc(var(--iconSize)/2);
+    top: calc(var(--iconSize)/2);
+    display: inline-block;
+    width: var(--iconSize);
+    height: var(--iconSize);
+    border: 6px solid var(--iconColor);
+    background:
+        linear-gradient(45deg, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 43%,var(--xColor) 45%,var(--xColor) 55%,rgba(0,0,0,0) 57%,rgba(0,0,0,0) 100%),
+        linear-gradient(135deg, var(--iconColor) 0%,var(--iconColor) 43%,var(--xColor) 45%,var(--xColor) 55%,var(--iconColor) 57%,var(--iconColor) 100%);
+}
+
+.bar-title {
+	width: 80%;
+    text-align: center;
+    display: inline-block;
+    color: var(--textColor);
+}
+
+.container {  
+  border: 3px solid var(--outlineColor);
+  border-radius: 5px;
+  
+    
+  --outlineColor: #E54F99;
+  --barColor: #ffffff;
+  --backgroundColor: #F7D6E7;
+  --xColor: var(--barColor);
+  --iconColor: var(--outlineColor);
+  --textColor: var(--outlineColor);
+  --iconSize: 30px;
+}
+
+.top {
+  padding: 10px;
+  background: var(--barColor);
+  border-radius: 5px;
+}
+
+.content {
+  background: var(--backgroundColor);
+  color: var(--textColor);
+  padding: 10px;
+  text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="top">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="bar-title">solidarity.exe</span>
+    <span class="x-icon"></span>
+  </div>
+
+  <div class="content">
+    <h3>Browser Window</h3>
+    <p>How to create a browser window look with CSS.</p>
+  </div>
+</div>
+
+</body>
+</html> 
