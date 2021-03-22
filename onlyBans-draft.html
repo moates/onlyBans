@@ -40,6 +40,47 @@ tw-sidebar {
 /* ************* */
 /* FAKE BROWSER */
 /* ************* */
+.browser-container {  
+  border: 4px solid var(--outlineColor);
+  border-radius: 7px;   
+  --iconSize: 30px; /* the math is wrong, so dont change this */
+}
+
+
+.browser-blue {
+  --outlineColor: #555ACF;
+  --barColor: #ffffff;
+  --backgroundColor: #555ACF;
+  --xColor: var(--barColor);
+  --iconColor: var(--outlineColor);
+  --textColor: var(--barColor);
+}
+
+.browser-white {
+  --outlineColor: #555ACF;
+  --barColor: #ffffff;
+  --backgroundColor: #ffffff;
+  --xColor: var(--barColor);
+  --iconColor: var(--outlineColor);
+  --textColor: var(--outlineColor);
+}
+
+.browser-pink {
+  --outlineColor: #E54F99;
+  --barColor: #ffffff;
+  --backgroundColor: #F7D6E7;
+  --xColor: var(--barColor);
+  --iconColor: var(--outlineColor);
+  --textColor: var(--outlineColor);
+}
+
+.browser-top {
+  padding: 10px;
+  background: var(--barColor);
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom: 4px solid var(--outlineColor);
+}
 
 .browser-dot {
   height: calc(var(--iconSize)/2);
@@ -48,6 +89,7 @@ tw-sidebar {
   border-radius: 50%;
   display: inline-block;
   vertical-align: middle;
+  margin: 2px;
 }
 
 .browser-x-icon {
@@ -68,30 +110,9 @@ tw-sidebar {
 	width: 80%;
     text-align: center;
     display: inline-block;
-    color: var(--textColor);
+    color: var(--iconColor);
 }
 
-.browser-container {  
-  border: 3px solid var(--outlineColor);
-  border-radius: 5px;
-  
-    
-  --outlineColor: #E54F99;
-  --barColor: #ffffff;
-  --backgroundColor: #F7D6E7;
-  --xColor: var(--barColor);
-  --iconColor: var(--outlineColor);
-  --textColor: var(--outlineColor);
-  --iconSize: 30px;
-}
-
-.browser-top {
-  padding: 10px;
-  background: var(--barColor);
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  border-bottom: 3px solid var(--outlineColor);
-}
 
 .browser-bottom {
   background: var(--backgroundColor);
@@ -216,26 +237,30 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 
 [[Continue with your week.-&gt;community-support]]</tw-passagedata><tw-passagedata pid="9" name="flagged-too-sexy" tags="" position="394,901" size="100,100">{
 (set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
-(enchant:?page,(background:#ff8787))
+(enchant:?page,(background:#D185A1))
 
-}Your photo is *too* sexy. It&#39;s been flagged and taken down for Violating the Terms of Service. 
+}($blueBrowser: &quot;onlybans.exe&quot;, &quot;###BANNED!
+Your photo is *too* sexy. It&#39;s been flagged and taken down for Violating the Terms of Service. 
 
 Sorry, no new fans. No new money. Careful, if too many of your photos are flagged, your account may be suspended or deactivated altogether!
 
+&quot;)
 
 
 ---
-(text-colour:#e64980)[Placeholder for an image that was actually censored in real life, similar to the one you selected in the game. Upon hover, it shows a real story &amp; stat such as:]
+(text-colour:#ffffff)[Placeholder for an image that was actually censored in real life, similar to the one you selected in the game. Upon hover, it shows a real story &amp; stat such as:]
 “I&#39;m AMAB (assigned male at birth) and non-binary. It&#39;s frustrating to have my body policed in a way where the more feminine I look, the more incriminating it is and thus more of a liability.”
 
 (either: &quot;43.75% of sex workers report having had their images or content used for a fake account that they did not run or provided false information (e.g. having a catfishing account steal their photos).&quot;, &quot;41.01% of those who have done sex work said they have been deplatformed or kicked off of a social media account. Only 7.27% of these deplatformed sex workers have been able to get their account back.&quot;)
 ---
 </tw-passagedata><tw-passagedata pid="10" name="flagged-no-reason" tags="" position="527,1029" size="100,100">(set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
 (enchant:?page,(background:#ff8787))
+($blueBrowser: &quot;flagged-no-reason.exe&quot;, &quot;### BANNED!
 The algorithm flagged your content even though you followed all the guidelines perfectly! 
 
 Sorry, no new fans. No new money.
 
+&quot;)
 
 
 ---
@@ -390,6 +415,72 @@ Wallet: $(print:$income)
 &lt;!-- STYLE VARIABLES --!&gt;
 (set: $headerColor to #748ffc)
 
+
+&lt;!-- FAKE BROWSER MACROS --!&gt;
+(set: $pinkBrowser to (macro: str-type _title, str-type _content, [
+    (output:)[{
+	&lt;div class=&quot;browser-container browser-pink&quot;&gt;
+  	&lt;div class=&quot;browser-top&quot;&gt;
+	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
+	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
+	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
+	  &lt;span class=&quot;browser-bar-title&quot;&gt;_title&lt;/span&gt;
+	  &lt;span class=&quot;browser-x-icon&quot;&gt;&lt;/span&gt;
+ 	&lt;/div&gt;
+	&lt;div class=&quot;browser-bottom&quot;&gt;
+	  &lt;div class=&quot;browser-content&quot;&gt;
+		_content
+	  &lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+	}]
+]))
+
+(set: $blueBrowser to (macro: str-type _title, str-type _content, [
+    (output:)[{
+	&lt;div class=&quot;browser-container browser-blue&quot;&gt;
+  	&lt;div class=&quot;browser-top&quot;&gt;
+	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
+	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
+	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
+	  &lt;span class=&quot;browser-bar-title&quot;&gt;_title&lt;/span&gt;
+	  &lt;span class=&quot;browser-x-icon&quot;&gt;&lt;/span&gt;
+ 	&lt;/div&gt;
+	&lt;div class=&quot;browser-bottom&quot;&gt;
+	  &lt;div class=&quot;browser-content&quot;&gt;
+		_content
+	  &lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+	}]
+]))
+
+(set: $whiteBrowser to (macro: str-type _title, str-type _content, [
+    (output:)[{
+	&lt;div class=&quot;browser-container browser-white&quot;&gt;
+  	&lt;div class=&quot;browser-top&quot;&gt;
+	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
+	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
+	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
+	  &lt;span class=&quot;browser-bar-title&quot;&gt;_title&lt;/span&gt;
+	  &lt;span class=&quot;browser-x-icon&quot;&gt;&lt;/span&gt;
+ 	&lt;/div&gt;
+	&lt;div class=&quot;browser-bottom&quot;&gt;
+	  &lt;div class=&quot;browser-content&quot;&gt;
+		_content
+	  &lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+	}]
+]))
+
+(set: $browserButton to (macro: str-type _content, [
+	(output:)[{
+	&lt;div class=&quot;browser-button&quot;&gt;_content&lt;/div&gt;
+	}]
+]))
+
+
 }</tw-passagedata><tw-passagedata pid="27" name="stolen-content" tags="" position="645,208" size="100,100">You fill out a form on PornHubba to report the stolen content.
 
 (TODO)
@@ -462,33 +553,23 @@ Verified!
 
 [[Continue posting.-&gt;photo-selection]]</tw-passagedata><tw-passagedata pid="40" name="close-account" tags="" position="1431,230" size="100,100">You close your account. (@TODO)
 
-[[Continue with your life.-&gt;ending]]</tw-passagedata><tw-passagedata pid="41" name="fake-browser-template" tags="" position="25,275" size="100,100">{
-(set: $pinkBrowser to (macro: str-type _title, str-type _content,[
-    (output:)[{
-	&lt;div class=&quot;browser-container&quot;&gt;
-  	&lt;div class=&quot;browser-top&quot;&gt;
-	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
-	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
-	  &lt;span class=&quot;browser-dot&quot;&gt;&lt;/span&gt;
-	  &lt;span class=&quot;browser-bar-title&quot;&gt;_title&lt;/span&gt;
-	  &lt;span class=&quot;browser-x-icon&quot;&gt;&lt;/span&gt;
- 	&lt;/div&gt;
-	&lt;div class=&quot;browser-bottom&quot;&gt;
-	  &lt;div class=&quot;browser-content&quot;&gt;
-		_content
-	  &lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;}
-	]
-]))
-}
-
-## testing macro
+[[Continue with your life.-&gt;ending]]</tw-passagedata><tw-passagedata pid="41" name="fake-browser-template" tags="" position="25,275" size="100,100">## testing macro
 
 ($pinkBrowser: &quot;solidarity.exeeee&quot;,&quot;You&#39;re invited to join a private WhatsApp group where sex workers discuss best practices. You learn that you should watermark  your images. (Otherwise, impersonators could steal your content and set up fake social media accounts.)
 
-Your new friends also share your content with their followers and you get 2 new fans!&quot;
-)</tw-passagedata></tw-storydata>
+Your new friends also share your content with their followers and you get 2 new fans! &lt;h3&gt; testing html tags &lt;/h3&gt;
+
+(button:)[[[Continue-&gt;browser-test]]]&quot;
+)
+
+[[next test-&gt;browser-test]]</tw-passagedata><tw-passagedata pid="42" name="browser-test" tags="" position="10,418" size="100,100">($pinkBrowser: &quot;hackinghustling.exe&quot;, &quot;
+	okay? I want to go to [[the next page-&gt;browser-test-2]].&quot;)</tw-passagedata><tw-passagedata pid="43" name="browser-test-2" tags="" position="52,556" size="100,100">(enchant:?page,(background:#7D70C0))
+($blueBrowser: &quot;amiblue.exe&quot;, &quot;Yes you are my dear!&quot;)
+
+($whiteBrowser: &quot;white.exe&quot;, &quot;Here is a white one for a change of pace!
+
+($browserButton: &#39;[[With a button-&gt;browser-test]]&#39;)&quot;)
+</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,i=!1,a=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){i=!0,a=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw a}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
