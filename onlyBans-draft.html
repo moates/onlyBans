@@ -30,6 +30,13 @@ tw-story {
     padding: 5% 10%;
 }
 
+/* ************* */
+/* PHOTO STYLE  */
+/* ************* */
+img.original {
+ 	max-width: 400px;
+  	max-height: 400px;
+}
 
 /* ************* */
 /*     VIDEO     */
@@ -244,8 +251,12 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 (if: $numWeek is $suspensionWeek)[[[You go to post a new photo and see a weird notification.-&gt;suspension-side-story]]]
 (else-if: $numWeek is $outingWeek)[You see an email pop in your inbox. [[Open the message.-&gt;outing-side-story]]]
 (else-if: $numWeek &gt; $weekLimit)[Those $numWeek weeks passed //way// too quickly. [[Time to pay those bills.-&gt;money-ending]]]
-(else:)[[(either: &quot;Time to set some thirst traps.&quot;, &quot;You get out the selfie stick and start snapping away.&quot;, &quot;You love the camera and the camera loves you&quot;)-&gt;photo-selection]] </tw-passagedata><tw-passagedata pid="7" name="photo-selection" tags="" position="199,746" size="100,100">{
-(set: $queuedPhotos to (a: &quot;butt&quot;, &quot;bra&quot;, &quot;nude&quot;, &quot;feet&quot;, &quot;towel&quot;, &quot;bra&quot;, &quot;feet&quot;, &quot;feet&quot;, &quot;towel&quot;, &quot;bra&quot;))
+(else:)[[(either: &quot;Time to set some thirst traps.&quot;, &quot;You get out the selfie stick and start snapping away.&quot;, &quot;You love the camera and the camera loves you&quot;)-&gt;photo-selection]] </tw-passagedata><tw-passagedata pid="7" name="photo-selection" tags="" position="215,768" size="100,100">{
+(set: _availablePhotos to (datanames: $photoPool))
+(set: $queuedPhotos to (shuffled: ...(repeated: (ceil: $numPhotosQueued / _availablePhotos&#39;s length), ..._availablePhotos)))
+(set: $queuedPhotos to (shuffled: ...$queuedPhotos))
+
+(assert: $queuedPhotos&#39;s length &gt;= $numPhotosQueued)
 
 (enchant:?Page,(background:#D185A1))
 }
@@ -256,7 +267,7 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 &#39;)
 </tw-passagedata><tw-passagedata pid="8" name="photo-outcome" tags="" position="201,1005" size="100,100">{
 &lt;!-- If your photo is risky, you&#39;re more likely to get flagged. But you&#39;re also more like to get more fans. --&gt;
-(set: _riskLevel to 2nd of $currentPhoto of $photoPool)
+(set: _riskLevel to &quot;riskLevel&quot; of $currentPhoto of $photoPool)
 
 
 
@@ -324,8 +335,7 @@ Sorry, no new fans. No new money. Careful, if too many of your photos are flagge
 
 
 ---
-(text-colour:#ffffff)[Placeholder for an image that was actually censored in real life, similar to the one you selected in the game. Upon hover, it shows a real story &amp; stat such as:]
-“I&#39;m AMAB (assigned male at birth) and non-binary. It&#39;s frustrating to have my body policed in a way where the more feminine I look, the more incriminating it is and thus more of a liability.”
+($originalPhotoBlurb: $currentPhoto)
 
 (either: &quot;43.75% of sex workers report having had their images or content used for a fake account that they did not run or provided false information (e.g. having a catfishing account steal their photos).&quot;, &quot;41.01% of those who have done sex work said they have been deplatformed or kicked off of a social media account. Only 7.27% of these deplatformed sex workers have been able to get their account back.&quot;)
 ---
@@ -340,8 +350,7 @@ Sorry, no new fans. No new money.
 
 
 ---
-(text-colour:#e64980)[Placeholder for an image that was actually censored in real life, similar to the one you selected in the game. Upon hover, it shows a real story &amp; stat such as:]
-&quot;This selfie was on my account for 3 years but got flagged recently as sexual solicitation and deleted. I had many pictures deleted before but this one upset me the most, because it&#39;s literally just a clothed selfie and also because I kept it as a reminder that I could still have moments where I felt good about myself despite being crushingly depressed at the time.&quot;
+($originalPhotoBlurb: $currentPhoto)
 
 67.14% of those who have done sex work have had a post removed from social media.
 ---
@@ -356,6 +365,8 @@ Sorry, no new fans. No new money.
 
 
 ---
+($originalPhotoBlurb: $currentPhoto)
+
 58.57% of those who have done sex work said they have found their username does not show up in searches.
 ---
 </tw-passagedata><tw-passagedata pid="12" name="community-support" tags="" position="200,1200" size="100,100">{
@@ -451,22 +462,21 @@ You&#39;ve earned $(print: _tip) tip!
 
 [[Go to ending.-&gt;ending]]</tw-passagedata><tw-passagedata pid="23" name="not-enough-money-ending" tags="" position="1588,936" size="100,100">You didn&#39;t get enough money in time :( TODO
 
-[[Go to ending.-&gt;ending]]</tw-passagedata><tw-passagedata pid="24" name="header1-stats-bar" tags="header" position="439,6" size="100,100">(background:$headerColor)[
+[[Go to ending.-&gt;ending]]</tw-passagedata><tw-passagedata pid="24" name="header1-stats-bar" tags="header" position="439,6" size="100,100">{(if: $numWeek &lt;1)[]}(else:)[(background:$headerColor)[
 =|=
-(if: $numWeek &gt; 0)[Week $numWeek]
+Week $numWeek
 =|=
 =|=
 Wallet: $(print:$income)
 |==|
 ---
-]</tw-passagedata><tw-passagedata pid="25" name="money-ending" tags="" position="1443,905" size="100,100">either you got [[enough money-&gt;got-money-ending]] or you [[didn&#39;t-&gt;not-enough-money-ending]] TODO</tw-passagedata><tw-passagedata pid="26" name="startup-1-global-variables" tags="startup" position="29,15" size="100,100">{
+]]</tw-passagedata><tw-passagedata pid="25" name="money-ending" tags="" position="1443,905" size="100,100">either you got [[enough money-&gt;got-money-ending]] or you [[didn&#39;t-&gt;not-enough-money-ending]] TODO</tw-passagedata><tw-passagedata pid="26" name="startup-1-global-variables" tags="startup" position="29,15" size="100,100">{
 &lt;!-- GLOBAL VARIABLES --!&gt;
 
 (set: $income to 0)
 (set: $incomePerFan to 10)
 (set: $incomeTarget to 200)
 
-(set: $numPhotosPosted to 0)
 (set: $numPhotosFlagged to 0)
 (set: $numFans to 0)
 
@@ -487,6 +497,8 @@ Wallet: $(print:$income)
 
 
 (set: $currentPhoto to &quot;default&quot;)	
+(set: $numPhotosQueued to 9)
+
 
 &lt;!-- Outcome/reward distributions for the different photo risks.
 		These should add to 100. --!&gt;
@@ -514,18 +526,92 @@ Wallet: $(print:$income)
 	)
 ))
 
-&lt;!-- Pool of photos. DON&#39;T change the order of the array values...they&#39;re hard-coded, rip. 
+(set: $photoPool to (dm:
+	&quot;default&quot;, (dm:
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/1_JP_Square.jpg&quot; 
+			alt=&quot;feet&quot; 
+			style=&quot;width:100%&quot;&gt;&#39;,
+		&quot;riskLevel&quot;, &quot;low&quot;,
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/1_JP.jpg&quot; 
+			alt=&quot;feet&quot; 
+			class=&quot;original&quot;
+			&gt;&#39;,
+		&quot;context&quot;, &quot;This is the story behind this photo and how it was censored. We haven&#39;t gotten these all approved yet so I don&#39;t want to commit any yet. JP &quot;,
+		&quot;model&quot;, &quot;JP is the default currently.&quot;
+	),
+	
+	&quot;jp&quot;, (dm:
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/1_JP_Square.jpg&quot; 
+			alt=&quot;Pink and purple person kneeling in a fishnet stocking&quot; 
+			style=&quot;width:100%&quot;&gt;&#39;,
+		&quot;riskLevel&quot;, &quot;medium&quot;,
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/1_JP.jpg&quot; 
+			alt=&quot;A person with medium dark skin, buzzed hair, and a mustache. The person is kneeling in an orange fishnet body stocking and a matching banana hammock. Nipples are faintly visible.&quot; 
+			class=&quot;original&quot;
+			&gt;&#39;,
+		&quot;context&quot;, &quot;This is the story behind this photo and how it was censored. We haven&#39;t gotten these all approved yet so I don&#39;t want to commit any yet.&quot;,
+		&quot;model&quot;, &quot;My Name&quot;
+	),
+	
+	&quot;maritza&quot;, (dm:
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/3_Maritza_Square.jpg&quot; 
+			alt=&quot;feet&quot; 
+			style=&quot;width:100%&quot;&gt;&#39;,
+		&quot;riskLevel&quot;, &quot;low&quot;,
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/3_Maritza.jpeg&quot; 
+			alt=&quot;description&quot; 
+			class=&quot;original&quot;
+			&gt;&#39;,
+		&quot;context&quot;, &quot;This is the story behind this photo and how it was censored. We haven&#39;t gotten these all approved yet so I don&#39;t want to commit any yet.&quot;,
+		&quot;model&quot;, &quot;Maritza&quot;
+	),
+	
+	&quot;stonerdomme&quot;, (dm: 
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/4_Stonerdomme_Square.jpg&quot; 
+			alt=&quot;feet&quot; 
+			style=&quot;width:100%&quot;&gt;&#39;,
+		&quot;riskLevel&quot;, &quot;low&quot;,
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/4_Stonerdomme.jpeg&quot; 
+			alt=&quot;description&quot; 
+			class=&quot;original&quot;
+			&gt;&#39;,
+		&quot;context&quot;, &quot;This is the story behind this photo and how it was censored. We haven&#39;t gotten these all approved yet so I don&#39;t want to commit any yet.&quot;,
+		&quot;model&quot;, &quot;Stonerdomme&quot;
+	),
+	
+	&quot;noven&quot;, (dm:
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/5_Noven_Square.jpg&quot; 
+			alt=&quot;feet&quot; 
+			style=&quot;width:100%&quot;&gt;&#39;,
+		&quot;riskLevel&quot;, &quot;medium&quot;,
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/5_Noven.jpeg&quot; 
+			alt=&quot;description&quot; 
+			class=&quot;original&quot;
+			&gt;&#39;,
+		&quot;context&quot;, &quot;This is the story behind this photo and how it was censored. We haven&#39;t gotten these all approved yet so I don&#39;t want to commit any yet.&quot;,
+		&quot;model&quot;, &quot;Noven&quot;
+	),
+	
+	&quot;nimina&quot;, (dm:
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/6_Nimina_Square.jpg&quot; 
+			alt=&quot;feet&quot; 
+			style=&quot;width:100%&quot;&gt;&#39;,
+		&quot;riskLevel&quot;, &quot;low&quot;,
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/6_Nimina.jpg&quot; 
+			alt=&quot;description&quot; 
+			class=&quot;original&quot;
+			&gt;&#39;,
+		&quot;context&quot;, &quot;This is the story behind this photo and how it was censored. We haven&#39;t gotten these all approved yet so I don&#39;t want to commit any yet.&quot;,
+		&quot;model&quot;, &quot;Nimina&quot;
+	),
+	
+	
+)
+)
+
+&lt;!-- COMMENTS
+
 --!&gt;
-(set: $photoPool to (dm: 
-	&quot;default&quot;, 	(a: &quot;&lt;img src=VaporPhotoFilename alt=&#39;alttext&#39;&quot;, 
-				&quot;LOW/MEDIUM/HIGH RISK&quot;, 
-				&quot;&lt;img src=originalfile.jpg&gt;&quot;),
-	&quot;butt&quot;, 	(a: &quot;&lt;img src=&#39;images/buttocks-cc0.jpg&#39; alt=&#39;a butt&#39; style=&#39;width:100%&#39;&gt;&quot;, &quot;high&quot;),
-	&quot;bra&quot;, 		(a: &#39;&lt;img src=&quot;images/bra-cc0.jpg&quot; alt=&quot;bra drama&quot; style=&quot;width:100%&quot;&gt;&#39;, &quot;medium&quot;),
-	&quot;nude&quot;, 	(a: &#39;&lt;img src=&quot;images/nude-cc0.jpg&quot; alt=&quot;nude outside&quot; style=&quot;width:100%&quot;&gt;&#39;, &quot;high&quot;),
-	&quot;feet&quot;, 	(a: &#39;&lt;img src=&quot;images/feet-cc0.jpg&quot; alt=&quot;feet&quot; style=&quot;width:100%&quot;&gt;&#39;, &quot;low&quot;),
-	&quot;towel&quot;, 	(a: &#39;&lt;img src=&quot;images/towel-cc0.jpg&quot; alt=&quot;person in towel&quot; width=100%&quot;&gt;&#39;, &quot;low&quot;),
-))
 
 &lt;!-- ACCESSIBILITY VARIABLES --!&gt;
 (set: $playVideos to false)
@@ -623,11 +709,24 @@ Your new friends also share your content with their followers and you get 2 new 
 
 ($browserButton: &#39;[[With a button-&gt;browser-UI-test]]&#39;)&quot;)
 </tw-passagedata><tw-passagedata pid="43" name="startup-2-macros" tags="startup" position="145,16" size="100,100">{
+
+&lt;!-- ORIGINAL PHOTO --!&gt;
+(set: $originalPhotoBlurb to (macro: str-type _image, [
+  (output:)[
+  	(text-colour:#ffffff)[
+	  	(print: &quot;originalHTML&quot; of _image of $photoPool)
+	  	(print: &quot;context&quot; of _image of $photoPool)
+  		]
+	(text-colour:#74c0fc)[Note: This section has not been formatted yet.]
+	]
+]))
+
 &lt;!-- PHOTO SELECTOR MACROS --!&gt;
-	&lt;!-- holy fuckkkk this code is so awful because Harlowe&#39;s syntax and datastructures awful. 
+	&lt;!-- holy fuckkkk this code is awful because Harlowe&#39;s syntax and datastructures r awful. 
 		the HTML img tag and styling is actually hard-coded
 	--!&gt;
 (set: $photoGrid to (macro: array-type _images, [
+	(assert: _images&#39;s length &gt;= $numPhotosQueued)
 	(set: _p1 to _images&#39;s 1st)
 	(set: _p2 to _images&#39;s 2nd)
 	(set: _p3 to _images&#39;s 3rd)
@@ -637,15 +736,15 @@ Your new friends also share your content with their followers and you get 2 new 
 	(set: _p7 to _images&#39;s 7th)
 	(set: _p8 to _images&#39;s 8th)
 	(set: _p9 to _images&#39;s 9th)
-	(set: _p1HTML to 1st of _p1 of $photoPool)
-	(set: _p2HTML to 1st of _p2 of $photoPool)
-	(set: _p3HTML to 1st of _p3 of $photoPool)
-	(set: _p4HTML to 1st of _p4 of $photoPool)
-	(set: _p5HTML to 1st of _p5 of $photoPool)
-	(set: _p6HTML to 1st of _p6 of $photoPool)
-	(set: _p7HTML to 1st of _p7 of $photoPool)
-	(set: _p8HTML to 1st of _p8 of $photoPool)
-	(set: _p9HTML to 1st of _p9 of $photoPool)
+	(set: _p1HTML to &quot;vaporHTML&quot; of _p1 of $photoPool)
+	(set: _p2HTML to &quot;vaporHTML&quot; of _p2 of $photoPool)
+	(set: _p3HTML to &quot;vaporHTML&quot; of _p3 of $photoPool)
+	(set: _p4HTML to &quot;vaporHTML&quot; of _p4 of $photoPool)
+	(set: _p5HTML to &quot;vaporHTML&quot; of _p5 of $photoPool)
+	(set: _p6HTML to &quot;vaporHTML&quot; of _p6 of $photoPool)
+	(set: _p7HTML to &quot;vaporHTML&quot; of _p7 of $photoPool)
+	(set: _p8HTML to &quot;vaporHTML&quot; of _p8 of $photoPool)
+	(set: _p9HTML to &quot;vaporHTML&quot; of _p9 of $photoPool)
 	
 	(output:)[{	
 	&lt;div class=&quot;photo-grid&quot;&gt;
