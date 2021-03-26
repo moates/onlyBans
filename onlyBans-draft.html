@@ -255,12 +255,38 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 	
 &#39;)
 </tw-passagedata><tw-passagedata pid="8" name="photo-outcome" tags="" position="201,1005" size="100,100">{
+&lt;!-- If your photo is risky, you&#39;re more likely to get flagged. But you&#39;re also more like to get more fans. --&gt;
 (set: _riskLevel to 2nd of $currentPhoto of $photoPool)
 
-(put: (either: (either: &quot;flagged-too-sexy&quot;, &quot;flagged-no-reason&quot;, &quot;shadowbanned&quot;), &quot;new-fans&quot;) into _photoOutcome)
 
 
-}(if: _photoOutcome is &quot;new-fans&quot;)[{
+(set: _weightedOutcome to (macro: dm-type _riskDist, [
+	(set: _tooSexyCap to _riskDist&#39;s &quot;tooSexyBan&quot;)
+	(set: _noReasonCap to _tooSexyCap + _riskDist&#39;s &quot;noReasonBan&quot;)
+	(set: _shadowCap to _noReasonCap + _riskDist&#39;s &quot;shadowBan&quot;)
+	(set: _newFansCap to _shadowCap + _riskDist&#39;s &quot;newFans&quot;)
+	(assert: _newFansCap is 100)
+	(set: _cumDist to  (dm: 
+		  &quot;tooSexyBan&quot;, _tooSexyCap,
+		  &quot;noReasonBan&quot;, _noReasonCap,
+		  &quot;shadowBan&quot;, _shadowCap,
+		  &quot;newFans&quot;, _newFansCap,
+	 ))
+	 (set: _discreteRandom to (random: 0, 100))
+	 (output-data:
+	 	(cond: _discreteRandom &lt;= _tooSexyCap, &quot;flagged-too-sexy&quot;,
+	 		_discreteRandom &lt;= _noReasonCap, &quot;flagged-no-reason&quot;,
+			_discreteRandom &lt;= _shadowCap, &quot;shadowbanned&quot;,
+			_discreteRandom &lt;= _newFansCap, &quot;new-fans&quot;,
+			&quot;new-fans&quot; )
+		)	
+]))
+
+
+(set: $currentPhotoOutcome to (_weightedOutcome: _riskLevel of $riskDists ))
+
+
+}(if: $currentPhotoOutcome is &quot;new-fans&quot;)[{
 	(set: _numNewFans to (random: 2, 4))
 	(set: $numFans to ($numFans + _numNewFans))
 	(set: $income to $income + (_numNewFans * $incomePerFan))
@@ -270,15 +296,15 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 	
 	Keep &#39;em coming!]{
 	
-}(else-if: _photoOutcome is &quot;flagged-too-sexy&quot;)[{
+}(else-if: $currentPhotoOutcome is &quot;flagged-too-sexy&quot;)[{
 	(set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
 	(enchant:?page,(background:#ff8787))}(display: &quot;flagged-too-sexy&quot;)]{
 	
-}(else-if: _photoOutcome is &quot;flagged-no-reason&quot;)[{
+}(else-if: $currentPhotoOutcome is &quot;flagged-no-reason&quot;)[{
 	(set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
 	(enchant:?page,(background:#ff8787))}(display: &quot;flagged-no-reason&quot;)]{
 	
-}(else-if: _photoOutcome is &quot;shadowbanned&quot;)[{
+}(else-if: $currentPhotoOutcome is &quot;shadowbanned&quot;)[{
 	(enchant:?page,(background:#ff8787))}(display:&quot;shadowbanned&quot;)]{
 	
 }(else:)[{
@@ -460,14 +486,45 @@ Wallet: $(print:$income)
 (set: $fakeIDCost to 50)
 
 
-(set: $currentPhoto to &quot;default&quot;)		
+(set: $currentPhoto to &quot;default&quot;)	
+
+&lt;!-- Outcome/reward distributions for the different photo risks.
+		These should add to 100. --!&gt;
+(set: $riskDists to (dm:
+	&quot;low&quot;, (dm: 
+		&quot;tooSexyBan&quot;, 0,
+		&quot;noReasonBan&quot;, 20,
+		&quot;shadowBan&quot;, 10,
+		&quot;newFans&quot;, 70, 
+		&quot;newFansRange&quot;, (random: 1, 2),
+	),
+	&quot;medium&quot;, (dm:
+		&quot;tooSexyBan&quot;, 16,
+		&quot;noReasonBan&quot;, 17,
+		&quot;shadowBan&quot;, 17,
+		&quot;newFans&quot;, 50,
+		&quot;newFansRange&quot;, (random:2,4),
+	),
+	&quot;high&quot;, (dm:
+		&quot;tooSexyBan&quot;, 30,
+		&quot;noReasonBan&quot;, 10,
+		&quot;shadowBan&quot;, 30,
+		&quot;newFans&quot;, 30,
+		&quot;newFansRange&quot;, (random:3,6),
+	)
+))
+
+&lt;!-- Pool of photos. DON&#39;T change the order of the array values...they&#39;re hard-coded, rip. 
+--!&gt;
 (set: $photoPool to (dm: 
-	&quot;default&quot;, (a: &quot;&lt;img src=filename alt=&#39;alttext&#39;&quot;, 0),
-	&quot;butt&quot;, (a: &quot;&lt;img src=&#39;images/buttocks-cc0.jpg&#39; alt=&#39;a butt&#39; style=&#39;width:100%&#39;&gt;&quot;, 3),
-	&quot;bra&quot;, (a: &#39;&lt;img src=&quot;images/bra-cc0.jpg&quot; alt=&quot;bra drama&quot; style=&quot;width:100%&quot;&gt;&#39;, 2),
-	&quot;nude&quot;, (a: &#39;&lt;img src=&quot;images/nude-cc0.jpg&quot; alt=&quot;nude outside&quot; style=&quot;width:100%&quot;&gt;&#39;, 3),
-	&quot;feet&quot;, (a: &#39;&lt;img src=&quot;images/feet-cc0.jpg&quot; alt=&quot;feet&quot; style=&quot;width:100%&quot;&gt;&#39;, 1),
-	&quot;towel&quot;, (a: &#39;&lt;img src=&quot;images/towel-cc0.jpg&quot; alt=&quot;person in towel&quot; width=100%&quot;&gt;&#39;, 1),
+	&quot;default&quot;, 	(a: &quot;&lt;img src=VaporPhotoFilename alt=&#39;alttext&#39;&quot;, 
+				&quot;LOW/MEDIUM/HIGH RISK&quot;, 
+				&quot;&lt;img src=originalfile.jpg&gt;&quot;),
+	&quot;butt&quot;, 	(a: &quot;&lt;img src=&#39;images/buttocks-cc0.jpg&#39; alt=&#39;a butt&#39; style=&#39;width:100%&#39;&gt;&quot;, &quot;high&quot;),
+	&quot;bra&quot;, 		(a: &#39;&lt;img src=&quot;images/bra-cc0.jpg&quot; alt=&quot;bra drama&quot; style=&quot;width:100%&quot;&gt;&#39;, &quot;medium&quot;),
+	&quot;nude&quot;, 	(a: &#39;&lt;img src=&quot;images/nude-cc0.jpg&quot; alt=&quot;nude outside&quot; style=&quot;width:100%&quot;&gt;&#39;, &quot;high&quot;),
+	&quot;feet&quot;, 	(a: &#39;&lt;img src=&quot;images/feet-cc0.jpg&quot; alt=&quot;feet&quot; style=&quot;width:100%&quot;&gt;&#39;, &quot;low&quot;),
+	&quot;towel&quot;, 	(a: &#39;&lt;img src=&quot;images/towel-cc0.jpg&quot; alt=&quot;person in towel&quot; width=100%&quot;&gt;&#39;, &quot;low&quot;),
 ))
 
 &lt;!-- ACCESSIBILITY VARIABLES --!&gt;
