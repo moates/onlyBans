@@ -214,9 +214,15 @@ OnlyBans is an online platform where fans pay for your sexy content. You adverti
 Want to play?
 
 =|=
-[[Yes-&gt;What-is-your-name]]
+[[Play.-&gt;What-is-your-name]]
 =|=
-[[Skip to the end.-&gt;ending]]
+[[Read more.-&gt;ending]]
+=|=
+(link:&quot;Play with no video or animation.&quot;)[{
+	($disableVideo:)
+	This feature isn&#39;t complete yet.
+}]
+^^(You might want this for accessibility reasons.)^^
 |==|
 
 
@@ -231,13 +237,13 @@ Your name is
 Did you pick |realName&gt;[a real name] or |identity&gt;[make up an identity]? 
 
 (click: ?realName)[(set: $usedRealName to true)(goto: &quot;motivation&quot;)]
-(click: ?identity)[(set: $usedRealName to false)(goto: &quot;motivation&quot;)]</tw-passagedata><tw-passagedata pid="3" name="content-warning" tags="" position="147,138" size="100,100">Here is a content warning, or maybe some options about hiding NSFW content.</tw-passagedata><tw-passagedata pid="4" name="ending" tags="" position="1740,310" size="100,100">(text-colour:#fa5252)[Note: No matter how badly your SW career went in the game, all endings eventually lead to a utopic-ish future where SWers band together and create co-owned platforms, health care, decrim, etc. This hasn&#39;t been written yet.]
+(click: ?identity)[(set: $usedRealName to false)(goto: &quot;motivation&quot;)]</tw-passagedata><tw-passagedata pid="3" name="content-warning" tags="" position="147,138" size="100,100">Here is a content warning, or maybe some options about hiding NSFW content.</tw-passagedata><tw-passagedata pid="4" name="ending" tags="" position="1736,396" size="100,100">(text-colour:#fa5252)[Note: No matter how badly your SW career went in the game, all endings eventually lead to a utopic-ish future where SWers band together and create co-owned platforms, health care, decrim, etc. This hasn&#39;t been written yet.]
 
 
 Here are some resources.
-(text-colour:#fa5252)[Note: There will eventually be an expanded resource page.]
+(text-colour:#fa5252)[Note: There will eventually be an expanded [[resource page-&gt;resource-page]].]
 
-[[Play again?-&gt;opening-screen]]</tw-passagedata><tw-passagedata pid="5" name="motivation" tags="" position="200,445" size="100,100">Lookin good, (print:$playerName)!
+(link:&quot;Play again?&quot;)[(restart:)]</tw-passagedata><tw-passagedata pid="5" name="motivation" tags="" position="200,445" size="100,100">Lookin good, (print:$playerName)!
 
 You&#39;re hoping to earn $(print:$incomeTarget) to pay your bills in $weekLimit weeks. Every fan you get earns you $(print:$incomePerFan). If you&#39;re lucky, some of them may even tip you extra! 😘
 
@@ -295,7 +301,7 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 
 
 (set: $currentPhotoOutcome to (_weightedOutcome: _riskLevel of $riskDists ))
-
+(set: _isBannable to $currentPhotoOutcome is in (a: &quot;flagged-too-sexy&quot;, &quot;flagged-no-reason&quot;, &quot;shadowbanned&quot;))
 
 }(if: $currentPhotoOutcome is &quot;new-fans&quot;)[{
 	(set: _numNewFans to (random: 2, 4))
@@ -322,7 +328,14 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 	&#39;&#39;Ooops. Logic error.&#39;&#39;}]
 (display: &quot;stats&quot;)
 
-[[Continue with your week.-&gt;community-support]]</tw-passagedata><tw-passagedata pid="9" name="flagged-too-sexy" tags="" position="394,901" size="100,100">{
+{
+(if: _isBannable and $wasSuspended)[
+	Another banned photo? And after you were suspended recently? [[Oh shit.-&gt;permabanned]]
+]
+(else:)[
+	[[Continue with your week.-&gt;community-support]]
+]
+}</tw-passagedata><tw-passagedata pid="9" name="flagged-too-sexy" tags="" position="401,899" size="100,100">{
 (set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
 (enchant:?page,(background:#D185A1))
 
@@ -442,9 +455,10 @@ You&#39;ve earned $(print: _tip) tip!
 
   (align:&quot;&lt;==&quot;)+(box:&quot;==XXXXX===&quot;)[Hey $playerName. This is kind of awkward, but I just wanted to reach out and let you know I stumbled on this pic of you on PornHubba...]
 
-The pic is yours, but you didn&#39;t post it on PornHubba. Oh, hell no!
-  
-Someone is stealing and reposting your content! Do you want to [[ask other sex workers for advice-&gt;stolen-content]] or [[ignore it-&gt;photo-selection]]?
+The pic is yours, but you didn&#39;t post it on PornHubba. Oh, hell no! 
+Someone is stealing and reposting your content! 
+
+Do you want to [[ask other sex workers for advice-&gt;stolen-content]] or [[ignore it-&gt;photo-selection]]?
 ]
 (else-if: _outingBranch is &quot;personal-data&quot;)[
 	[[The subject line reads //ACCOUNT ISSUE//.-&gt;&quot;personal-data&quot;]]
@@ -463,14 +477,16 @@ Social media is obviously rigged against sex workers. You want to reach your dre
 But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
 
 So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes-&gt;ending]] 😈
-</tw-passagedata><tw-passagedata pid="20" name="suspension-side-story" tags="" position="499,691" size="100,100">(text-colour:#fa5252)[Note: This side story isn&#39;t written yet. You might get suspended from your account and lose some time, might be fine, or might get IP-banned from your platforms. For now, pick your poison.]
-
-[[You don&#39;t get suspended, phew. Let&#39;s get back to content.-&gt;photo-selection]]
-
-[[You do get suspended, so you can&#39;t post this week. This week was a bust.-&gt;start-week]]
-</tw-passagedata><tw-passagedata pid="21" name="permabanned-ending" tags="" position="1438,631" size="100,100">Even if you tried to fight it, 93.75% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
-
-On your journey, you’ve learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
+</tw-passagedata><tw-passagedata pid="20" name="suspension-side-story" tags="side-story" position="499,691" size="100,100">{(set: $wasSuspended to true)}
+($pinkBrowser: &quot;SUSPENSION&quot;, &quot;
+	#SUSPENDED!
+	OnlyBans is watching you. Based on your previous activity, your account has been temporarily blocked from taking this action. This block expires in one week. 
+	
+	We restrict certain content to protect our community. If you continue to post dangerous content, you may be banned permanently.
+	
+	($browserButton: &#39;[[Continue.-&gt;suspension-consequence]]&#39;)
+	&quot;
+)</tw-passagedata><tw-passagedata pid="21" name="permabanned-ending" tags="" position="1438,631" size="100,100">On your journey, you’ve learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
 
 Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own.
 
@@ -488,7 +504,9 @@ Social media is obviously rigged against sex workers. You want to reach your dre
 But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
 </tw-passagedata><tw-passagedata pid="24" name="header1-stats-bar" tags="header" position="439,6" size="100,100">{(if: $numWeek &lt;1)[]}(else:)[(background:$headerColor)[
 =|=
-Week $numWeek
+{(if: (passage: )&#39;s &quot;name&quot; is &quot;start-week&quot;)[]
+(else:)[Week $numWeek]
+}
 =|=
 =|=
 Wallet: $(print:$income)
@@ -516,7 +534,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 (set: $numFans to 0)
 
 (set: $flagLimit to 3)
-(set: $isSuspended to false)
+(set: $wasSuspended to false)
 (set: $outingRisk to 3)
 (set: $outingLimit to 3)
 
@@ -657,7 +675,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 
 
 
-}</tw-passagedata><tw-passagedata pid="27" name="stolen-content" tags="" position="713,336" size="100,100">It turns out that 45% of sex workers have had their images or content used for a fake account (e.g., catfishing). 
+}</tw-passagedata><tw-passagedata pid="27" name="stolen-content" tags="side-story" position="713,336" size="100,100">It turns out that 45% of sex workers have had their images or content used for a fake account (e.g., catfishing). 
 
 You&#39;re pissed that someone could be impersonating you and providing false information or even profiting from your content. They&#39;re going DOWN.
 
@@ -665,10 +683,22 @@ You&#39;re pissed that someone could be impersonating you and providing false in
 You submit a help request, but a few days later the fake account is still up.
 
 (t8n:&quot;dissolve&quot;)+(link:&quot;Find some more help.&quot;)[=
-You ask your sex worker support group to (link:&quot;report the account&quot;)[The copycat gets taken down. Close call!
+You ask your sex worker support group to (link:&quot;report the account&quot;)[{
+	(set: _getsTakenDown to (either: true, false))
+
+}(if:_getsTakenDown is true)[The copycat gets taken down. Close call!
 
 41% of sex workers have had success in getting fake accounts taken down.
+](if: _getsTakenDown is false)[
 
+	The account stays up. It makes you nervous to not have control over your content, but this is a common problem. 59% of sex workers don’t manage to get copycat accounts shut down. What can you do?
+	
+=|=
+	[[Shut down your account before more content is stolen-&gt;close-account]].
+=|=
+	Cut your losses and [[continue posting.-&gt;photo-selection]].
+|==|
+]
 [[Return to posting-&gt;photo-selection]].
 ].</tw-passagedata><tw-passagedata pid="28" name="name-policy" tags="" position="1125,1509" size="100,100">(text-style:&quot;bold&quot;,&quot;expand&quot;)[LOCKED!]
 (align:&quot;&lt;==&quot;)+(box:&quot;===XXXXXXXXXX=======&quot;)[We&#39;ve detected suspicious activity and have locked your account as a security measure. We won&#39;t be able to help you until we receive proof that you&#39;re the owner of this account. Please submit a government-issued ID with your legal name matching the information on the account.]
@@ -678,7 +708,7 @@ What&#39;s your situation?
 
 [[You&#39;re using a pseudonym, so your government ID doesn&#39;t match your work name.-&gt;no-ID]]
 
-[[You submit a government ID with your legal name, the one you&#39;ve been using for work. -&gt;legal-ID]]</tw-passagedata><tw-passagedata pid="29" name="suggested-friends" tags="" position="716,451" size="100,100">OnlyBans suggests a list of people you should follow. It includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
+[[You submit a government ID with your legal name, the one you&#39;ve been using for work. -&gt;legal-ID]]</tw-passagedata><tw-passagedata pid="29" name="suggested-friends" tags="side-story" position="716,451" size="100,100">OnlyBans suggests a list of people you should follow. It includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
 
 
 =|=
@@ -691,27 +721,20 @@ You imagine telling your (cycling-link:&quot;mom&quot;,&quot;dad&quot;,&quot;fav
 ]
 =|=
 (link:&quot;Nope.&quot;)[You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.]
-|==|</tw-passagedata><tw-passagedata pid="30" name="delete-this-payment-processor" tags="" position="717,1088" size="100,100">Payment processor issues - look up Peepshow podcast on people locked out of banking account
-
-A fan sends you a tip on VenCashPal with the description &#96;&#96;sexy handjob video&#96;&#96;. You go to withdraw the money but find that your account has been locked. Eventually, your bank also flags your transactions and shuts down your account. 
-
-[[It takes 3 months for you to get the money that is rightfully and legally yours-&gt;money-ending]]. You try to open a new credit card in the meantime, but most won&#39;t approve your application because card companies have flagged your legal name as being associated with adult content.</tw-passagedata><tw-passagedata pid="31" name="suspended" tags="" position="641,723" size="100,100">(text-style:&quot;bold&quot;,&quot;expand&quot;)[SUSPENDED!]
-(align:&quot;&lt;==&quot;)+(box:&quot;===XXXXXXXXXX=======&quot;)[OnlyBans is watching you. Based on your previous activity, your account has been temporarily blocked from taking this action. This block expires in one week. We restrict certain content to protect our community.]
-
-You can’t use OnlyBans for the rest of the week. You’ve gained no new followers and made no money.</tw-passagedata><tw-passagedata pid="32" name="legal-ID" tags="" position="1280,1283" size="100,100">You submit a copy of your ID and get your account back, but...using your real name publically for sex work is pretty dangerous. This may affect you later.
+|==|</tw-passagedata><tw-passagedata pid="30" name="legal-ID" tags="" position="1280,1283" size="100,100">You submit a copy of your ID and get your account back, but...using your real name publically for sex work is pretty dangerous. This may affect you later.
 
 [[Continue with your week.-&gt;back-to-photo-selection]]
 ---
-[Educational piece on pseudonyms]</tw-passagedata><tw-passagedata pid="33" name="buy-fake-ID" tags="" position="1440,1297" size="100,100">{
+[Educational piece on pseudonyms]</tw-passagedata><tw-passagedata pid="31" name="buy-fake-ID" tags="" position="1440,1297" size="100,100">{
  (set: $income to $income - $fakeIDCost)
 }
 You buy the fake ID for $(print: $fakeIDCost) and submit it to the site to verify your identity. Thankfully, they unlock your account.
 
 (display: &quot;stats&quot;)
 
-[[Continue with posting-&gt;back-to-photo-selection]]</tw-passagedata><tw-passagedata pid="34" name="locked-account" tags="" position="1815,1489" size="100,100">You lose access to your own account. Well. That was short-lived.
+[[Continue with posting-&gt;back-to-photo-selection]]</tw-passagedata><tw-passagedata pid="32" name="locked-account" tags="" position="1815,1489" size="100,100">You lose access to your own account. Well. That was short-lived.
 
-[[Flip off the platform and try to make ends meet a different way. -&gt;an-ending]]</tw-passagedata><tw-passagedata pid="35" name="outing-prelude" tags="" position="473,200" size="100,100">(align:&quot;&lt;==&quot;)+(box:&quot;=========XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=====================&quot;)[We&#39;ve temporarily limited some of your account features. In order to make sure OnlyBans is as safe as possible, you may be asked to confirm you&#39;re not a robot. Easy, right? 
+[[Flip off the platform and try to make ends meet a different way. -&gt;an-ending]]</tw-passagedata><tw-passagedata pid="33" name="outing-prelude" tags="side-story" position="473,200" size="100,100">(align:&quot;&lt;==&quot;)+(box:&quot;=========XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX=====================&quot;)[We&#39;ve temporarily limited some of your account features. In order to make sure OnlyBans is as safe as possible, you may be asked to confirm you&#39;re not a robot. Easy, right? 
 
 For full access, please verify your phone number.]
 
@@ -721,18 +744,18 @@ For full access, please verify your phone number.]
 [[Submit.-&gt;verify-phone]]
 =|=
 [[Skip verification.-&gt;skip-verify-phone]]
-|==|</tw-passagedata><tw-passagedata pid="36" name="skip-verify-phone" tags="" position="840,234" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you verify your phone number. What&#39;s the point of making this content if you can&#39;t even get paid? 
+|==|</tw-passagedata><tw-passagedata pid="34" name="skip-verify-phone" tags="side-story" position="840,234" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you verify your phone number. What&#39;s the point of making this content if you can&#39;t even get paid? 
 
-[[Verify your number.-&gt;outing-prelude]]</tw-passagedata><tw-passagedata pid="37" name="verify-phone" tags="" position="826,113" size="100,100">Your phone buzzes with a text and you type in the verification code.
+[[Verify your number.-&gt;outing-prelude]]</tw-passagedata><tw-passagedata pid="35" name="verify-phone" tags="side-story" position="826,113" size="100,100">Your phone buzzes with a text and you type in the verification code.
 
 Verified!
 
-[[Continue posting.-&gt;photo-selection]]</tw-passagedata><tw-passagedata pid="38" name="close-account" tags="" position="1431,230" size="100,100">Unfortunately, stigma and shame means that most sex workers use pseudonymns and hide their job from their employers and loved ones. Even though you’re not willing to risk being outed, you’ve learned a lot about digital freedom and privacy during your time on OnlyBans. Most importantly, you made friends along the way and realized the power of community!
+[[Continue posting.-&gt;photo-selection]]</tw-passagedata><tw-passagedata pid="36" name="close-account" tags="" position="1431,230" size="100,100">Unfortunately, stigma and shame means that most sex workers use pseudonymns and hide their job from their employers and loved ones. Even though you’re not willing to risk being outed, you’ve learned a lot about digital freedom and privacy during your time on OnlyBans. Most importantly, you made friends along the way and realized the power of community!
 
 But you also want to give the platforms another chance. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
 
 So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes-&gt;ending]] 😈
-</tw-passagedata><tw-passagedata pid="39" name="browser-UI-test" tags="" position="1005,1359" size="100,100">## testing macro
+</tw-passagedata><tw-passagedata pid="37" name="browser-UI-test" tags="" position="1005,1359" size="100,100">## testing macro
 
 ($pinkBrowser: &quot;solidarity.exeeee&quot;,&quot;You&#39;re invited to join a private WhatsApp group where sex workers discuss best practices. You learn that you should watermark  your images. (Otherwise, impersonators could steal your content and set up fake social media accounts.)
 
@@ -741,13 +764,19 @@ Your new friends also share your content with their followers and you get 2 new 
 (button:)[[[Continue-&gt;browser-test]]]&quot;
 )
 
-[[next test-&gt;browser-test]]</tw-passagedata><tw-passagedata pid="40" name="browser-test" tags="" position="990,1502" size="100,100">(enchant:?page,(background:#7D70C0))
+[[next test-&gt;browser-test]]</tw-passagedata><tw-passagedata pid="38" name="browser-test" tags="" position="990,1502" size="100,100">(enchant:?page,(background:#7D70C0))
 ($blueBrowser: &quot;amiblue.exe&quot;, &quot;Yes you are(text-style:&quot;emboss&quot;)[ my dear!&quot;])
 
 ($whiteBrowser: &quot;white.exe&quot;, &quot;Here is a white one for a change of pace!
 
 ($browserButton: &#39;[[With a button-&gt;browser-UI-test]]&#39;)&quot;)
-</tw-passagedata><tw-passagedata pid="41" name="startup-2-macros" tags="startup" position="145,16" size="100,100">{
+</tw-passagedata><tw-passagedata pid="39" name="startup-2-macros" tags="startup" position="145,16" size="100,100">{
+&lt;!-- ACCESSIBILITY TODO --!&gt;
+
+(set: $disableVideo to (macro: [
+		(output:)[]
+	]
+))
 
 &lt;!-- ORIGINAL PHOTO --!&gt;
 (set: $originalPhotoBlurb to (macro: str-type _image, [
@@ -874,7 +903,13 @@ Your new friends also share your content with their followers and you get 2 new 
 	}]
 ]))
 
-}</tw-passagedata><tw-passagedata pid="42" name="peepshow-podcast-TODO" tags="" position="677,1208" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="&quot;personal-data&quot;" tags="" position="719,571" size="100,100">(text-style:&quot;buoy&quot;)[💌] (text-style:&quot;wavy-underline&quot;)[NEW FAN MESSAGE]
+}</tw-passagedata><tw-passagedata pid="40" name="peepshow-podcast-TODO" tags="" position="677,1208" size="100,100">TODO
+
+Payment processor issues - look up Peepshow podcast on people locked out of banking account
+
+A fan sends you a tip on VenCashPal with the description &#96;&#96;sexy handjob video&#96;&#96;. You go to withdraw the money but find that your account has been locked. Eventually, your bank also flags your transactions and shuts down your account. 
+
+It takes 3 months for you to get the money that is rightfully and legally yours. You try to open a new credit card in the meantime, but most won&#39;t approve your application because card companies have flagged your legal name as being associated with adult content.</tw-passagedata><tw-passagedata pid="41" name="&quot;personal-data&quot;" tags="side-story" position="719,571" size="100,100">(text-style:&quot;buoy&quot;)[💌] (text-style:&quot;wavy-underline&quot;)[NEW FAN MESSAGE]
 //(align:&quot;&lt;==&quot;)+(box:&quot;===XXXXXXXXXX=======&quot;)[
   Hey, this is weird, but don&#39;t I know you from somehwere? 
 ]//
@@ -891,7 +926,39 @@ Now that one person knows you&#39;re doing sex work, others might find out too. 
 [[Yes, take your chances and continue posting.-&gt;photo-selection]] 
 =|=
 No way. [[Close your account.-&gt;close-account]]
-|==|</tw-passagedata><tw-passagedata pid="44" name="back-to-photo-selection" tags="" position="1609,1405" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="45" name="an-ending" tags="" position="1815,1594" size="100,100">Double-click this passage to edit it.</tw-passagedata></tw-storydata>
+|==|</tw-passagedata><tw-passagedata pid="42" name="back-to-photo-selection" tags="" position="1609,1405" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="an-ending" tags="" position="1815,1594" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="44" name="resource-page" tags="" position="1901.5,400" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="45" name="suspension-consequence" tags="side-story negative" position="643,692" size="100,100">You can&#39;t use OnlyBans for the rest of the week. You&#39;ve gained no new followers and made no money. 
+
+But hey, it&#39;s [[a new week-&gt;start-week]]. Maybe your luck will improve.</tw-passagedata><tw-passagedata pid="46" name="permabanned" tags="" position="533,898" size="100,100">($pinkBrowser: &quot;DEACTIVATED&quot;, &quot;
+	#PERMABANNED
+	You&#39;ve violated the rules one too many times. Your account has been permanently disabled. 
+
+	[[CONTINUE-&gt;permabanned-stat]].
+&quot;)</tw-passagedata><tw-passagedata pid="47" name="permabanned-appeal" tags="" position="869,890" size="100,100">{
+(set: _hasAppealSuccess to (either: true, false))
+}
+Tell us if you think we made a mistake. What do you do?
+
+
+=|=
+(link:&quot;Cut your losses.&quot;)[Even if you tried to fight it, 93% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
+
+You [[take a moment to reflect -&gt;permabanned-ending]]on everything that&#39;s gone down.
+]
+=|=
+(link:&quot;Contest the decision.&quot;)[{	
+	(if:_hasAppealSuccess is false)[You lose. 93% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
+	
+	You [[take a moment to reflect -&gt;permabanned-ending]]on everything that&#39;s gone down.]
+	(else:)[Your account has been reactivated! Consider yourself in the lucky 7% of sex workers who successfully regain access after being deplatformed.
+	
+	[[Continue with your week.-&gt;community-support]]
+	]
+}]
+|==|</tw-passagedata><tw-passagedata pid="48" name="permabanned-stat" tags="" position="703,900" size="100,100">($blueBrowser: &quot;not-alone.exe&quot;, &quot;41.01% of those who have done sex work said they have been deplatformed or kicked off of a social media account.
+
+	($browserButton:&#39;[[CONTINUE.-&gt;permabanned-appeal]]&#39;)
+&quot;)
+</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,i=!1,a=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){i=!0,a=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw a}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
