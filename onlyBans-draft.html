@@ -43,8 +43,8 @@ tw-link:hover, enchantment-link:hover, .visited:hover {
 
 /* tag styling */
 tw-story[tags~="messy"]{
-  background-color: #E54F99;
-  background-image: url("/windows-background.jpg");
+  background-color: #D185A1;
+  background-image: url("images/windows-background.jpg");
 }
 
 tw-story[tags~="gameplay"]{
@@ -198,12 +198,20 @@ video#bgvid {
 
 .browser-button {
    padding: 5px;
-   color: var(--barColor);
-   background-color: var(--outlineColor);
+   color: var(--barColor, #ffffff);
+   background-color: var(--outlineColor, #555ACF);
    border: none;
    font-size: 1.5em;
 }
 
+.lone-button {
+   	padding: 5px;
+   	color: var(--barColor, #ffffff);
+   	background-color: var(--outlineColor, #555ACF);
+   	border: none;
+   	font-size: 1.5em;
+	border: 5px solid var(--iconColor, #D185A1);
+}
 
 /**************************/
 /*     PHOTO SELECTOR     */
@@ -257,28 +265,34 @@ video#bgvid {
   }
 }
 
-</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="opening-screen" tags="messy" position="299,97" size="100,100">{&lt;video autoplay loop muted id=&quot;bgvid&quot;&gt;
-  &lt;source type=&quot;video/mp4&quot; src=&quot;images/pink-pan.mp4&quot;&gt;
-&lt;/video&gt;
-}
-#Welcome to (text-style:&quot;bold&quot;)[OnlyBans]!
+</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="opening-screen" tags="messy" position="299,97" size="100,100">($whiteBrowser: &quot;&quot;, &quot;#Welcome to (text-style:&#39;bold&#39;)[OnlyBans]!
 
 OnlyBans is an online platform where fans pay for your sexy content. You advertise your Only Bans by offering previews of this content on social media sites to attract fans. The sexier the photo, the more fans! The more fans, the more money! But if you’re too sexy, then your social media account might get suspended, shadowbanned, or deleted - and then you’ll have to start over with a new account. Besides avoiding social media censorship, you also want to make sure that you don’t get outed as a sex worker.
 
-Want to play?
+Want to play?&quot;)
 
 =|=
+($loneButton: &#39;
 [[Play.-&gt;what-is-your-name]]
+
+&#39;)
 =|=
-[[Read more.-&gt;ending]]
-=|=
-(link:&quot;Play with no video or animation.&quot;)[{
-	($disableVideo:)
-	This feature isn&#39;t complete yet.
-}]
-^^(You might want this for accessibility reasons.)^^
+($loneButton: &#39;
+[[Read more.-&gt;resource-page]]
+
+&#39;)
 |==|
 
+
+(align:&quot;=&gt;&lt;=&quot;)+(box:&quot;X=&quot;)[($loneButton: &#39;
+(link:&quot;Play with no video or animation.&quot;)[{
+	($disableVideo:)
+	This feature isn\&#39;t complete yet.
+	
+}]
+(text-size:0.6)[You might want this for accessibility reasons.]
+&#39;)
+]
 
 
 
@@ -1012,6 +1026,17 @@ Your new friends also share your content with their followers and you get 2 new 
 	}]
 ]))
 
+(set: $loneButton to (macro: str-type _content, [
+	(output:)[{
+	&lt;div class=&quot;browser-container&quot;&gt;
+	&lt;div class=&quot;browser-content&quot;&gt;
+	&lt;div class=&quot;lone-button&quot;&gt;_content&lt;/div&gt;
+	&lt;/div&gt;
+	&lt;/div&gt;
+	}]
+]))
+
+
 }</tw-passagedata><tw-passagedata pid="39" name="peepshow-podcast-TODO" tags="" position="677,1208" size="100,100">TODO
 
 Payment processor issues - look up Peepshow podcast on people locked out of banking account
@@ -1067,7 +1092,12 @@ You [[take a moment to reflect -&gt;permabanned-ending]]on everything that&#39;s
 
 	($browserButton:&#39;[[CONTINUE.-&gt;permabanned-appeal]]&#39;)
 &quot;)
-</tw-passagedata><tw-passagedata pid="48" name="what-is-your-name" tags="" position="209,301" size="100,100">($whiteBrowser: &quot;WELCOME&quot;,&#39; 
+</tw-passagedata><tw-passagedata pid="48" name="what-is-your-name" tags="" position="209,301" size="100,100">{&lt;video autoplay loop muted id=&quot;bgvid&quot;&gt;
+  &lt;source type=&quot;video/mp4&quot; src=&quot;images/pink-pan.mp4&quot;&gt;
+&lt;/video&gt;
+}
+
+($whiteBrowser: &quot;WELCOME&quot;,&#39; 
 Your name is
 (input-box:2bind $playerName,&quot;XXXX=&quot;,1)&#39;)
 
