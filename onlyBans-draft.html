@@ -17,6 +17,9 @@
 
 body, tw-story {
 	font-family: Montserrat, sans-serif;
+  	--transitionTime: 4s;
+  	transition: color var(--transitionTime, 2s) ease-in-out;
+  	
 }
 
 tw-sidebar {
@@ -28,18 +31,24 @@ tw-story {
     z-index: 0; 
     padding: 5% 10%;
   	color: #ffffff;
+  	transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
 /* link styling */
 tw-link, .enchantment-link, .visited {
   	color: inherit;
-  	text-shadow: #000000 0.05em 0.05em 0em;
+  	text-shadow: #670033 0.06em 0.06em 0em;
+  transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
 tw-link:hover, enchantment-link:hover, .visited:hover {
-	text-shadow: #000000 0.05em 0.05em 0em;
+	text-shadow: #670033 0.05em 0.05em 0em;
+  		
 }
 
+tw-hook {
+ transition: color var(--transitionTime, 2s) ease-in-out; 
+}
 
 /* tag styling */
 tw-story[tags~="messy"]{
@@ -101,6 +110,7 @@ video#bgvid {
     background: no-repeat;
     background-size: cover;
     background-position: 50% 0%;
+  transition: color 10s ease-in-out;
 }
 
 
@@ -112,6 +122,7 @@ video#bgvid {
   border: 4px solid var(--outlineColor);
   border-radius: 7px;   
   --iconSize: 30px; /* the math is wrong, so dont change this */
+  transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
 
@@ -122,6 +133,7 @@ video#bgvid {
   --xColor: var(--barColor);
   --iconColor: var(--outlineColor);
   --textColor: var(--barColor);
+  transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
 .browser-white {
@@ -131,6 +143,7 @@ video#bgvid {
   --xColor: var(--barColor);
   --iconColor: var(--outlineColor);
   --textColor: var(--outlineColor);
+  transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
 .browser-pink {
@@ -140,6 +153,7 @@ video#bgvid {
   --xColor: var(--barColor);
   --iconColor: var(--outlineColor);
   --textColor: var(--outlineColor);
+  transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
 .browser-top {
@@ -148,6 +162,7 @@ video#bgvid {
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
   border-bottom: 4px solid var(--outlineColor);
+  
 }
 
 .browser-dot {
@@ -185,6 +200,7 @@ video#bgvid {
 .browser-bottom {
   background: var(--backgroundColor);
   padding: 10px;
+  transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
 .browser-content {
@@ -194,6 +210,7 @@ video#bgvid {
 	padding-top: 3%;
 	text-align: center;
 	color: var(--textColor);
+  transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
 .browser-button {
@@ -205,12 +222,12 @@ video#bgvid {
 }
 
 .lone-button {
-   	padding: 5px;
-   	color: var(--barColor, #ffffff);
-   	background-color: var(--outlineColor, #555ACF);
-   	border: none;
+   	padding: 7px;
+   	color: var(--barColor, #555ACF);
+   	background-color: var(--outlineColor, #ffffff);
    	font-size: 1.5em;
 	border: 5px solid var(--iconColor, #D185A1);
+  transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
 /**************************/
@@ -271,31 +288,28 @@ OnlyBans is an online platform where fans pay for your sexy content. You adverti
 
 Want to play?&quot;)
 
+
 =|=
 ($loneButton: &#39;
 [[Play.-&gt;what-is-your-name]]
 
 &#39;)
 =|=
+
+
 ($loneButton: &#39;
 [[Read more.-&gt;resource-page]]
 
 &#39;)
 |==|
-
-
-(align:&quot;=&gt;&lt;=&quot;)+(box:&quot;X=&quot;)[($loneButton: &#39;
+(align:&quot;==&gt;&lt;=&quot;)[($loneButton: &#39;
 (link:&quot;Play with no video or animation.&quot;)[{
 	($disableVideo:)
 	This feature isn\&#39;t complete yet.
 	
 }]
 (text-size:0.6)[You might want this for accessibility reasons.]
-&#39;)
-]
-
-
-
+&#39;)]
 
 </tw-passagedata><tw-passagedata pid="2" name="content-warning" tags="" position="147,138" size="100,100">Here is a content warning, or maybe some options about hiding NSFW content.</tw-passagedata><tw-passagedata pid="3" name="ending" tags="ending" position="1736,396" size="100,100">
 #Thank you for playing OnlyBans
@@ -574,7 +588,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 
 (set: $income to 0)
 (set: $incomePerFan to 10)
-(set: $incomeTarget to 200)
+(set: $incomeTarget to 300)
 
 (set: $numPhotosFlagged to 0)
 (set: $numFans to 0)
@@ -796,32 +810,43 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 
 
 
-}</tw-passagedata><tw-passagedata pid="26" name="stolen-content" tags="side-story gameplay" position="713,336" size="100,100">It turns out that 45% of sex workers have had their images or content used for a fake account (e.g., catfishing). 
+}</tw-passagedata><tw-passagedata pid="26" name="stolen-content" tags="side-story gameplay" position="713,336" size="100,100">{	
+	(set: _getsTakenDown to (either: true, false))
+	
+	(click: ?report)[(show:?submit)]
+	(click: ?moreHelp)[(show:?supportGroup)]
+	(click: ?groupReport)[(show: ?diceRoll)
+		(if: _getsTakenDown is true)[(show:?takenDown)]
+		(else: )[(show:?notTakenDown)]
+		]
+
+}
+($pinkBrowser: &quot;IRL.txt&quot;, &quot;It turns out that 45% of sex workers have had their images or content used for a fake account (e.g., catfishing).&quot;)
 
 You&#39;re pissed that someone could be impersonating you and providing false information or even profiting from your content. They&#39;re going DOWN.
 
-(t8n:&quot;dissolve&quot;)+(link:&quot;Report the account.&quot;)[=
-You submit a help request, but a few days later the fake account is still up.
+|report&gt;[Report the account.]
 
-(t8n:&quot;dissolve&quot;)+(link:&quot;Find some more help.&quot;)[=
-You ask your sex worker support group to (link:&quot;report the account&quot;)[{
-	(set: _getsTakenDown to (either: true, false))
+|submit)[You submit a help request, but a few days later the fake account is still up.
 
-}(if:_getsTakenDown is true)[The copycat gets taken down. Close call!
+|moreHelp&gt;[Find some more help.]]
 
-41% of sex workers have had success in getting fake accounts taken down.
-](if: _getsTakenDown is false)[
+|supportGroup)[You ask your sex worker support group to |groupReport&gt;[report the account]]
+|diceRoll)[(text-style:&quot;rumble&quot;)[🎲](text-style:&quot;shudder&quot;)[🎲](text-style:&quot;shudder&quot;)[🎲](text-style:&quot;rumble&quot;)[🎲]]
+	|takenDown)[
+  The copycat gets taken down. Close call!
 
-	The account stays up. It makes you nervous to not have control over your content, but this is a common problem. 59% of sex workers don’t manage to get copycat accounts shut down. What can you do?
-	
-=|=
-	[[Shut down your account before more content is stolen-&gt;close-account]].
-=|=
-	Cut your losses and [[continue posting.-&gt;photo-selection]].
-|==|
-]
-[[Return to posting-&gt;photo-selection]].
-].</tw-passagedata><tw-passagedata pid="27" name="name-policy" tags="" position="1125,1509" size="100,100">(text-style:&quot;bold&quot;,&quot;expand&quot;)[LOCKED!]
+  ($pinkBrowser: &quot;IRL.txt&quot;, &quot;41% of sex workers have had success in getting fake accounts taken down.&quot;)
+  ]
+	|notTakenDown)[The account stays up. It makes you nervous to not have control over your content, but this is a common problem. 59% of sex workers don’t manage to get copycat accounts shut down. What can you do?
+
+  =|=
+	  [[Shut down your account before more content is stolen-&gt;close-account]].
+  =|=
+	  Cut your losses and [[continue posting.-&gt;photo-selection]].
+  |==|
+  ]
+</tw-passagedata><tw-passagedata pid="27" name="name-policy" tags="" position="1125,1509" size="100,100">(text-style:&quot;bold&quot;,&quot;expand&quot;)[LOCKED!]
 (align:&quot;&lt;==&quot;)+(box:&quot;===XXXXXXXXXX=======&quot;)[We&#39;ve detected suspicious activity and have locked your account as a security measure. We won&#39;t be able to help you until we receive proof that you&#39;re the owner of this account. Please submit a government-issued ID with your legal name matching the information on the account.]
 
 What&#39;s your situation?
@@ -829,20 +854,29 @@ What&#39;s your situation?
 
 [[You&#39;re using a pseudonym, so your government ID doesn&#39;t match your work name.-&gt;no-ID]]
 
-[[You submit a government ID with your legal name, the one you&#39;ve been using for work. -&gt;legal-ID]]</tw-passagedata><tw-passagedata pid="28" name="suggested-friends" tags="side-story gameplay" position="716,451" size="100,100">OnlyBans suggests a list of people you should follow. It includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
+[[You submit a government ID with your legal name, the one you&#39;ve been using for work. -&gt;legal-ID]]</tw-passagedata><tw-passagedata pid="28" name="suggested-friends" tags="side-story gameplay" position="712,457" size="100,100">OnlyBans suggests a list of people you should follow. It includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
 
 
 =|=
-(link:&quot;Yes.&quot;)[You&#39;ll take the risk of having an uncomfortable conversation. After all, you need the money and the clock is ticking. 
+(t8n:&quot;dissolve&quot;)+(t8n-time:3s)|yes&gt;[Yes.]
+=|=
+(t8n:&quot;dissolve&quot;)+(t8n-time:3s)|no&gt;[Nope.]
+|==|
+
+
+|yesConvo)[You&#39;ll take the risk of having an uncomfortable conversation. After all, you need the money and the clock is ticking. 
 
 You imagine telling your (cycling-link:&quot;mom&quot;,&quot;dad&quot;,&quot;favorite teacher&quot;,&quot;child&quot;,&quot;parent&quot;,&quot;godparent&quot;,) about your account. What would you say?
 	(input-box:&quot;===XXXXXXXXXXXXXX===&quot;)
 
 [[That was awkward...-&gt;photo-selection]]
 ]
-=|=
-(link:&quot;Nope.&quot;)[You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.]
-|==|</tw-passagedata><tw-passagedata pid="29" name="legal-ID" tags="" position="1280,1283" size="100,100">You submit a copy of your ID and get your account back, but...using your real name publically for sex work is pretty dangerous. This may affect you later.
+
+(t8n:&quot;dissolve&quot;)+(t8n-time:3s)|noConvo)[You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.]
+
+
+(click: ?no)[(hide:?yes)(show: ?noConvo)]
+(click: ?yes)[(hide:?no)(show:?yesConvo)]</tw-passagedata><tw-passagedata pid="29" name="legal-ID" tags="" position="1280,1283" size="100,100">You submit a copy of your ID and get your account back, but...using your real name publically for sex work is pretty dangerous. This may affect you later.
 
 [[Continue with your week.-&gt;back-to-photo-selection]]
 ---
@@ -1060,7 +1094,21 @@ Now that one person knows you&#39;re doing sex work, others might find out too. 
 [[Yes, take your chances and continue posting.-&gt;photo-selection]] 
 =|=
 No way. [[Close your account.-&gt;close-account]]
-|==|</tw-passagedata><tw-passagedata pid="41" name="back-to-photo-selection" tags="" position="1609,1405" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="an-ending" tags="" position="1815,1594" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="resource-page" tags="IRL" position="1901,400" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="44" name="suspension-consequence" tags="side-story platform-bad" position="643,692" size="100,100">You can&#39;t use OnlyBans for the rest of the week. You&#39;ve gained no new followers and made no money. 
+|==|</tw-passagedata><tw-passagedata pid="41" name="back-to-photo-selection" tags="" position="1609,1405" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="an-ending" tags="" position="1815,1594" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="resource-page" tags="IRL" position="1901,400" size="100,100">(link: &quot;Back to game.&quot;)[(restart:)]
+
+#Resources Page
+
+TODO
+
+#Credits
+
+TODO 
+
+#Acknowledgements
+
+TODO
+
+</tw-passagedata><tw-passagedata pid="44" name="suspension-consequence" tags="side-story platform-bad" position="643,692" size="100,100">You can&#39;t use OnlyBans for the rest of the week. You&#39;ve gained no new followers and made no money. 
 
 But hey, it&#39;s [[a new week-&gt;start-week]]. Maybe your luck will improve.</tw-passagedata><tw-passagedata pid="45" name="permabanned" tags="platform platform-bad" position="533,898" size="100,100">($pinkBrowser: &quot;DEACTIVATED&quot;, &quot;
 	#PERMABANNED
@@ -1099,7 +1147,8 @@ You [[take a moment to reflect -&gt;permabanned-ending]]on everything that&#39;s
 
 ($whiteBrowser: &quot;WELCOME&quot;,&#39; 
 Your name is
-(input-box:2bind $playerName,&quot;XXXX=&quot;,1)&#39;)
+(input-box:2bind $playerName,&quot;=XXX=&quot;,1)
+&#39;)
 
 Did you pick |realName&gt;[a real name] or |identity&gt;[make up an identity]? 
 
