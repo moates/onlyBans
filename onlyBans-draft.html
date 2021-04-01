@@ -424,8 +424,6 @@ Sorry, no new fans. No new money. Careful, if too many of your photos are flagge
 
 </tw-passagedata><tw-passagedata pid="9" name="flagged-no-reason" tags="platform platform-bad" position="527,1029" size="100,100">{
 $platformBadStyle
-&lt;!-- apply tag to whole page since this passage has a parent passage --!&gt;
-(enchant:?page,(css:&quot;.class: platform-bad&quot;)) 
 (set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
 }
 ($blackBrowser: &quot;flagged-no-reason.exe&quot;, &quot;### BANNED!
@@ -534,14 +532,8 @@ $platformNeutralStyle
 (set: _tip to (random: 10, 100))
 (set: $income to ($income + _tip))
 (set: _message to (either: &quot;Damn baby you&#39;re so beautiful and very very sexy!!! 👅👅👅&quot;, &quot;🔥What a beautiful sexy perfect body 🔥&quot;, &quot;Take it all off!!!!!!&quot;, &quot;Sweet meat baby ❤️&quot;, &quot;I love your toes&quot;))
-
-(click:?open)[(show:?message)(hide:?open)]
-}
-(text-style:&quot;buoy&quot;)[💌] (text-style:&quot;wavy-underline&quot;)[NEW FAN MESSAGE]
-(align:&quot;&lt;==&quot;)+(box:&quot;===XXXXXXXXXX=======&quot;)[
-|open&gt;[Open?]|message)[//_message//]
-]
-|message)[You&#39;ve earned $(print: _tip) tip!]
+}($fanMail: _message)
+|message)[You&#39;ve earned a $(print: _tip) tip!]
 
 (display: &quot;stats&quot;)</tw-passagedata><tw-passagedata pid="17" name="outing-side-story" tags="side-story gameplay" position="512,474" size="100,100">{
 	(set: _outingBranch to (either: &quot;stolen-content&quot;, &quot;personal-data&quot;, &quot;suggested-friends&quot;,))
@@ -984,6 +976,17 @@ Your new friends also share your content with their followers and you get 2 new 
 	]
 ))
 
+&lt;!-- FAN MAIL --!&gt;
+	&lt;!-- Note: Any hooks in the passage calling this macro that 
+	are named |message or |open will also trigger
+	This could be helpful, or it could cause name conflicts.
+	--!&gt;
+(set: $fanMail to (macro: str-type _message, [
+	(output:)[{(click:?open)[(show:?message)(hide:?open)]}
+	  ($blueBrowser: &#39;(text-style:&quot;buoy&quot;)[💌] (text-style:&quot;wavy-underline&quot;)[NEW FAN MESSAGE]&#39;, 
+	  &#39;|open&gt;[Open?]|message)[//_message//]&#39;)]]
+))
+
 &lt;!-- ORIGINAL PHOTO --!&gt;
 (set: $originalPhotoBlurb to (macro: str-type _image, str-type _stat, [
 	(set: _photoText to &#39;(print: &quot;originalHTML&quot; of _image of $photoPool)
@@ -1170,10 +1173,7 @@ Payment processor issues - look up Peepshow podcast on people locked out of bank
 
 A fan sends you a tip on VenCashPal with the description &#96;&#96;sexy handjob video&#96;&#96;. You go to withdraw the money but find that your account has been locked. Eventually, your bank also flags your transactions and shuts down your account. 
 
-It takes 3 months for you to get the money that is rightfully and legally yours. You try to open a new credit card in the meantime, but most won&#39;t approve your application because card companies have flagged your legal name as being associated with adult content.</tw-passagedata><tw-passagedata pid="40" name="&quot;personal-data&quot;" tags="side-story gameplay" position="719,571" size="100,100">(text-style:&quot;buoy&quot;)[💌] (text-style:&quot;wavy-underline&quot;)[NEW FAN MESSAGE]
-//(align:&quot;&lt;==&quot;)+(box:&quot;===XXXXXXXXXX=======&quot;)[
-  Hey, this is weird, but don&#39;t I know you from somehwere? 
-]//
+It takes 3 months for you to get the money that is rightfully and legally yours. You try to open a new credit card in the meantime, but most won&#39;t approve your application because card companies have flagged your legal name as being associated with adult content.</tw-passagedata><tw-passagedata pid="40" name="&quot;personal-data&quot;" tags="side-story gameplay" position="719,571" size="100,100">($fanMessage: &quot;Hey, this is weird, but don&#39;t I know you from somehwere?&quot;)
 
 Your old boss started following your OnlyBans account? How did they find you? It&#39;s not like your account is very popular yet...
 
@@ -1256,7 +1256,8 @@ Did you pick |realName&gt;[a real name] or |identity&gt;[make up an identity]?
 }
 Your photo got some attention and attracted _numNewFans new fans!
 	
-Keep &#39;em coming!</tw-passagedata></tw-storydata>
+Keep &#39;em coming!
+</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,i=!1,a=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){i=!0,a=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw a}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
