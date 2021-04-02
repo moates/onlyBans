@@ -38,7 +38,7 @@ tw-story {
 tw-link, .enchantment-link, .visited {
   	color: inherit;
   	text-shadow: #670033 0.06em 0.06em 0em;
-  transition: color var(--transitionTime, 2s) ease-in-out;
+  	transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
 tw-hook {
@@ -46,8 +46,8 @@ tw-hook {
 }
 
 tw-link:hover, enchantment-link:hover, .visited:hover {
-	text-shadow: #670033 0.05em 0.05em 0em;
-  		
+	text-shadow: #670033 0.08em 0.08em 0em;  		
+  	transition: color var(--transitionTime, 0.2s) ease-in-out;
 }
 
 tw-hook {
@@ -333,7 +333,12 @@ Want to play?&quot;)
 </tw-passagedata><tw-passagedata pid="2" name="content-warning" tags="" position="147,138" size="100,100">Here is a content warning, or maybe some options about hiding NSFW content.</tw-passagedata><tw-passagedata pid="3" name="ending" tags="ending" position="1736,396" size="100,100">
 #Thank you for playing OnlyBans
 
-(t8n:  &quot;dissolve&quot;)+(t8n-time:8s)+(link: &quot;Play again?&quot;)[(restart:)]</tw-passagedata><tw-passagedata pid="4" name="motivation" tags="gameplay" position="200,445" size="100,100">Lookin good, (print:$playerName)!
+(t8n:  &quot;dissolve&quot;)+(t8n-time:8s)+(link: &quot;Play again?&quot;)[(restart:)]</tw-passagedata><tw-passagedata pid="4" name="motivation" tags="gameplay bkgvid" position="200,445" size="100,100">{
+($backgroundVideo: &quot;images/empty-wallet.mp4&quot;)
+}
+
+
+Lookin good, (print:$playerName)!
 
 You&#39;re hoping to earn $(print:$incomeTarget) to pay your bills in $weekLimit weeks. Every fan you get earns you $(print:$incomePerFan). If you&#39;re lucky, some of them may even tip you extra! 😘
 
@@ -430,7 +435,7 @@ You’ve made no new fans and earned (link-show: &quot;no money&quot;, ?context)
 You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?</tw-passagedata><tw-passagedata pid="9" name="flagged-no-reason" tags="platform platform-bad" position="527,1029" size="100,100">{
   $platformBadStyle
   (set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
-  (_set: $currentStat to (either: 
+  (set: $currentStat to (either: 
   	&quot;77% of those who have done sex work avoid posting content for fear of being kicked off, shadowbanned, or facing legal action. –Hacking//Hustling&quot;,
 	&quot;68% of those who have done sex work have had content that does not violate a sensitive media policy marked as sensitive media on their profile –Hacking//Hustling&quot;,
 	&quot;74% of those who have done sex work are noticing trends in the suppression of information on social media. –Hacking//Hustling&quot;,
@@ -487,8 +492,9 @@ Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your bu
 }
 
 [[Continue to the next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="12" name="share4share" tags="community" position="412,1209" size="100,100">{
-$communityStyle
-(set: _numNewFans to 2)
+  ($backgroundVideo: &quot;images/help-fist.mp4&quot;)
+  $communityStyle
+  (set: _numNewFans to 2)
 }
 Another sex worker follows your account and invites you to do a &#39;&#39;share 4 share,&#39;&#39; which means that you share their content on your feed and they do the same for you. Are you in?
 
@@ -512,17 +518,18 @@ Another sex worker follows your account and invites you to do a &#39;&#39;share 
 (click: ?no)[(hide: ?share)(show:?noped)]
 }
 </tw-passagedata><tw-passagedata pid="13" name="stats" tags="" position="26,147" size="100,100">Wallet: $(print: $income)</tw-passagedata><tw-passagedata pid="14" name="joinGroup" tags="community" position="542,1203" size="100,100">{
-$communityStyle
-(set: _numNewFans to 2)
+  $communityStyle
+  ($backgroundVideo:&quot;images/help-scrolling.mp4&quot;)
+  (set: _numNewFans to 2)
 
-(set: _groupLesson to (either: 
-	&quot;watermark your images. (Otherwise, impersonators could steal your content and set up fake social media accounts.)&quot;, 
-	&quot;disable location sharing when taking photos. A photo’s EXIF data can expose your exact location.&quot;, 
-	))
+  (set: _groupLesson to (either: 
+	  &quot;watermark your images. (Otherwise, impersonators could steal your content and set up fake social media accounts.)&quot;, 
+	  &quot;disable location sharing when taking photos. A photo’s EXIF data can expose your exact location.&quot;, 
+	  ))
 
 
-(click: ?sure)[(show:?lesson)(hide:?no)]
-(click: ?no)[(show:?nope)(hide:?sure)]
+  (click: ?sure)[(show:?lesson)(hide:?no)]
+  (click: ?no)[(show:?nope)(hide:?sure)]
 }
 You get a DM from a sex worker you follow...
 //(align:&quot;&lt;==&quot;)+(box:&quot;==XXXXX===&quot;)[Wanna join our private sex worker group chat? There&#39;s tons of good tips for making money and keeping yourself safe!]//
@@ -543,6 +550,7 @@ Your new friends also share your content with their followers and you get _numNe
 |nope)[&quot;Alright, good luck then.&quot;]
 |==|
 </tw-passagedata><tw-passagedata pid="15" name="attendWorkshop" tags="community" position="408,1332" size="100,100">{
+	($backgroundVideo: &quot;images/help-hands.mp4&quot;)
 	$communityStyle
 	(set: $outingRisk to $outingRisk - 2)
 	(set: _lesson to (either:
@@ -567,6 +575,7 @@ _lesson
 
 You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out. Plus, there&#39;s pizza. Grab a slice [[on your way out-&gt;start-week]].
 ]</tw-passagedata><tw-passagedata pid="16" name="tip" tags="platform-neutral" position="545,1333" size="100,100">{
+	($backgroundVideo:&quot;images/help-scrolling.mp4&quot;)
   $platformNeutralStyle
   (set: _tip to (random: 10, 100))
   (set: $income to ($income + _tip))
@@ -594,6 +603,7 @@ You wake up with a headache, but you still need to make money. Instead of shooti
 |message)[You&#39;ve earned a $(print: _tip) tip!]
 
 (display: &quot;stats&quot;)</tw-passagedata><tw-passagedata pid="17" name="outing-side-story" tags="side-story gameplay" position="512,474" size="100,100">{
+	($backgroundVideo: &quot;images/mannequin1.mp4&quot;)
 	(set: _outingBranch to (either: &quot;stolen-content&quot;, &quot;personal-data&quot;, &quot;suggested-friends&quot;,))
 	(if: $isLivestream)[(set: _outingBranch to &#39;suggested-friends&#39;)]
 }
@@ -608,9 +618,8 @@ Someone is stealing and reposting your content!
 Do you want to [[ask other sex workers for advice-&gt;stolen-content]] or [[ignore it-&gt;photo-selection]]?
 ]
 (else-if: _outingBranch is &quot;personal-data&quot;)[
-	[[The subject line reads //ACCOUNT ISSUE//.-&gt;&quot;personal-data&quot;]]
+	[[The subject line reads //ACCOUNT ISSUE//.-&gt;personal-data]]
 ]
-
 (else-if: _outingBranch is &quot;suggested-friends&quot;)[
 	OnlyBans sent you a list of suggested followers. You think you recognize one of the people? [[Take a closer look.-&gt;suggested-friends]] 
 ]
@@ -674,7 +683,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 
 &lt;!-- PERFORMANCE SPECIAL FLAG --!&gt;
 &lt;!-- for rigging the game in live playthroughs --!&gt;
-(set: $isLivestream to true)
+(set: $isLivestream to false)
 
 &lt;!-- GLOBAL VARIABLES --!&gt;
 
@@ -908,7 +917,8 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 
 
 
-}</tw-passagedata><tw-passagedata pid="26" name="stolen-content" tags="side-story gameplay" position="713,336" size="100,100">{	
+}</tw-passagedata><tw-passagedata pid="26" name="stolen-content" tags="side-story gameplay bkgvid" position="713,336" size="100,100">{	
+	($backgroundVideo: &quot;images/mannequin4.mp4&quot;)
 	(set: _getsTakenDown to (either: true, false))
 	
 	(click: ?report)[(show:?submit)]
@@ -952,7 +962,9 @@ What&#39;s your situation?
 
 [[You&#39;re using a pseudonym, so your government ID doesn&#39;t match your work name.-&gt;no-ID]]
 
-[[You submit a government ID with your legal name, the one you&#39;ve been using for work. -&gt;legal-ID]]</tw-passagedata><tw-passagedata pid="28" name="suggested-friends" tags="side-story gameplay" position="712,457" size="100,100">The list of people you should follow includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
+[[You submit a government ID with your legal name, the one you&#39;ve been using for work. -&gt;legal-ID]]</tw-passagedata><tw-passagedata pid="28" name="suggested-friends" tags="side-story gameplay bkgvid" position="712,464" size="100,100">{
+	($backgroundVideo: &quot;images/mannequin2.mp4&quot;)
+}The list of people you should follow includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
 
 
 =|=
@@ -1034,6 +1046,15 @@ Your new friends also share your content with their followers and you get 2 new 
 		(output:)[]
 	]
 ))
+
+(set: $backgroundVideo to (macro: str-type _source, [
+	{
+		(set: _glueSource to 
+		&#39;&lt;video autoplay loop muted id=&quot;bgvid&quot;&gt;&lt;source type=&quot;video/mp4&quot; src=&#39;+_source+&#39;&gt;&lt;/video&gt;&#39;)
+	}
+	(output:)[_glueSource
+	]
+]))
 
 &lt;!-- FAN MAIL --!&gt;
 	&lt;!-- Note: Any hooks in the passage calling this macro that 
@@ -1240,7 +1261,10 @@ Payment processor issues - look up Peepshow podcast on people locked out of bank
 
 A fan sends you a tip on VenCashPal with the description &#96;&#96;sexy handjob video&#96;&#96;. You go to withdraw the money but find that your account has been locked. Eventually, your bank also flags your transactions and shuts down your account. 
 
-It takes 3 months for you to get the money that is rightfully and legally yours. You try to open a new credit card in the meantime, but most won&#39;t approve your application because card companies have flagged your legal name as being associated with adult content.</tw-passagedata><tw-passagedata pid="40" name="&quot;personal-data&quot;" tags="side-story gameplay" position="719,571" size="100,100">($fanMessage: &quot;Hey, this is weird, but don&#39;t I know you from somehwere?&quot;)
+It takes 3 months for you to get the money that is rightfully and legally yours. You try to open a new credit card in the meantime, but most won&#39;t approve your application because card companies have flagged your legal name as being associated with adult content.</tw-passagedata><tw-passagedata pid="40" name="personal-data" tags="side-story gameplay bkgvid" position="719,571" size="100,100">{
+	($backgroundVideo: &quot;images/mannequin2.mp4&quot;)
+}
+($fanMail: &quot;Hey, this is weird, but don&#39;t I know you from somehwere?&quot;)
 
 Your old boss started following your OnlyBans account? How did they find you? It&#39;s not like your account is very popular yet...
 
@@ -1268,7 +1292,10 @@ TODO
 
 TODO
 
-</tw-passagedata><tw-passagedata pid="44" name="suspension-consequence" tags="side-story platform-bad" position="643,692" size="100,100">You can&#39;t use OnlyBans for the rest of the week. You&#39;ve gained no new followers and made no money. 
+</tw-passagedata><tw-passagedata pid="44" name="suspension-consequence" tags="side-story platform-bad" position="643,692" size="100,100">{
+	($backgroundVideo: &quot;images/stress-nails.mp4&quot;)
+}
+You can&#39;t use OnlyBans for the rest of the week. You&#39;ve gained no new followers and made no money. 
 
 But hey, it&#39;s [[a new week-&gt;start-week]]. Maybe your luck will improve.</tw-passagedata><tw-passagedata pid="45" name="permabanned" tags="platform platform-bad" position="533,898" size="100,100">($blackBrowser: &quot;DEACTIVATED&quot;, &quot;
 	#PERMABANNED
@@ -1276,8 +1303,9 @@ But hey, it&#39;s [[a new week-&gt;start-week]]. Maybe your luck will improve.</
 
 	[[CONTINUE-&gt;permabanned-stat]].
 &quot;)</tw-passagedata><tw-passagedata pid="46" name="permabanned-appeal" tags="gameplay" position="869,890" size="100,100">{
-(set: _hasAppealSuccess to (either: true, false))
-(if: $isLivestream)[(set: _hasAppealSuccess to true)]
+	($backgroundVideo: &quot;images/stress-temples.mp4&quot;)
+  	(set: _hasAppealSuccess to (either: true, false))
+  	(if: $isLivestream)[(set: _hasAppealSuccess to true)]
 }
 Tell us if you think we made a mistake. What do you do?
 
@@ -1301,10 +1329,10 @@ You [[take a moment to reflect -&gt;permabanned-ending]]on everything that&#39;s
 
 	($browserButton:&#39;[[CONTINUE.-&gt;permabanned-appeal]]&#39;)
 &quot;)
-</tw-passagedata><tw-passagedata pid="48" name="what-is-your-name" tags="" position="209,301" size="100,100">{&lt;video autoplay loop muted id=&quot;bgvid&quot;&gt;
-  &lt;source type=&quot;video/mp4&quot; src=&quot;images/pink-pan.mp4&quot;&gt;
-&lt;/video&gt;
+</tw-passagedata><tw-passagedata pid="48" name="what-is-your-name" tags="bkgvid" position="209,301" size="100,100">{
+	($backgroundVideo: &quot;images/typing.mp4&quot;)
 }
+
 
 ($whiteBrowser: &quot;WELCOME&quot;,&#39; Your name is
 (input-box:2bind $playerName,&quot;=XXX=&quot;,1)
@@ -1323,7 +1351,7 @@ Did you pick |realName&gt;[a real name] or |identity&gt;[make up an identity]?
 }
 Your photo got some attention and attracted _numNewFans new fans!
 	
-Yay, you’re getting the hang of this! [[What else could you do-&gt;community-support]] to boost your fan count?</tw-passagedata></tw-storydata>
+Yay, you’re getting the hang of this! [[What else could you do-&gt;community-support]] to boost your fan count?</tw-passagedata><tw-passagedata pid="50" name="cutscene-test" tags="" position="68,698" size="100,100">Double-click this passage to edit it.</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,i=!1,a=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){i=!0,a=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw a}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
