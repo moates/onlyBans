@@ -96,7 +96,20 @@ tw-story[tags~="ending"]{
   background-color: #4b5bcf;
 }
 
+/* HEASDER */
+.info-bar {
+	overflow: hidden;
+  	background-color: #748ffc;
+  	color: #ffffff;
+	padding: 10px 20px;
+  	font-size: 0.7em;
+  	border-radius: 8px;
+  	margin-top: 10px;
+}
 
+.info-bar-right {
+ 	float: right; 
+}
 
 
 /* ************* */
@@ -348,7 +361,7 @@ Lookin good, (print:$playerName)!
 
 You&#39;re hoping to earn $(print:$incomeTarget) to pay your bills in $weekLimit weeks. Every fan you get earns you $(print:$incomePerFan). If you&#39;re lucky, some of them may even tip you extra! 😘
 
-[[Let&#39;s get fans!-&gt;start-week]]</tw-passagedata><tw-passagedata pid="5" name="start-week" tags="gameplay" position="199,596" size="100,100">{
+[[Let&#39;s get fans!-&gt;start-week]]</tw-passagedata><tw-passagedata pid="5" name="start-week" tags="gameplay" position="205,622" size="100,100">{
 	(set: $numWeek to $numWeek + 1)
 }
 ## Week $numWeek
@@ -358,7 +371,7 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 (else-if: $numWeek is $outingPreludeWeek)[(t8n:&quot;dissolve&quot;)+(t8n-time:1.5s)+(link:&quot;Log in to post a new photo.&quot;)[Weird...the button to post photos is disabled. [[Check your notifications-&gt;outing-prelude]].]]
 (else-if: $numWeek is $outingWeek)[You see a message pop up. [[Open the message.-&gt;outing-side-story]]]
 (else-if: $numWeek &gt; $weekLimit)[(go-to:&quot;money-ending&quot;)]
-(else:)[[(either: &quot;Time to set some thirst traps.&quot;, &quot;You get out the selfie stick and start snapping away.&quot;, &quot;You love the camera and the camera loves you&quot;)-&gt;photo-selection]] </tw-passagedata><tw-passagedata pid="6" name="photo-selection" tags="platform-neutral" position="215,768" size="100,100">{
+(else:)[[(either: &quot;Time to set some thirst traps.&quot;, &quot;You get out the selfie stick and start snapping away.&quot;, &quot;You love the camera and the camera loves you&quot;)-&gt;photo-selection]] </tw-passagedata><tw-passagedata pid="6" name="photo-selection" tags="platform-neutral" position="255,808" size="100,100">{
   (set: $queuedPhotos to $availablePhotos)
   (if: $queuedPhotos&#39;s length &lt; $numPhotosQueued)[
 	  (set: _numEmpties to (max: 0, $numPhotosQueued - $availablePhotos&#39;s length))
@@ -521,7 +534,9 @@ Sorry, no new fans. (link-show: &quot;No new money.&quot;, ?context)
 |shared)[They share your pics to their feed. You attract _numNewFans new fans make some more money!{
 (set: $numFans to $numFans + _numNewFans)
 (set: $income to $income + (_numNewFans * $incomePerFan))
-}]
+}
+
+(display: &quot;stats&quot;)]
 =||=
 |no&gt;[&quot;Nah.&quot;]
 
@@ -613,9 +628,7 @@ You pick up some digital harm reduction tools that will come in handy to prevent
 	&quot;Gorgeous and sexy, I so want you babe 🔥🔥🔥👿👿👿😍😘&quot;,
 	&quot;You poor child,have you no clothes to wear??&quot;,  
   ))
-}
-You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.
-
+}_intro
 (align:&quot;&lt;==&quot;)+(box:&quot;===XXXXXXXXXXXXXX===&quot;)[($fanMail: _message+&quot;
 	Here’s an extra tip :)&quot;)]
 |message)[{(set: $income to ($income + _tip))
@@ -683,17 +696,24 @@ But you also want to give the platforms the chance to change. Even though it’s
 Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
 
 But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
-</tw-passagedata><tw-passagedata pid="23" name="header1-stats-bar" tags="header" position="439,6" size="100,100">{(if: $numWeek &lt;1)[]}(else:)[(background:$headerColor)[
-=|=
-{(if: (passage: )&#39;s &quot;name&quot; is &quot;start-week&quot;)[]
-(else:)[Week $numWeek]
+</tw-passagedata><tw-passagedata pid="23" name="header1-stats-bar" tags="header" position="439,6" size="100,100">
+{
+	(if: $numWeek &gt;=1)[		
+	  {
+	  	(set: $weekInfo to &quot;Week &quot;+(str: $numWeek))
+	  	(if: (passage:)&#39;s &quot;name&quot; is &quot;start-week&quot;)[
+		  (set: $weekInfo to &quot;&quot;)]
+	  }
+	  	&lt;div class=&quot;info-bar&quot;&gt;
+		  $weekInfo
+		  &lt;div class=&quot;info-bar-right&quot;&gt;
+		  Wallet: $(print:$income)
+		  &lt;/div&gt;
+	  &lt;/div&gt; 
+	  ]
+	  (else:)[]
 }
-=|=
-=|=
-Wallet: $(print:$income)
-|==|
----
-]]</tw-passagedata><tw-passagedata pid="24" name="money-ending" tags="ending" position="1443,905" size="100,100">{
+</tw-passagedata><tw-passagedata pid="24" name="money-ending" tags="ending" position="1443,905" size="100,100">{
    (set: _hasEnoughMoney to $income &gt; $incomeTarget)
 }
 Time&#39;s up! Your $(print: $incomeTarget) is due.
@@ -1363,6 +1383,7 @@ No way. [[Close your account.-&gt;close-account]]
 |about)[##ABOUT
 Created by a team of sex workers and allies, OnlyBans is an interactive game that critically examines the policing of marginalized bodies and sexual labor to empathetically teach people about discrimination faced by sex workers online. Players encounter content moderation algorithms, shadowbanning, “real name” policies, facial recognition software, and other threats based on actual experiences of sex workers. Featuring real images and stories from sex workers themselves, OnlyBans offers a speculative vision of how marginalized communities can unite to protest these unjust policies and create better alternatives.
 
+This game is still a living document, a work-in-progress. We welcome feedback!
 ]
 |resources)[##RESOURCES
 OnlyBans is a journey into a world of increasing censorship, restrictive content policy changes, and user account shutdowns. It is the world we are living in today, as platforms such as YouTube, Instagram, Craigslist, Reddit, and Tumblr, adopt an umbrella ban on “adult content”, which has not only impacted sex workers, but also artists, activists, and Internet users of all backgrounds.
