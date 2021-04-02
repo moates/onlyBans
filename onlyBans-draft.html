@@ -344,11 +344,14 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 (else-if: $numWeek is $outingWeek)[You see a message pop up. [[Open the message.-&gt;outing-side-story]]]
 (else-if: $numWeek &gt; $weekLimit)[(go-to:&quot;money-ending&quot;)]
 (else:)[[(either: &quot;Time to set some thirst traps.&quot;, &quot;You get out the selfie stick and start snapping away.&quot;, &quot;You love the camera and the camera loves you&quot;)-&gt;photo-selection]] </tw-passagedata><tw-passagedata pid="6" name="photo-selection" tags="platform-neutral" position="215,768" size="100,100">{
-(set: _availablePhotos to (datanames: $photoPool))
-(set: $queuedPhotos to (shuffled: ...(repeated: (ceil: $numPhotosQueued / _availablePhotos&#39;s length), ..._availablePhotos)))
-(set: $queuedPhotos to (shuffled: ...$queuedPhotos))
+  (set: $queuedPhotos to $availablePhotos)
+  (if: $queuedPhotos&#39;s length &lt; $numPhotosQueued)[
+	  (set: _numEmpties to (max: 0, $numPhotosQueued - $availablePhotos&#39;s length))
+	  (set: $queuedPhotos to $availablePhotos + (repeated: _numEmpties, &quot;default&quot;))
+  ]
 
-(assert: $queuedPhotos&#39;s length &gt;= $numPhotosQueued)
+  (set: $queuedPhotos to (shuffled: ...$queuedPhotos))
+  (assert: $queuedPhotos&#39;s length &gt;= $numPhotosQueued)
 }
 
 ($whiteBrowser: &quot;MY PHOTOS&quot;,&#39;(text-style:&quot;bold&quot;,&quot;expand&quot;)[Which photo do you want to post?]	
@@ -554,7 +557,7 @@ Do you want to [[ask other sex workers for advice-&gt;stolen-content]] or [[igno
 ]
 
 (else-if: _outingBranch is &quot;suggested-friends&quot;)[
-	[[You log on one day and notice someone in your &#39;Suggested Followers&#39; list.-&gt;suggested-friends]] 
+	OnlyBans sent you a list of suggested followers. You think you recognize one of the people? [[Take a closer look.-&gt;suggested-friends]] 
 ]
 (else:)[
 	Your friend asks you to feed their cat (again). [[Get back to making content.-&gt;photo-selection]]
@@ -674,6 +677,8 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	)
 ))
 
+
+	
 (set: $photoPool to (dm:
 	&quot;default&quot;, (dm:
 		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/default_Square.jpg&quot; 
@@ -701,12 +706,12 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 		&quot;model&quot;, &quot;J.P (Themme)&quot;
 	),
 	
-	&quot;maritza&quot;, (dm:
-		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/3_Maritza_Square.jpg&quot; 
-			alt=&quot;feet&quot; 
+	&quot;quin&quot;, (dm:
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/3_Quin_Square.jpg&quot; 
+			alt=&quot;A pink and purple person lies chest-down on a cushion with their butt lifted slightly into the air. No nipples or genitals are in view.&quot; 
 			class=&quot;photo&quot;&gt;&#39;,
 		&quot;riskLevel&quot;, &quot;medium&quot;,
-		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/3_Maritza.jpeg&quot; 
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/3_Quin.jpeg&quot; 
 			alt=&quot;A light-skinned, tattooed, thin person lies chest-down on a cushion with their butt lifted slightly into the air. They are wearing strong eyelines, a nose ring, and pink thong bodysuit lingerie with a few bows. No nipples or genitals are in view.&quot; 
 			class=&quot;original&quot;
 			&gt;&#39;,
@@ -728,11 +733,11 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	),
 	
 	&quot;fae&quot;, (dm:
-		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/default_Square.jpg&quot; 
-			alt=&quot;default&quot; 
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/12_Fae_Square.jpg&quot; 
+			alt=&quot;The chin and chest of a pink and purple person a leather chest harness and lipstick. Their arms cover most of their flat chest, but the faint outline of a nipple is visible.&quot; 
 			class=&quot;photo&quot;&gt;&#39;,
 		&quot;riskLevel&quot;, &quot;low&quot;,
-		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/default.jpg&quot; 
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/12_Fae.jpg&quot; 
 			alt=&quot;A person with tight curly hair, glasses, and dark lipstick gazes listlessly at the camera. They are wearing a leather chest harness and fishnet tights. Their arms cover most of their flat chest, but the faint outline of a nipple is visible.&quot;
 			class=&quot;original&quot;
 			&gt;&#39;,
@@ -740,12 +745,12 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 		&quot;model&quot;, &quot;Fae Brite&quot;
 	),
 	
-	&quot;noven&quot;, (dm:
-		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/5_Noven_Square.jpg&quot; 
+	&quot;amala&quot;, (dm:
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/5_Amala_Square.jpg&quot; 
 			alt=&quot;A pink and purple person leans shirtless toward the camera with one hand covering both breasts.&quot; 
 			class=&quot;photo&quot;&gt;&#39;,
 		&quot;riskLevel&quot;, &quot;low&quot;,
-		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/5_Noven.jpeg&quot; 
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/5_Amala.jpeg&quot; 
 			alt=&quot;Amala Azul leans shirtless toward the camera with one hand covering both breasts. Amala is Black and wear a checkered skirt, hoop earrings, a head scarf, and fantastic eyebrows. No nipples are showing.&quot; 
 			class=&quot;original&quot;
 			&gt;&#39;,
@@ -755,7 +760,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	
 	&quot;nimina&quot;, (dm:
 		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/6_Nimina_Square.jpg&quot; 
-			alt=&quot;&quot; 
+			alt=&quot;A curvy, pink and purple person holds two peace signs up. They are wearing a sleeveless top and a studded leather collar. There is a small amount of cleavage visible.&quot; 
 			class=&quot;photo&quot;&gt;&#39;,
 		&quot;riskLevel&quot;, &quot;low&quot;,
 		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/6_Nimina.jpg&quot; 
@@ -767,11 +772,11 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	),
 	
 	&quot;hellbait&quot;, (dm:
-		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/default_Square.jpg&quot; 
-			alt=&quot;default&quot; 
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/11_Hellbait_Square.jpg&quot; 
+			alt=&quot;A pink and purple person with long hair holds their hands above their head. A yellow tellytubby toy sits on their lap. They are shirtless, but their hair fully covers their breasts. Their mouth is held open with a hook gag, tongue out.&quot; 
 			class=&quot;photo&quot;&gt;&#39;,
 		&quot;riskLevel&quot;, &quot;medium&quot;,
-		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/default.jpg&quot; 
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/11_Hellbait.jpg&quot; 
 			alt=&quot;A Vietnamese person with long hair holds two butt plugs to their head like alien antennae. A yellow tellytubby toy sits on their lap. They are shirtless, but their hair fully covers their breasts. Their mouth is held open with a hook gag, tongue out.&quot; 
 			class=&quot;original&quot;
 			&gt;&#39;,
@@ -780,11 +785,11 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	),
 	
 	&quot;karren&quot;, (dm:
-		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/default_Square.jpg&quot; 
-			alt=&quot;default karren 06&quot; 
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/9_Karren1_Square.jpg&quot; 
+			alt=&quot;A thin, shirtless, pink and purple person default slides one hand under sheer tights into their crotch. There are nipples visible, but no genitals.&quot; 
 			class=&quot;photo&quot;&gt;&#39;,
 		&quot;riskLevel&quot;, &quot;high&quot;,
-		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/default.jpg&quot; 
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/9_Karren1.jpg&quot; 
 			alt=&quot;A shiftless woman slides one hand under sheer tights into her crotch. She is thin, has light skin, dark hair, and a perfect manicure. The portion of her face above the lips has been cropped off.&quot; 
 			class=&quot;original&quot;
 			&gt;&#39;,
@@ -793,11 +798,11 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	),
 	
 	&quot;karren2&quot;, (dm:
-		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/default_Square.jpg.&quot; 
-			alt=&quot;default karren 2 05&quot; 
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/10_Karren2_Square.jpg.&quot; 
+			alt=&quot;A thin, purple person stands angled slightly away from the camera. The person is shirtless with pink underwear. One nipple is faintly visible.&quot; 
 			class=&quot;photo&quot;&gt;&#39;,
 		&quot;riskLevel&quot;, &quot;high&quot;,
-		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/default.jpg&quot; 
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/10_Karren2.jpg&quot; 
 			alt=&quot;A thin, light-skinned woman stands angled slightly away from the camera. She is shirtless with dark brief underwear. One nipple is visible.&quot; 
 			class=&quot;original&quot;
 			&gt;&#39;,
@@ -806,12 +811,12 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	),
 
 	&quot;lync&quot;, (dm:
-		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/default_Square.jpg&quot; 
-			alt=&quot;default&quot; 
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/8_Lync2_Square.jpg&quot; 
+			alt=&quot;A muscled, pink and purple man faces the camera. One hand lifts up his shirt above his nipple. The other hand reaches down into his pants, revealing the edge of public hair.&quot; 
 			class=&quot;photo&quot;&gt;&#39;,
 		&quot;riskLevel&quot;, &quot;high&quot;,
-		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/default.jpg&quot; 
-			alt=&quot;A thin, muscular Black man stares into the camera. One hand lifts up his shirt above his nipple. The other hand reaches down into his pant, revealing the edge of public hair.&quot;
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/8_Lync2.jpg&quot; 
+			alt=&quot;A thin, muscular Black man stares into the camera. One hand lifts up his shirt above his nipple. The other hand reaches down into his pants, revealing the edge of public hair.&quot;
 			class=&quot;original&quot;
 			&gt;&#39;,
 		&quot;context&quot;, &quot;This image was deleted by Instagram.  I had to crop or edit the photo in order to successfully repost them.&quot;,
@@ -819,11 +824,11 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	),
 	
 	&quot;lync2&quot;, (dm:
-		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/default_Square.jpg&quot; 
-			alt=&quot;default&quot; 
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/7_Lync1_Square.jpg&quot; 
+			alt=&quot;A naked, thin, muscular, pink and purple man stares into the camera. The image is cropped from his eyes to the edge of his groin, revealing the faintest suggestion of genitals. Both nipples are visible.&quot; 
 			class=&quot;photo&quot;&gt;&#39;,
 		&quot;riskLevel&quot;, &quot;high&quot;,
-		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/default.jpg&quot; 
+		&quot;originalHTML&quot;, &#39;&lt;img src=&quot;images/7_Lync1.jpg&quot; 
 			alt=&quot;A naked, thin, muscular Black man stares into the camera. The image is cropped at the edge of his groin, revealing the faintest suggestion of genitals. Both nipples are visible. A water mark says RoyMayh.&quot;
 			class=&quot;original&quot;
 			&gt;&#39;,
@@ -832,9 +837,8 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	),
 ))
 
-&lt;!-- COMMENTS
+(set: $availablePhotos to (datanames: $photoPool) - (a: &quot;default&quot;))
 
---!&gt;
 
 &lt;!-- ACCESSIBILITY VARIABLES --!&gt;
 (set: $playVideos to false)
@@ -893,7 +897,7 @@ What&#39;s your situation?
 
 [[You&#39;re using a pseudonym, so your government ID doesn&#39;t match your work name.-&gt;no-ID]]
 
-[[You submit a government ID with your legal name, the one you&#39;ve been using for work. -&gt;legal-ID]]</tw-passagedata><tw-passagedata pid="28" name="suggested-friends" tags="side-story gameplay" position="712,457" size="100,100">OnlyBans suggests a list of people you should follow. It includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
+[[You submit a government ID with your legal name, the one you&#39;ve been using for work. -&gt;legal-ID]]</tw-passagedata><tw-passagedata pid="28" name="suggested-friends" tags="side-story gameplay" position="712,457" size="100,100">The list of people you should follow includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
 
 
 =|=
@@ -1024,24 +1028,32 @@ Your new friends also share your content with their followers and you get 2 new 
 	(set: _p7HTML to &quot;vaporHTML&quot; of _p7 of $photoPool)
 	(set: _p8HTML to &quot;vaporHTML&quot; of _p8 of $photoPool)
 	(set: _p9HTML to &quot;vaporHTML&quot; of _p9 of $photoPool)
+	(set: _pickPhoto to (macro: str-type _imgKey, [
+		(if: _imgKey is &quot;default&quot;)[(output:)[]]
+		(else:)[ (output:)[
+			(set: $currentPhoto to _imgKey)
+			(set: $availablePhotos to $availablePhotos - (a: _imgKey))
+			(goto:&quot;photo-outcome&quot;)
+		]]
+	]))
 	
 	(output:)[{	
 	&lt;div class=&quot;photo-grid&quot;&gt;
 	  &lt;div class=&quot;photo-row&quot;&gt;
 		  &lt;div class=&quot;photo-column&quot;&gt;		  	
-			  (link: _p1HTML)[(set: $currentPhoto to _p1)(goto:&quot;photo-outcome&quot;)]
-			(link: _p2HTML)[(set: $currentPhoto to _p2)(goto:&quot;photo-outcome&quot;)]	  
-			  (link: _p3HTML)[(set: $currentPhoto to _p3)(goto:&quot;photo-outcome&quot;)]
+			  (link-reveal: _p1HTML)[(_pickPhoto: _p1)]
+			  (link-reveal: _p2HTML)[(_pickPhoto: _p2)]  
+			  (link-reveal: _p3HTML)[(_pickPhoto: _p3)]
 		  &lt;/div&gt;
 		  &lt;div class=&quot;photo-column&quot;&gt;
-			  (link: _p4HTML)[(set: $currentPhoto to _p4)(goto:&quot;photo-outcome&quot;)]
-			  (link: _p5HTML)[(set: $currentPhoto to _p5)(goto:&quot;photo-outcome&quot;)]
-			  (link: _p6HTML)[(set: $currentPhoto to _p6)(goto:&quot;photo-outcome&quot;)]
+			  (link-reveal: _p4HTML)[(_pickPhoto: _p4)]
+			  (link-reveal: _p5HTML)[(_pickPhoto: _p5)]
+			  (link-reveal: _p6HTML)[(_pickPhoto: _p6)]
 		  &lt;/div&gt;
 		  &lt;div class=&quot;photo-column&quot;&gt;
-			  (link: _p7HTML)[(set: $currentPhoto to _p7)(goto:&quot;photo-outcome&quot;)]
-			  (link: _p8HTML)[(set: $currentPhoto to _p8)(goto:&quot;photo-outcome&quot;)]
-			  (link: _p9HTML)[(set: $currentPhoto to _p9)(goto:&quot;photo-outcome&quot;)]
+			  (link-reveal: _p7HTML)[(_pickPhoto: _p7)]
+			  (link-reveal: _p8HTML)[(_pickPhoto: _p8)]
+			  (link-reveal: _p9HTML)[(_pickPhoto: _p9)]
 		  &lt;/div&gt;
 		 &lt;/div&gt;
 	&lt;/div&gt;	
