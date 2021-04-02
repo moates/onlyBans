@@ -409,57 +409,76 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 (if: _isBannable and $wasSuspended)[
 	Another banned photo? That&#39;s $numFlaggedPhotos banned photos //and// you were recently suspended? [[Oh shit...-&gt;permabanned]]
 ]
-(else:)[
-	[[Continue with your week.-&gt;community-support]]
-]
 }</tw-passagedata><tw-passagedata pid="8" name="flagged-too-sexy" tags="platform-bad" position="397,891" size="100,100">{
 &lt;!-- apply tag to whole page since this passage has a parent passage --!&gt; 
 $platformBadStyle
 (set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
-(set: $currentStat to (either: &quot;43.75% of sex workers report having had their images or content used for a fake account that they did not run or provided false information (e.g. having a catfishing account steal their photos).\&quot;, \&quot;41.01% of those who have done sex work said they have been deplatformed or kicked off of a social media account. Only 7.27% of these deplatformed sex workers have been able to get their account back.\&quot;&quot;))
+(set: $currentStat to (either: 
+	&quot;42% of sex workers said they have received a warning that their social media account is close to deletion.&quot;, 
+	&quot;67% of sex workers have had a post removed from social media.&quot;,
+	&quot;Plus-size users&#39; accounts are flagged for excessive nudity and sexual solicitation more frequently than thin users’ accounts. Women of color and queer people experience platform punishment and policing more frequently than their white, cishetero counterparts.&quot;))
 
-}($blackBrowser: &quot;onlybans.exe&quot;, &quot;###BANNED!
-Your photo is *too* sexy. It&#39;s been flagged and taken down for Violating the Terms of Service. 
-
+}($blackBrowser: &quot;onlybans.exe&quot;, &quot;###FLAGGED!
+Your photo is *too* sexy. It’s been taken down. If you post something that goes against our guidelines again, your account may be deleted.
 &quot;)
 
-Sorry, no new fans. (link-show: &quot;No new money.&quot;, ?context) Careful, if too many of your photos are flagged, your account may be suspended or deactivated altogether! 
+You’ve made no new fans and earned (link-show: &quot;no money&quot;, ?context).
 
 |context)[($pinkBrowser: &quot;IRL.jpg&quot;, &quot;($originalPhotoBlurb: $currentPhoto, $currentStat)
 &quot;)]
 
-</tw-passagedata><tw-passagedata pid="9" name="flagged-no-reason" tags="platform platform-bad" position="527,1029" size="100,100">{
-$platformBadStyle
-(set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
+You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?</tw-passagedata><tw-passagedata pid="9" name="flagged-no-reason" tags="platform platform-bad" position="527,1029" size="100,100">{
+  $platformBadStyle
+  (set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
+  (_set: $currentStat to (either: 
+  	&quot;77% of those who have done sex work avoid posting content for fear of being kicked off, shadowbanned, or facing legal action. –Hacking//Hustling&quot;,
+	&quot;68% of those who have done sex work have had content that does not violate a sensitive media policy marked as sensitive media on their profile –Hacking//Hustling&quot;,
+	&quot;74% of those who have done sex work are noticing trends in the suppression of information on social media. –Hacking//Hustling&quot;,
+  ))
 }
-($blackBrowser: &quot;flagged-no-reason.exe&quot;, &quot;### BANNED!
-The algorithm flagged your content even though you followed all the guidelines perfectly! 
+($blackBrowser: &quot;flagged-no-reason.exe&quot;, &quot;### FLAGGED!
+The algorithm flagged your content even though you followed all the guidelines! If you get flagged again, your account may be deleted.
 &quot;)
 
-Sorry, no new fans. (link-show: &quot;No new money.&quot;, ?context)
+Sorry, no new fans. This seems completely unfair, but you&#39;re probably (link-show: &quot;not the first sex worker to have this problem&quot;, ?context).
 
 |context)[($pinkBrowser: &quot;IRL.jpg&quot;, 
 	&#39;($originalPhotoBlurb: $currentPhoto, &quot;67.14% of those who have done sex work have had a post removed from social media.&quot;)&#39;
 )]
 
+
+=|=
+[[Do some research.-&gt;community-support]]
+=|=
+[[Keep posting.-&gt;start-week]]
+|==|
 </tw-passagedata><tw-passagedata pid="10" name="shadowbanned" tags="platform platform-bad" position="399,1037" size="100,100">{
-&lt;!-- apply tag to whole page since this passage has a parent passage --!&gt;
-$platformBadStyle
-}($blackBrowser: &quot;&quot;, &quot;Your photo was posted but there are barely any likes or comments. 🤔
+  &lt;!-- apply tag to whole page since this passage has a parent passage --!&gt;
+  $platformBadStyle
 
-You’ve probably been &#39;&#39;shadowbanned&#39;&#39;. 
+	(set: $currentStat to (either: 
+		&#39;&quot;We are reducing the spread of posts that are inappropriate but do not go against guidelines, limiting them from being recommended on our Explore and hashtag pages. For example, a sexually suggestive post will still appear in Feed if you follow the account that posts it, but this type of content may not appear for the broader community.&quot; –Instagram&quot;&#39;,
+		&#39;A shadowban ensures that content that platforms deem inappropriate, high-risk, or low value speech is invisible to other users, but still allows an account to remain on the platform in order to make ad revenue off of the shadowbanned individual. –Hacking//Hustling&#39;,
+		&#39;You can get shadowbanned for following other sex workers. 73% of sex workers have experienced social media platforms suppressing their friends’ content from their timelines. –Hacking//Hustling&#39;,
+		&#39;59% of sex workers have found their username does not show up in searches –Hacking//Hustling&#39;,
+		&#39;55% of those who have done sex work avoid specific words to avoid being shadowbanned. You can get shadowbanned for using banned phrases and hashtags like #asiangirl, #curvygirls, or #lesbian.  –Hacking//Hustling&#39;
+	))
 
-Shadowbanned accounts have a harder time attracting followers. Platforms can quietly shadowban you for reasons such as: you follow other sex workers, you used hashtags like #asiangirl #curvygirls #sopretty #models #swole, you identified your gender as &#39;female.&#39; &quot;)
+}($blackBrowser: &quot;&quot;, &quot;###SHADOWBANNED?
+
+Your photo was posted but there are barely any likes or comments. 🤔
+
+A shadowban means that a user can continue posting as normal, but their posts will be hidden from the rest of the community.
+&quot;)
 
 Sorry, no new fans. (link-show: &quot;No new money.&quot;, ?context)
 
 
 |context)[($pinkBrowser: &quot;IRL.png&quot;, &#39;
-		($originalPhotoBlurb: $currentPhoto,
-		&quot;58.57% of those who have done sex work said they have found their username does not show up in searches.&quot;)&#39;)]
+		($originalPhotoBlurb: $currentPhoto,$currentStat)&#39;)]
 
 
-
+Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your business skills-&gt;community-support]]. 
 </tw-passagedata><tw-passagedata pid="11" name="community-support" tags="community" position="200,1200" size="100,100">{
 (put: (either: &quot;share4share&quot;, &quot;joinGroup&quot;, &quot;attendWorkshop&quot;, &quot;tip&quot;) into $communityOutcome)
 
@@ -499,7 +518,7 @@ $communityStyle
 (set: _groupLesson to (either: 
 	&quot;watermark your images. (Otherwise, impersonators could steal your content and set up fake social media accounts.)&quot;, 
 	&quot;disable location sharing when taking photos. A photo’s EXIF data can expose your exact location.&quot;, 
-	&quot;never post a photo to your sex worker account that you have posted to your personal account. A reverse image search on a photo could reveal your other identity.&quot;))
+	))
 
 
 (click: ?sure)[(show:?lesson)(hide:?no)]
@@ -524,19 +543,54 @@ Your new friends also share your content with their followers and you get _numNe
 |nope)[&quot;Alright, good luck then.&quot;]
 |==|
 </tw-passagedata><tw-passagedata pid="15" name="attendWorkshop" tags="community" position="408,1332" size="100,100">{
-$communityStyle
-(set: $outingRisk to $outingRisk - 2)
+	$communityStyle
+	(set: $outingRisk to $outingRisk - 2)
+	(set: _lesson to (either:
+		&quot;You overhear a conversation in the bathroom about how the same tactics used to repress sex workers online have also been used against activists, such as those posting about Black Lives Matter.&quot;,
+		&quot;A cam performer there mentions that they posted the same cute bikini photo to their sex worker account and their personal account. One of their clients ran a reverse image search on their photo and found out their real identity. Apparently, it’s not just the algorithm that’s stalking you!&quot;,
+		&quot;You learn from other sex workers that they&#39;ve had more luck avoiding shadowbanning by identifying as “male” on their profile.&quot;,
+	))
+	
+	(click: ?go)[(hide: ?skip)(show: ?conference)]
 }
-You attend a digital harm reduction workshop led by other sex workers and learn how to stay safe(r) digitally. 
+You see a post about a workshop led by sex workers to learn how to stay safe digitally. 
 
-These skills will come in handy to prevent your real identity from getting out.
 
-Plus, there was pizza.</tw-passagedata><tw-passagedata pid="16" name="tip" tags="platform-neutral" position="545,1333" size="100,100">{
-$platformNeutralStyle
-(set: _tip to (random: 10, 100))
-(set: $income to ($income + _tip))
-(set: _message to (either: &quot;Damn baby you&#39;re so beautiful and very very sexy!!! 👅👅👅&quot;, &quot;🔥What a beautiful sexy perfect body 🔥&quot;, &quot;Take it all off!!!!!!&quot;, &quot;Sweet meat baby ❤️&quot;, &quot;I love your toes&quot;))
-}($fanMail: _message)
+=|=
+|go&gt;[Check it out.]
+=|=
+|skip&gt;[It looks cool, but your time is precious. [[Skip it.-&gt;start-week]]]
+|==|
+
+|conference)[
+_lesson
+
+You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out. Plus, there&#39;s pizza. Grab a slice [[on your way out-&gt;start-week]].
+]</tw-passagedata><tw-passagedata pid="16" name="tip" tags="platform-neutral" position="545,1333" size="100,100">{
+  $platformNeutralStyle
+  (set: _tip to (random: 10, 100))
+  (set: $income to ($income + _tip))
+  (set: _intro to (either: &quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
+  	&quot;Scrolling through your message history with your ex, you find a pic you sent when you two were sexting. Hmm … the relationship might be over, but the relics don’t have to go to waste. You repurpose the photo by sharing it with your followers.&quot;
+))
+  (set: _message to (either:
+  	&quot;Can you keep me warm? 🔥😘&quot;,
+	&quot;🔥What a beautiful sexy perfect body 🔥&quot;,
+	&quot;Sweet meat baby ❤️&quot;,
+	&quot;Take it all off!!!!!!!&quot;,
+	&quot;I love your toes&quot;,
+	&quot;Damn baby you&#39;re so beautiful and very very sexy!!! 🔥🔥🔥👅👅👅😈&quot;,
+	&quot;you are wonderful my princess🔥👅&quot;,
+	&quot;I would **** you till I faint !!!&quot;,
+	&quot;🍒💜🌹bonita🐰babygirl🌹💜🍒&quot;,
+	&quot;Gorgeous and sexy, I so want you babe 🔥🔥🔥👿👿👿😍😘&quot;,
+	&quot;You poor child,have you no clothes to wear??&quot;,  
+  ))
+}
+You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.
+
+($fanMail: _message+&quot;
+	Here’s an extra tip :)&quot;)
 |message)[You&#39;ve earned a $(print: _tip) tip!]
 
 (display: &quot;stats&quot;)</tw-passagedata><tw-passagedata pid="17" name="outing-side-story" tags="side-story gameplay" position="512,474" size="100,100">{
@@ -1269,8 +1323,7 @@ Did you pick |realName&gt;[a real name] or |identity&gt;[make up an identity]?
 }
 Your photo got some attention and attracted _numNewFans new fans!
 	
-Keep &#39;em coming!
-</tw-passagedata></tw-storydata>
+Yay, you’re getting the hang of this! [[What else could you do-&gt;community-support]] to boost your fan count?</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,i=!1,a=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){i=!0,a=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw a}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
