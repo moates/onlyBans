@@ -41,6 +41,10 @@ tw-link, .enchantment-link, .visited {
   transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
+tw-hook {
+  transition: color var(--transitionTime, 2s) ease-in-out;
+}
+
 tw-link:hover, enchantment-link:hover, .visited:hover {
 	text-shadow: #670033 0.05em 0.05em 0em;
   		
@@ -408,7 +412,7 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 (else:)[
 	[[Continue with your week.-&gt;community-support]]
 ]
-}</tw-passagedata><tw-passagedata pid="8" name="flagged-too-sexy" tags="platform-bad" position="401,899" size="100,100">{
+}</tw-passagedata><tw-passagedata pid="8" name="flagged-too-sexy" tags="platform-bad" position="397,891" size="100,100">{
 &lt;!-- apply tag to whole page since this passage has a parent passage --!&gt; 
 $platformBadStyle
 (set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
@@ -417,13 +421,12 @@ $platformBadStyle
 }($blackBrowser: &quot;onlybans.exe&quot;, &quot;###BANNED!
 Your photo is *too* sexy. It&#39;s been flagged and taken down for Violating the Terms of Service. 
 
-Sorry, no new fans. No new money. Careful, if too many of your photos are flagged, your account may be suspended or deactivated altogether!
-
 &quot;)
 
-($pinkBrowser: &quot;IRL.jpg&quot;, &quot;($originalPhotoBlurb: $currentPhoto, $currentStat)
-&quot;)
+Sorry, no new fans. (link-show: &quot;No new money.&quot;, ?context) Careful, if too many of your photos are flagged, your account may be suspended or deactivated altogether! 
 
+|context)[($pinkBrowser: &quot;IRL.jpg&quot;, &quot;($originalPhotoBlurb: $currentPhoto, $currentStat)
+&quot;)]
 
 </tw-passagedata><tw-passagedata pid="9" name="flagged-no-reason" tags="platform platform-bad" position="527,1029" size="100,100">{
 $platformBadStyle
@@ -431,15 +434,13 @@ $platformBadStyle
 }
 ($blackBrowser: &quot;flagged-no-reason.exe&quot;, &quot;### BANNED!
 The algorithm flagged your content even though you followed all the guidelines perfectly! 
-
-Sorry, no new fans. No new money.
-
 &quot;)
 
+Sorry, no new fans. (link-show: &quot;No new money.&quot;, ?context)
 
-($pinkBrowser: &quot;IRL.jpg&quot;, 
+|context)[($pinkBrowser: &quot;IRL.jpg&quot;, 
 	&#39;($originalPhotoBlurb: $currentPhoto, &quot;67.14% of those who have done sex work have had a post removed from social media.&quot;)&#39;
-)
+)]
 
 </tw-passagedata><tw-passagedata pid="10" name="shadowbanned" tags="platform platform-bad" position="399,1037" size="100,100">{
 &lt;!-- apply tag to whole page since this passage has a parent passage --!&gt;
@@ -450,12 +451,12 @@ You’ve probably been &#39;&#39;shadowbanned&#39;&#39;.
 
 Shadowbanned accounts have a harder time attracting followers. Platforms can quietly shadowban you for reasons such as: you follow other sex workers, you used hashtags like #asiangirl #curvygirls #sopretty #models #swole, you identified your gender as &#39;female.&#39; &quot;)
 
-Sorry, no new fans. No new money.
+Sorry, no new fans. (link-show: &quot;No new money.&quot;, ?context)
 
 
-($pinkBrowser: &quot;IRL.png&quot;, &#39;
+|context)[($pinkBrowser: &quot;IRL.png&quot;, &#39;
 		($originalPhotoBlurb: $currentPhoto,
-		&quot;58.57% of those who have done sex work said they have found their username does not show up in searches.&quot;)&#39;)
+		&quot;58.57% of those who have done sex work said they have found their username does not show up in searches.&quot;)&#39;)]
 
 
 
