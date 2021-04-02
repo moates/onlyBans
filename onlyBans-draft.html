@@ -402,25 +402,35 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
   (set: $currentPhotoOutcome to (_weightedOutcome: _riskLevel of $riskDists ))
   (set: _isBannable to $currentPhotoOutcome is in (a: &quot;flagged-too-sexy&quot;, &quot;flagged-no-reason&quot;, &quot;shadowbanned&quot;))
 
+	(set: _transitionMessage to &quot;Continue.&quot;)
 }{
-(if: $currentPhotoOutcome is &quot;new-fans&quot;)[
+(if: $currentPhotoOutcome is &quot;new-fans&quot;)[{
+	(set: _transitionMessage to &#39;Yay, you’re getting the hang of this! [[What else could you do-&gt;community-support]] to boost your fan count?&#39;)
+	}
 	(display: &quot;newFans&quot;)
 ]
 }(else-if: $currentPhotoOutcome is &quot;flagged-too-sexy&quot;)[{
 	(set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
-	}(display: &quot;flagged-too-sexy&quot;)]{
-	
-}(else-if: $currentPhotoOutcome is &quot;flagged-no-reason&quot;)[{
+	(set: _transitionMessage to &quot;You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?&quot;)
+	}(display: &quot;flagged-too-sexy&quot;){
+}](else-if: $currentPhotoOutcome is &quot;flagged-no-reason&quot;)[{
 	(set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
-	}(display: &quot;flagged-no-reason&quot;)]{
-	
+	(set: _transitionMessage to &quot;=|=
+		[[Do some research.-&gt;community-support]]
+		=|=
+		[[Keep posting.-&gt;start-week]]
+		|==|
+		&quot;)
+	}(display: &quot;flagged-no-reason&quot;)]{	
 }(else-if: $currentPhotoOutcome is &quot;shadowbanned&quot;)[
-	(display:&quot;shadowbanned&quot;)]
+	(display:&quot;shadowbanned&quot;)
+	(set: _transitionMessage to &quot;Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your business skills-&gt;community-support]].&quot;)]
 {
 (if: _isBannable and $wasSuspended)[
-	Another banned photo? That&#39;s $numFlaggedPhotos banned photos //and// you were recently suspended? [[Oh shit...-&gt;permabanned]]
+	(set: _transitionMessage to &quot;Another banned photo? That&#39;s $numFlaggedPhotos banned photos //and// you were recently suspended? [[Oh shit...-&gt;permabanned]]&quot;)
 ]
-}</tw-passagedata><tw-passagedata pid="8" name="flagged-too-sexy" tags="platform-bad" position="397,891" size="100,100">{
+}
+_transitionMessage</tw-passagedata><tw-passagedata pid="8" name="flagged-too-sexy" tags="platform-bad" position="397,891" size="100,100">{
 &lt;!-- apply tag to whole page since this passage has a parent passage --!&gt; 
 $platformBadStyle
 (set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
@@ -438,7 +448,7 @@ You’ve made no new fans and earned (link-show: &quot;no money&quot;, ?context)
 |context)[($pinkBrowser: &quot;IRL.jpg&quot;, &quot;($originalPhotoBlurb: $currentPhoto, $currentStat)
 &quot;)]
 
-You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?</tw-passagedata><tw-passagedata pid="9" name="flagged-no-reason" tags="platform platform-bad" position="527,1029" size="100,100">{
+</tw-passagedata><tw-passagedata pid="9" name="flagged-no-reason" tags="platform platform-bad" position="527,1029" size="100,100">{
   $platformBadStyle
   (set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
   (set: $currentStat to (either: 
@@ -456,13 +466,6 @@ Sorry, no new fans. This seems completely unfair, but you&#39;re probably (link-
 |context)[($pinkBrowser: &quot;IRL.jpg&quot;, 
 	&#39;($originalPhotoBlurb: $currentPhoto, &quot;67.14% of those who have done sex work have had a post removed from social media.&quot;)&#39;
 )]
-
-
-=|=
-[[Do some research.-&gt;community-support]]
-=|=
-[[Keep posting.-&gt;start-week]]
-|==|
 </tw-passagedata><tw-passagedata pid="10" name="shadowbanned" tags="platform platform-bad" position="399,1037" size="100,100">{
   &lt;!-- apply tag to whole page since this passage has a parent passage --!&gt;
   $platformBadStyle
@@ -488,23 +491,25 @@ Sorry, no new fans. (link-show: &quot;No new money.&quot;, ?context)
 |context)[($pinkBrowser: &quot;IRL.png&quot;, &#39;
 		($originalPhotoBlurb: $currentPhoto,$currentStat)&#39;)]
 
-
-Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your business skills-&gt;community-support]]. 
 </tw-passagedata><tw-passagedata pid="11" name="community-support" tags="community" position="200,1200" size="100,100">{
-(put: (either: &quot;share4share&quot;, &quot;joinGroup&quot;, &quot;attendWorkshop&quot;, &quot;tip&quot;) into $communityOutcome)
-
+	(if: $numWeek is $suspensionWeek)[ 
+		&lt;!-- you can&#39;t get tips if yr suspended --!&gt;
+		(put: (either: &quot;share4share&quot;, &quot;joinGroup&quot;, &quot;attendWorkshop&quot;) into $communityOutcome)
+	]
+	(else:)[
+  	(put: (either: &quot;share4share&quot;, &quot;joinGroup&quot;, &quot;attendWorkshop&quot;, &quot;tip&quot;) into $communityOutcome)
+	]
 
 (display: $communityOutcome)
 }
-
-[[Continue to the next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="12" name="share4share" tags="community" position="412,1209" size="100,100">{
+</tw-passagedata><tw-passagedata pid="12" name="share4share" tags="community" position="412,1209" size="100,100">{
 	($pinkTransparency:)
   ($backgroundVideo: &quot;images/help-fist.mp4&quot;)
   $communityStyle
   (set: _numNewFans to 2)
   
-  (click: ?share)[(hide:?no)(show:?shared)]
-	(click: ?no)[(hide: ?share)(show:?noped)]
+  (click: ?share)[(hide:?no)(show:?shared, ?continue)]
+	(click: ?no)[(hide: ?share)(show:?noped, ?continue)]
 
 }Another sex worker follows your account and invites you to do a &#39;&#39;share 4 share,&#39;&#39; which means that you share their content on your feed and they do the same for you. Are you in?
 
@@ -515,16 +520,21 @@ Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your bu
 
 |shared)[They share your pics to their feed. You attract _numNewFans new fans make some more money!{
 (set: $numFans to $numFans + _numNewFans)
-(set: $income to $income + (_numNewFans * $incomePerFan))}
-]
+(set: $income to $income + (_numNewFans * $incomePerFan))
+}]
 =||=
 |no&gt;[&quot;Nah.&quot;]
 
 
 |noped)[&quot;Okay, suit yourself!&quot;]
-|==|</tw-passagedata><tw-passagedata pid="13" name="stats" tags="" position="26,147" size="100,100">Wallet: $(print: $income)</tw-passagedata><tw-passagedata pid="14" name="joinGroup" tags="community" position="542,1203" size="100,100">{
+|==|
+|continue)[
+
+[[Continue to your next week.-&gt;start-week]]
+
+]</tw-passagedata><tw-passagedata pid="13" name="stats" tags="" position="26,147" size="100,100">Wallet: $(print: $income)</tw-passagedata><tw-passagedata pid="14" name="joinGroup" tags="community" position="542,1203" size="100,100">{
   $communityStyle
-  (enchant:?passage,(background:(hsl:338,0.9063,0.8745,0.7)))
+  ($pinkTransparency:)
   ($backgroundVideo:&quot;images/help-scrolling.mp4&quot;)
   (set: _numNewFans to 2)
 
@@ -534,28 +544,30 @@ Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your bu
 	  ))
 
 
-  (click: ?sure)[(show:?lesson)(hide:?no)]
-  (click: ?no)[(show:?nope)(hide:?sure)]
-}
-You get a DM from a sex worker you follow...
-//(align:&quot;&lt;==&quot;)+(box:&quot;==XXXXX===&quot;)[Wanna join our private sex worker group chat? There&#39;s tons of good tips for making money and keeping yourself safe!]//
-
+  (click: ?sure)[(show:?lesson, ?continue)(hide:?no)]
+  (click: ?no)[(show:?nope, ?continue)(hide:?sure)]
+}You get a DM from a sex worker you follow...
+//(align:&quot;&lt;====&quot;)+(box:&quot;==XXXXX==&quot;)[Wanna join our private sex worker group chat? There&#39;s tons of good tips for making money and keeping yourself safe!]//
 
 ==||=
-|sure&gt;[(align:&quot;===&gt;&lt;==&quot;)[&quot;Sure?&quot;]]
-
+|sure&gt;[[&quot;Sure?&quot;]]
+=||=
+|no&gt;[[&quot;No thanks.&quot;]]
+|nope)[
+&quot;Alright, good luck then.&quot;]
+|==|
 |lesson)[Clicking through the group, you learn that you should probably _groupLesson 
 
 Your new friends also share your content with their followers and you get _numNewFans new fans! 😎{
   (set: $numFans to $numFans + _numNewFans)
   (set: $income to $income + ($_numNewFans * $incomePerFan))
 }]
-=||=
-|no&gt;[(align:&quot;===&gt;&lt;==&quot;)[&quot;No thanks.&quot;]]
 
-|nope)[&quot;Alright, good luck then.&quot;]
-|==|
-</tw-passagedata><tw-passagedata pid="15" name="attendWorkshop" tags="community platformNeutral" position="408,1332" size="100,100">{
+|continue)[
+
+[[Continue to your next week.-&gt;start-week]]
+
+]</tw-passagedata><tw-passagedata pid="15" name="attendWorkshop" tags="community platformNeutral" position="408,1332" size="100,100">{
 	($pinkTransparency:)
 	($backgroundVideo: &quot;images/help-hands.mp4&quot;)
 	(set: $outingRisk to $outingRisk - 2)
@@ -581,10 +593,10 @@ _lesson
 
 You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out. Plus, there&#39;s pizza. Grab a slice [[on your way out-&gt;start-week]].
 ]</tw-passagedata><tw-passagedata pid="16" name="tip" tags="platform-neutral" position="545,1333" size="100,100">{
+	($pinkTransparency:)
 	($backgroundVideo:&quot;images/help-scrolling.mp4&quot;)
   $platformNeutralStyle
-  (set: _tip to (random: 10, 100))
-  (set: $income to ($income + _tip))
+  (set: _tip to (random: 10, 100))  
   (set: _intro to (either: &quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
   	&quot;Scrolling through your message history with your ex, you find a pic you sent when you two were sexting. Hmm … the relationship might be over, but the relics don’t have to go to waste. You repurpose the photo by sharing it with your followers.&quot;
 ))
@@ -604,11 +616,18 @@ You pick up some digital harm reduction tools that will come in handy to prevent
 }
 You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.
 
-($fanMail: _message+&quot;
-	Here’s an extra tip :)&quot;)
-|message)[You&#39;ve earned a $(print: _tip) tip!]
+(align:&quot;&lt;==&quot;)+(box:&quot;===XXXXXXXXXXXXXX===&quot;)[($fanMail: _message+&quot;
+	Here’s an extra tip :)&quot;)]
+|message)[{(set: $income to ($income + _tip))
+}You&#39;ve earned a $(print: _tip) tip!
 
-(display: &quot;stats&quot;)</tw-passagedata><tw-passagedata pid="17" name="outing-side-story" tags="side-story gameplay" position="512,474" size="100,100">{
+(display: &quot;stats&quot;)
+
+]
+
+Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.
+
+</tw-passagedata><tw-passagedata pid="17" name="outing-side-story" tags="side-story gameplay" position="512,474" size="100,100">{
 	($backgroundVideo: &quot;images/mannequin1.mp4&quot;)
 	(set: _outingBranch to (either: &quot;stolen-content&quot;, &quot;personal-data&quot;, &quot;suggested-friends&quot;,))
 	(if: $isLivestream)[(set: _outingBranch to &#39;suggested-friends&#39;)]
@@ -715,6 +734,9 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 (set: $outingWeek to 5)
 
 (set: $fakeIDCost to 50)
+(set: $hasVerifiedName to false)
+(set: $hasVerifiedAddress to false)
+(set: $hasVerifiedID to false)
 
 
 (set: $currentPhoto to &quot;default&quot;)	
@@ -1009,27 +1031,44 @@ You buy the fake ID for $(print: $fakeIDCost) and submit it to the site to verif
 
 [[Continue with posting-&gt;back-to-photo-selection]]</tw-passagedata><tw-passagedata pid="31" name="locked-account" tags="" position="1815,1489" size="100,100">You lose access to your own account. Well. That was short-lived.
 
-[[Flip off the platform and try to make ends meet a different way. -&gt;an-ending]]</tw-passagedata><tw-passagedata pid="32" name="outing-prelude" tags="side-story platform-bad" position="473,200" size="100,100">($blackBrowser: &quot;&quot;, &quot;We&#39;ve temporarily limited some of your account features. In order to make sure OnlyBans is as safe as possible, you may be asked to confirm you&#39;re not a robot. Easy, right? 
+[[Flip off the platform and try to make ends meet a different way. -&gt;an-ending]]</tw-passagedata><tw-passagedata pid="32" name="outing-prelude" tags="side-story platform-bad" position="473,200" size="100,100">($blackBrowser: &quot;&quot;, &quot;###LOCKED 
+We&#39;ve temporarily limited some of your account features. In order to make sure OnlyBans is as safe as possible, you may be asked to confirm you&#39;re not a robot. Easy, right? 
 
 
-For full access, please verify your phone number.]
+For full access, please verify your phone number.
 
-(input-box:&#39;=XXX=&#39;,1,&#39;456-7878&#39;)
+(input-box:bind $fakePhone, &#39;=XXX=&#39;,1,&#39;456-7878&#39;)
 
 =|=
-[[Submit.-&gt;verify-phone]]
+[[Submit.-&gt;verify-more]]
 =|=
 [[Skip verification.-&gt;skip-verify-phone]]
 |==|
 &quot;)
 
-</tw-passagedata><tw-passagedata pid="33" name="skip-verify-phone" tags="side-story gameplay" position="840,234" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you verify your phone number. What&#39;s the point of making this content if you can&#39;t even get paid? 
+</tw-passagedata><tw-passagedata pid="33" name="skip-verify-phone" tags="side-story gameplay" position="840,234" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
 
-[[Verify your number.-&gt;outing-prelude]]</tw-passagedata><tw-passagedata pid="34" name="verify-phone" tags="side-story gameplay" position="826,113" size="100,100">Your phone buzzes with a text and you type in the verification code.
+[[Verify your number.-&gt;outing-prelude]]</tw-passagedata><tw-passagedata pid="34" name="verify-more" tags="side-story gameplay" position="826,113" size="100,100">{(click: ?submit)[
+	(if: $hasVerifiedName and $hasVerifiedAddress and $hasVerifiedID)[
+		(show: ?verifiedAll)(hide: ?submit)]
+	(else:)[(goto: &#39;skip-verify-more&#39;)]
+	]
+}
 
-Verified!
+($blackBrowser: &quot;STILL LOCKED&quot;, &quot;Thank you for verifying your phone number. 
+	
+	For somewhat vague safety reasons, we still need more information before you can cash out any money from your account.
+	
+(align:&#39;&lt;==&#39;)[
+(checkbox: 2bind $hasVerifiedName, &#39;Add your legal name.&#39;)
+(checkbox: 2bind $hasVerifiedAddress, &#39;Add a backup email.&#39;)
+(checkbox: 2bind $hasVerifiedID, &#39;Upload a photo of yourself holding a state ID.&#39;)]
 
-[[Continue posting.-&gt;photo-selection]]</tw-passagedata><tw-passagedata pid="35" name="close-account" tags="ending" position="1431,230" size="100,100">Unfortunately, stigma and shame means that most sex workers use pseudonymns and hide their job from their employers and loved ones. Even though you’re not willing to risk being outed, you’ve learned a lot about digital freedom and privacy during your time on OnlyBans. Most importantly, you made friends along the way and realized the power of community!
+|submit&gt;[($browserButton: &#39;(text-colour:black)[Submit.]&#39;)]|verifiedAll)[Verified!]&quot;)
+
+|verifiedAll)[Finally! You&#39;re not thrilled about all the personal info you just gave away, but at least now you can [[get back to posting.-&gt;photo-selection]]]
+
+</tw-passagedata><tw-passagedata pid="35" name="close-account" tags="ending" position="1431,230" size="100,100">Unfortunately, stigma and shame means that most sex workers use pseudonymns and hide their job from their employers and loved ones. Even though you’re not willing to risk being outed, you’ve learned a lot about digital freedom and privacy during your time on OnlyBans. Most importantly, you made friends along the way and realized the power of community!
 
 But you also want to give the platforms another chance. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
 
@@ -1049,7 +1088,7 @@ Your new friends also share your content with their followers and you get 2 new 
 ($whiteBrowser: &quot;white.exe&quot;, &quot;Here is a white one for a change of pace!
 
 ($browserButton: &#39;[[With a button-&gt;browser-UI-test]]&#39;)&quot;)
-</tw-passagedata><tw-passagedata pid="38" name="startup-2-macros" tags="startup" position="145,16" size="100,100">{
+</tw-passagedata><tw-passagedata pid="38" name="startup-2-macros" tags="startup" position="142,29" size="100,100">{
 &lt;!-- VIDEO MACROS --!&gt;
 
 (set: $disableVideo to (macro: [
@@ -1068,12 +1107,13 @@ Your new friends also share your content with their followers and you get 2 new 
 ]))
 
 (set: $pinkTransparency to (macro: [
-	(output:)[(enchant:?passage,(background:(hsl:338,0.9063,0.8745,0.7)))]
+	(output:)[(enchant:?passage,(background:(hsl:338,0.9063,0.8745,0.7))+
+	(css: &quot;border-radius:20px;&quot;))]
 ]))
 
-(set: $redTransparency to (macro: [
-	
-	(output:)[(enchant:?passage,(background:(hsl:0,0.9438,0.651,0.5)))]
+(set: $redTransparency to (macro: [	
+	(output:)[(enchant:?passage,(background:(hsl:0,0.9438,0.651,0.5))+
+	(css: &quot;border-radius:20px;&quot;))]
 ]))
 
 &lt;!-- FAN MAIL --!&gt;
@@ -1083,8 +1123,9 @@ Your new friends also share your content with their followers and you get 2 new 
 	--!&gt;
 (set: $fanMail to (macro: str-type _message, [
 	(output:)[{(click:?open)[(show:?message)(hide:?open)]}
+	&lt;div style=&quot;max-width:600px&quot;&gt;
 	  ($blueBrowser: &#39;(text-style:&quot;buoy&quot;)[💌] (text-style:&quot;wavy-underline&quot;)[NEW FAN MESSAGE]&#39;, 
-	  &#39;|open&gt;[Open?]|message)[//_message//]&#39;)]]
+	  &#39;|open&gt;[Open?]|message)[//_message//]&#39;)&lt;/div&gt;]]
 ))
 
 &lt;!-- ORIGINAL PHOTO --!&gt;
@@ -1316,12 +1357,11 @@ TODO
 </tw-passagedata><tw-passagedata pid="44" name="suspension-consequence" tags="side-story platform-bad" position="643,692" size="100,100">{
 	($redTransparency:)
 	($backgroundVideo: &quot;images/stress-nails.mp4&quot;)
-}
-You can&#39;t use OnlyBans for the rest of the week. You&#39;ve gained no new followers and made no money. 
+}You can&#39;t use OnlyBans for the rest of the week. You&#39;ve gained no new followers and made no money. 
 
 But hey, it&#39;s [[a new week-&gt;start-week]]. Maybe your luck will improve.
-
-</tw-passagedata><tw-passagedata pid="45" name="permabanned" tags="platform platform-bad" position="533,898" size="100,100">($blackBrowser: &quot;DEACTIVATED&quot;, &quot;
+ 
+ </tw-passagedata><tw-passagedata pid="45" name="permabanned" tags="platform platform-bad" position="533,898" size="100,100">($blackBrowser: &quot;DEACTIVATED&quot;, &quot;
 	#PERMABANNED
 	You&#39;ve violated the rules one too many times. Your account has been permanently disabled. 
 
@@ -1330,26 +1370,30 @@ But hey, it&#39;s [[a new week-&gt;start-week]]. Maybe your luck will improve.
 	($backgroundVideo: &quot;images/stress-temples.mp4&quot;)
   	(set: _hasAppealSuccess to (either: true, false))
   	(if: $isLivestream)[(set: _hasAppealSuccess to true)]
+
+  (click: ?giveUp)[(show: ?gaveUp)(hide:?contest)]
+  (click: ?contest)[(show: ?contested)(hide:?giveUp)]
 }Tell us if you think we made a mistake. What do you do?
 
 
 =|=
-(link:&quot;Cut your losses.&quot;)[Even if you tried to fight it, 93% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
-
-You [[take a moment to reflect -&gt;permabanned-ending]]on everything that&#39;s gone down.
-]
+|giveUp&gt;[Cut your losses and accept the ban.]
 =|=
-(link:&quot;Contest the decision.&quot;)[{	
+|contest&gt;[Contest the decision.]
+|==|
+
+|contested)[	
 	(if:_hasAppealSuccess is false)[You lose. 93% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
 	
 	You [[take a moment to reflect -&gt;permabanned-ending]]on everything that&#39;s gone down.]
 	(else:)[Your account has been reactivated! Consider yourself in the lucky 7% of sex workers who successfully regain access after being deplatformed.
 	
 	[[Continue with your week.-&gt;community-support]]
-	]
-}]
-|==|
+	]]
+|gaveUp)[Even if you tried to fight it, 93% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
 
+You [[take a moment to reflect -&gt;permabanned-ending]]on everything that&#39;s gone down.
+]
 </tw-passagedata><tw-passagedata pid="47" name="permabanned-stat" tags="irl" position="703,900" size="100,100">($pinkBrowser: &quot;not-alone.exe&quot;, &quot;41.01% of those who have done sex work said they have been deplatformed or kicked off of a social media account.
 
 	($browserButton:&#39;[[CONTINUE.-&gt;permabanned-appeal]]&#39;)
@@ -1376,7 +1420,15 @@ Did you pick |realName&gt;[a real name] or |identity&gt;[make up an identity]?
 }
 Your photo got some attention and attracted _numNewFans new fans!
 	
-Yay, you’re getting the hang of this! [[What else could you do-&gt;community-support]] to boost your fan count?</tw-passagedata><tw-passagedata pid="50" name="cutscene-test" tags="" position="68,698" size="100,100">Double-click this passage to edit it.</tw-passagedata></tw-storydata>
+	</tw-passagedata><tw-passagedata pid="50" name="cutscene-test" tags="" position="33,576" size="100,100">go [[here-&gt;cutvid-test]]</tw-passagedata><tw-passagedata pid="51" name="skip-verify-more" tags="" position="974,116" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
+
+
+=|=
+[[Verify the rest.-&gt;verify-more]]
+=|=
+Give up and [[close your account-&gt;close-account]] 
+|==|
+</tw-passagedata><tw-passagedata pid="52" name="&quot;Sure?&quot;" tags="" position="528,1453" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="53" name="&quot;No thanks.&quot;" tags="" position="665,1430" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="54" name="cutvid-test" tags="" position="33,726" size="100,100">auto to [[here-&gt;cutscene-test-end]]</tw-passagedata><tw-passagedata pid="55" name="cutscene-test-end" tags="" position="33,876" size="100,100">have i arrived?</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,i=!1,a=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){i=!0,a=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw a}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
