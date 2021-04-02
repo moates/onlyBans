@@ -970,20 +970,25 @@ What&#39;s your situation?
 
 [[You submit a government ID with your legal name, the one you&#39;ve been using for work. -&gt;legal-ID]]</tw-passagedata><tw-passagedata pid="28" name="suggested-friends" tags="side-story gameplay bkgvid" position="712,464" size="100,100">{
 	($backgroundVideo: &quot;images/mannequin2.mp4&quot;)
+	
+	(click: ?no)[(hide:?yes)(show: ?noConvo)]
+	(click: ?yes)[(hide:?no)(show:?yesConvo)]
+	
 }The list of people you should follow includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
 
 
 =|=
-(t8n:&quot;dissolve&quot;)+(t8n-time:3s)|yes&gt;[Yes.]
+|yes&gt;[Yes.]
 =|=
-(t8n:&quot;dissolve&quot;)+(t8n-time:3s)|no&gt;[Nope.]
+|no&gt;[Nope.]
 |==|
 
 
 |yesConvo)[You&#39;ll take the risk of having an uncomfortable conversation. After all, you need the money and the clock is ticking. 
 
-You imagine telling your (cycling-link:&quot;mom&quot;,&quot;dad&quot;,&quot;favorite teacher&quot;,&quot;child&quot;,&quot;parent&quot;,&quot;godparent&quot;,) about your account. What would you say?
-	(input-box:&quot;===XXXXXXXXXXXXXX===&quot;)
+You imagine telling your (cycling-link:&quot;mom&quot;,&quot;favorite teacher&quot;,&quot;child&quot;,&quot;landlord&quot;, &quot;godparent&quot;,) about your account. What would you say?
+(input-box:2bind $tellSomeone,&quot;===XXXXXXXXXXXXXX===&quot;,4)
+	
 
 [[That was awkward...-&gt;photo-selection]]
 ]
@@ -991,8 +996,7 @@ You imagine telling your (cycling-link:&quot;mom&quot;,&quot;dad&quot;,&quot;fav
 (t8n:&quot;dissolve&quot;)+(t8n-time:3s)|noConvo)[You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.]
 
 
-(click: ?no)[(hide:?yes)(show: ?noConvo)]
-(click: ?yes)[(hide:?no)(show:?yesConvo)]</tw-passagedata><tw-passagedata pid="29" name="legal-ID" tags="" position="1280,1283" size="100,100">You submit a copy of your ID and get your account back, but...using your real name publically for sex work is pretty dangerous. This may affect you later.
+</tw-passagedata><tw-passagedata pid="29" name="legal-ID" tags="" position="1280,1283" size="100,100">You submit a copy of your ID and get your account back, but...using your real name publically for sex work is pretty dangerous. This may affect you later.
 
 [[Continue with your week.-&gt;back-to-photo-selection]]
 ---
