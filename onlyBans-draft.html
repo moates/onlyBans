@@ -22,6 +22,12 @@ body, tw-story {
   	
 }
 
+tw-passage {
+ padding-left:30px; 
+  padding-right:30px; 
+  transition: color var(--transitionTime, 2s) ease-in-out;
+}
+
 tw-sidebar {
   /* remove twine's undo button */
      display: none;
@@ -492,11 +498,15 @@ Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your bu
 }
 
 [[Continue to the next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="12" name="share4share" tags="community" position="412,1209" size="100,100">{
+	($pinkTransparency:)
   ($backgroundVideo: &quot;images/help-fist.mp4&quot;)
   $communityStyle
   (set: _numNewFans to 2)
-}
-Another sex worker follows your account and invites you to do a &#39;&#39;share 4 share,&#39;&#39; which means that you share their content on your feed and they do the same for you. Are you in?
+  
+  (click: ?share)[(hide:?no)(show:?shared)]
+	(click: ?no)[(hide: ?share)(show:?noped)]
+
+}Another sex worker follows your account and invites you to do a &#39;&#39;share 4 share,&#39;&#39; which means that you share their content on your feed and they do the same for you. Are you in?
 
 
 ==||=
@@ -512,13 +522,9 @@ Another sex worker follows your account and invites you to do a &#39;&#39;share 
 
 
 |noped)[&quot;Okay, suit yourself!&quot;]
-|==|
-{
-(click: ?share)[(hide:?no)(show:?shared)]
-(click: ?no)[(hide: ?share)(show:?noped)]
-}
-</tw-passagedata><tw-passagedata pid="13" name="stats" tags="" position="26,147" size="100,100">Wallet: $(print: $income)</tw-passagedata><tw-passagedata pid="14" name="joinGroup" tags="community" position="542,1203" size="100,100">{
+|==|</tw-passagedata><tw-passagedata pid="13" name="stats" tags="" position="26,147" size="100,100">Wallet: $(print: $income)</tw-passagedata><tw-passagedata pid="14" name="joinGroup" tags="community" position="542,1203" size="100,100">{
   $communityStyle
+  (enchant:?passage,(background:(hsl:338,0.9063,0.8745,0.7)))
   ($backgroundVideo:&quot;images/help-scrolling.mp4&quot;)
   (set: _numNewFans to 2)
 
@@ -536,7 +542,7 @@ You get a DM from a sex worker you follow...
 
 
 ==||=
-|sure&gt;[&quot;Sure?&quot;]
+|sure&gt;[(align:&quot;===&gt;&lt;==&quot;)[&quot;Sure?&quot;]]
 
 |lesson)[Clicking through the group, you learn that you should probably _groupLesson 
 
@@ -545,13 +551,13 @@ Your new friends also share your content with their followers and you get _numNe
   (set: $income to $income + ($_numNewFans * $incomePerFan))
 }]
 =||=
-|no&gt;[&quot;No thanks.&quot;]
+|no&gt;[(align:&quot;===&gt;&lt;==&quot;)[&quot;No thanks.&quot;]]
 
 |nope)[&quot;Alright, good luck then.&quot;]
 |==|
-</tw-passagedata><tw-passagedata pid="15" name="attendWorkshop" tags="community" position="408,1332" size="100,100">{
+</tw-passagedata><tw-passagedata pid="15" name="attendWorkshop" tags="community platformNeutral" position="408,1332" size="100,100">{
+	($pinkTransparency:)
 	($backgroundVideo: &quot;images/help-hands.mp4&quot;)
-	$communityStyle
 	(set: $outingRisk to $outingRisk - 2)
 	(set: _lesson to (either:
 		&quot;You overhear a conversation in the bathroom about how the same tactics used to repress sex workers online have also been used against activists, such as those posting about Black Lives Matter.&quot;,
@@ -590,7 +596,7 @@ You pick up some digital harm reduction tools that will come in handy to prevent
 	&quot;I love your toes&quot;,
 	&quot;Damn baby you&#39;re so beautiful and very very sexy!!! 🔥🔥🔥👅👅👅😈&quot;,
 	&quot;you are wonderful my princess🔥👅&quot;,
-	&quot;I would **** you till I faint !!!&quot;,
+	&quot;I would &#96;*&#96;*&#96;*&#96;* you till I faint !!!&quot;,
 	&quot;🍒💜🌹bonita🐰babygirl🌹💜🍒&quot;,
 	&quot;Gorgeous and sexy, I so want you babe 🔥🔥🔥👿👿👿😍😘&quot;,
 	&quot;You poor child,have you no clothes to wear??&quot;,  
@@ -862,7 +868,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	),
 	
 	&quot;karren2&quot;, (dm:
-		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/10_Karren2_Square.jpg.&quot; 
+		&quot;vaporHTML&quot;, &#39;&lt;img src=&quot;images/10_Karren2_Square.jpg&quot; 
 			alt=&quot;A thin, purple person stands angled slightly away from the camera. The person is shirtless with pink underwear. One nipple is faintly visible.&quot; 
 			class=&quot;photo&quot;&gt;&#39;,
 		&quot;riskLevel&quot;, &quot;high&quot;,
@@ -1040,10 +1046,11 @@ Your new friends also share your content with their followers and you get 2 new 
 
 ($browserButton: &#39;[[With a button-&gt;browser-UI-test]]&#39;)&quot;)
 </tw-passagedata><tw-passagedata pid="38" name="startup-2-macros" tags="startup" position="145,16" size="100,100">{
-&lt;!-- ACCESSIBILITY TODO --!&gt;
+&lt;!-- VIDEO MACROS --!&gt;
 
 (set: $disableVideo to (macro: [
 		(output:)[]
+		&lt;!-- ACCESSIBILITY TODO --!&gt;
 	]
 ))
 
@@ -1054,6 +1061,15 @@ Your new friends also share your content with their followers and you get 2 new 
 	}
 	(output:)[_glueSource
 	]
+]))
+
+(set: $pinkTransparency to (macro: [
+	(output:)[(enchant:?passage,(background:(hsl:338,0.9063,0.8745,0.7)))]
+]))
+
+(set: $redTransparency to (macro: [
+	
+	(output:)[(enchant:?passage,(background:(hsl:0,0.9438,0.651,0.5)))]
 ]))
 
 &lt;!-- FAN MAIL --!&gt;
@@ -1253,7 +1269,7 @@ Your new friends also share your content with their followers and you get 2 new 
 ]))
 
 
-}</tw-passagedata><tw-passagedata pid="39" name="peepshow-podcast-TODO" tags="community" position="677,1208" size="100,100">{
+}</tw-passagedata><tw-passagedata pid="39" name="peepshow-podcast-TODO" tags="community" position="698,1310" size="100,100">{
 $communityStyle
 }TODO
 
@@ -1266,7 +1282,7 @@ It takes 3 months for you to get the money that is rightfully and legally yours.
 }
 ($fanMail: &quot;Hey, this is weird, but don&#39;t I know you from somehwere?&quot;)
 
-Your old boss started following your OnlyBans account? How did they find you? It&#39;s not like your account is very popular yet...
+|message)[Your old boss started following your OnlyBans account? How did they find you? It&#39;s not like your account is very popular yet...
 
 {(if:$usedRealName is true)[When you opened your account, you picked a real name. Maybe your boss searched your name and found your page?]}
 
@@ -1278,7 +1294,8 @@ Now that one person knows you&#39;re doing sex work, others might find out too. 
 [[Yes, take your chances and continue posting.-&gt;photo-selection]] 
 =|=
 No way. [[Close your account.-&gt;close-account]]
-|==|</tw-passagedata><tw-passagedata pid="41" name="back-to-photo-selection" tags="" position="1609,1405" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="an-ending" tags="" position="1815,1594" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="resource-page" tags="IRL" position="1901,400" size="100,100">(link: &quot;Back to game.&quot;)[(restart:)]
+|==|
+]</tw-passagedata><tw-passagedata pid="41" name="back-to-photo-selection" tags="" position="1609,1405" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="an-ending" tags="" position="1815,1594" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="resource-page" tags="IRL" position="1901,400" size="100,100">(link: &quot;Back to game.&quot;)[(restart:)]
 
 #Resources Page
 
@@ -1293,21 +1310,23 @@ TODO
 TODO
 
 </tw-passagedata><tw-passagedata pid="44" name="suspension-consequence" tags="side-story platform-bad" position="643,692" size="100,100">{
+	($redTransparency:)
 	($backgroundVideo: &quot;images/stress-nails.mp4&quot;)
 }
 You can&#39;t use OnlyBans for the rest of the week. You&#39;ve gained no new followers and made no money. 
 
-But hey, it&#39;s [[a new week-&gt;start-week]]. Maybe your luck will improve.</tw-passagedata><tw-passagedata pid="45" name="permabanned" tags="platform platform-bad" position="533,898" size="100,100">($blackBrowser: &quot;DEACTIVATED&quot;, &quot;
+But hey, it&#39;s [[a new week-&gt;start-week]]. Maybe your luck will improve.
+
+</tw-passagedata><tw-passagedata pid="45" name="permabanned" tags="platform platform-bad" position="533,898" size="100,100">($blackBrowser: &quot;DEACTIVATED&quot;, &quot;
 	#PERMABANNED
 	You&#39;ve violated the rules one too many times. Your account has been permanently disabled. 
 
 	[[CONTINUE-&gt;permabanned-stat]].
-&quot;)</tw-passagedata><tw-passagedata pid="46" name="permabanned-appeal" tags="gameplay" position="869,890" size="100,100">{
+&quot;)</tw-passagedata><tw-passagedata pid="46" name="permabanned-appeal" tags="gameplay" position="869,890" size="100,100">{	($redTransparency:)
 	($backgroundVideo: &quot;images/stress-temples.mp4&quot;)
   	(set: _hasAppealSuccess to (either: true, false))
   	(if: $isLivestream)[(set: _hasAppealSuccess to true)]
-}
-Tell us if you think we made a mistake. What do you do?
+}Tell us if you think we made a mistake. What do you do?
 
 
 =|=
@@ -1325,7 +1344,9 @@ You [[take a moment to reflect -&gt;permabanned-ending]]on everything that&#39;s
 	[[Continue with your week.-&gt;community-support]]
 	]
 }]
-|==|</tw-passagedata><tw-passagedata pid="47" name="permabanned-stat" tags="irl" position="703,900" size="100,100">($pinkBrowser: &quot;not-alone.exe&quot;, &quot;41.01% of those who have done sex work said they have been deplatformed or kicked off of a social media account.
+|==|
+
+</tw-passagedata><tw-passagedata pid="47" name="permabanned-stat" tags="irl" position="703,900" size="100,100">($pinkBrowser: &quot;not-alone.exe&quot;, &quot;41.01% of those who have done sex work said they have been deplatformed or kicked off of a social media account.
 
 	($browserButton:&#39;[[CONTINUE.-&gt;permabanned-appeal]]&#39;)
 &quot;)
