@@ -104,7 +104,6 @@ tw-story[tags~="ending"]{
 	padding: 10px 20px;
   	font-size: 0.7em;
   	border-radius: 8px;
-  	margin-top: 10px;
 }
 
 .info-bar-right {
@@ -696,14 +695,14 @@ But you also want to give the platforms the chance to change. Even though it’s
 Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
 
 But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
-</tw-passagedata><tw-passagedata pid="23" name="header1-stats-bar" tags="header" position="439,6" size="100,100">
-{
+</tw-passagedata><tw-passagedata pid="23" name="header1-stats-bar" tags="header" position="439,6" size="100,100">{
 	(if: $numWeek &gt;=1)[		
 	  {
 	  	(set: $weekInfo to &quot;Week &quot;+(str: $numWeek))
 	  	(if: (passage:)&#39;s &quot;name&quot; is &quot;start-week&quot;)[
 		  (set: $weekInfo to &quot;&quot;)]
 	  }
+	  	&lt;br&gt;
 	  	&lt;div class=&quot;info-bar&quot;&gt;
 		  $weekInfo
 		  &lt;div class=&quot;info-bar-right&quot;&gt;
