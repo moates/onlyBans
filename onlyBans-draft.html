@@ -323,7 +323,7 @@ Want to play?&quot;)
 
 
 ($loneButton: &#39;
-[[Read more.-&gt;resource-page]]
+[[Read more.-&gt;read-more]]
 
 &#39;)
 |==|
@@ -1340,19 +1340,79 @@ Now that one person knows you&#39;re doing sex work, others might find out too. 
 =|=
 No way. [[Close your account.-&gt;close-account]]
 |==|
-]</tw-passagedata><tw-passagedata pid="41" name="back-to-photo-selection" tags="" position="1609,1405" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="an-ending" tags="" position="1815,1594" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="resource-page" tags="IRL" position="1901,400" size="100,100">(link: &quot;Back to game.&quot;)[(restart:)]
+]</tw-passagedata><tw-passagedata pid="41" name="back-to-photo-selection" tags="" position="1609,1405" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="an-ending" tags="" position="1815,1594" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="read-more" tags="IRL" position="1901,400" size="100,100">(link: &quot;Back to game.&quot;)[(restart:)]
 
-#Resources Page
+(align:&quot;=&gt;&lt;=&quot;)+(box:&quot;X&quot;)[
+=|=
+|aboutSelect&gt;[ABOUT](click: ?aboutSelect)[(show: ?about)]
+=|=
+|resourcesSelect&gt;[RESOURCES](click: ?resourcesSelect)[(show: ?resources)]
+|==|
 
-TODO
+=|=
+|creditsSelect&gt;[CREDITS](click: ?creditsSelect)[(show: ?credits)]
+=|=
+|teamSelect&gt;[TEAM](click: ?teamSelect)[(show: ?team)]
+|==|
+]
 
-#Credits
+&lt;!-- |acknowledgementsSelect&gt;[ACKNOWLEDGEMENTS](click: ?acknowledgementsSelect)[(show: ?acknowledgements)]
+--!&gt;
 
-TODO 
+(click-: ?aboutSelect)[(show: ?about)]
+|about)[##ABOUT
+Created by a team of sex workers and allies, OnlyBans is an interactive game that critically examines the policing of marginalized bodies and sexual labor to empathetically teach people about discrimination faced by sex workers online. Players encounter content moderation algorithms, shadowbanning, “real name” policies, facial recognition software, and other threats based on actual experiences of sex workers. Featuring real images and stories from sex workers themselves, OnlyBans offers a speculative vision of how marginalized communities can unite to protest these unjust policies and create better alternatives.
 
-#Acknowledgements
+]
+|resources)[##RESOURCES
+OnlyBans is a journey into a world of increasing censorship, restrictive content policy changes, and user account shutdowns. It is the world we are living in today, as platforms such as YouTube, Instagram, Craigslist, Reddit, and Tumblr, adopt an umbrella ban on “adult content”, which has not only impacted sex workers, but also artists, activists, and Internet users of all backgrounds.
 
-TODO
+Digital discrimination and deplatforming of sex workers is a direct result of FOSTA-SESTA, a federal bill Congress passed in 2018 to hold Internet service providers responsible for third-party advertisements of sexual services posted on their platform. Organizations, such as American Civil Liberties Union and Electronic Frontier Foundation, have warned that the bill threatens free speech and endangers sex workers by leaving them without access to client screening protocols or community resources. The solution is to amplify the work of sex worker-led organizations and coalitions that work to improve the safety of sex workers’ online spaces and working conditions.
+
+(link: &quot;Hacking//Hustling&quot;)[(gotoURL:&quot;https://hackinghustling.org/&quot;)] is a collective of sex workers, survivors, and accomplices working at the intersection of tech and social justice to interrupt state surveillance and violence facilitated by technology. Created in response to the imposed threat of FOSTA-SESTA, their work takes a harm reduction approach that includes community-based research, mutual aid, organizing, art, and any/all tools sex workers and survivors develop to mitigate state, workplace, and interpersonal violence and thrive.
+
+(link: &quot;Stop SESTA/FOSTA&quot;)[(gotoURL:&quot;https://stopsesta.org/&quot;]
+FOSTA-SESTA is opposed by a broad coalition of internet freedom, human rights, and sex worker advocates and organizations. The Stop SESTA + FOSTA coalition website provides information about the bill and a script to read to your Senator.
+
+(link: &quot;Survivors Against SESTA&quot;)[(gotoURL:&quot;https://survivorsagainstsesta.org/&quot;)]
+Survivors Against SESTA is a “coalition of current and former sex workers, people who have experienced exploitation and trafficking, dancers, hustlers, allies, partners, family members and community members.”
+
+(link: &quot;Decoding Stigma&quot;)[(gotoURL: &quot;https://decodingstigma.tech/&quot;)] bridges the gap between sex workers, academics, technologists, and anyone who holds multiples of these identities. Their goal is to prioritize sexual autonomy as a necessary ethics question for researchers and technologists and to design a liberatory future in which sexually stigmatized voices are amplified and celebrated.
+
+]
+
+|credits)[##CREDITS
+&#39;&#39;Creators&#39;&#39;: Lena Chen &amp; Maggie Oates
+&#39;&#39;Writer&#39;&#39;: Lena Chen
+&#39;&#39;Software Princess&#39;&#39;: Maggie Oates
+&#39;&#39;Graphic Designer:&#39;&#39; Goofy Toof
+&#39;&#39;Videographer&#39;&#39;: Goofy Toof
+&#39;&#39;Contributors:&#39;&#39; Amala Azul, Fae Brite, Hellbait, J.P. (Themme), Lync Johnson, Karren, Nimina Harley, Stonerdomme, Quin
+
+Thank you to all the sex workers, artists, and activists who continue to work, create, and agitate on- and off-line. You are our heroes, and we made OnlyBans for and with you.
+
+##ACKOWLEDGEMENTS
+Thank you to all our contributors who have been brave enough to share their real stories and photos. Your generosity and trust has been a gift.
+
+Thank you to Hacking//Hustling. We are indebted to your research, in particular the report, (link:&quot;Posting Into The Void&quot;)[(gotoURL:&quot;https://hackinghustling.org/posting-into-the-void-content-moderation/&quot;)], from which we drew many of our statistics on shadowbanning and deplatforming. You have been an invaluable resource to those fighting on the digital frontlines.
+
+Thank you Lien Tran, the creator of (link:&quot;Cops &amp; Rubbers&quot;)[(gotoURL: &quot;http://copsandrubbers.com/&quot;)], which was hugely inspirational as we considered how to design a game that could also compel real-world policy change.
+
+We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an early version of OnlyBans. Thank you to Kelly Strayhorn Theater for supporting the project’s visual development and narrative expansion during the Freshworks residency.
+
+]
+
+|team)[##THE TEAM
+&#39;&#39;Lena Chen&#39;&#39; is a Chinese American artist, writer, and sex worker creating performances and socially engaged art in live and virtual contexts. Awarded &quot;Best Emerging Talent” at B3 Biennial of the Moving Image and the Judson-Morrissey Excellence in New Media Award, she has exhibited and performed her work at Transmediale, Die Digitale, Baltimore Museum of Art, Centre for Contemporary Art Derry~Londonderry, Haus der Kulturen der Welt, and Human Resources, among others. She has spoken widely on digital performance practices, feminist activism, and sex work at Oxford, Yale, Stanford, SXSW, HOPE, and re:publica. She is currently writing an essay on sex worker art as memory, mutual aid, and resistance for the forthcoming anthology Curating as Feminist Organizing, edited by Elke Krasny and Lara Perry (Routledge, 2022). She earned a B.A. in sociology from Harvard University, and is currently completing a MFA at Carnegie Mellon University’s School of Art, where she holds the Lea Simmons Fellowship. 
+
+&#39;&#39;Maggie Oates&#39;&#39; is a computer scientist and researcher-artist focused on making privacy and security tools work for more people. In 2019 she was the Research Lead for //Project Amelia//, an open-world immersive theater production that invited hundreds of audience members into a fictional start-up office as the company navigated ethical and privacy issues in their AI products. 
+
+She has a BS in Computer Science, an MS in Societal Computing, and is currently completing a PhD at Carnegie Mellon University. With a fantastic research team, she published the award-winning work &quot;Turtles, Locks, and Bathrooms,&quot; exploring visual metaphors of privacy. She has presented interactive exhibits on privacy and security for audiences ranging from high schoolers to lawyers.
+
+(link:&quot;@oatesmeal&quot;)[(gotoURL:&quot;https://twitter.com/oatesmeal&quot;)]
+
+&#39;&#39;Goofy Toof&#39;&#39; is a queer erotic filmmaker, performance artist, animator, and self-proclaimed big weirdo. Winner of Best Comedy at the London Fetish Film Festival, her asexual porn parody film CREAMPIE GLORYHOLE is currently touring across film festivals worldwide - making people everywhere think &quot;Well, this is a weird turn-on!&quot; Goofy Toof explores themes of sexuality and eroticism from a demisexual femme perspective. Her most recent performance BIMBOFY ME BABY! was featured in the German festival Die Digitale as part of the sex worker-led group performance Play4UsNow. In another life, Goofy Toof graduated from Carnegie Mellon University with a degree in Fine Arts, and her work as a professional animator has been featured on Adult Swim.
+]
 
 </tw-passagedata><tw-passagedata pid="44" name="suspension-consequence" tags="side-story platform-bad" position="643,692" size="100,100">{
 	($redTransparency:)
