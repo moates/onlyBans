@@ -15,25 +15,25 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
-body, tw-story {
+body, tw-story { /* override */
 	font-family: Montserrat, sans-serif;
   	--transitionTime: 4s;
   	transition: color var(--transitionTime, 2s) ease-in-out;
   	
 }
 
-tw-passage {
+tw-passage { /* override */
  padding-left:30px; 
   padding-right:30px; 
   transition: color var(--transitionTime, 2s) ease-in-out;
 }
 
-tw-sidebar {
+tw-sidebar { /* override */
   /* remove twine's undo button */
      display: none;
 }
 
-tw-story {
+tw-story { /* override */
     z-index: 0; 
     padding: 5% 10%;
   	color: #ffffff;
@@ -96,7 +96,9 @@ tw-story[tags~="ending"]{
   background-color: #4b5bcf;
 }
 
-/* HEASDER */
+/* ************* */
+/*     HEADER    */
+/* ************* */
 .info-bar {
 	overflow: hidden;
   	background-color: #748ffc;
@@ -110,6 +112,40 @@ tw-story[tags~="ending"]{
  	float: right; 
 }
 
+/* ************* */
+/*     RESTART    */
+/* ************* */
+.restart-bar {
+  	background-color: rgba(116, 143, 252, 0.5);
+	padding: 10px;
+  	border-radius: 8px;
+  max-width: 140px;
+  max-height: 140px;
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+tw-icon[alt] { /*override*/
+	 opacity: 0.8;
+}
+
+tw-icon { /*override harlowe's hacky inline hard-coded numbers*/
+	display: inline-flex;
+  	flex-direction: column;
+  	margin: 0.3 em;
+  	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+}
+
+tw-icon[data-label]::after { /*override*/
+ display: inline-flex;	
+  bottom:0;
+  	left:0;
+}
 
 /* ************* */
 /* PHOTO STYLE  */
@@ -427,12 +463,7 @@ You have $(print: $income) in your pocket and $(print: (max: 0, ($incomeTarget -
 	}(display: &quot;flagged-too-sexy&quot;){
 }](else-if: $currentPhotoOutcome is &quot;flagged-no-reason&quot;)[{
 	(set: $numFlaggedPhotos to ($numFlaggedPhotos + 1))
-	(set: _transitionMessage to &quot;=|=
-		[[Do some research.-&gt;community-support]]
-		=|=
-		[[Keep posting.-&gt;start-week]]
-		|==|
-		&quot;)
+	(set: _transitionMessage to &quot;Well, that sucks, but [[maybe your luck will improve?-&gt;community-support]]&quot;)
 	}(display: &quot;flagged-no-reason&quot;)]{	
 }(else-if: $currentPhotoOutcome is &quot;shadowbanned&quot;)[
 	(display:&quot;shadowbanned&quot;)
@@ -655,7 +686,8 @@ Someone is stealing and reposting your content!
 Do you want to [[ask other sex workers for advice-&gt;stolen-content]] or [[ignore it-&gt;photo-selection]]?
 ]
 (else-if: _outingBranch is &quot;personal-data&quot;)[
-	[[The subject line reads //ACCOUNT ISSUE//.-&gt;personal-data]]
+	Shooting and posting content is hard work, but what nobody told you about was all the invisible effort of chatting with fans. Like working in a coffee shop, you start to get regular customers who tip you again and again. And then there are some people who are just there for freebies or who are just plain rude.
+	There&#39;s yet another [[fan message to deal with.-&gt;personal-data]]
 ]
 (else-if: _outingBranch is &quot;suggested-friends&quot;)[
 	OnlyBans sent you a list of suggested followers. You think you recognize one of the people? [[Take a closer look.-&gt;suggested-friends]] 
@@ -733,7 +765,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 
 (set: $income to 0)
 (set: $incomePerFan to 10)
-(set: $incomeTarget to 300)
+(set: $incomeTarget to 200)
 
 (set: $numPhotosFlagged to 0)
 (set: $numFans to 0)
@@ -780,9 +812,9 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 		&quot;newFansRange&quot;, (random:2,4),
 	),
 	&quot;high&quot;, (dm:
-		&quot;tooSexyBan&quot;, 30,
-		&quot;noReasonBan&quot;, 10,
-		&quot;shadowBan&quot;, 30,
+		&quot;tooSexyBan&quot;, 35,
+		&quot;noReasonBan&quot;, 1,
+		&quot;shadowBan&quot;, 34,
 		&quot;newFans&quot;, 30,
 		&quot;newFansRange&quot;, (random:3,6),
 	)
@@ -1453,11 +1485,11 @@ But hey, it&#39;s [[a new week-&gt;start-week]]. Maybe your luck will improve.
 
   (click: ?giveUp)[(show: ?gaveUp)(hide:?contest)]
   (click: ?contest)[(show: ?contested)(hide:?giveUp)]
-}Tell us if you think we made a mistake. What do you do?
+}You ask a stripper you follow who lost an account with over 10k followers. They tell you that you can try to get your account back by submitting a support request, but the odds are against you.
 
-
+What do you do?
 =|=
-|giveUp&gt;[Cut your losses and accept the ban.]
+|giveUp&gt;[Give up your account.]
 =|=
 |contest&gt;[Contest the decision.]
 |==|
@@ -1508,7 +1540,19 @@ Your photo got some attention and attracted _numNewFans new fans!
 =|=
 Give up and [[close your account-&gt;close-account]] 
 |==|
-</tw-passagedata><tw-passagedata pid="52" name="&quot;Sure?&quot;" tags="" position="528,1453" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="53" name="&quot;No thanks.&quot;" tags="" position="665,1430" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="54" name="cutvid-test" tags="" position="33,726" size="100,100">auto to [[here-&gt;cutscene-test-end]]</tw-passagedata><tw-passagedata pid="55" name="cutscene-test-end" tags="" position="33,876" size="100,100">have i arrived?</tw-passagedata></tw-storydata>
+</tw-passagedata><tw-passagedata pid="52" name="&quot;Sure?&quot;" tags="" position="528,1453" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="53" name="&quot;No thanks.&quot;" tags="" position="665,1430" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="54" name="cutvid-test" tags="" position="33,726" size="100,100">auto to [[here-&gt;cutscene-test-end]]</tw-passagedata><tw-passagedata pid="55" name="cutscene-test-end" tags="" position="33,876" size="100,100">have i arrived?</tw-passagedata><tw-passagedata pid="56" name="footer-restart" tags="footer" position="559,4" size="100,100">
+
+
+
+
+
+
+
+
+&lt;div class=&quot;restart-bar&quot;&gt;(link: &#39;(icon-restart:&quot;Restart&quot;)&#39;)[(restart:)]
+&lt;/div&gt;
+
+</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,i=!1,a=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){i=!0,a=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw a}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
