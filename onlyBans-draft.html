@@ -392,7 +392,7 @@ Want to play?&quot;)
 }
 
 
-Lookin good, (print:$playerName)!
+Lookin good, $playerName!
 
 You&#39;re hoping to earn $(print:$incomeTarget) to pay your bills in $weekLimit weeks. Every fan you get earns you $(print:$incomePerFan). If you&#39;re lucky, some of them may even tip you extra! 😘
 
@@ -1062,7 +1062,7 @@ What&#39;s your situation?
 You imagine telling your (cycling-link:&quot;mom&quot;,&quot;favorite teacher&quot;,&quot;child&quot;,&quot;landlord&quot;, &quot;godparent&quot;,) about your account. What would you say?
 (input-box:2bind $tellSomeone,&quot;===XXXXXXXXXXXXXX===&quot;,4)
 	
-
+(set: $tellSomeone to (verbatim-print: $tellSomeone))
 [[That was awkward...-&gt;photo-selection]]
 ]
 
@@ -1096,8 +1096,9 @@ For full access, please verify your phone number.
 [[Skip verification.-&gt;skip-verify-phone]]
 |==|
 &quot;)
-
-</tw-passagedata><tw-passagedata pid="33" name="skip-verify-phone" tags="side-story gameplay" position="840,234" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
+{
+(set: $fakePhone to (verbatim-print: $fakePhone))
+}</tw-passagedata><tw-passagedata pid="33" name="skip-verify-phone" tags="side-story gameplay" position="840,234" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
 
 [[Verify your number.-&gt;outing-prelude]]</tw-passagedata><tw-passagedata pid="34" name="verify-more" tags="side-story gameplay" position="826,113" size="100,100">{(click: ?submit)[
 	(if: $hasVerifiedName and $hasVerifiedAddress and $hasVerifiedID)[
@@ -1521,8 +1522,8 @@ You [[take a moment to reflect -&gt;permabanned-ending]]on everything that&#39;s
 
 Did you pick |realName&gt;[a real name] or |identity&gt;[make up an identity]? 
 
-(click: ?realName)[(set: $usedRealName to true)(goto: &quot;motivation&quot;)]
-(click: ?identity)[(set: $usedRealName to false)(goto: &quot;motivation&quot;)]
+(click: ?realName)[(set: $usedRealName to true)(set: $playerName to (verbatim-print: $playerName))(goto: &quot;motivation&quot;)]
+(click: ?identity)[(set: $usedRealName to false)(set: $playerName to (verbatim-print: $playerName))(goto: &quot;motivation&quot;)]
 </tw-passagedata><tw-passagedata pid="49" name="newFans" tags="platform-neutral" position="658,1029" size="100,100">{
 	&lt;!-- manually apply tag to whole page since this passage has a parent passage --!&gt; 
 	$platformNeutralStyle
