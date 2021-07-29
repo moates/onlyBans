@@ -144,6 +144,18 @@ Config.ui.stowBarInitially = 1200; //close sidebar if viewport less than X pixel
 Config.history.controls = false; //disable backward and forward buttons
 Config.saves.slots = 0; //num of save slots available
 
+/* GAMEPLAY UTILITIES */
+Macro.add("addfans", {
+		handler: function() {
+				if (this.args.length !== 1) {
+						return this.error('addfans takes one parameter');
+				}	
+				var _numNewFans = this.args[0];
+				var _income = State.variables.income;
+				State.variables.numFans += _numNewFans;
+				State.variables.income = State.variables.income + (State.variables.incomePerFan * _numNewFans);				
+	}
+});
 
 /* PHOTO CLASS */
 window.Photo = function (key, filename, riskLevel, alt, model, context) {
@@ -250,25 +262,53 @@ Want to play?
 
 [[Play.-&gt;what-is-your-name]]
 
-[[Read more.-&gt;read-more]]</tw-passagedata><tw-passagedata pid="2" name="what-is-your-name" tags="" position="296,266" size="100,100">Your name is
+[[Read more.-&gt;StoryMenu]]</tw-passagedata><tw-passagedata pid="2" name="what-is-your-name" tags="" position="296,266" size="100,100">Your name is
 &lt;&lt;textbox &quot;$playerName&quot; $playerName autofocus&gt;&gt;
 
 &lt;&lt;button &quot;Submit&quot; &quot;greetings&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="3" name="read-more" tags="" position="408,273" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="4" name="StoryMenu" tags="" position="25,258" size="100,100">[[My Wallet]]
+</tw-passagedata><tw-passagedata pid="3" name="StoryMenu" tags="" position="34,271" size="100,100">[[How to Play]]
 
+[[About]]
 
+[[Credits]]</tw-passagedata><tw-passagedata pid="4" name="How to Play" tags="" position="30,437" size="100,100">&lt;h2&gt;How to play&lt;/h2&gt;
+Goal: Make $&lt;&lt;print $incomeTarget&gt;&gt; in $weekLimit weeks.
 
+Make money by:
+* posting photos that attract new paying fans
+* earning tips
+Avoid: 
+* Having your identity stolen or revealed.
+* Having your account shut down.
+* Stalkers and harrassment
 
+Use your mouse or finger to click links.  Links look like &lt;&lt;cycle &quot;_temp&quot;&gt;&gt; &lt;&lt;option &quot;THIS&quot;&gt;&gt;&lt;&lt;option &quot;that&quot;&gt;&gt;&lt;&lt;/cycle&gt;&gt;. Sometimes you can also click on photos. There is no undo or back button. There are some videos that you cannot click on; they are just for watching.
 
-[[How to Play]]
+This game is fictionalized, but based on entirely true stories. Throughout the game, facts and real-life experiences will be shared &lt;em&gt;IN THIS FORMAT.&lt;/em&gt;
 
-[[Credits]]
+If you get stuck or something is broken, you can &lt;&lt;link &quot;Restart&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;.</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="16,127" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="" position="32,585" size="100,100">&lt;h1&gt;Credits &lt;/h1&gt;
+&#39;&#39;Conceiver&#39;&#39;: Lena Chen
+&#39;&#39;Writer&#39;&#39;: Lena Chen
+&#39;&#39;Software Princess&#39;&#39;: Maggie Oates
+&#39;&#39;Graphic Designer:&#39;&#39; Goofy Toof
+&#39;&#39;Videographer&#39;&#39;: Goofy Toof
+&#39;&#39;Sound Designer&#39;&#39;: &lt;a href=&quot;http://adriennecassel.com/&quot;&gt;Adrienne Cassel&lt;/a&gt;
+&#39;&#39;Contributors:&#39;&#39; Amala Azul, Fae Brite, Hellbait, J.P. (Themme), Lync Johnson, Karren, Nimina Harley, Stonerdomme, Quin
 
-&lt;a href=&quot;https://www.onlybansgame.com&quot;&gt;Home&lt;/a&gt;</tw-passagedata><tw-passagedata pid="5" name="How to Play" tags="" position="30,437" size="100,100">How to play</tw-passagedata><tw-passagedata pid="6" name="StoryDisplayTitle" tags="" position="10,88" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="7" name="Credits" tags="" position="32,585" size="100,100">Credits</tw-passagedata><tw-passagedata pid="8" name="StoryInit" tags="" position="138,11" size="100,100">/* GLOBAL VARIABLES */
+Thank you to all the sex workers, artists, and activists who continue to work, create, and agitate on- and off-line. You are our heroes, and we made OnlyBans for and with you.
 
-&lt;&lt;set $income to 300&gt;&gt;
+&lt;h2&gt;ACKOWLEDGEMENTS&lt;/h2&gt;
+Thank you to all our contributors who have been brave enough to share their real stories and photos. Your generosity and trust has been a gift.
+
+Thank you to &quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;. We are indebted to your research, in particular the report, &lt;a href=&quot;https://hackinghustling.org/posting-into-the-void-content-moderation/&quot;&gt;&quot;Posting Into The Void&quot;&lt;/a&gt;, from which we drew many of our statistics on shadowbanning and deplatforming. You have been an invaluable resource to those fighting on the digital frontlines.
+
+Thank you Lien Tran, the creator of &lt;a href=&quot;http://copsandrubbers.com/&quot;&gt;&quot;Cops &amp; Rubbers&quot;&lt;/a&gt;, which was hugely inspirational as we considered how to design a game that could also compel real-world policy change.
+
+We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an early version of OnlyBans. Thank you to Kelly Strayhorn Theater for supporting the project’s visual development and narrative expansion during the Freshworks residency. This work was also supported by Science Gallery Detroit and the UC Berkeley Center for Long-Term Cybersecurity Arts Contest.
+</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="138,11" size="100,100">/* GLOBAL VARIABLES */
+
+&lt;&lt;set $income to 13&gt;&gt;
 &lt;&lt;set $incomePerFan to 10&gt;&gt;
 &lt;&lt;set $incomeTarget to 200&gt;&gt;
 
@@ -421,14 +461,14 @@ Want to play?
 &lt;&lt;set $availablePhotos to clone(Object.keys($photoPool))&gt;&gt;
 &lt;&lt;run $availablePhotos.delete(&quot;default&quot;) &gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="9" name="My Wallet" tags="" position="163,590" size="100,100">Display wallet amount rn</tw-passagedata><tw-passagedata pid="10" name="greetings" tags="" position="297,399" size="100,100">&lt;&lt;type 60ms&gt;&gt;Welcome, $playerName.&lt;&lt;/type&gt;&gt;
+</tw-passagedata><tw-passagedata pid="8" name="greetings" tags="" position="297,399" size="100,100">&lt;&lt;type 60ms&gt;&gt;Welcome, $playerName.&lt;&lt;/type&gt;&gt;
 
 Did you select your &lt;&lt;link &quot;real name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to true&gt;&gt;&lt;&lt;/link&gt;&gt; or 
-a &lt;&lt;link &quot;fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to false&gt;&gt;&lt;&lt;/link&gt;&gt;?</tw-passagedata><tw-passagedata pid="11" name="motivation" tags="" position="300,550" size="100,100">Lookin good, $playerName!
+a &lt;&lt;link &quot;fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to false&gt;&gt;&lt;&lt;/link&gt;&gt;?</tw-passagedata><tw-passagedata pid="9" name="motivation" tags="" position="300,550" size="100,100">Lookin good, $playerName!
 
 You&#39;re hoping to earn $&lt;&lt;print &quot;$incomeTarget&quot;&gt;&gt; to pay your bills in $weekLimit weeks. Every fan you get earns you $&lt;&lt;print &quot;$incomePerFan&quot;&gt;&gt;. If you&#39;re lucky, some of them may even tip you extra! 😘
 
-[[Let&#39;s get fans!-&gt;start-week]]</tw-passagedata><tw-passagedata pid="12" name="start-week" tags="" position="299,696" size="100,100">&lt;&lt;set $numWeek to visited()&gt;&gt;
+[[Let&#39;s get fans!-&gt;start-week]]</tw-passagedata><tw-passagedata pid="10" name="start-week" tags="" position="299,696" size="100,100">&lt;&lt;set $numWeek to visited()&gt;&gt;
 &lt;&lt;set _toGo = Math.clamp($incomeTarget - $income, 0, $incomeTarget + $income) &gt;&gt;
 
 Week $numWeek
@@ -449,7 +489,29 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 		&lt;&lt;set _line to [&quot;Time to set some thirst traps.&quot;, &quot;You get out the selfie stick and start snapping away.&quot;, &quot;You love the camera and the camera loves you&quot;].pluck()&gt;&gt;
 		[[_line-&gt;photo-selection]]		
 &lt;&lt;/switch&gt;&gt;
-</tw-passagedata><tw-passagedata pid="13" name="outing-side-story" tags="" position="702,395" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="14" name="suspension-side-story" tags="" position="699,594" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="11" name="outing-side-story" tags="" position="678,493" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;set _outingBranch to either(&quot;stolen-content&quot;, &quot;personal-data&quot;, &quot;suggested-friends&quot;)&gt;&gt;
+	&lt;&lt;set _outingEquiv to (_outingBranch == &quot;stolen-content&quot;)&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+
+&lt;&lt;if _outingBranch == &quot;stolen-content&quot;&gt;&gt;
+	The text is from an old friend you haven&#39;t talked to in years.
+
+  &lt;em&gt;Hey $playerName. This is kind of awkward, but I just wanted to reach out and let you know I stumbled on this pic of you on PornHubba...&lt;/em&gt;
+
+  The pic is yours, but you didn&#39;t post it on PornHubba. Oh, hell no! 
+  Someone is stealing and reposting your content! 
+
+  Do you want to [[ask other sex workers for advice-&gt;stolen-content]] or [[ignore it-&gt;photo-selection]]?
+&lt;&lt;elseif  _outingBranch == &quot;personal-data&quot;&gt;&gt;
+	Shooting and posting content is hard work, but what nobody told you about was all the invisible effort of chatting with fans. Like working in a coffee shop, you start to get regular customers who tip you again and again. And then there are some people who are just there for freebies or who are just plain rude.
+	There&#39;s yet another [[fan message to deal with.-&gt;personal-data]]
+
+&lt;&lt;elseif _outingBranch == &quot;suggested-friends&quot;&gt;&gt;
+	OnlyBans sent you a list of suggested followers. You think you recognize one of the people? [[Take a closer look.-&gt;suggested-friends]] 
+&lt;&lt;else&gt;&gt;
+	Your friend asks you to feed their cat (again). [[Get back to making content.-&gt;photo-selection]]
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="suspension-side-story" tags="" position="653,785" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $wasSuspended to true&gt;&gt;
 	
 	#SUSPENDED!
@@ -458,7 +520,27 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 	We restrict certain content to protect our community. If you continue to post dangerous content, you may be banned permanently.
 	
 	[[Continue.-&gt;suspension-consequence]]
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="outing-prelude" tags="" position="701,204" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="16" name="money-ending" tags="" position="799,904" size="100,100">money end</tw-passagedata><tw-passagedata pid="17" name="photo-selection" tags="" position="292,921" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="outing-prelude" tags="" position="701,204" size="100,100">LOCKED 
+We&#39;ve temporarily limited some of your account features. In order to make sure OnlyBans is as safe as possible, you may be asked to confirm you&#39;re not a robot. Easy, right? 
+
+
+For full access, please verify your phone number.
+
+&lt;&lt;textbox &quot;_fakePhone&quot; &quot;777-7777&quot; &quot;verify-more&quot; autofocus&gt;&gt;
+
+[[Submit.-&gt;verify-more]]
+
+[[Skip verification.-&gt;skip-verify-phone]]</tw-passagedata><tw-passagedata pid="14" name="money-ending" tags="ending" position="944,952" size="100,100">&lt;&lt;set _hasEnoughMoney to $income &gt; $incomeTarget&gt;&gt;
+Time&#39;s up! Your $&lt;&lt;print $incomeTarget&gt;&gt; is due.
+
+&lt;&lt;linkreplace &quot;Count your money&quot;&gt;&gt;
+	You have $&lt;&lt;print $income&gt;&gt;.
+	
+	&lt;&lt;if _hasEnoughMoney&gt;&gt;&lt;&lt;include &quot;got-money-ending&quot;&gt;&gt;
+	&lt;&lt;else&gt;&gt;&lt;&lt;include &quot;not-enough-money-ending&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
+
+So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes -&gt;ending]]😈
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="photo-selection" tags="" position="292,921" size="100,100">&lt;&lt;silently&gt;&gt;
   &lt;&lt;set $queuedPhotos to $availablePhotos&gt;&gt;
   &lt;&lt;if $queuedPhotos.length &lt; $numPhotosQueued&gt;&gt;
   	&lt;&lt;set _numEmpties to $numPhotosQueued - $availablePhotos.length&gt;&gt;
@@ -492,27 +574,15 @@ Which photo do you want to post today?
 &lt;&lt;/for&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="18" name="photo-outcome" tags="" position="111,1059" size="100,100">&lt;&lt;silently&gt;&gt;
-	&lt;&lt;set _riskDist to $riskDists[$photoPool[$currentPhoto].riskLevel]&gt;&gt;
-	&lt;&lt;set $currentPhotoOutcome to $photoPool[$currentPhoto].getPostOutcome(_riskDist) &gt;&gt;
-	
-	&lt;&lt;set _isBannable to $currentPhotoOutcome in [&quot;flagged-too-sexy&quot;,&quot;flagged-no-reason&quot;, &quot;shadowbanned&quot;]
-	
-&lt;&lt;/silently&gt;&gt;
-something happens w $currentPhoto
-
-$photoPool[$currentPhoto].riskLevel
-$currentPhotoOutcome
-</tw-passagedata><tw-passagedata pid="19" name="newFans" tags="" position="282,1089" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="16" name="newFans" tags="" position="282,1089" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _newFansRange to $fanRewardDists[$photoPool[$currentPhoto].riskLevel] &gt;&gt;
 	&lt;&lt;set _numNewFans to random(_newFansRange[0], _newFansRange[1])&gt;&gt;
-	&lt;&lt;set $numFans += _numNewFans&gt;&gt;
-	&lt;&lt;set $income to $income + (_numNewFans * $incomePerFan)&gt;&gt;
+	&lt;&lt;addfans _numNewFans&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 
 Your photo got some attention and attracted _numNewFans new fans!
 
-Yay, you’re getting the hang of this! [[What else could you do-&gt;community-support]] to boost your fan count?</tw-passagedata><tw-passagedata pid="20" name="tooSexyBan" tags="" position="402,1089" size="100,100">&lt;&lt;silently&gt;&gt;
+Yay, you’re getting the hang of this! [[What else could you do-&gt;community-support]] to boost your fan count?</tw-passagedata><tw-passagedata pid="17" name="tooSexyBan" tags="" position="402,1089" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;
 	
 	&lt;&lt;set _currentStat to either(
@@ -541,7 +611,7 @@ You’ve made no new fans and earned no new money.
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="shadowBan" tags="" position="402,1209" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="shadowBan" tags="" position="402,1209" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;
 	
 	&lt;&lt;set _currentStat to either(
@@ -575,7 +645,7 @@ Sorry, no new fans. No new money.
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your business skills-&gt;community-support]].
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="noReasonBan" tags="" position="284,1212" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="noReasonBan" tags="" position="284,1212" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;
 	
 	&lt;&lt;set _currentStat to either(
@@ -604,13 +674,28 @@ Sorry, no new fans. This seems completely unfair, but you&#39;re probably
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	Well, that sucks, but [[maybe your luck will improve?-&gt;community-support]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="community-support" tags="" position="296,1496" size="100,100">community support</tw-passagedata><tw-passagedata pid="24" name="suspension-consequence" tags="" position="834,603" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="25" name="permaban-transition" tags="" position="553,1085" size="100,100">Another banned photo? That&#39;s $numPhotosFlagged banned photos //and// you were recently suspended? [[Oh shit...-&gt;permabanned]]</tw-passagedata><tw-passagedata pid="26" name="permabanned" tags="" position="698,1091" size="100,100">&#39;&#39;DEACTIVATED&#39;&#39;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="community-support" tags="" position="296,1496" size="100,100">&lt;&lt;silently&gt;&gt;
+  &lt;&lt;if $numWeek == $suspensionWeek&gt;&gt;
+		  &lt;!-- you can&#39;t get tips if yr suspended --!&gt;
+		  &lt;&lt;set $communityOutcome to either(&quot;share4share&quot;, &quot;joinGroup&quot;, &quot;attendWorkshop&quot;)&gt;&gt;
+		  &lt;&lt;else&gt;&gt;
+			  &lt;&lt;set $communityOutcome to either(&quot;share4share&quot;, &quot;joinGroup&quot;, &quot;attendWorkshop&quot;, &quot;tip&quot;)&gt;&gt;
+  &lt;&lt;/if&gt;&gt;	
+  
+  &lt;!-- dummy utility links for the Twine editor map --!&gt;
+  [[share4share-&gt;share4share]]
+  [[joinGroup-&gt;joinGroup]]
+  [[tip-&gt;tip]]
+  [[attendWorkshop-&gt;attendWorkshop]]
+&lt;&lt;/silently&gt;&gt;&lt;&lt;include $communityOutcome&gt;&gt;
+
+</tw-passagedata><tw-passagedata pid="21" name="suspension-consequence" tags="" position="804,777" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="22" name="permaban-transition" tags="" position="553,1085" size="100,100">Another banned photo? That&#39;s $numPhotosFlagged banned photos //and// you were recently suspended? [[Oh shit...-&gt;permabanned]]</tw-passagedata><tw-passagedata pid="23" name="permabanned" tags="" position="698,1091" size="100,100">&#39;&#39;DEACTIVATED&#39;&#39;
 	You&#39;ve violated the rules one too many times. Your account has been permanently disabled. 
 
-[[CONTINUE-&gt;permabanned-stat]].</tw-passagedata><tw-passagedata pid="27" name="permabanned-stat" tags="" position="698,1241" size="100,100">not-alone.exe
+[[CONTINUE-&gt;permabanned-stat]].</tw-passagedata><tw-passagedata pid="24" name="permabanned-stat" tags="" position="698,1241" size="100,100">not-alone.exe
 41.01% of those who have done sex work said they have been deplatformed or kicked off of a social media account.
 
-[[CONTINUE.-&gt;permabanned-appeal]]</tw-passagedata><tw-passagedata pid="28" name="permabanned-appeal" tags="" position="846,1243" size="100,100">&lt;&lt;silently&gt;&gt;
+[[CONTINUE.-&gt;permabanned-appeal]]</tw-passagedata><tw-passagedata pid="25" name="permabanned-appeal" tags="" position="846,1243" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _hasAppealSuccess to either(true, false)&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 
@@ -635,14 +720,233 @@ What do you do?
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="29" name="permabanned-ending" tags="" position="986,1243" size="100,100">On your journey, you’ve learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
+</tw-passagedata><tw-passagedata pid="26" name="permabanned-ending" tags="" position="986,1243" size="100,100">On your journey, you’ve learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
 
 Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own.
 
 But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
 
 So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes-&gt;ending]] 😈
-</tw-passagedata><tw-passagedata pid="30" name="ending" tags="" position="1286,1115" size="100,100">Double-click this passage to edit it.</tw-passagedata></tw-storydata>
+</tw-passagedata><tw-passagedata pid="27" name="ending" tags="" position="1286,1115" size="100,100">Thank you for playing OnlyBans
+
+&lt;&lt;link &quot;Play again?&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="verify-more" tags="" position="898,276" size="100,100">STILL LOCKED 
+
+Thank you for verifying your phone number. 
+	
+For somewhat vague safety reasons, we still need more information before you can cash out any money from your account.
+&lt;&lt;checkbox &quot;$hasVerifiedName&quot; false true&gt;&gt; Add your legal name.
+&lt;&lt;checkbox &quot;$hasVerifiedAddress&quot; false true&gt;&gt; Add a personal email.
+&lt;&lt;checkbox &quot;$hasVerifiedID&quot; false true&gt;&gt; Upload a photo of yourself holding your state ID.
+
+&lt;&lt;linkreplace &quot;Submit&quot;&gt;&gt;
+	&lt;&lt;if $hasVerifiedName and $hasVerifiedAddress and $hasVerifiedID&gt;&gt;
+		Verified!
+		
+		Finally! You&#39;re not thrilled about all the personal info you just gave away, but at least now you can [[get back to posting.-&gt;photo-selection]]
+	&lt;&lt;else&gt;&gt;
+		&lt;&lt;goto &quot;skip-verify-more&quot;&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+&lt;&lt;/linkreplace&gt;&gt;
+</tw-passagedata><tw-passagedata pid="29" name="skip-verify-phone" tags="" position="894,117" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
+
+[[Verify your number.-&gt;outing-prelude]]</tw-passagedata><tw-passagedata pid="30" name="skip-verify-more" tags="" position="1021,273" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making content if you can&#39;t even get paid? 
+
+
+
+[[Verify the rest.-&gt;verify-more]]
+
+Give up and [[close your account-&gt;close-account]] 
+
+</tw-passagedata><tw-passagedata pid="31" name="close-account" tags="" position="1176,359" size="100,100">Unfortunately, stigma and shame means that most sex workers use pseudonymns and hide their job from their employers and loved ones. Even though you’re not willing to risk being outed, you’ve learned a lot about digital freedom and privacy during your time on OnlyBans. Most importantly, you made friends along the way and realized the power of community!
+
+But you also want to give the platforms another chance. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
+
+So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes-&gt;ending]] 😈
+</tw-passagedata><tw-passagedata pid="32" name="stolen-content" tags="" position="944,666" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;set _getsTakenDown to either(true, false)&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+
+&lt;em&gt;
+&quot;IRL.txt&quot;
+&quot;It turns out that 45% of sex workers have had their images or content used for a fake account (e.g., catfishing).&quot;
+&lt;/em&gt;
+
+You&#39;re pissed that someone could be impersonating you and providing false information or even profiting from your content. They&#39;re going DOWN.
+
+&lt;&lt;linkreplace &quot;Report the account.&quot;&gt;&gt;
+	You submit a help request, but a few days later the fake account is still up.
+	
+	&lt;&lt;linkreplace &quot;Find some help.&quot;&gt;&gt;
+		You ask your sex worker support group to &lt;&lt;linkappend &quot;report the account&quot;&gt;&gt;
+			&lt;&lt;if _getsTakenDown&gt;&gt;
+				The copycat gets taken down. Close call!
+				
+				41% of sex workers have had success in getting fake accounts taken down.
+				
+				Thank goodness! 🙏 Now you can [[get back to it-&gt;photo-selection]].
+				 
+			&lt;&lt;else&gt;&gt;
+				The account stays up. It makes you nervous to not have control over your content, but this is a common problem. 59% of sex workers don’t manage to get copycat accounts shut down. What can you do?
+				 [[Shut down your account before more content is stolen-&gt;close-account]].
+	  			Cut your losses and [[continue posting.-&gt;photo-selection]].				
+			&lt;&lt;/if&gt;&gt;
+		&lt;&lt;/linkappend&gt;&gt;
+	&lt;&lt;/linkreplace&gt;&gt;
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="personal-data" tags="" position="945,552" size="100,100">&lt;em&gt; &quot;Hey, this is weird, but don&#39;t I know you from somehwere?&quot; &lt;/em&gt;
+&lt;&lt;linkreplace &quot;Open Message&quot;&gt;&gt; 
+  Your old boss started following your OnlyBans account? How did they find you? It&#39;s not like your account is very popular yet...
+&lt;&lt;if $usedRealName&gt;&gt;
+	When you opened your account, you picked a real name. Maybe your boss searched your name and found your page?
+	&lt;&lt;else&gt;&gt;
+	Did you use verify your account with the same phone number you used for social media? These platforms often sell or share data around with each other, so using the same contact information can lead to your sex work account being recommended to people you may know in real life. (The Algorithm is creepy!)]
+
+Now that one person knows you&#39;re doing sex work, others might find out too. Do you want to keep posting on OnlyBans?	
+&lt;&lt;/if&gt;&gt; 
+
+[[Yes, take your chances and continue posting.-&gt;photo-selection]] 
+
+No way. [[Close your account.-&gt;close-account]]
+&lt;&lt;/linkreplace&gt;&gt;
+</tw-passagedata><tw-passagedata pid="34" name="suggested-friends" tags="" position="934,441" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;set _people to [&quot;mom&quot;,&quot;favorite teacher&quot;,&quot;child&quot;,&quot;landlord&quot;, &quot;godparent&quot;]&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+The list of people you should follow includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
+
+
+&lt;&lt;linkreplace &quot;Yes.&quot;&gt;&gt;
+	You&#39;ll take the risk of having an uncomfortable conversation. After all, you need the money and the clock is ticking. 
+
+	You imagine telling your &lt;&lt;cycle &quot;_person&quot; autoselect&gt;&gt;&lt;&lt;optionsfrom _people&gt;&gt;&lt;&lt;/cycle&gt;&gt; about your account. What would you say?
+	&lt;&lt;textarea &quot;$toldSomeone&quot; &quot;&quot;&gt;&gt;
+	[[That was awkward...-&gt;photo-selection]].
+&lt;&lt;/linkreplace&gt;&gt;
+
+&lt;&lt;linkreplace &quot;Nope.&quot;&gt;&gt;You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;
+</tw-passagedata><tw-passagedata pid="35" name="got-money-ending" tags="ending" position="1076,882" size="100,100">Congratulations, your booty beat the odds! You reached your goal, learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
+
+You were one of the lucky ones. Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
+
+But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.</tw-passagedata><tw-passagedata pid="36" name="not-enough-money-ending" tags="ending" position="1070,1001" size="100,100">Too bad, you didn’t reach your goal … but you did learn a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
+
+Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
+
+But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
+</tw-passagedata><tw-passagedata pid="37" name="About" tags="" position="150,430" size="100,100">&lt;&lt;h2&gt;&gt; Home Page &lt;&lt;/h2&gt;&gt;
+This game lives at &lt;a href=&quot;https://www.onlybansgame.com&quot;&gt;www.onlybansgame.com&lt;/a&gt;.
+&lt;h2&gt; About the game &lt;/h2&gt;
+Created by a team of sex workers and allies, OnlyBans is an interactive game that critically examines the policing of marginalized bodies and sexual labor to empathetically teach people about discrimination faced by sex workers online. Players encounter content moderation algorithms, shadowbanning, “real name” policies, facial recognition software, and other threats based on actual experiences of sex workers. Featuring real images and stories from sex workers themselves, OnlyBans offers a speculative vision of how marginalized communities can unite to protest these unjust policies and create better alternatives.
+
+This game is still a living document, a work-in-progress. We welcome &lt;a href=&quot;https://www.onlybansgame.com/feedback&quot;&gt;feedback&lt;/a&gt;!
+
+&lt;hr&gt;
+&lt;h2&gt;More Resources&lt;/h2&gt;
+OnlyBans is a journey into a world of increasing censorship, restrictive content policy changes, and user account shutdowns. It is the world we are living in today, as platforms such as YouTube, Instagram, Craigslist, Reddit, and Tumblr, adopt an umbrella ban on “adult content”, which has not only impacted sex workers, but also artists, activists, and Internet users of all backgrounds.
+
+Digital discrimination and deplatforming of sex workers is a direct result of FOSTA-SESTA, a federal bill Congress passed in 2018 to hold Internet service providers responsible for third-party advertisements of sexual services posted on their platform. Organizations, such as American Civil Liberties Union and Electronic Frontier Foundation, have warned that the bill threatens free speech and endangers sex workers by leaving them without access to client screening protocols or community resources. The solution is to amplify the work of sex worker-led organizations and coalitions that work to improve the safety of sex workers’ online spaces and working conditions.
+
+
+&lt;a href=&quot;https://hackinghustling.org/&quot;&gt;&quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;&gt;&gt;&lt;/a&gt; is a collective of sex workers, survivors, and accomplices working at the intersection of tech and social justice to interrupt state surveillance and violence facilitated by technology. Created in response to the imposed threat of FOSTA-SESTA, their work takes a harm reduction approach that includes community-based research, mutual aid, organizing, art, and any/all tools sex workers and survivors develop to mitigate state, workplace, and interpersonal violence and thrive.
+
+
+&lt;a href=&quot;https://stopsesta.org/&quot;&gt;Stop SESTA/FOSTA&lt;/a&gt;. FOSTA-SESTA is opposed by a broad coalition of internet freedom, human rights, and sex worker advocates and organizations. The Stop SESTA + FOSTA coalition website provides information about the bill and a script to read to your Senator.
+
+&lt;a href=&quot;https://survivorsagainstsesta.org/&quot;&gt;Survivors Against SESTA&lt;/a&gt; is a “coalition of current and former sex workers, people who have experienced exploitation and trafficking, dancers, hustlers, allies, partners, family members and community members.”
+
+&lt;a href= &quot;https://decodingstigma.tech/&quot;&gt;Decoding Stigma&lt;/a&gt; bridges the gap between sex workers, academics, technologists, and anyone who holds multiples of these identities. Their goal is to prioritize sexual autonomy as a necessary ethics question for researchers and technologists and to design a liberatory future in which sexually stigmatized voices are amplified and celebrated.
+</tw-passagedata><tw-passagedata pid="38" name="StorySubtitle" tags="" position="140,133" size="100,100">Goal: Get $&lt;&lt;print $incomeTarget&gt;&gt; by week $weekLimit
+Wallet: $&lt;&lt;print $income&gt;&gt;
+Week: $numWeek</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="" position="476,1470" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;set _numNewFans to 2&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+
+Another sex worker follows your account and invites you to do a &#39;&#39;share 4 share,&#39;&#39; which means that you share their content on your feed and they do the same for you. Are you in?
+
+&lt;&lt;linkreplace &quot;Sure, let&#39;s share!&quot;&gt;&gt;&lt;&lt;addfans _numNewFans&gt;&gt;They share your pics to their feed. You attract _numNewFans new fans and make some more money. 
+	Wallet: $&lt;&lt;print $income&gt;&gt;
+&lt;&lt;/linkreplace&gt;&gt;
+
+&lt;&lt;linkreplace &quot;Nah.&quot;&gt;&gt;
+Okay, suit yourself.
+&lt;&lt;/linkreplace&gt;&gt;
+
+[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="40" name="joinGroup" tags="" position="597,1460" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;set _numNewFans to 2&gt;&gt;
+
+  &lt;&lt;set _groupLesson to either( 
+	  &quot;watermark your images. (Otherwise, impersonators could steal your content and set up fake social media accounts.)&quot;, 
+	  &quot;disable location sharing when taking photos. A photo’s EXIF data can expose your exact location.&quot;, 
+	  )&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+
+You get a DM from a sex worker you follow...
+&lt;blockquote&gt;Wanna join our private sex worker group chat? There&#39;s tons of good tips for making money and keeping yourself safe!&lt;/blockquote&gt;
+
+&lt;&lt;linkreplace &quot;Sure?&quot;&gt;&gt;
+	Clicking through the group, you learn that you should probably _groupLesson 
+
+Your new friends also share your content with their followers and you get _numNewFans new fans! 😎
+&lt;&lt;addfans _numNewFans&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;
+
+&lt;&lt;linkreplace &quot;No thanks.&quot;&gt;&gt;Alright, good luck then.&lt;&lt;/linkreplace&gt;&gt;
+
+[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="41" name="tip" tags="" position="602,1603" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;set _tip to random(10,100)&gt;&gt;
+	&lt;&lt;set _intro to either(
+	&quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
+  	&quot;Scrolling through your message history with your ex, you find a pic you sent when you two were sexting. Hmm … the relationship might be over, but the relics don’t have to go to waste. You repurpose the photo by sharing it with your followers.&quot;
+	)&gt;&gt;	
+	&lt;&lt;set _message to either(&quot;Can you keep me warm? 🔥😘&quot;,
+	&quot;🔥What a beautiful sexy perfect body 🔥&quot;,
+	&quot;Sweet meat baby ❤️&quot;,
+	&quot;Take it all off!!!!!!!&quot;,
+	&quot;I love your toes&quot;,
+	&quot;Damn baby you&#39;re so beautiful and very very sexy!!! 🔥🔥🔥👅👅👅😈&quot;,
+	&quot;you are wonderful my princess🔥👅&quot;,
+	&quot;I would &#96;*&#96;*&#96;*&#96;* you till I faint !!!&quot;,
+	&quot;🍒💜🌹bonita🐰babygirl🌹💜🍒&quot;,
+	&quot;Gorgeous and sexy, I so want you babe 🔥🔥🔥👿👿👿😍😘&quot;,
+	&quot;You poor child,have you no clothes to wear??&quot;, 
+	)&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+_intro
+
+&lt;&lt;linkreplace &quot;&lt;em&gt;Open fan mail!&lt;/em&gt;&quot;&gt;&gt;
+&lt;&lt;set $income += _tip&gt;&gt;&lt;em&gt; 
+_message
+
+Tip: $&lt;&lt;print _tip&gt;&gt;
+&lt;/em&gt;
+
+You&#39;ve earned a tip! The wallet&#39;s at $&lt;&lt;print $income&gt;&gt;.
+&lt;&lt;/linkreplace&gt;&gt;
+
+Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.</tw-passagedata><tw-passagedata pid="42" name="attendWorkshop" tags="" position="476,1605" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;set $outingRisk to $outingRisk - 2&gt;&gt;
+	&lt;&lt;set _lesson to either(&quot;You overhear a conversation in the bathroom about how the same tactics used to repress sex workers online have also been used against activists, such as those posting about Black Lives Matter.&quot;,
+		&quot;A cam performer there mentions that they posted the same cute bikini photo to their sex worker account and their personal account. One of their clients ran a reverse image search on their photo and found out their real identity. Apparently, it’s not just the algorithm that’s stalking you!&quot;,
+		&quot;You learn from other sex workers that they&#39;ve had more luck avoiding shadowbanning by identifying as “male” on their profile.&quot;)&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+You see a post about a workshop led by sex workers to learn how to stay safe digitally. 
+
+&lt;&lt;linkreplace &quot;Check it out.&quot;&gt;&gt;
+You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out. Plus, there&#39;s pizza. Grab a slice [[on your way out-&gt;start-week]]	
+&lt;&lt;/linkreplace&gt;&gt; 
+It looks cool, but your time is precious. [[Skip it.-&gt;start-week]]
+
+</tw-passagedata><tw-passagedata pid="43" name="addFansTest" tags="" position="80,829" size="100,100">$ $income
+$numFans
+
+&lt;&lt;addfans 3&gt;&gt;
+$ $income
+$numFans
+
+&lt;&lt;addfans 5&gt;&gt;
+$ $income
+$numFans
+
+&lt;&lt;addfans 7&gt;&gt;
+$ $income
+$numFans</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&null!==n&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",r="\\s"===e?"\\S":e.replace(/^\[/,"[^"),n="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",a=n.replace("\\-",""),i=function(){var e="(?:[\\x2D.0-9A-Z_a-z\\xB7\\xC0-\\xD6\\xD8-\\xF6\\xF8-\\u037D\\u037F-\\u1FFF\\u200C\\u200D\\u203F\\u2040\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD]|[\\uD800-\\uDB7F][\\uDC00-\\uDFFF])";return"[A-Za-z](?:"+e+"*-"+e+"*|[0-9A-Za-z]*)"}(),o=function(){return"("+n+"+)\\(([^\\)\\|\\n]+)\\):|"+t+"*("+n+"+)"+t+"*:([^;\\|\\n]+);|"+t+"*((?:[#.]"+n+"+"+t+"*)+);"}();return Object.freeze({space:e,spaceNoTerminator:t,lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:r,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:n,anyLetterStrict:a,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",htmlTagName:i,cssIdOrClassSigil:"[#.]",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:o,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_stringify",{value:JSON.stringify}),Object.defineProperty(JSON,"stringify",{configurable:!0,writable:!0,value:function(e,t,r){return JSON._real_stringify(e,function(e,r){var n=r;if("function"==typeof t)try{n=t(e,n)}catch(e){}return void 0===n&&(n=["(revive:eval)","undefined"]),n},r)}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),r=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),n=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),a=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),i=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),o=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,fileAPI:t,geolocation:r,mutationObserver:n,performance:a,touch:i,transitionEndEvent:o})}(),Visibility=function(){function e(){return a}function t(){return a&&document[a.stateProperty]||"visible"}function r(){return Boolean(a)}function n(){return Boolean(a&&document[a.hiddenProperty])}var a=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return undefined}();return Object.freeze(Object.defineProperties({},{vendor:{get:e},state:{get:t},isEnabled:{value:r},isHidden:{value:n},hiddenProperty:{value:a&&a.hiddenProperty},stateProperty:{value:a&&a.stateProperty},changeEvent:{value:a&&a.changeEvent}}))}(),Fullscreen=function(){function e(e){var t=e||document.documentElement;return t===document.documentElement&&("msRequestFullscreen"===f.requestFn||Browser.isOpera&&Browser.operaVersion<15)&&(t=document.body),t}function t(){return f}function r(){return(f||null)&&document[f.element]}function n(){return Boolean(f&&document[f.isEnabled])}function a(){return Boolean(f&&document[f.element])}function i(t,r){var n=this;if(!f)return Promise.reject(new Error("fullscreen not supported"));var i=e(r);if("function"!=typeof i[f.requestFn])return Promise.reject(new Error("fullscreen not supported"));if(a())return Promise.resolve();if(p())return i[f.requestFn](t);var o=".Fullscreen_requestFullscreen";return new Promise(function(e,r){jQuery(i).off(o).one(""+f.errorEvent+o+" "+f.changeEvent+o,function(t){jQuery(n).off(o),t.type===f.errorEvent?r(new Error("unknown fullscreen request error")):e()}),i[f.requestFn](t)})}function o(){var e=this;if(!f||"function"!=typeof document[f.exitFn])return Promise.reject(new TypeError("fullscreen not supported"));if(!a())return Promise.reject(new TypeError("fullscreen mode not active"));if(p())return document[f.exitFn]();var t=".Fullscreen_exitFullscreen";return new Promise(function(r,n){jQuery(document).off(t).one(""+f.errorEvent+t+" "+f.changeEvent+t,function(a){jQuery(e).off(t),a.type===f.errorEvent?n(new Error("unknown fullscreen exit error")):r()}),document[f.exitFn]()})}function s(e,t){return a()?o():i(e,t)}function u(t,r){if(f){var n=e(r);$(n).on(f.changeEvent,t)}}function l(t,r){if(f){var n=e(r);t?$(n).off(f.changeEvent,t):$(n).off(f.changeEvent)}}function c(t,r){if(f){var n=e(r);$(n).on(f.errorEvent,t)}}function d(t,r){if(f){var n=e(r);t?$(n).off(f.errorEvent,t):$(n).off(f.errorEvent)}}var f=function(){try{return Object.freeze([{isEnabled:"fullscreenEnabled",element:"fullscreenElement",requestFn:"requestFullscreen",exitFn:"exitFullscreen",changeEvent:"fullscreenchange",errorEvent:"fullscreenerror"},{isEnabled:"webkitFullscreenEnabled",element:"webkitFullscreenElement",requestFn:"webkitRequestFullscreen",exitFn:"webkitExitFullscreen",changeEvent:"webkitfullscreenchange",errorEvent:"webkitfullscreenerror"},{isEnabled:"mozFullScreenEnabled",element:"mozFullScreenElement",requestFn:"mozRequestFullScreen",exitFn:"mozCancelFullScreen",changeEvent:"mozfullscreenchange",errorEvent:"mozfullscreenerror"},{isEnabled:"msFullscreenEnabled",element:"msFullscreenElement",requestFn:"msRequestFullscreen",exitFn:"msExitFullscreen",changeEvent:"MSFullscreenChange",errorEvent:"MSFullscreenError"}].find(function(e){return e.isEnabled in document}))}catch(e){}return undefined}(),p=function(){function e(){if(null!==t)return t;if(t=!1,f)try{var e=document.exitFullscreen();e.catch(function(){}),t=e instanceof Promise}catch(e){}return t}var t=null;return e}();return Object.freeze(Object.defineProperties({},{vendor:{get:t},element:{get:r},isEnabled:{value:n},isFullscreen:{value:a},request:{value:i},exit:{value:o},toggle:{value:s},onChange:{value:u},offChange:{value:l},onError:{value:c},offError:{value:d}}))}(),_ref3=function(){function e(e){for(var t=e.cloneNode(!0),r=document.createDocumentFragment(),n=void 0;null!==(n=t.firstChild);){if(n.nodeType===Node.ELEMENT_NODE)switch(n.nodeName.toUpperCase()){case"BR":case"DIV":case"P":r.appendChild(document.createTextNode(" "))}r.appendChild(n)}return r.textContent}function t(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)return e;if(e instanceof String)return String(e);if(e instanceof Number)return Number(e);if(e instanceof Boolean)return Boolean(e)
