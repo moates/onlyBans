@@ -159,9 +159,6 @@ Macro.add("addfans", {
 
 /* AUDIO */
 //check to see if trackID is loaded?
-window.TrackExists = function(trackID) {
-	return SimpleAudio.track.has(trackID);	
-};
 
 window.isPlaying = function(trackID) {
 	var track = SimpleAudio.tracks.get(trackID);
@@ -174,29 +171,35 @@ var $audioTagMap = {
 	"music-ska" : "ska",
 };
 
+var $bgmusicgroupID = ":bgmusic";
+var $musicFadeTime = 2;
+
+// At each passage transition, control background music transitions
 $(document).on(':passagerender', function (ev) {
-	// control background audio transitions
+	
 	// first, check for music passage tags
 	var _musictags = tags().filter(t => t.includes("music"));
 	if (_musictags.length != 1 || !(_musictags[0] in $audioTagMap)){
-		console.warn("Problem with music tags for passage: ", _musictags);
+		console.warn("Missing or extra music tags for passage: ", _musictags);
 	}
 	else {
-		//match tag to track or playlist ID that matches the tag
+		//match tag to track or playlist ID
 		var _musictag =$audioTagMap[_musictags[0]];
-		console.log("trackID", _musictag);
+		var _bggroup = SimpleAudio.select($bgmusicgroupID);
 		
-		if (SimpleAudio.tracks.has(_musictag)){
-			
-			SimpleAudio.select(_musictag).playWhenAllowed();	
+		//if a song exists, and isn't already playing, play it!
+		// fade out all other bg tracks
+		if (SimpleAudio.tracks.has(_musictag)){ 
+			var _track = SimpleAudio.tracks.get(_musictag);
+			if(!_track.isPlaying()){			
+				_bggroup.fadeOut($musicFadeTime);
+				_track.fadeIn($musicFadeTime, 0);			
+			}
 		}
 		else {
 			console.warn("Missing audio track for tag ", _musictag);	
 		}
-	}
-	
-	console.log('passage render event');
-	
+	}	
 });
 
 /* PHOTO CLASS */
@@ -297,7 +300,6 @@ Setting.addToggle("disableAnimations", {
 
 
 </script><tw-passagedata pid="1" name="opening-screen" tags="messy" position="342,99" size="100,100">&lt;&lt;silently&gt;&gt;
-	&lt;&lt;playlist &quot;bgtest&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 !Welcome to &lt;strong&gt;OnlyBans&lt;/strong&gt;!
 
@@ -351,7 +353,7 @@ Thank you to &quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;. We are indeb
 Thank you Lien Tran, the creator of &lt;a href=&quot;http://copsandrubbers.com/&quot;&gt;&quot;Cops &amp; Rubbers&quot;&lt;/a&gt;, which was hugely inspirational as we considered how to design a game that could also compel real-world policy change.
 
 We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an early version of OnlyBans. Thank you to Kelly Strayhorn Theater for supporting the project’s visual development and narrative expansion during the Freshworks residency. This work was also supported by Science Gallery Detroit and the UC Berkeley Center for Long-Term Cybersecurity Arts Contest.
-</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="1421,1359" size="100,100">/* GLOBAL STORY VARIABLES */
+</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="216,17" size="100,100">/* GLOBAL STORY VARIABLES */
 
 &lt;&lt;set $income to 13&gt;&gt;
 &lt;&lt;set $incomePerFan to 10&gt;&gt;
@@ -402,6 +404,9 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 &lt;&lt;createaudiogroup &quot;:bgmusic&quot;&gt;&gt;
 	&lt;&lt;track &quot;testtrack&quot;&gt;&gt;
 	&lt;&lt;track &quot;testtrack2&quot;&gt;&gt;
+	&lt;&lt;track &quot;ska&quot;&gt;&gt;
+	&lt;&lt;track &quot;amazing&quot;&gt;&gt;
+	&lt;&lt;track &quot;waltz&quot;&gt;&gt;
 &lt;&lt;/createaudiogroup&gt;&gt;
 
 &lt;&lt;createplaylist &quot;bgtest&quot;&gt;&gt;
@@ -1005,7 +1010,7 @@ You pick up some digital harm reduction tools that will come in handy to prevent
 &lt;&lt;/linkreplace&gt;&gt; 
 It looks cool, but your time is precious. [[Skip it.-&gt;start-week]]
 
-</tw-passagedata><tw-passagedata pid="43" name="audio-test" tags="" position="1276.6423950195312,1460.8095092773438" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;audio-test2]] &lt;&lt;/silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="43" name="audio-test" tags="" position="1083.6423950195312,1456.8095092773438" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;audio-test2]] &lt;&lt;/silently&gt;&gt;
 
 &lt;&lt;link &quot;Play a song?&quot;&gt;&gt;&lt;&lt;audio &quot;testtrack&quot; volume 0.05 play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
 
@@ -1014,7 +1019,7 @@ It looks cool, but your time is precious. [[Skip it.-&gt;start-week]]
 	&lt;&lt;link &quot;Another?&quot;&gt;&gt;&lt;&lt;audio &quot;down-sound&quot; volume 0.02 play&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
 
-&lt;&lt;link &quot;Play audio and mvoe on.&quot; &quot;audio-test2&quot;&gt;&gt;&lt;&lt;audio &quot;up-sound&quot; volume 0.02 play&gt;&gt; &lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="audio-test2" tags="tags-test music-test" position="1174.1423950195312,1583.8095092773438" size="100,100">you should have heard a litlle boopy boop sound when you left the last page.
+&lt;&lt;link &quot;Play audio and mvoe on.&quot; &quot;audio-test2&quot;&gt;&gt;&lt;&lt;audio &quot;up-sound&quot; volume 0.02 play&gt;&gt; &lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="audio-test2" tags="tags-test music-test" position="1086.1423950195312,1580.8095092773438" size="100,100">you should have heard a litlle boopy boop sound when you left the last page.
 did it play?
 
 Yeah! Okay, let&#39;s try changing the background track on transition.
@@ -1027,20 +1032,20 @@ Yeah! Okay, let&#39;s try changing the background track on transition.
 [[&quot;nice music&quot;-&gt;&quot;nice-audio&quot;]]
 [[&quot;ska music&quot;-&gt;&quot;ska-audio&quot;]]
 [[&quot;amazing grace music&quot;-&gt;&quot;amazing-grace&quot;]]
-</tw-passagedata><tw-passagedata pid="45" name="&quot;nice-audio&quot;" tags="music-nice" position="1248.1423950195312,1810.8095092773438" size="100,100">	
-[[&quot;nice music&quot;-&gt;&quot;nice-audio&quot;]]
-[[&quot;ska music&quot;-&gt;&quot;ska-audio&quot;]]
-[[&quot;amazing grace music&quot;-&gt;&quot;ska-audio&quot;]]
-</tw-passagedata><tw-passagedata pid="46" name="&quot;ska-audio&quot;" tags="music-ska" position="1434.6423950195312,1790.8095092773438" size="100,100">	
+</tw-passagedata><tw-passagedata pid="45" name="&quot;nice-audio&quot;" tags="music-nice" position="1410.1423950195312,1917.8095092773438" size="100,100">	
 [[&quot;nice music&quot;-&gt;&quot;nice-audio&quot;]]
 [[&quot;ska music&quot;-&gt;&quot;ska-audio&quot;]]
 [[&quot;amazing grace music&quot;-&gt;&quot;amazing-grace&quot;]]
-</tw-passagedata><tw-passagedata pid="47" name="&quot;amazing-grace&quot;" tags="music-amazing" position="998.1423950195312,1779.8095092773438" size="100,100">
+</tw-passagedata><tw-passagedata pid="46" name="&quot;ska-audio&quot;" tags="music-ska" position="1081.6423950195312,1700.8095092773438" size="100,100">	
+[[&quot;nice music&quot;-&gt;&quot;nice-audio&quot;]]
+[[&quot;ska music&quot;-&gt;&quot;ska-audio&quot;]]
+[[&quot;amazing grace music&quot;-&gt;&quot;amazing-grace&quot;]]
+</tw-passagedata><tw-passagedata pid="47" name="&quot;amazing-grace&quot;" tags="music-amazing" position="858.1423950195312,1882.8095092773438" size="100,100">
 [[&quot;nice music&quot;-&gt;&quot;nice-audio&quot;]]
 [[&quot;ska music&quot;-&gt;&quot;ska-audio&quot;]]
 [[&quot;amazing grace music&quot;-&gt;&quot;amazing-grace&quot;]]
 [[&quot;more amazing grace music&quot;-&gt;&quot;amazing-grace2&quot;]]
-</tw-passagedata><tw-passagedata pid="48" name="&quot;amazing-grace2&quot;" tags="music-amazing" position="998.1423950195312,1929.8095092773438" size="100,100">
+</tw-passagedata><tw-passagedata pid="48" name="&quot;amazing-grace2&quot;" tags="music-amazing" position="842.1423950195312,2020.8095092773438" size="100,100">
 [[&quot;nice music&quot;-&gt;&quot;nice-audio&quot;]]
 [[&quot;ska music&quot;-&gt;&quot;ska-audio&quot;]]
 [[&quot;amazing grace music&quot;-&gt;&quot;amazing-grace&quot;]]
