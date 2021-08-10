@@ -159,20 +159,17 @@ Macro.add("addfans", {
 
 
 /* AUDIO*/
-var $audioTagMap = {
-	"music-amazing" : "amazing",
-	"music-nice" : "waltz",
-	"music-ska" : "ska",
-};
-
-var $bgmusicgroupID = ":bgmusic";
+var $audioTagMap = State.variables.audioTagMap || {};
+var $bgmusicgroupID = State.variables.bgmusicgroupID || "";
 var $musicFadeTime = 2;
 
 // At each passage transition, control background music transitions
-$(document).on(':passagerender', function (ev) {
-	
+$(document).on(':passagerender', function (ev) {	
 	// first, check for music passage tags
 	var _musictags = tags().filter(t => t.includes("music"));
+	var $audioTagMap = State.variables.audioTagMap
+	var $bgmusicgroupID = State.variables.bgmusicgroupID || "";
+	
 	if (_musictags.length != 1 || !(_musictags[0] in $audioTagMap)){
 		console.warn("Missing or extra music tags for passage: ", _musictags);
 	}
@@ -188,6 +185,7 @@ $(document).on(':passagerender', function (ev) {
 			if(!_track.isPlaying()){			
 				_bggroup.fadeOut($musicFadeTime);
 				_track.fadeIn($musicFadeTime, 0);			
+				_track.loop(true);			
 			}
 		}
 		else {
@@ -341,7 +339,15 @@ Setting.addToggle("disableAnimations", {
 				});
 
 
-</script><tw-passagedata pid="1" name="opening-screen" tags="messy" position="342,99" size="100,100">&lt;&lt;silently&gt;&gt;
+/* DEBUG UTILITIES */
+
+/* Spit out all passage names */
+/*var anyRegExp = new RegExp('');
+var passageTitles = Story.lookupWith(function (p) {
+	return anyRegExp.test(p.title);
+								 });
+console.log("All Passages", passageTitles);*/
+</script><tw-passagedata pid="1" name="opening-screen" tags="messy music-ambient" position="342,99" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 !Welcome to &lt;strong&gt;OnlyBans&lt;/strong&gt;!
 
@@ -353,7 +359,7 @@ Want to play?
 
 [[Read more.-&gt;StoryMenu]]
 
-[[TESTING cut scene -&gt;cutscene-test]] </tw-passagedata><tw-passagedata pid="2" name="what-is-your-name" tags="" position="296,266" size="100,100">Your name is
+[[TESTING cut scene -&gt;cutscene-test]] </tw-passagedata><tw-passagedata pid="2" name="what-is-your-name" tags="music-sexi" position="296,266" size="100,100">Your name is
 &lt;&lt;textbox &quot;$playerName&quot; $playerName autofocus&gt;&gt;
 
 &lt;&lt;button &quot;Submit&quot; &quot;greetings&quot;&gt;&gt;
@@ -363,7 +369,7 @@ Want to play?
 
 [[About]]
 
-[[Credits]]</tw-passagedata><tw-passagedata pid="4" name="How to Play" tags="" position="30,437" size="100,100">&lt;h2&gt;How to play&lt;/h2&gt;
+[[Credits]]</tw-passagedata><tw-passagedata pid="4" name="How to Play" tags="music-ambient" position="30,437" size="100,100">&lt;h2&gt;How to play&lt;/h2&gt;
 Goal: Make $&lt;&lt;print $incomeTarget&gt;&gt; in $weekLimit weeks.
 
 Make money by:
@@ -378,7 +384,7 @@ Use your mouse or finger to click links.  Links look like &lt;&lt;cycle &quot;_t
 
 This game is fictionalized, but based on entirely true stories. Throughout the game, facts and real-life experiences will be shared &lt;em&gt;IN THIS FORMAT.&lt;/em&gt;
 
-If you get stuck or something is broken, you can &lt;&lt;link &quot;Restart&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;.</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="16,127" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="" position="32,585" size="100,100">&lt;h1&gt;Credits &lt;/h1&gt;
+If you get stuck or something is broken, you can &lt;&lt;link &quot;Restart&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;.</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="16,127" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="music-ambient" position="32,585" size="100,100">&lt;h1&gt;Credits &lt;/h1&gt;
 &#39;&#39;Conceiver&#39;&#39;: Lena Chen
 &#39;&#39;Writer&#39;&#39;: Lena Chen
 &#39;&#39;Software Princess&#39;&#39;: Maggie Oates
@@ -430,33 +436,40 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 
 /* SOUND */
 &lt;&lt;masteraudio muteonhide&gt;&gt; /* mute audio when tab is in background */
-&lt;&lt;cacheaudio &quot;up-sound&quot; &quot;audio/test-up-sound.ogg&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;testtrack&quot; &quot;audio/test-track.mp3&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;down-sound&quot; &quot;audio/test-down-sound.ogg&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;testtrack2&quot; &quot;audio/test-track2.mp3&quot;&gt;&gt;
 
+&lt;&lt;cacheaudio &quot;up-sound&quot; &quot;audio/test/test-up-sound.ogg&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;down-sound&quot; &quot;audio/test/test-down-sound.ogg&quot;&gt;&gt;
 
-&lt;&lt;cacheaudio &quot;ska&quot; &quot;audio/ska.ogg&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;amazing&quot; &quot;audio/amazing.ogg&quot;&gt;&gt;
-&lt;&lt;cacheaudio &quot;waltz&quot; &quot;audio/waltz.ogg&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;ambient&quot; &quot;audio/ambient.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;bad&quot; &quot;audio/bad.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;outsideclub&quot; &quot;audio/outsideclub.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;sexi&quot; &quot;audio/sexi.mp3&quot;&gt;&gt;
+
+&lt;&lt;cacheaudio &quot;glitch&quot; &quot;audio/glitch.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;cashregister&quot; &quot;audio/cashregister.mp3&quot;&gt;&gt;
 
 &lt;&lt;createaudiogroup &quot;:soundeffects&quot;&gt;&gt;
 	&lt;&lt;track &quot;up-sound&quot;&gt;&gt;
 	&lt;&lt;track &quot;down-sound&quot;&gt;&gt;
+	&lt;&lt;track &quot;glitch&quot;&gt;&gt;
+	&lt;&lt;track &quot;cashregister&quot;&gt;&gt;
 &lt;&lt;/createaudiogroup&gt;&gt;
 
-&lt;&lt;createaudiogroup &quot;:bgmusic&quot;&gt;&gt;
-	&lt;&lt;track &quot;testtrack&quot;&gt;&gt;
-	&lt;&lt;track &quot;testtrack2&quot;&gt;&gt;
-	&lt;&lt;track &quot;ska&quot;&gt;&gt;
-	&lt;&lt;track &quot;amazing&quot;&gt;&gt;
-	&lt;&lt;track &quot;waltz&quot;&gt;&gt;
+&lt;&lt;set $bgmusicgroupID to &quot;:bgmusic&quot;&gt;&gt;
+&lt;&lt;createaudiogroup $bgmusicgroupID&gt;&gt;
+	&lt;&lt;track &quot;ambient&quot;&gt;&gt;
+	&lt;&lt;track &quot;bad&quot;&gt;&gt;
+	&lt;&lt;track &quot;outsideclub&quot;&gt;&gt;
+	&lt;&lt;track &quot;sexi&quot;&gt;&gt;
 &lt;&lt;/createaudiogroup&gt;&gt;
 
-&lt;&lt;createplaylist &quot;bgtest&quot;&gt;&gt;
-	&lt;&lt;track &quot;testtrack&quot;&gt;&gt;
-	&lt;&lt;track &quot;testtrack2&quot;&gt;&gt;
-&lt;&lt;/createplaylist&gt;&gt;
+&lt;&lt;set $audioTagMap to {
+	&quot;music-ambient&quot; :  &quot;ambient&quot;,
+	&quot;music-bad&quot; : &quot;bad&quot;,
+	&quot;music-outsideclub&quot; : &quot;outsideclub&quot;,
+	&quot;music-sexi&quot; : &quot;sexi&quot;,
+}&gt;&gt;
+
 
 /* PHOTOS */
 /* Outcome/reward distributions for the different photo risks.
@@ -582,14 +595,14 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 &lt;&lt;set $availablePhotos to clone(Object.keys($photoPool))&gt;&gt;
 &lt;&lt;run $availablePhotos.delete(&quot;default&quot;) &gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="8" name="greetings" tags="" position="297,399" size="100,100">&lt;&lt;type 60ms&gt;&gt;Welcome, $playerName.&lt;&lt;/type&gt;&gt;
+</tw-passagedata><tw-passagedata pid="8" name="greetings" tags="music-sexi" position="297,399" size="100,100">&lt;&lt;type 60ms&gt;&gt;Welcome, $playerName.&lt;&lt;/type&gt;&gt;
 
 Did you select your &lt;&lt;link &quot;real name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to true&gt;&gt;&lt;&lt;/link&gt;&gt; or 
-a &lt;&lt;link &quot;fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to false&gt;&gt;&lt;&lt;/link&gt;&gt;?</tw-passagedata><tw-passagedata pid="9" name="motivation" tags="" position="300,550" size="100,100">Lookin good, $playerName!
+a &lt;&lt;link &quot;fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to false&gt;&gt;&lt;&lt;/link&gt;&gt;?</tw-passagedata><tw-passagedata pid="9" name="motivation" tags="music-ambient" position="300,550" size="100,100">Lookin good, $playerName!
 
 You&#39;re hoping to earn $&lt;&lt;print &quot;$incomeTarget&quot;&gt;&gt; to pay your bills in $weekLimit weeks. Every fan you get earns you $&lt;&lt;print &quot;$incomePerFan&quot;&gt;&gt;. If you&#39;re lucky, some of them may even tip you extra! 😘
 
-[[Let&#39;s get fans!-&gt;start-week]]</tw-passagedata><tw-passagedata pid="10" name="start-week" tags="" position="299,696" size="100,100">&lt;&lt;set $numWeek to visited()&gt;&gt;
+[[Let&#39;s get fans!-&gt;start-week]]</tw-passagedata><tw-passagedata pid="10" name="start-week" tags="music-sexi" position="299,696" size="100,100">&lt;&lt;set $numWeek to visited()&gt;&gt;
 &lt;&lt;set _toGo = Math.clamp($incomeTarget - $income, 0, $incomeTarget + $income) &gt;&gt;
 
 Week $numWeek
@@ -610,7 +623,7 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 		&lt;&lt;set _line to [&quot;Time to set some thirst traps.&quot;, &quot;You get out the selfie stick and start snapping away.&quot;, &quot;You love the camera and the camera loves you&quot;].pluck()&gt;&gt;
 		[[_line-&gt;photo-selection]]		
 &lt;&lt;/switch&gt;&gt;
-</tw-passagedata><tw-passagedata pid="11" name="outing-side-story" tags="" position="678,493" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="11" name="outing-side-story" tags="music-dark" position="678,493" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _outingBranch to either(&quot;stolen-content&quot;, &quot;personal-data&quot;, &quot;suggested-friends&quot;)&gt;&gt;
 	&lt;&lt;set _outingEquiv to (_outingBranch == &quot;stolen-content&quot;)&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
@@ -632,7 +645,7 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 	OnlyBans sent you a list of suggested followers. You think you recognize one of the people? [[Take a closer look.-&gt;suggested-friends]] 
 &lt;&lt;else&gt;&gt;
 	Your friend asks you to feed their cat (again). [[Get back to making content.-&gt;photo-selection]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="suspension-side-story" tags="" position="653,785" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="suspension-side-story" tags="music-dark" position="653,785" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $wasSuspended to true&gt;&gt;
 	
 	#SUSPENDED!
@@ -641,7 +654,7 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 	We restrict certain content to protect our community. If you continue to post dangerous content, you may be banned permanently.
 	
 	[[Continue.-&gt;suspension-consequence]]
-&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="outing-prelude" tags="" position="701,204" size="100,100">LOCKED 
+&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="outing-prelude" tags="music-dark" position="701,204" size="100,100">LOCKED 
 We&#39;ve temporarily limited some of your account features. In order to make sure OnlyBans is as safe as possible, you may be asked to confirm you&#39;re not a robot. Easy, right? 
 
 
@@ -661,7 +674,7 @@ Time&#39;s up! Your $&lt;&lt;print $incomeTarget&gt;&gt; is due.
 	&lt;&lt;else&gt;&gt;&lt;&lt;include &quot;not-enough-money-ending&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
 
 So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes -&gt;ending-text]]😈
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="photo-selection" tags="" position="292,921" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="photo-selection" tags="music-outsideclub" position="292,921" size="100,100">&lt;&lt;silently&gt;&gt;
   &lt;&lt;set $queuedPhotos to $availablePhotos&gt;&gt;
   &lt;&lt;if $queuedPhotos.length &lt; $numPhotosQueued&gt;&gt;
   	&lt;&lt;set _numEmpties to $numPhotosQueued - $availablePhotos.length&gt;&gt;
@@ -695,7 +708,7 @@ Which photo do you want to post today?
 &lt;&lt;/for&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="16" name="newFans" tags="" position="282,1089" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="16" name="newFans" tags="music-outsideclub" position="282,1089" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _newFansRange to $fanRewardDists[$photoPool[$currentPhoto].riskLevel] &gt;&gt;
 	&lt;&lt;set _numNewFans to random(_newFansRange[0], _newFansRange[1])&gt;&gt;
 	&lt;&lt;addfans _numNewFans&gt;&gt;
@@ -703,7 +716,7 @@ Which photo do you want to post today?
 
 Your photo got some attention and attracted _numNewFans new fans!
 
-Yay, you’re getting the hang of this! [[What else could you do-&gt;community-support]] to boost your fan count?</tw-passagedata><tw-passagedata pid="17" name="tooSexyBan" tags="" position="402,1089" size="100,100">&lt;&lt;silently&gt;&gt;
+Yay, you’re getting the hang of this! [[What else could you do-&gt;community-support]] to boost your fan count?</tw-passagedata><tw-passagedata pid="17" name="tooSexyBan" tags="music-dark" position="402,1089" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;
 	
 	&lt;&lt;set _currentStat to either(
@@ -732,7 +745,7 @@ You’ve made no new fans and earned no new money.
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="shadowBan" tags="" position="402,1209" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="shadowBan" tags="music-dark" position="402,1209" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;
 	
 	&lt;&lt;set _currentStat to either(
@@ -766,7 +779,7 @@ Sorry, no new fans. No new money.
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your business skills-&gt;community-support]].
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="noReasonBan" tags="" position="284,1212" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="noReasonBan" tags="music-dark" position="284,1212" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;
 	
 	&lt;&lt;set _currentStat to either(
@@ -795,7 +808,7 @@ Sorry, no new fans. This seems completely unfair, but you&#39;re probably
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	Well, that sucks, but [[maybe your luck will improve?-&gt;community-support]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="community-support" tags="" position="296,1496" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="community-support" tags="music-ambient" position="296,1496" size="100,100">&lt;&lt;silently&gt;&gt;
   &lt;&lt;if $numWeek == $suspensionWeek&gt;&gt;
 		  &lt;!-- you can&#39;t get tips if yr suspended --!&gt;
 		  &lt;&lt;set $communityOutcome to either(&quot;share4share&quot;, &quot;joinGroup&quot;, &quot;attendWorkshop&quot;)&gt;&gt;
@@ -810,13 +823,14 @@ Sorry, no new fans. This seems completely unfair, but you&#39;re probably
   [[attendWorkshop-&gt;attendWorkshop]]
 &lt;&lt;/silently&gt;&gt;&lt;&lt;include $communityOutcome&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="21" name="suspension-consequence" tags="" position="804,777" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="22" name="permaban-transition" tags="" position="553,1085" size="100,100">Another banned photo? That&#39;s $numPhotosFlagged banned photos //and// you were recently suspended? [[Oh shit...-&gt;permabanned]]</tw-passagedata><tw-passagedata pid="23" name="permabanned" tags="" position="698,1091" size="100,100">&#39;&#39;DEACTIVATED&#39;&#39;
+</tw-passagedata><tw-passagedata pid="21" name="suspension-consequence" tags="music-dark" position="804,777" size="100,100">TODO
+haven&#39;t finished this yet, click restart in the left panel</tw-passagedata><tw-passagedata pid="22" name="permaban-transition" tags="music-dark" position="553,1085" size="100,100">Another banned photo? That&#39;s $numPhotosFlagged banned photos //and// you were recently suspended? [[Oh shit...-&gt;permabanned]]</tw-passagedata><tw-passagedata pid="23" name="permabanned" tags="music-dark" position="698,1091" size="100,100">&#39;&#39;DEACTIVATED&#39;&#39;
 	You&#39;ve violated the rules one too many times. Your account has been permanently disabled. 
 
-[[CONTINUE-&gt;permabanned-stat]].</tw-passagedata><tw-passagedata pid="24" name="permabanned-stat" tags="" position="698,1241" size="100,100">not-alone.exe
+[[CONTINUE-&gt;permabanned-stat]].</tw-passagedata><tw-passagedata pid="24" name="permabanned-stat" tags="music-dark" position="698,1241" size="100,100">not-alone.exe
 41.01% of those who have done sex work said they have been deplatformed or kicked off of a social media account.
 
-[[CONTINUE.-&gt;permabanned-appeal]]</tw-passagedata><tw-passagedata pid="25" name="permabanned-appeal" tags="" position="846,1243" size="100,100">&lt;&lt;silently&gt;&gt;
+[[CONTINUE.-&gt;permabanned-appeal]]</tw-passagedata><tw-passagedata pid="25" name="permabanned-appeal" tags="music-dark" position="846,1243" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _hasAppealSuccess to either(true, false)&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 
@@ -841,16 +855,16 @@ What do you do?
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="26" name="permabanned-ending" tags="" position="986,1243" size="100,100">On your journey, you’ve learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
+</tw-passagedata><tw-passagedata pid="26" name="permabanned-ending" tags="music-dark" position="986,1243" size="100,100">On your journey, you’ve learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
 
 Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own.
 
 But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
 
 So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes-&gt;ending-text]] 😈
-</tw-passagedata><tw-passagedata pid="27" name="ending-text" tags="" position="1640,1032" size="100,100">Thank you for playing OnlyBans
+</tw-passagedata><tw-passagedata pid="27" name="ending-text" tags="music-outsideclub" position="1640,1032" size="100,100">Thank you for playing OnlyBans
 
-&lt;&lt;link &quot;Play again?&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="verify-more" tags="" position="898,276" size="100,100">STILL LOCKED 
+&lt;&lt;link &quot;Play again?&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="verify-more" tags="music-dark" position="898,276" size="100,100">STILL LOCKED 
 
 Thank you for verifying your phone number. 
 	
@@ -868,9 +882,9 @@ For somewhat vague safety reasons, we still need more information before you can
 		&lt;&lt;goto &quot;skip-verify-more&quot;&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
-</tw-passagedata><tw-passagedata pid="29" name="skip-verify-phone" tags="" position="894,117" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
+</tw-passagedata><tw-passagedata pid="29" name="skip-verify-phone" tags="music-dark" position="894,117" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
 
-[[Verify your number.-&gt;outing-prelude]]</tw-passagedata><tw-passagedata pid="30" name="skip-verify-more" tags="" position="1021,273" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making content if you can&#39;t even get paid? 
+[[Verify your number.-&gt;outing-prelude]]</tw-passagedata><tw-passagedata pid="30" name="skip-verify-more" tags="music-dark" position="1021,273" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making content if you can&#39;t even get paid? 
 
 
 
@@ -878,12 +892,12 @@ For somewhat vague safety reasons, we still need more information before you can
 
 Give up and [[close your account-&gt;close-account]] 
 
-</tw-passagedata><tw-passagedata pid="31" name="close-account" tags="" position="1176,359" size="100,100">Unfortunately, stigma and shame means that most sex workers use pseudonymns and hide their job from their employers and loved ones. Even though you’re not willing to risk being outed, you’ve learned a lot about digital freedom and privacy during your time on OnlyBans. Most importantly, you made friends along the way and realized the power of community!
+</tw-passagedata><tw-passagedata pid="31" name="close-account" tags="music-dark" position="1176,359" size="100,100">Unfortunately, stigma and shame means that most sex workers use pseudonymns and hide their job from their employers and loved ones. Even though you’re not willing to risk being outed, you’ve learned a lot about digital freedom and privacy during your time on OnlyBans. Most importantly, you made friends along the way and realized the power of community!
 
 But you also want to give the platforms another chance. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
 
 So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes-&gt;ending-text]] 😈
-</tw-passagedata><tw-passagedata pid="32" name="stolen-content" tags="" position="944,666" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="32" name="stolen-content" tags="music-ambient" position="944,666" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _getsTakenDown to either(true, false)&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 
@@ -913,7 +927,7 @@ You&#39;re pissed that someone could be impersonating you and providing false in
 			&lt;&lt;/if&gt;&gt;
 		&lt;&lt;/linkappend&gt;&gt;
 	&lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="personal-data" tags="" position="945,552" size="100,100">&lt;em&gt; &quot;Hey, this is weird, but don&#39;t I know you from somehwere?&quot; &lt;/em&gt;
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="personal-data" tags="music-ambient" position="945,552" size="100,100">&lt;em&gt; &quot;Hey, this is weird, but don&#39;t I know you from somehwere?&quot; &lt;/em&gt;
 &lt;&lt;linkreplace &quot;Open Message&quot;&gt;&gt; 
   Your old boss started following your OnlyBans account? How did they find you? It&#39;s not like your account is very popular yet...
 &lt;&lt;if $usedRealName&gt;&gt;
@@ -928,7 +942,7 @@ Now that one person knows you&#39;re doing sex work, others might find out too. 
 
 No way. [[Close your account.-&gt;close-account]]
 &lt;&lt;/linkreplace&gt;&gt;
-</tw-passagedata><tw-passagedata pid="34" name="suggested-friends" tags="" position="934,441" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="34" name="suggested-friends" tags="music-ambient" position="934,441" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _people to [&quot;mom&quot;,&quot;favorite teacher&quot;,&quot;child&quot;,&quot;landlord&quot;, &quot;godparent&quot;]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 The list of people you should follow includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
@@ -943,16 +957,16 @@ The list of people you should follow includes tons of friends and … even your 
 &lt;&lt;/linkreplace&gt;&gt;
 
 &lt;&lt;linkreplace &quot;Nope.&quot;&gt;&gt;You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;
-</tw-passagedata><tw-passagedata pid="35" name="got-money-ending" tags="ending" position="1076,882" size="100,100">Congratulations, your booty beat the odds! You reached your goal, learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
+</tw-passagedata><tw-passagedata pid="35" name="got-money-ending" tags="ending music-sexi" position="1076,882" size="100,100">Congratulations, your booty beat the odds! You reached your goal, learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
 
 You were one of the lucky ones. Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
 
-But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.</tw-passagedata><tw-passagedata pid="36" name="not-enough-money-ending" tags="ending" position="1070,1001" size="100,100">Too bad, you didn’t reach your goal … but you did learn a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
+But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.</tw-passagedata><tw-passagedata pid="36" name="not-enough-money-ending" tags="ending music-dark" position="1070,1001" size="100,100">Too bad, you didn’t reach your goal … but you did learn a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
 
 Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
 
 But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
-</tw-passagedata><tw-passagedata pid="37" name="About" tags="" position="150,430" size="100,100">&lt;&lt;h2&gt;&gt; Home Page &lt;&lt;/h2&gt;&gt;
+</tw-passagedata><tw-passagedata pid="37" name="About" tags="music-ambient" position="150,430" size="100,100">&lt;&lt;h2&gt;&gt; Home Page &lt;&lt;/h2&gt;&gt;
 This game lives at &lt;a href=&quot;https://www.onlybansgame.com&quot;&gt;www.onlybansgame.com&lt;/a&gt;.
 &lt;h2&gt; About the game &lt;/h2&gt;
 Created by a team of sex workers and allies, OnlyBans is an interactive game that critically examines the policing of marginalized bodies and sexual labor to empathetically teach people about discrimination faced by sex workers online. Players encounter content moderation algorithms, shadowbanning, “real name” policies, facial recognition software, and other threats based on actual experiences of sex workers. Featuring real images and stories from sex workers themselves, OnlyBans offers a speculative vision of how marginalized communities can unite to protest these unjust policies and create better alternatives.
@@ -976,7 +990,7 @@ Digital discrimination and deplatforming of sex workers is a direct result of FO
 &lt;a href= &quot;https://decodingstigma.tech/&quot;&gt;Decoding Stigma&lt;/a&gt; bridges the gap between sex workers, academics, technologists, and anyone who holds multiples of these identities. Their goal is to prioritize sexual autonomy as a necessary ethics question for researchers and technologists and to design a liberatory future in which sexually stigmatized voices are amplified and celebrated.
 </tw-passagedata><tw-passagedata pid="38" name="StorySubtitle" tags="" position="140,133" size="100,100">Goal: Get $&lt;&lt;print $incomeTarget&gt;&gt; by week $weekLimit
 Wallet: $&lt;&lt;print $income&gt;&gt;
-Week: $numWeek</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="" position="476,1470" size="100,100">&lt;&lt;silently&gt;&gt;
+Week: $numWeek</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="music-sexi" position="476,1470" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 
@@ -990,7 +1004,7 @@ Another sex worker follows your account and invites you to do a &#39;&#39;share 
 Okay, suit yourself.
 &lt;&lt;/linkreplace&gt;&gt;
 
-[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="40" name="joinGroup" tags="" position="597,1460" size="100,100">&lt;&lt;silently&gt;&gt;
+[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="40" name="joinGroup" tags="music-sexi" position="597,1460" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 
   &lt;&lt;set _groupLesson to either( 
@@ -1010,7 +1024,7 @@ Your new friends also share your content with their followers and you get _numNe
 
 &lt;&lt;linkreplace &quot;No thanks.&quot;&gt;&gt;Alright, good luck then.&lt;&lt;/linkreplace&gt;&gt;
 
-[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="41" name="tip" tags="" position="602,1603" size="100,100">&lt;&lt;silently&gt;&gt;
+[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="41" name="tip" tags="music-sexi" position="602,1603" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _tip to random(10,100)&gt;&gt;
 	&lt;&lt;set _intro to either(
 	&quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
@@ -1041,7 +1055,7 @@ Tip: $&lt;&lt;print _tip&gt;&gt;
 You&#39;ve earned a tip! The wallet&#39;s at $&lt;&lt;print $income&gt;&gt;.
 &lt;&lt;/linkreplace&gt;&gt;
 
-Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.</tw-passagedata><tw-passagedata pid="42" name="attendWorkshop" tags="" position="476,1605" size="100,100">&lt;&lt;silently&gt;&gt;
+Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.</tw-passagedata><tw-passagedata pid="42" name="attendWorkshop" tags="music-outsideclub" position="476,1605" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $outingRisk to $outingRisk - 2&gt;&gt;
 	&lt;&lt;set _lesson to either(&quot;You overhear a conversation in the bathroom about how the same tactics used to repress sex workers online have also been used against activists, such as those posting about Black Lives Matter.&quot;,
 		&quot;A cam performer there mentions that they posted the same cute bikini photo to their sex worker account and their personal account. One of their clients ran a reverse image search on their photo and found out their real identity. Apparently, it’s not just the algorithm that’s stalking you!&quot;,
@@ -1054,48 +1068,9 @@ You pick up some digital harm reduction tools that will come in handy to prevent
 &lt;&lt;/linkreplace&gt;&gt; 
 It looks cool, but your time is precious. [[Skip it.-&gt;start-week]]
 
-</tw-passagedata><tw-passagedata pid="43" name="audio-test" tags="" position="1083,1456" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;audio-test2]] &lt;&lt;/silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="43" name="cutscene-test" tags="" position="1558,1404" size="100,100">Here is a cutscene. It should play and move you to the next screen.
 
-&lt;&lt;link &quot;Play a song?&quot;&gt;&gt;&lt;&lt;audio &quot;testtrack&quot; volume 0.05 play loop&gt;&gt;&lt;&lt;/link&gt;&gt;
-
-&lt;&lt;linkreplace &quot;Play a sound effect?&quot;&gt;&gt;
-	&lt;&lt;audio &quot;up-sound&quot; volume 0.02 play&gt;&gt;
-	&lt;&lt;link &quot;Another?&quot;&gt;&gt;&lt;&lt;audio &quot;down-sound&quot; volume 0.02 play&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;link &quot;Play audio and mvoe on.&quot; &quot;audio-test2&quot;&gt;&gt;&lt;&lt;audio &quot;up-sound&quot; volume 0.02 play&gt;&gt; &lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="audio-test2" tags="tags-test music-test" position="1086,1580" size="100,100">you should have heard a litlle boopy boop sound when you left the last page.
-did it play?
-
-Yeah! Okay, let&#39;s try changing the background track on transition.
-
-&lt;&lt;link &quot;Start the background audio.&quot;&gt;&gt;
-	&lt;&lt;playlist &quot;bgtest&quot; play&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-	Nice songs? U like? Now let&#39;s practice some background music transitions.
-	
-[[&quot;nice music&quot;-&gt;&quot;nice-audio&quot;]]
-[[&quot;ska music&quot;-&gt;&quot;ska-audio&quot;]]
-[[&quot;amazing grace music&quot;-&gt;&quot;amazing-grace&quot;]]
-</tw-passagedata><tw-passagedata pid="45" name="&quot;nice-audio&quot;" tags="music-nice" position="1410,1917" size="100,100">	
-[[&quot;nice music&quot;-&gt;&quot;nice-audio&quot;]]
-[[&quot;ska music&quot;-&gt;&quot;ska-audio&quot;]]
-[[&quot;amazing grace music&quot;-&gt;&quot;amazing-grace&quot;]]
-</tw-passagedata><tw-passagedata pid="46" name="&quot;ska-audio&quot;" tags="music-ska" position="1081,1700" size="100,100">	
-[[&quot;nice music&quot;-&gt;&quot;nice-audio&quot;]]
-[[&quot;ska music&quot;-&gt;&quot;ska-audio&quot;]]
-[[&quot;amazing grace music&quot;-&gt;&quot;amazing-grace&quot;]]
-</tw-passagedata><tw-passagedata pid="47" name="&quot;amazing-grace&quot;" tags="music-amazing" position="858,1882" size="100,100">
-[[&quot;nice music&quot;-&gt;&quot;nice-audio&quot;]]
-[[&quot;ska music&quot;-&gt;&quot;ska-audio&quot;]]
-[[&quot;amazing grace music&quot;-&gt;&quot;amazing-grace&quot;]]
-[[&quot;more amazing grace music&quot;-&gt;&quot;amazing-grace2&quot;]]
-</tw-passagedata><tw-passagedata pid="48" name="&quot;amazing-grace2&quot;" tags="music-amazing" position="842,2020" size="100,100">
-[[&quot;nice music&quot;-&gt;&quot;nice-audio&quot;]]
-[[&quot;ska music&quot;-&gt;&quot;ska-audio&quot;]]
-[[&quot;amazing grace music&quot;-&gt;&quot;amazing-grace&quot;]]
-[[&quot;same amazing grace music&quot;-&gt;&quot;amazing-grace2&quot;]]</tw-passagedata><tw-passagedata pid="49" name="cutscene-test" tags="" position="1558,1404" size="100,100">Here is a cutscene. It should play and move you to the next screen.
-
-&lt;&lt;cutscene &quot;help-hands&quot; &quot;cut&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="cut" tags="" position="1749,1482" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;cutscene &quot;help-hands&quot; &quot;cut&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="cut" tags="" position="1749,1482" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[cut-&gt;cutscene-end]] 
 &lt;&lt;/silently&gt;&gt;
 
@@ -1110,10 +1085,10 @@ video here
   &lt;/video&gt;
 &lt;/div&gt;*/
 
-</tw-passagedata><tw-passagedata pid="51" name="cutscene-end" tags="" position="1797,1291" size="100,100">You did it. 
+</tw-passagedata><tw-passagedata pid="45" name="cutscene-end" tags="" position="1797,1291" size="100,100">You did it. 
 
 [[Another?-&gt;cut2]]
-[[Start over?-&gt;cutscene-test]]</tw-passagedata><tw-passagedata pid="52" name="cut2" tags="" position="1948,1309" size="100,100">video here
+[[Start over?-&gt;cutscene-test]]</tw-passagedata><tw-passagedata pid="46" name="cut2" tags="" position="1948,1309" size="100,100">video here
   &lt;video controls  id=&quot;cutscene&quot; width=&quot;inherit&quot; height=&quot;inherit&quot; muted autoplay&gt;
 	  &lt;source src=&quot;images\help-scrolling.mp4&quot;
 			  type = &quot;video/mp4&quot;&gt;
