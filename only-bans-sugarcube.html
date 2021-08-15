@@ -138,6 +138,132 @@ img.vapor {
   max-width: 20%;
   max-height: 30%;
 }
+
+/* ************* */
+/* CHAT BUBBLES  */
+/* ************* */
+/* Based on n7best's codepen */
+section {
+  max-width: 50%;
+  margin: 50px auto;
+  background: #d185a1;
+}
+section.div {
+  max-width: 255px;
+    word-wrap: break-word;
+    margin-bottom: 10px;
+    line-height: 24px;
+}
+
+.clear {
+  clear: both
+}
+
+.from-me {
+  position: relative;
+  padding: 10px 15px;
+  color: white;
+  background: #0B93F6;
+  border-radius: 25px;
+  float: right;
+}
+.from-me:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    bottom: -2px;
+    right: -7px;
+    height: 20px;
+    border-right: 20px solid #0B93F6;
+    border-bottom-left-radius: 16px 14px;
+    -webkit-transform: translate(0, -2px);
+  }
+.from-me:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    bottom: -2px;
+    right: -56px;
+    width: 26px;
+    height: 20px;
+    background: #d185a1;
+    border-bottom-left-radius: 10px;
+    -webkit-transform: translate(-30px, -2px);
+  }
+
+
+.from-them {
+  position: relative;
+  padding: 10px 20px;
+  background: #E5E5EA;
+  border-radius: 25px;
+  color: black;
+  float: left;
+}
+
+.from-them:before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    bottom: -2px;
+    left: -7px;
+    height: 20px;
+    border-left: 20px solid #E5E5EA;
+    border-bottom-right-radius: 16px 14px;
+    -webkit-transform: translate(0, -2px);
+  }
+
+.from-them:after{
+    content: "";
+    position: absolute;
+    z-index: 3;
+    bottom: -2px;
+    left: 4px;
+    width: 26px;
+    height: 20px;
+    background: #d185a1;
+    border-bottom-right-radius: 10px;
+    -webkit-transform: translate(-30px, -2px);
+}
+
+
+@keyframes loud {
+  20% {
+    transform: rotate3d(0, 0, 1, 5deg) scale3d(1.5, 1.5, 1.5);
+  }
+  25% {
+    transform: rotate3d(0, 0, 1, -5deg) scale3d(1.5, 1.5, 1.5);
+  }
+  30% {
+    transform: rotate3d(0, 0, 1, 5deg) scale3d(1.5, 1.5, 1.5);
+  }
+  35% {
+    transform: rotate3d(0, 0, 1, -5deg) scale3d(1.5, 1.5, 1.5);
+  }
+  40% {
+    transform: rotate3d(0, 0, 1, 5deg) scale3d(1.5, 1.5, 1.5);
+  }
+  45% {
+    transform: rotate3d(0, 0, 1, -5deg) scale3d(1.5, 1.5, 1.5);
+  }
+  50% {
+    transform: rotate3d(0, 0, 1, 5deg) scale3d(1.5, 1.5, 1.5);
+  }
+  60% {
+    transform: rotate3d(0, 0, 1, 5deg) scale3d(1.5, 1.5, 1.5);
+  }
+  to {
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}
+
+.loud {
+  animation-duration: 1.5s;
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  transform-origin: center center;
+  animation-name: loud;
+}
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">/* UI Sidebar Config */
 // UIBar.destroy() /* hide the UI bar altogether */
 Config.ui.stowBarInitially = 1200; //close sidebar if viewport less than X pixels
@@ -992,17 +1118,33 @@ Digital discrimination and deplatforming of sex workers is a direct result of FO
 Wallet: $&lt;&lt;print $income&gt;&gt;
 Week: $numWeek</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="music-sexi" position="476,1470" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
 
 Another sex worker follows your account and invites you to do a &#39;&#39;share 4 share,&#39;&#39; which means that you share their content on your feed and they do the same for you. Are you in?
-
-&lt;&lt;linkreplace &quot;Sure, let&#39;s share!&quot;&gt;&gt;&lt;&lt;addfans _numNewFans&gt;&gt;They share your pics to their feed. You attract _numNewFans new fans and make some more money. 
+&lt;&lt;/silently&gt;&gt;
+	&lt;section&gt;
+	&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Hey @quiteSaxy, cool account! I’m also selling pics on OnlyBans. Do you wanna do a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
+	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+	&lt;&lt;linkreplace &quot;What&#39;s a share4share?&quot;&gt;&gt;&lt;div class=&quot;from-me loud&quot;&gt;
+		&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;What’s a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;
+	&lt;/div&gt;
+	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+	&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms start 1s&gt;&gt;I’ll share your content with my followers, if you do the same for me. It’s a way to build a bigger fanbase!&lt;&lt;/type&gt;&gt;&lt;/p&gt;	&lt;/div&gt;
+	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+		
+	&lt;&lt;linkreplace &quot;Sure, let&#39;s share!&quot;&gt;&gt;&lt;&lt;addfans _numNewFans&gt;&gt;
+	&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Sure, let&#39;s share!&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
+	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+They share your pics to their feed. You attract _numNewFans new fans and make some more money. 
 	Wallet: $&lt;&lt;print $income&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
 
 &lt;&lt;linkreplace &quot;Nah.&quot;&gt;&gt;
-Okay, suit yourself.
+		&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Nah, sorry.&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
+		&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+		&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms start 1s&gt;&gt;Okay, suit yourself.&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;&lt;/linkreplace&gt;&gt;
+&lt;&lt;/linkreplace&gt;&gt;
+&lt;/section&gt;
 
 [[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="40" name="joinGroup" tags="music-sexi" position="597,1460" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
