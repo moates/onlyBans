@@ -102,7 +102,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 /* GENERAL STYLE  */
 /* ************* */
 
-/*@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 
 
@@ -119,24 +119,266 @@ body { /* override */
 body.messy {
   background-color: #D185A1;
   background-image: url("images/windows-background.jpg");
-  
 }
 
+a {
+	color: white;
+  	text-decoration: underline;  	
+}
+
+a:hover {
+  	color: purple;
+}
+
+a.link-broken {
+	color: #c22;
+}
+
+#story {
+
+}
+
+#passages {
+  max-width 100em;  
+}
 
 #passage-opening-screen {
   background-color: none;
 }
+
+/* ************* */
+/* BROWSER STYLE */
+/* ************* */
+.browser-container {
+  border: 4px solid var(--outlineColor);
+  border-radius: 7px;    
+}
+
+.browser-color {
+  --outlineColor: #555ACF;
+  --bottomColor: #555ACF;
+  --topColor: #ffffff;
+  --topTextColor: var(--bottomColor);
+  --bottomTextColor: var(--topColor);
+  --xColor: var(--topColor);
+  --iconColor: var(--outlineColor);
+}
+
+.browser-top{
+  background: var(--topColor);
+  color: var(--topTextColor);
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom: 4px solid var(--outlineColor);
+  padding: 0.5em;
+  
+  display: flex; 
+  flex-flow: row nowrap; /* keeps top bar evenly spaced*/
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.browser-dots{ 
+  display: inline-flex;  
+}
+
+.browser-dot{
+  height: 1em;
+  width: 1em;
+  background-color: var(--iconColor);
+  border-radius: 50%;
+  margin: 0.2em;
+}
+
+.browser-title{
+  color: var(--topTextColor);
+}
+
+.browser-x{
+  background: var(--iconColor);  
+  height: 1.5em;
+  width: 1.5em;
+  border: 0.4em solid var(--iconColor);
+  background:
+        linear-gradient(45deg, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 43%,var(--xColor) 45%,var(--xColor) 55%,rgba(0,0,0,0) 57%,rgba(0,0,0,0) 100%),
+        linear-gradient(135deg, var(--iconColor) 0%,var(--iconColor) 43%,var(--xColor) 45%,var(--xColor) 55%,var(--iconColor) 57%,var(--iconColor) 100%);
+}
+
+.browser-bottom {
+  background: var(--bottomColor);
+  color: var(--bottomTextColor);
+  padding: 0.25em;  
+  padding-left: 8%;
+  padding-right: 8%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  text-align: center;
+
+}
+
+/*.browser-container {  
+  border: 4px solid var(--outlineColor);
+  border-radius: 7px;   
+  --iconSize: 30px; 
+  transition: color var(--transitionTime, 2s) ease-in-out;
+  
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center; 
+  min-width: 8em;
+  box-sizing: border-box;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  align-content: stretch;
+}
+
+.browser-top {
+  padding: 10px;
+  background: var(--barColor);
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom: 4px solid var(--outlineColor);
+  
+  min-width: 100%
+  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.browser-dots {
+ 	flex-direction: column; 
+}
+
+.browser-color {
+  --outlineColor: #555ACF;
+  --barColor: #ffffff;
+  --backgroundColor: #555ACF;
+  --xColor: var(--barColor);
+  --iconColor: var(--outlineColor);
+  --textColor: var(--barColor);
+  transition: color var(--transitionTime, 2s) ease-in-out;
+}
+
+
+.browser-dot {
+  height: calc(var(--iconSize)/2);
+  width: calc(var(--iconSize)/2);
+  background-color: var(--iconColor);
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 2px;
+}
+
+.browser-x-icon {
+	box-sizing: border-box;
+    position: absolute;
+    right: calc(var(--iconSize)/2);
+    top: calc(var(--iconSize)/2);
+    display: inline-block;
+    width: var(--iconSize);
+    height: var(--iconSize);
+    border: 6px solid var(--iconColor);
+    background:
+        linear-gradient(45deg, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 43%,var(--xColor) 45%,var(--xColor) 55%,rgba(0,0,0,0) 57%,rgba(0,0,0,0) 100%),
+        linear-gradient(135deg, var(--iconColor) 0%,var(--iconColor) 43%,var(--xColor) 45%,var(--xColor) 55%,var(--iconColor) 57%,var(--iconColor) 100%);
+}
+
+.browser-bar-title {
+	width: 80%;
+    text-align: center;
+    display: inline-block;
+    color: var(--iconColor);
+}
+
+
+.browser-bottom {
+  background: var(--backgroundColor);
+  padding: 10px;
+  transition: color var(--transitionTime, 2s) ease-in-out;
+}
+
+.browser-content {
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-bottom: 3%;
+	padding-top: 3%;
+	text-align: center;
+	color: var(--textColor);
+  transition: color var(--transitionTime, 2s) ease-in-out;
+  margin: 0;
+}*/
+
 /* ************* */
 /* PHOTO SELECTOR */
 /* ************* */
 img.original {
-  max-width: 20%;
-  max-height: 30%;
+  width: 100%;
+  height: auto;
+  /*max-width: 20%;
+  max-height: 30%;*/
 }
 
 img.vapor {
-  max-width: 20%;
-  max-height: 30%;
+  width: 100%;
+  height: auto;
+  /*max-width: 20%;
+  max-height: 30%;*/
+}
+
+/* ************* */
+/* PHOTO OVERLAY */
+/* ************* */
+/* Container needed to position the overlay. Adjust the width as needed */
+.photo-container{
+	position: relative;
+  	width: 50%;
+}
+
+.underlay {
+ 	display: block;
+  	width:100%;
+	height:auto;
+  	opacity: 1;
+  	transition: 2s ease;
+  	-webkit-transition: 2s ease;
+}
+
+/* The overlay effect (full height and width) - lays on top of the container and over the image */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: inherit;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  opacity:0;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
+  -webkit-transition: 2s ease;
+  transition: 2s ease;
+}
+
+/* When you mouse over the container, the overlay text will "zoom" in display */
+.photo-container:hover .overlay {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+
+.photo-container:hover .underlay {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  -ms-transform: scale(0);
+  transform: scale(0);
 }
 
 /* ************* */
@@ -283,6 +525,18 @@ Macro.add("addfans", {
 	}
 });
 
+/*  */
+Macro.add("browserWindow", {
+		handler: function() {
+				if (this.args.length !== 3) {
+						return this.error('browserWindow takes three parameters');
+				}	
+				var _colorScheme = this.args[0];
+				var _title = this.args[1];
+				var _content = this.args[2];								
+				State.variables.income;
+	}
+});
 
 /* AUDIO*/
 var $musicFadeTime = 2;
@@ -469,7 +723,7 @@ Setting.addToggle("disableAnimations", {
 /*var anyRegExp = new RegExp('');
 var passageTitles = Story.lookupWith(function (p) {
 	return anyRegExp.test(p.title);
-								 });
+								 }).map(psg => psg.title);
 console.log("All Passages", passageTitles);*/
 </script><tw-passagedata pid="1" name="opening-screen" tags="messy music-ambient" position="342,99" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
@@ -569,11 +823,19 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 
 &lt;&lt;cacheaudio &quot;glitch&quot; &quot;audio/glitch.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;cashregister&quot; &quot;audio/cashregister.mp3&quot;&gt;&gt;
-&lt;&lt;waitforaudio&gt;&gt;
+&lt;&lt;cacheaudio &quot;bad&quot; &quot;audio/bad.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;notification&quot; &quot;audio/notification.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;click&quot; &quot;audio/click.mp3&quot;&gt;&gt;
+&lt;&lt;cacheaudio &quot;neutral&quot; &quot;audio/neutral.mp3&quot;&gt;&gt;
+
 
 &lt;&lt;createaudiogroup &quot;:soundeffects&quot;&gt;&gt;
 	&lt;&lt;track &quot;glitch&quot;&gt;&gt;
 	&lt;&lt;track &quot;cashregister&quot;&gt;&gt;
+	&lt;&lt;track &quot;bad&quot;&gt;&gt;
+	&lt;&lt;track &quot;notification&quot;&gt;&gt;
+	&lt;&lt;track &quot;click&quot;&gt;&gt;
+	&lt;&lt;track &quot;neutral&quot;&gt;&gt;
 &lt;&lt;/createaudiogroup&gt;&gt;
 
 &lt;&lt;set $bgmusicgroupID to &quot;:bgmusic&quot;&gt;&gt;
@@ -725,7 +987,7 @@ a &lt;&lt;link &quot;fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $
 
 You&#39;re hoping to earn $&lt;&lt;print &quot;$incomeTarget&quot;&gt;&gt; to pay your bills in $weekLimit weeks. Every fan you get earns you $&lt;&lt;print &quot;$incomePerFan&quot;&gt;&gt;. If you&#39;re lucky, some of them may even tip you extra! 😘
 
-[[Let&#39;s get fans!-&gt;start-week]]</tw-passagedata><tw-passagedata pid="10" name="start-week" tags="music-sexi" position="299,696" size="100,100">&lt;&lt;set $numWeek to visited()&gt;&gt;
+&lt;&lt;link &quot;Let&#39;s get fans!&quot; start-week&gt;&gt;&lt;&lt;audio &quot;glitch&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="start-week" tags="music-sexi" position="299,696" size="100,100">&lt;&lt;set $numWeek to visited()&gt;&gt;
 &lt;&lt;set _toGo = Math.clamp($incomeTarget - $income, 0, $incomeTarget + $income) &gt;&gt;
 
 Week $numWeek
@@ -744,7 +1006,7 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 		&lt;&lt;goto [[money-ending]]&gt;&gt;
 	&lt;&lt;default&gt;&gt;
 		&lt;&lt;set _line to [&quot;Time to set some thirst traps.&quot;, &quot;You get out the selfie stick and start snapping away.&quot;, &quot;You love the camera and the camera loves you&quot;].pluck()&gt;&gt;
-		[[_line-&gt;photo-selection]]		
+		&lt;&lt;link _line photo-selection&gt;&gt;&lt;&lt;audio &quot;neutral&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
 </tw-passagedata><tw-passagedata pid="11" name="outing-side-story" tags="music-dark" position="678,493" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _outingBranch to either(&quot;stolen-content&quot;, &quot;personal-data&quot;, &quot;suggested-friends&quot;)&gt;&gt;
@@ -770,6 +1032,7 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 	Your friend asks you to feed their cat (again). [[Get back to making content.-&gt;photo-selection]]
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="suspension-side-story" tags="music-dark" position="653,785" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $wasSuspended to true&gt;&gt;
+	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;	
 	#SUSPENDED!
 	OnlyBans is watching you. Based on your previous activity, your account has been temporarily blocked from taking this action. This block expires in one week. 
@@ -787,7 +1050,7 @@ For full access, please verify your phone number.
 
 [[Submit.-&gt;verify-more]]
 
-[[Skip verification.-&gt;skip-verify-phone]]</tw-passagedata><tw-passagedata pid="14" name="money-ending" tags="ending" position="944,952" size="100,100">&lt;&lt;set _hasEnoughMoney to $income &gt; $incomeTarget&gt;&gt;
+[[Skip verification.-&gt;skip-verify-phone]]</tw-passagedata><tw-passagedata pid="14" name="money-ending" tags="ending" position="1134,827" size="100,100">&lt;&lt;set _hasEnoughMoney to $income &gt; $incomeTarget&gt;&gt;
 Time&#39;s up! Your $&lt;&lt;print $incomeTarget&gt;&gt; is due.
 
 &lt;&lt;linkreplace &quot;Count your money&quot;&gt;&gt;
@@ -807,6 +1070,10 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
   &lt;&lt;/if&gt;&gt;
   
   &lt;&lt;run $queuedPhotos.shuffle()&gt;&gt;
+  [[dummy-&gt;newFans]] 
+  [[dummy-&gt;noReasonBan]] 
+  [[dummy-&gt;shadowBan]] 
+  [[dummy-&gt;tooSexyBan]] 
 &lt;&lt;/silently&gt;&gt;
 
 
@@ -831,55 +1098,28 @@ Which photo do you want to post today?
 &lt;&lt;/for&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="16" name="newFans" tags="music-outsideclub" position="282,1089" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="16" name="newFans" tags="music-outsideclub" position="111,1081" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _newFansRange to $fanRewardDists[$photoPool[$currentPhoto].riskLevel] &gt;&gt;
 	&lt;&lt;set _numNewFans to random(_newFansRange[0], _newFansRange[1])&gt;&gt;
 	&lt;&lt;addfans _numNewFans&gt;&gt;
+	&lt;&lt;audio &quot;neutral&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 
 Your photo got some attention and attracted _numNewFans new fans!
 
-Yay, you’re getting the hang of this! [[What else could you do-&gt;community-support]] to boost your fan count?</tw-passagedata><tw-passagedata pid="17" name="tooSexyBan" tags="music-dark" position="402,1089" size="100,100">&lt;&lt;silently&gt;&gt;
-	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;
-	
-	&lt;&lt;set _currentStat to either(
-	&quot;42% of sex workers said they have received a warning that their social media account is close to deletion.&quot;, 
-	&quot;67% of sex workers have had a post removed from social media.&quot;,
-	&quot;Plus-size users&#39; accounts are flagged for excessive nudity and sexual solicitation more frequently than thin users’ accounts. Women of color and queer people experience platform punishment and policing more frequently than their white, cishetero counterparts.&quot; )&gt;&gt;
+Yay, you’re getting the hang of this! [[What else could you do-&gt;community-support]] to boost your fan count?</tw-passagedata><tw-passagedata pid="17" name="tooSexyBan" tags="music-dark" position="350,1081" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;	
+	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-
 ###FLAGGED!
 Your photo is *too* sexy. It’s been taken down. If you post something that goes against our guidelines again, your account may be deleted.
 
 You’ve made no new fans and earned no new money.
 
-&lt;&lt;linkreplace &quot;Why??&quot;&gt;&gt; 
-  &lt;em&gt;
-  IRL info for $currentPhoto
-
-  _currentStat
-
-  &lt;&lt;print $photoPool[$currentPhoto].toHTML() &gt;&gt;
-  &lt;&lt;print $photoPool[$currentPhoto].context &gt;&gt;
-  &lt;/em&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;if $wasSuspended&gt;&gt;
-	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
-&lt;&lt;else&gt;&gt;
-	You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="shadowBan" tags="music-dark" position="402,1209" size="100,100">&lt;&lt;silently&gt;&gt;
-	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;
-	
-	&lt;&lt;set _currentStat to either(
-	&#39;&quot;We are reducing the spread of posts that are inappropriate but do not go against guidelines, limiting them from being recommended on our Explore and hashtag pages. For example, a sexually suggestive post will still appear in Feed if you follow the account that posts it, but this type of content may not appear for the broader community.&quot; –Instagram&quot;&#39;,
-		&#39;A shadowban ensures that content that platforms deem inappropriate, high-risk, or low value speech is invisible to other users, but still allows an account to remain on the platform in order to make ad revenue off of the shadowbanned individual. –Hacking//Hustling&#39;,
-		&#39;You can get shadowbanned for following other sex workers. 73% of sex workers have experienced social media platforms suppressing their friends’ content from their timelines. –Hacking//Hustling&#39;,
-		&#39;59% of sex workers have found their username does not show up in searches –Hacking//Hustling&#39;,
-		&#39;55% of those who have done sex work avoid specific words to avoid being shadowbanned. You can get shadowbanned for using banned phrases and hashtags like #asiangirl, #curvygirls, or #lesbian.  –Hacking//Hustling&#39;
-	)&gt;&gt;
+[[Continue-&gt;too-sexy-real-story]]</tw-passagedata><tw-passagedata pid="18" name="shadowBan" tags="music-dark" position="465,1080" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;	
+	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-
 SHADOWBANNED?
 Your photo was posted but there are barely any likes or comments. 🤔
 
@@ -887,51 +1127,17 @@ A shadowban means that a user can continue posting as normal, but their posts wi
 
 Sorry, no new fans. No new money.
 
-&lt;&lt;linkreplace &quot;Ugh, why?&quot;&gt;&gt;
-	&lt;em&gt;
-  IRL info for $currentPhoto
-
-  _currentStat
-
-  &lt;&lt;print $photoPool[$currentPhoto].toHTML() &gt;&gt;
-  &lt;&lt;print $photoPool[$currentPhoto].context &gt;&gt;
-  &lt;/em&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;if $wasSuspended&gt;&gt;
-	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
-&lt;&lt;else&gt;&gt;
-	Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your business skills-&gt;community-support]].
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="noReasonBan" tags="music-dark" position="284,1212" size="100,100">&lt;&lt;silently&gt;&gt;
-	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;
-	
-	&lt;&lt;set _currentStat to either(
-	&quot;77% of those who have done sex work avoid posting content for fear of being kicked off, shadowbanned, or facing legal action. –Hacking//Hustling&quot;,
-	&quot;68% of those who have done sex work have had content that does not violate a sensitive media policy marked as sensitive media on their profile –Hacking//Hustling&quot;,
-	&quot;74% of those who have done sex work are noticing trends in the suppression of information on social media. –Hacking//Hustling&quot;
-	)&gt;&gt;
+[[&quot;Ugh, why?&quot;-&gt;shadowBan-real-story]]
+</tw-passagedata><tw-passagedata pid="19" name="noReasonBan" tags="music-dark" position="240,1083" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;	
+	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-
 FLAGGED!
 The algorithm flagged your content even though you followed all the guidelines! If you get flagged again, your account may be deleted.
 
-Sorry, no new fans. This seems completely unfair, but you&#39;re probably 
-&lt;&lt;linkreplace &quot;not the first sex worker to have this problem&quot;&gt;&gt; 
-  &lt;em&gt;
-  IRL info for $currentPhoto
+Sorry, no new fans. 
 
-  _currentStat
-
-  &lt;&lt;print $photoPool[$currentPhoto].toHTML() &gt;&gt;
-  &lt;&lt;print $photoPool[$currentPhoto].context &gt;&gt;
-  &lt;/em&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;if $wasSuspended&gt;&gt;
-	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
-&lt;&lt;else&gt;&gt;
-	Well, that sucks, but [[maybe your luck will improve?-&gt;community-support]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="community-support" tags="music-ambient" position="296,1496" size="100,100">&lt;&lt;silently&gt;&gt;
+[[Continue-&gt;noReason-real-story]] </tw-passagedata><tw-passagedata pid="20" name="community-support" tags="music-ambient" position="296,1496" size="100,100">&lt;&lt;silently&gt;&gt;
   &lt;&lt;if $numWeek == $suspensionWeek&gt;&gt;
 		  &lt;!-- you can&#39;t get tips if yr suspended --!&gt;
 		  &lt;&lt;set $communityOutcome to either(&quot;share4share&quot;, &quot;joinGroup&quot;, &quot;attendWorkshop&quot;)&gt;&gt;
@@ -950,10 +1156,13 @@ Sorry, no new fans. This seems completely unfair, but you&#39;re probably
 &lt;&lt;/silently&gt;&gt;
 You can&#39;t use OnlyBans for the rest of the week. You&#39;ve gained no new followers and made no money. 
 
-But hey, it&#39;s [[a new week-&gt;start-week]]. Maybe your luck will improve.</tw-passagedata><tw-passagedata pid="22" name="permaban-transition" tags="music-dark" position="553,1085" size="100,100">Another banned photo? That&#39;s $numPhotosFlagged banned photos //and// you were recently suspended? [[Oh shit...-&gt;permabanned]]</tw-passagedata><tw-passagedata pid="23" name="permabanned" tags="music-dark" position="698,1091" size="100,100">&#39;&#39;DEACTIVATED&#39;&#39;
+But hey, it&#39;s [[a new week-&gt;start-week]]. Maybe your luck will improve.</tw-passagedata><tw-passagedata pid="22" name="permaban-transition" tags="music-dark" position="847,1092" size="100,100">Another banned photo? That&#39;s $numPhotosFlagged banned photos //and// you were recently suspended? [[Oh shit...-&gt;permabanned]]</tw-passagedata><tw-passagedata pid="23" name="permabanned" tags="music-dark" position="698,1091" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+&#39;&#39;DEACTIVATED&#39;&#39;
 	You&#39;ve violated the rules one too many times. Your account has been permanently disabled. 
 
-[[CONTINUE-&gt;permabanned-stat]].</tw-passagedata><tw-passagedata pid="24" name="permabanned-stat" tags="music-dark" position="698,1241" size="100,100">not-alone.exe
+[[CONTINUE-&gt;permabanned-real-story]].</tw-passagedata><tw-passagedata pid="24" name="permabanned-real-story" tags="music-dark" position="698,1241" size="100,100">not-alone.exe
 41.01% of those who have done sex work said they have been deplatformed or kicked off of a social media account.
 
 [[CONTINUE.-&gt;permabanned-appeal]]</tw-passagedata><tw-passagedata pid="25" name="permabanned-appeal" tags="music-dark" position="846,1243" size="100,100">&lt;&lt;silently&gt;&gt;
@@ -981,7 +1190,7 @@ What do you do?
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="26" name="permabanned-ending" tags="music-dark" position="986,1243" size="100,100">On your journey, you’ve learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
+</tw-passagedata><tw-passagedata pid="26" name="permabanned-ending" tags="music-ambient" position="1241,1230" size="100,100">On your journey, you’ve learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
 
 Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own.
 
@@ -1008,7 +1217,10 @@ For somewhat vague safety reasons, we still need more information before you can
 		&lt;&lt;goto &quot;skip-verify-more&quot;&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
-</tw-passagedata><tw-passagedata pid="29" name="skip-verify-phone" tags="music-dark" position="894,117" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
+</tw-passagedata><tw-passagedata pid="29" name="skip-verify-phone" tags="music-dark" position="894,117" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;audio &quot;glitch&quot; play&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
 
 [[Verify your number.-&gt;outing-prelude]]</tw-passagedata><tw-passagedata pid="30" name="skip-verify-more" tags="music-dark" position="1021,273" size="100,100">You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making content if you can&#39;t even get paid? 
 
@@ -1018,7 +1230,7 @@ For somewhat vague safety reasons, we still need more information before you can
 
 Give up and [[close your account-&gt;close-account]] 
 
-</tw-passagedata><tw-passagedata pid="31" name="close-account" tags="music-dark" position="1176,359" size="100,100">Unfortunately, stigma and shame means that most sex workers use pseudonymns and hide their job from their employers and loved ones. Even though you’re not willing to risk being outed, you’ve learned a lot about digital freedom and privacy during your time on OnlyBans. Most importantly, you made friends along the way and realized the power of community!
+</tw-passagedata><tw-passagedata pid="31" name="close-account" tags="music-ambient" position="1212,344" size="100,100">Unfortunately, stigma and shame means that most sex workers use pseudonymns and hide their job from their employers and loved ones. Even though you’re not willing to risk being outed, you’ve learned a lot about digital freedom and privacy during your time on OnlyBans. Most importantly, you made friends along the way and realized the power of community!
 
 But you also want to give the platforms another chance. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
 
@@ -1083,11 +1295,11 @@ The list of people you should follow includes tons of friends and … even your 
 &lt;&lt;/linkreplace&gt;&gt;
 
 &lt;&lt;linkreplace &quot;Nope.&quot;&gt;&gt;You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;
-</tw-passagedata><tw-passagedata pid="35" name="got-money-ending" tags="ending music-sexi" position="1076,882" size="100,100">Congratulations, your booty beat the odds! You reached your goal, learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
+</tw-passagedata><tw-passagedata pid="35" name="got-money-ending" tags="ending music-ambient" position="1266,757" size="100,100">Congratulations, your booty beat the odds! You reached your goal, learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
 
 You were one of the lucky ones. Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
 
-But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.</tw-passagedata><tw-passagedata pid="36" name="not-enough-money-ending" tags="ending music-dark" position="1070,1001" size="100,100">Too bad, you didn’t reach your goal … but you did learn a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
+But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.</tw-passagedata><tw-passagedata pid="36" name="not-enough-money-ending" tags="ending music-ambient" position="1260,876" size="100,100">Too bad, you didn’t reach your goal … but you did learn a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
 
 Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
 
@@ -1116,10 +1328,9 @@ Digital discrimination and deplatforming of sex workers is a direct result of FO
 &lt;a href= &quot;https://decodingstigma.tech/&quot;&gt;Decoding Stigma&lt;/a&gt; bridges the gap between sex workers, academics, technologists, and anyone who holds multiples of these identities. Their goal is to prioritize sexual autonomy as a necessary ethics question for researchers and technologists and to design a liberatory future in which sexually stigmatized voices are amplified and celebrated.
 </tw-passagedata><tw-passagedata pid="38" name="StorySubtitle" tags="" position="140,133" size="100,100">Goal: Get $&lt;&lt;print $incomeTarget&gt;&gt; by week $weekLimit
 Wallet: $&lt;&lt;print $income&gt;&gt;
-Week: $numWeek</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="music-sexi" position="476,1470" size="100,100">&lt;&lt;silently&gt;&gt;
+Week: $numWeek</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="music-ambient" position="476,1470" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
-
-Another sex worker follows your account and invites you to do a &#39;&#39;share 4 share,&#39;&#39; which means that you share their content on your feed and they do the same for you. Are you in?
+	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 	&lt;section&gt;
 	&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Hey @quiteSaxy, cool account! I’m also selling pics on OnlyBans. Do you wanna do a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
@@ -1131,7 +1342,10 @@ Another sex worker follows your account and invites you to do a &#39;&#39;share 
 	&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms start 1s&gt;&gt;I’ll share your content with my followers, if you do the same for me. It’s a way to build a bigger fanbase!&lt;&lt;/type&gt;&gt;&lt;/p&gt;	&lt;/div&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 		
-	&lt;&lt;linkreplace &quot;Sure, let&#39;s share!&quot;&gt;&gt;&lt;&lt;addfans _numNewFans&gt;&gt;
+	&lt;&lt;linkreplace &quot;Sure, let&#39;s share!&quot;&gt;&gt;&lt;&lt;silently&gt;&gt;
+		&lt;&lt;addfans _numNewFans&gt;&gt;
+		&lt;&lt;audio &quot;cashregister&quot; play&gt;&gt;
+		&lt;&lt;/silently&gt;&gt;
 	&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Sure, let&#39;s share!&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 They share your pics to their feed. You attract _numNewFans new fans and make some more money. 
@@ -1184,11 +1398,15 @@ Your new friends also share your content with their followers and you get _numNe
 	&quot;Gorgeous and sexy, I so want you babe 🔥🔥🔥👿👿👿😍😘&quot;,
 	&quot;You poor child,have you no clothes to wear??&quot;, 
 	)&gt;&gt;
+	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 _intro
 
 &lt;&lt;linkreplace &quot;&lt;em&gt;Open fan mail!&lt;/em&gt;&quot;&gt;&gt;
-&lt;&lt;set $income += _tip&gt;&gt;&lt;em&gt; 
+	&lt;&lt;silently&gt;&gt;
+	  &lt;&lt;audio &quot;cashregister&quot; play&gt;&gt;
+	  &lt;&lt;set $income += _tip&gt;&gt;&lt;em&gt; 
+	&lt;&lt;/silently&gt;&gt;
 _message
 
 Tip: $&lt;&lt;print _tip&gt;&gt;
@@ -1206,7 +1424,7 @@ Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re get
 You see a post about a workshop led by sex workers to learn how to stay safe digitally. 
 
 &lt;&lt;linkreplace &quot;Check it out.&quot;&gt;&gt;
-You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out. Plus, there&#39;s pizza. Grab a slice [[on your way out-&gt;start-week]]	
+You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out. Plus, there&#39;s pizza. Grab a slice &lt;&lt;link &quot;on your way out&quot; &quot;start-week&quot;&gt;&gt;&lt;&lt;audio &quot;neutral&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;	
 &lt;&lt;/linkreplace&gt;&gt; 
 It looks cool, but your time is precious. [[Skip it.-&gt;start-week]]
 
@@ -1237,7 +1455,102 @@ video here
  &lt;/video&gt;
 </tw-passagedata><tw-passagedata pid="47" name="Load-screen" tags="" position="507,12" size="100,100">!OnlyBans
 
-[[Enter.-&gt;opening-screen]]</tw-passagedata></tw-storydata>
+[[Enter.-&gt;opening-screen]]</tw-passagedata><tw-passagedata pid="48" name="too-sexy-real-story" tags="" position="354,1227" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;set _currentStat to either(
+	&quot;42% of sex workers said they have received a warning that their social media account is close to deletion.&quot;, 
+	&quot;67% of sex workers have had a post removed from social media.&quot;,
+	&quot;Plus-size users&#39; accounts are flagged for excessive nudity and sexual solicitation more frequently than thin users’ accounts. Women of color and queer people experience platform punishment and policing more frequently than their white, cishetero counterparts.&quot; )&gt;&gt;
+IRL info for $currentPhoto
+&lt;&lt;/silently&gt;&gt;
+&lt;div class=&quot;photo-container&quot;&gt;
+	&lt;div class=&quot;underlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toHTML()&gt;&gt;&lt;/div&gt;
+	&lt;div class=&quot;overlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toVaporHTML()&gt;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;em&gt;
+  &lt;&lt;print $photoPool[$currentPhoto].context &gt;&gt;
+  &lt;/em&gt;
+  
+  _currentStat
+
+&lt;&lt;if $wasSuspended&gt;&gt;
+	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
+&lt;&lt;else&gt;&gt;	
+	You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="49" name="noReason-real-story" tags="" position="242,1228" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;set _currentStat to either(
+	&quot;77% of those who have done sex work avoid posting content for fear of being kicked off, shadowbanned, or facing legal action. –Hacking//Hustling&quot;,
+	&quot;68% of those who have done sex work have had content that does not violate a sensitive media policy marked as sensitive media on their profile –Hacking//Hustling&quot;,
+	&quot;74% of those who have done sex work are noticing trends in the suppression of information on social media. –Hacking//Hustling&quot;
+	)&gt;&gt;
+&lt;&lt;/silently&gt;&gt;	
+	
+	This seems completely unfair, but you&#39;re not the first sex worker to have this problem...
+
+  IRL info for $currentPhoto
+
+  _currentStat
+&lt;div class=&quot;photo-container&quot;&gt;
+	&lt;div class=&quot;underlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toHTML()&gt;&gt;&lt;/div&gt;
+	&lt;div class=&quot;overlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toVaporHTML()&gt;&gt;&lt;/div&gt;
+&lt;/div&gt;
+  &lt;&lt;print $photoPool[$currentPhoto].context &gt;&gt;
+
+  
+&lt;&lt;if $wasSuspended&gt;&gt;
+	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
+&lt;&lt;else&gt;&gt;
+	Well, that sucks, but [[maybe your luck will improve?-&gt;community-support]]
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="shadowBan-real-story" tags="" position="465,1227" size="100,100">&lt;&lt;silently&gt;&gt;
+
+&lt;&lt;set _currentStat to either(
+	&#39;&quot;We are reducing the spread of posts that are inappropriate but do not go against guidelines, limiting them from being recommended on our Explore and hashtag pages. For example, a sexually suggestive post will still appear in Feed if you follow the account that posts it, but this type of content may not appear for the broader community.&quot; –Instagram&quot;&#39;,
+		&#39;A shadowban ensures that content that platforms deem inappropriate, high-risk, or low value speech is invisible to other users, but still allows an account to remain on the platform in order to make ad revenue off of the shadowbanned individual. –Hacking//Hustling&#39;,
+		&#39;You can get shadowbanned for following other sex workers. 73% of sex workers have experienced social media platforms suppressing their friends’ content from their timelines. –Hacking//Hustling&#39;,
+		&#39;59% of sex workers have found their username does not show up in searches –Hacking//Hustling&#39;,
+		&#39;55% of those who have done sex work avoid specific words to avoid being shadowbanned. You can get shadowbanned for using banned phrases and hashtags like #asiangirl, #curvygirls, or #lesbian.  –Hacking//Hustling&#39;
+	)&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+
+	&lt;em&gt;
+  IRL info for $currentPhoto
+  _currentStat
+
+ &lt;div class=&quot;photo-container&quot;&gt;
+	&lt;div class=&quot;underlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toHTML()&gt;&gt;&lt;/div&gt;
+	&lt;div class=&quot;overlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toVaporHTML()&gt;&gt;&lt;/div&gt;
+&lt;/div&gt;  &lt;&lt;print $photoPool[$currentPhoto].context &gt;&gt;
+  &lt;/em&gt;
+
+&lt;&lt;if $wasSuspended&gt;&gt;
+	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
+&lt;&lt;else&gt;&gt;
+	Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your business skills-&gt;community-support]].
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="image-overlay-test" tags="" position="72,1272" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;set _currentStat to either(
+	&quot;42% of sex workers said they have received a warning that their social media account is close to deletion.&quot;, 
+	&quot;67% of sex workers have had a post removed from social media.&quot;,
+	&quot;Plus-size users&#39; accounts are flagged for excessive nudity and sexual solicitation more frequently than thin users’ accounts. Women of color and queer people experience platform punishment and policing more frequently than their white, cishetero counterparts.&quot; )&gt;&gt;
+IRL info for $currentPhoto
+
+&lt;&lt;set $currentPhoto to &quot;nimina&quot;&gt;&gt;
+&lt;&lt;/silently&gt;&gt;
+  _currentStat
+
+&lt;div class=&quot;photo-container&quot;&gt;
+	&lt;div class=&quot;underlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toHTML()&gt;&gt;&lt;/div&gt;
+	&lt;div class=&quot;overlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toVaporHTML()&gt;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+  
+  &lt;&lt;print $photoPool[$currentPhoto].context &gt;&gt;
+  &lt;/em&gt;
+
+&lt;&lt;if $wasSuspended&gt;&gt;
+	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
+&lt;&lt;else&gt;&gt;	
+	You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="browserWindow" tags="" position="123.5,716" size="100,100">&lt;div class=&quot;browser-container browser-color&quot;&gt;	&lt;div class=&quot;browser-top&quot;&gt;&lt;div class=&quot;browser-dots&quot;&gt;&lt;div class=&quot;browser-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;browser-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;browser-dot&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;browser-title&quot;&gt;TITLE&lt;/div&gt;&lt;div class=&quot;browser-x&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;browser-bottom&quot;&gt;CONTENT&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="browserTest" tags="" position="34.5,866" size="100,100">&lt;&lt;browserWindow &quot;TITLE&quot; &quot;BODY STUFF	like this&quot;
+	&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&null!==n&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",r="\\s"===e?"\\S":e.replace(/^\[/,"[^"),n="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",a=n.replace("\\-",""),i=function(){var e="(?:[\\x2D.0-9A-Z_a-z\\xB7\\xC0-\\xD6\\xD8-\\xF6\\xF8-\\u037D\\u037F-\\u1FFF\\u200C\\u200D\\u203F\\u2040\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD]|[\\uD800-\\uDB7F][\\uDC00-\\uDFFF])";return"[A-Za-z](?:"+e+"*-"+e+"*|[0-9A-Za-z]*)"}(),o=function(){return"("+n+"+)\\(([^\\)\\|\\n]+)\\):|"+t+"*("+n+"+)"+t+"*:([^;\\|\\n]+);|"+t+"*((?:[#.]"+n+"+"+t+"*)+);"}();return Object.freeze({space:e,spaceNoTerminator:t,lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:r,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:n,anyLetterStrict:a,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",htmlTagName:i,cssIdOrClassSigil:"[#.]",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:o,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_stringify",{value:JSON.stringify}),Object.defineProperty(JSON,"stringify",{configurable:!0,writable:!0,value:function(e,t,r){return JSON._real_stringify(e,function(e,r){var n=r;if("function"==typeof t)try{n=t(e,n)}catch(e){}return void 0===n&&(n=["(revive:eval)","undefined"]),n},r)}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),r=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),n=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),a=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),i=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),o=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,fileAPI:t,geolocation:r,mutationObserver:n,performance:a,touch:i,transitionEndEvent:o})}(),Visibility=function(){function e(){return a}function t(){return a&&document[a.stateProperty]||"visible"}function r(){return Boolean(a)}function n(){return Boolean(a&&document[a.hiddenProperty])}var a=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return undefined}();return Object.freeze(Object.defineProperties({},{vendor:{get:e},state:{get:t},isEnabled:{value:r},isHidden:{value:n},hiddenProperty:{value:a&&a.hiddenProperty},stateProperty:{value:a&&a.stateProperty},changeEvent:{value:a&&a.changeEvent}}))}(),Fullscreen=function(){function e(e){var t=e||document.documentElement;return t===document.documentElement&&("msRequestFullscreen"===f.requestFn||Browser.isOpera&&Browser.operaVersion<15)&&(t=document.body),t}function t(){return f}function r(){return(f||null)&&document[f.element]}function n(){return Boolean(f&&document[f.isEnabled])}function a(){return Boolean(f&&document[f.element])}function i(t,r){var n=this;if(!f)return Promise.reject(new Error("fullscreen not supported"));var i=e(r);if("function"!=typeof i[f.requestFn])return Promise.reject(new Error("fullscreen not supported"));if(a())return Promise.resolve();if(p())return i[f.requestFn](t);var o=".Fullscreen_requestFullscreen";return new Promise(function(e,r){jQuery(i).off(o).one(""+f.errorEvent+o+" "+f.changeEvent+o,function(t){jQuery(n).off(o),t.type===f.errorEvent?r(new Error("unknown fullscreen request error")):e()}),i[f.requestFn](t)})}function o(){var e=this;if(!f||"function"!=typeof document[f.exitFn])return Promise.reject(new TypeError("fullscreen not supported"));if(!a())return Promise.reject(new TypeError("fullscreen mode not active"));if(p())return document[f.exitFn]();var t=".Fullscreen_exitFullscreen";return new Promise(function(r,n){jQuery(document).off(t).one(""+f.errorEvent+t+" "+f.changeEvent+t,function(a){jQuery(e).off(t),a.type===f.errorEvent?n(new Error("unknown fullscreen exit error")):r()}),document[f.exitFn]()})}function s(e,t){return a()?o():i(e,t)}function u(t,r){if(f){var n=e(r);$(n).on(f.changeEvent,t)}}function l(t,r){if(f){var n=e(r);t?$(n).off(f.changeEvent,t):$(n).off(f.changeEvent)}}function c(t,r){if(f){var n=e(r);$(n).on(f.errorEvent,t)}}function d(t,r){if(f){var n=e(r);t?$(n).off(f.errorEvent,t):$(n).off(f.errorEvent)}}var f=function(){try{return Object.freeze([{isEnabled:"fullscreenEnabled",element:"fullscreenElement",requestFn:"requestFullscreen",exitFn:"exitFullscreen",changeEvent:"fullscreenchange",errorEvent:"fullscreenerror"},{isEnabled:"webkitFullscreenEnabled",element:"webkitFullscreenElement",requestFn:"webkitRequestFullscreen",exitFn:"webkitExitFullscreen",changeEvent:"webkitfullscreenchange",errorEvent:"webkitfullscreenerror"},{isEnabled:"mozFullScreenEnabled",element:"mozFullScreenElement",requestFn:"mozRequestFullScreen",exitFn:"mozCancelFullScreen",changeEvent:"mozfullscreenchange",errorEvent:"mozfullscreenerror"},{isEnabled:"msFullscreenEnabled",element:"msFullscreenElement",requestFn:"msRequestFullscreen",exitFn:"msExitFullscreen",changeEvent:"MSFullscreenChange",errorEvent:"MSFullscreenError"}].find(function(e){return e.isEnabled in document}))}catch(e){}return undefined}(),p=function(){function e(){if(null!==t)return t;if(t=!1,f)try{var e=document.exitFullscreen();e.catch(function(){}),t=e instanceof Promise}catch(e){}return t}var t=null;return e}();return Object.freeze(Object.defineProperties({},{vendor:{get:t},element:{get:r},isEnabled:{value:n},isFullscreen:{value:a},request:{value:i},exit:{value:o},toggle:{value:s},onChange:{value:u},offChange:{value:l},onError:{value:c},offError:{value:d}}))}(),_ref3=function(){function e(e){for(var t=e.cloneNode(!0),r=document.createDocumentFragment(),n=void 0;null!==(n=t.firstChild);){if(n.nodeType===Node.ELEMENT_NODE)switch(n.nodeName.toUpperCase()){case"BR":case"DIV":case"P":r.appendChild(document.createTextNode(" "))}r.appendChild(n)}return r.textContent}function t(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)return e;if(e instanceof String)return String(e);if(e instanceof Number)return Number(e);if(e instanceof Boolean)return Boolean(e)
