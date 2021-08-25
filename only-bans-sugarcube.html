@@ -146,6 +146,41 @@ a.link-broken {
   background-color: none;
 }
 
+/* ************************** */
+/* PHOTO SELECTOR GRID STYLE  */
+/* ************************** */
+.selector-photo {
+  width="100%";
+  transition: all .2 ease-in-out; 
+}
+
+.selector-photo:hover {
+  transform: scale(1.1); 
+}
+
+.photo-row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create three equal columns that sits next to each other */
+.photo-column {
+  -ms-flex: 33%; /* IE10 */
+  flex: 33%;
+  max-width: 33%;
+  padding: 0 4px;
+}
+
+.photo-column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+
 /* ************* */
 /* BROWSER STYLE */
 /* ************* */
@@ -227,118 +262,23 @@ a.link-broken {
 
 }
 
-/*.browser-container {  
-  border: 4px solid var(--outlineColor);
-  border-radius: 7px;   
-  --iconSize: 30px; 
-  transition: color var(--transitionTime, 2s) ease-in-out;
-  
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center; 
-  min-width: 8em;
-  box-sizing: border-box;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  align-content: stretch;
-}
-
-.browser-top {
-  padding: 10px;
-  background: var(--barColor);
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  border-bottom: 4px solid var(--outlineColor);
-  
-  min-width: 100%
-  
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.browser-dots {
- 	flex-direction: column; 
-}
-
-.browser-color {
-  --outlineColor: #555ACF;
-  --barColor: #ffffff;
-  --backgroundColor: #555ACF;
-  --xColor: var(--barColor);
-  --iconColor: var(--outlineColor);
-  --textColor: var(--barColor);
-  transition: color var(--transitionTime, 2s) ease-in-out;
-}
-
-
-.browser-dot {
-  height: calc(var(--iconSize)/2);
-  width: calc(var(--iconSize)/2);
-  background-color: var(--iconColor);
-  border-radius: 50%;
-  display: inline-block;
-  vertical-align: middle;
-  margin: 2px;
-}
-
-.browser-x-icon {
-	box-sizing: border-box;
-    position: absolute;
-    right: calc(var(--iconSize)/2);
-    top: calc(var(--iconSize)/2);
-    display: inline-block;
-    width: var(--iconSize);
-    height: var(--iconSize);
-    border: 6px solid var(--iconColor);
-    background:
-        linear-gradient(45deg, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 43%,var(--xColor) 45%,var(--xColor) 55%,rgba(0,0,0,0) 57%,rgba(0,0,0,0) 100%),
-        linear-gradient(135deg, var(--iconColor) 0%,var(--iconColor) 43%,var(--xColor) 45%,var(--xColor) 55%,var(--iconColor) 57%,var(--iconColor) 100%);
-}
-
-.browser-bar-title {
-	width: 80%;
-    text-align: center;
-    display: inline-block;
-    color: var(--iconColor);
-}
-
-
-.browser-bottom {
-  background: var(--backgroundColor);
-  padding: 10px;
-  transition: color var(--transitionTime, 2s) ease-in-out;
-}
-
-.browser-content {
-	padding-left: 10%;
-	padding-right: 10%;
-	padding-bottom: 3%;
-	padding-top: 3%;
-	text-align: center;
-	color: var(--textColor);
-  transition: color var(--transitionTime, 2s) ease-in-out;
-  margin: 0;
-}*/
 
 /* ************* */
 /* PHOTO SELECTOR */
 /* ************* */
-img.original {
+/*img.original {
   width: 100%;
   height: auto;
-  /*max-width: 20%;
-  max-height: 30%;*/
+  max-width: 20%;
+  max-height: 30%;
 }
 
 img.vapor {
   width: 100%;
   height: auto;
-  /*max-width: 20%;
-  max-height: 30%;*/
-}
+  max-width: 20%;
+  max-height: 30%;
+}*/
 
 /* ************* */
 /* PHOTO OVERLAY */
@@ -534,6 +474,99 @@ Macro.add("addfans", {
 				State.variables.income = State.variables.income + (State.variables.incomePerFan * _numNewFans);				
 	}
 });
+/*<<silently>>
+  <<set $queuedPhotos to $availablePhotos>>
+  <<if $queuedPhotos.length < $numPhotosQueued>>
+  	<<set _numEmpties to $numPhotosQueued - $availablePhotos.length>>
+	<<for _i to 0; _i < _numEmpties; _i++>>
+		<<run $queuedPhotos.concat(["default"])>>
+	<</for>>	
+  <</if>>  
+  
+  <<for _pic to 0; _pic <$numPhotosQueued; _pic++>>
+	  <<set _imgKey to $queuedPhotos[_pic]>>
+	  <<set _imgObj to $photoPool[$queuedPhotos[_pic]]>>	
+	  <<set _outcome to _imgObj.getPostOutcome($riskDists[_imgObj.riskLevel]) >>
+	  <<capture _pic _imgKey _imgObj _outcome>> 
+		_imgHTMLs.concat('
+		<<link "<<print  _imgObj.toVaporHTML('selector-photo')>>"
+	   _outcome>>		
+		  <<set $currentPhoto to _imgKey>>
+		  <<run $availablePhotos.delete(_imgKey)>>
+	  <</link>>')
+	  <</capture>>
+<</for>>  */
+Macro.add("photogrid", {
+		handler: function() {
+			if (this.args.length !== 1) {
+						return this.error('getPhotoOutcome takes one array of available Photo Object keys');
+			}	
+			
+			// Fill empites with a default square if we're out of photos. 
+			var _availablePhotos = this.args[0];			
+			var _queuedPhotos = [];
+			var _numPhotosQueued = State.variables.numPhotosQueued;
+			_queuedPhotos = _availablePhotos.slice();
+			console.log('before', _queuedPhotos);
+			if(_availablePhotos.length < _numPhotosQueued){				
+				var _nEmpty = _numPhotosQueued - _availablePhotos.length;
+				for(var _i = 0; _i < _nEmpty; _i++){
+					_queuedPhotos = _queuedPhotos.concat("default");	
+					console.log("added default?");
+				}
+			}
+			
+			console.log('after', _queuedPhotos);
+			_queuedPhotos.shuffle();
+			_queuedPhotos.slice(_numPhotosQueued-1);
+			console.log('final', _queuedPhotos);
+			
+			// Make a row to hold our columns
+			var $photoRow = $(document.createElement("div"))
+					.addClass("photo-row");
+				
+			
+			// Build columns with ~3 (_nColumns) photos in them
+			var _photoPool = State.variables.photoPool;				
+			var _riskDists = State.variables.riskDists;						
+			var _nColumns = 3; //Ideal num of columns in grid			
+			var $photoColumn = $(document.createElement("div"))
+					.addClass("photo-column"); //default column
+			
+				for(var _i = 0; _i < _numPhotosQueued; _i++){
+					var _imgKey =	_queuedPhotos[_i];
+					var _imgObj = _photoPool[_queuedPhotos[_i]];					
+					var _photoOutcome = "newFans";	//default outcome
+					_photoOutcome = _imgObj.getPostOutcome(_riskDists[_imgObj.riskLevel]);
+					
+					if (_i % _nColumns === 0){ 
+						//every nth photos, start a new column
+						$photoColumn = $(document.createElement("div"))
+							.addClass("photo-column")
+							.attr({'id': "column"+_i})
+							.appendTo($photoRow);						
+					}
+					
+					// Add link navigation. 
+				 	// Be very cautious here with nested quotes, bleh.
+					var _wikiString = '<<link '+ '"'+_imgObj.toVaporHTML('selector-photo')+'"'
+						+ " " + _photoOutcome 
+						+'>>  <<set $currentPhoto to '+ '"' + _imgKey+'"'
+						+'>>  <<run $availablePhotos.delete('+ '"' +_imgKey+'"'
+						+')>>	<</link>>';								
+					$photoColumn.wiki(_wikiString);					
+				}
+				
+				
+			// Build grid container
+			var $photoGrid = $(document.createElement("div"));
+			$photoGrid				
+				.addClass('photo-grid')				
+				.addClass('macro-' + this.name)
+				.append($photoRow)
+				.appendTo(this.output);
+	}
+});
 
 /* BROWSER WINDOW MACRO */
 Macro.add("browserwindow", {
@@ -702,19 +735,19 @@ Photo.prototype.toJSON = function() {
 	));
 };
 
-Photo.prototype.toHTML = function() {
-	return "<img src='"+this.original+"' class='original'>";
+Photo.prototype.toHTML = function(CSSclass) {
+	return "<img src='"+this.original+"' class='original "+CSSclass+"'>";
 }
 
-Photo.prototype.toVaporHTML = function() {
-	return "<img src='"+this.vapor+"' class='vapor'>";
+Photo.prototype.toVaporHTML = function(CSSclass) {
+	return "<img src='"+this.vapor+"' class='vapor "+CSSclass+"'>";
 }
 
 Photo.prototype.getPostOutcome = function(outcomeDistribution) {
 	// riskDistribution is a map of outcome: likelihood (int). 
 	// { "badOutcome" : 90, "goodOutcome": 10 } Should sum to 100%
 	// the cleaner way to do this is reduce() but my brain can't rn
-	console.log(this.key, this.riskLevel);
+	//console.log(this.key, this.riskLevel);
 	var _min = -1;
 	var _cap = 1;	
 	
@@ -729,13 +762,13 @@ Photo.prototype.getPostOutcome = function(outcomeDistribution) {
 			_outcome = key;			
 		}
 		else{
-			console.log("\t", key, _outcome, _min, _cap, _rando);
+			//console.log("\t", key, _outcome, _min, _cap, _rando);
 		}
 		
 	});	
 	
-	console.log(_rando, _outcome);
-	console.log(this.key, outcomeDistribution);
+	//console.log(_rando, _outcome);
+	//console.log(this.key, outcomeDistribution);
 	return _outcome;	
 }
 
@@ -1104,42 +1137,17 @@ Time&#39;s up! Your $&lt;&lt;print $incomeTarget&gt;&gt; is due.
 	&lt;&lt;else&gt;&gt;&lt;&lt;include &quot;not-enough-money-ending&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
 
 So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes -&gt;ending-text]]😈
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="photo-selection" tags="music-outsideclub" position="292,921" size="100,100">&lt;&lt;silently&gt;&gt;
-  &lt;&lt;set $queuedPhotos to $availablePhotos&gt;&gt;
-  &lt;&lt;if $queuedPhotos.length &lt; $numPhotosQueued&gt;&gt;
-  	&lt;&lt;set _numEmpties to $numPhotosQueued - $availablePhotos.length&gt;&gt;
-	&lt;&lt;for _i to 0; _i &lt; _numEmpties; _i++&gt;&gt;
-		&lt;&lt;run $queuedPhotos.concat([&quot;default&quot;])&gt;&gt;
-	&lt;&lt;/for&gt;&gt;	
-  &lt;&lt;/if&gt;&gt;
-  
-  &lt;&lt;run $queuedPhotos.shuffle()&gt;&gt;
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="photo-selection" tags="music-outsideclub" position="293,938" size="100,100">&lt;&lt;silently&gt;&gt;
+  &lt;&lt;run $availablePhotos.shuffle()&gt;&gt;
   [[dummy-&gt;newFans]] 
   [[dummy-&gt;noReasonBan]] 
   [[dummy-&gt;shadowBan]] 
-  [[dummy-&gt;tooSexyBan]] 
+  [[dummy-&gt;tooSexyBan]]   
 &lt;&lt;/silently&gt;&gt;
 
-
-/*
-&lt;&lt;set _riskDist to $riskDists[$photoPool[$currentPhoto].riskLevel]&gt;&gt;
-	&lt;&lt;set $currentPhotoOutcome to $photoPool[$currentPhoto].getPostOutcome(_riskDist) &gt;&gt; */
-
-
 &lt;&lt;browserwindow &quot;MY PHOTOS&quot;&gt;&gt;
-Which photo do you want to post today?
-&lt;&lt;for _pic to 0; _pic &lt;$numPhotosQueued; _pic++&gt;&gt;
-	&lt;&lt;set _imgKey to $queuedPhotos[_pic]&gt;&gt;
-	&lt;&lt;set _imgObj to $photoPool[$queuedPhotos[_pic]]&gt;&gt;	
-	&lt;&lt;set _outcome to _imgObj.getPostOutcome($riskDists[_imgObj.riskLevel]) &gt;&gt;
-	&lt;&lt;capture _pic _imgKey _imgObj _outcome&gt;&gt; /* need capture to sync up vars within loop */ 
-	&lt;&lt;print  _imgObj.toVaporHTML()&gt;&gt;
-	&lt;&lt;link _imgKey _outcome&gt;&gt;		
-		&lt;&lt;set $currentPhoto to _imgKey&gt;&gt;
-		&lt;&lt;run $availablePhotos.delete(_imgKey)&gt;&gt;
-	&lt;&lt;/link&gt;&gt;
-	&lt;&lt;/capture&gt;&gt;
-&lt;&lt;/for&gt;&gt;
+	Which photo do you want to post today?
+	&lt;&lt;photogrid $availablePhotos&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="newFans" tags="music-outsideclub" position="111,1081" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _newFansRange to $fanRewardDists[$photoPool[$currentPhoto].riskLevel] &gt;&gt;
 	&lt;&lt;set _numNewFans to random(_newFansRange[0], _newFansRange[1])&gt;&gt;
@@ -1591,7 +1599,7 @@ IRL info for $currentPhoto
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;	
 	You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="browserWindow" tags="" position="24.5,940" size="100,100">&lt;div class=&quot;browser-container browser-color&quot;&gt;	&lt;div class=&quot;browser-top&quot;&gt;&lt;div class=&quot;browser-dots&quot;&gt;&lt;div class=&quot;browser-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;browser-dot&quot;&gt;&lt;/div&gt;&lt;div class=&quot;browser-dot&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;browser-title&quot;&gt;TITLE&lt;/div&gt;&lt;div class=&quot;browser-x&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;browser-bottom&quot;&gt;CONTENT&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="53" name="browsermacrotest" tags="music-ambient" position="131.5,758" size="100,100">here is a window
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="browsermacrotest" tags="music-ambient" position="131,758" size="100,100">here is a window
 &lt;&lt;browserwindow &quot;An ARG TITLE.exe&quot; &quot;browser-green&quot; &gt;&gt;
 	BODY STUFF	like this
 	or maybe even with a [[link-&gt;browsermacrotest]]??
