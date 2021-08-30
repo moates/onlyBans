@@ -110,14 +110,15 @@ body { /* override */
 	font-family: Montserrat, sans-serif;
   
   	--transitionTime: 2s;
-  	transition: background-color var(--transitionTime, 1s) ease-in-out;
+  	transition: background-color var(--transitionTime, 0.5s) ease-in-out;
   
   	background-color: #D185A1;
   
 }
 
-body.messy {
-  /*background-color: #D185A1;*/
+body.background-messy {
+  background-color: #e97fb8;	
+  color: #bb276d;
   background-image: url("images/windows-background.jpg");
 }
 
@@ -131,6 +132,17 @@ body.background-purple {
 body.background-cyan {
   background-color: #7bd2ed;
 }
+
+body.background-cyan-transparent{
+  background-color: #7bd2ed;
+}
+
+body.background-cyan-transparent .passage{
+  background-color: hsla(194,76%,71%,0.8);
+  padding: 1em;
+  border-radius: 1em;
+}
+
 body.background-pink {
  background-color:  #bb276d;
 }
@@ -166,6 +178,26 @@ a.link-broken {
 
 #passage-opening-screen {
   background-color: none;
+}
+
+/* ************* */
+/*     VIDEO     */
+/* ************* */
+video#bgvid {
+    position: fixed;
+    top: 0;
+    left: 0.5em;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+  	max-width: none;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    background: no-repeat;
+    background-size: cover;
+    background-position: 50% 0%;
+  transition: color 2s ease-in-out;
 }
 
 /* ************************** */
@@ -527,14 +559,17 @@ a.link-broken {
   transform: scale(0);
 }
 
+
 /* ************* */
 /* CHAT BUBBLES  */
 /* ************* */
 /* Based on n7best's codepen */
+
 section {
   max-width: 70%;
   margin: auto;
-  padding: 1em;
+  padding: 3em;
+  border-radius: 1em;
   background: #7bd2ed;
 }
 section.div {
@@ -786,11 +821,13 @@ Macro.add("browserwindow", {
 				.append(_browsertop)
 				.append(_browserbottom)
 				.appendTo(this.output);
+			
 	}
 });
 
-
-/* AUDIO*/
+/***************/
+/*     AUDIO   */
+/***************/
 var $musicFadeTime = 2;
 
 // At each passage transition, control background music transitions
@@ -799,6 +836,7 @@ $(document).on(':passagerender', function (ev) {
 	var _musictags = tags().filter(t => t.includes("music"));
 	var $audioTagMap = State.variables.audioTagMap || {};
 	var $bgmusicgroupID = State.variables.bgmusicgroupID || "";
+	var $volumeCap = State.variables.audioCap;
 	
 	if (_musictags.length != 1 || !(_musictags[0] in $audioTagMap)){
 		console.warn("Missing or extra music tags for passage: ", _musictags);
@@ -814,7 +852,7 @@ $(document).on(':passagerender', function (ev) {
 			var _track = SimpleAudio.tracks.get(_musictag);
 			if(!_track.isPlaying()){				
 				_bggroup.fadeOut($musicFadeTime);
-				_track.fadeIn($musicFadeTime, 0);			
+				_track.fade($musicFadeTime, $volumeCap, 0);	//fade in
 				_track.loop(true);			
 			}
 		}
@@ -824,7 +862,31 @@ $(document).on(':passagerender', function (ev) {
 	}
 });
 
-/* CUT SCENE VIDEO */
+
+/*********************/
+/* BACKGROUND VIDEO  */
+/*********************/
+Macro.add("backgroundvideo", {
+		tags: null,
+		handler	: function() {								
+					// handling some arguments
+				var _vidName = (this.args.length > 0) ? this.args[0] : '';		
+				
+			// piecing together HTML. This is hacky, but for the life of me
+			// I can't figure out how to make autoplay work with proper DOM injection
+			var _src1 = '<source type="video/mp4" src=' + '"' +'images\\'+_vidName+'.mp4' +'"' +'>';				
+				var _bkgVideoOpen = '<video autoplay loop muted id="bgvid">';	
+				var _bkgVideoClose ='</video>';			
+				var _bgvideo = _bkgVideoOpen + _src1 + _bkgVideoClose;
+			
+				//inject HTML with wikifier
+				var $videoWrapper = $(document.createElement("span"))
+					.addClass('macro-' + this.name)
+					.wiki(_bgvideo)
+					.appendTo(this.output);	
+}});
+
+/* PASSAGEDISPLAY HANDLER, CUT SCENE VIDEO */
 $(document).on(':passagedisplay', function(ev) {
 	function cutHandler(e) {
 			console.log('video ended event!');
@@ -832,11 +894,11 @@ $(document).on(':passagedisplay', function(ev) {
 		}
 	
 	var $cutvideo = document.getElementById("cutscene");
-	console.log('video IDs:', $cutvideo);
+	console.log('cut video IDs:', $cutvideo);
 	if($cutvideo){
 		$cutvideo.addEventListener('ended',cutHandler,false);
-	}			
-});	
+	}	
+});
 
 /* CUTSCENE MACRO */
 Macro.add("cutscene", {
@@ -977,7 +1039,7 @@ var passageTitles = Story.lookupWith(function (p) {
 	return anyRegExp.test(p.title);
 								 }).map(psg => psg.title);
 console.log("All Passages", passageTitles);*/
-</script><tw-passagedata pid="1" name="opening-screen" tags="messy music-ambient background-pink-light" position="342,99" size="100,100">&lt;&lt;silently&gt;&gt;
+</script><tw-passagedata pid="1" name="opening-screen" tags="music-ambient background-messy" position="342,99" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;
 !Welcome to &lt;strong&gt;OnlyBans&lt;/strong&gt;!
@@ -990,7 +1052,7 @@ Want to play?
 [[Play.-&gt;what-is-your-name]]
 
 [[Read more.-&gt;StoryMenu]]
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="what-is-your-name" tags="music-sexi background-cyan" position="296,266" size="100,100">&lt;&lt;browserwindow &quot;&quot; &quot;browser-white-blue&quot;&gt;&gt;Your name is
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="what-is-your-name" tags="music-sexi background-cyan" position="296,266" size="100,100">&lt;&lt;backgroundvideo &quot;typing&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-white-blue&quot;&gt;&gt;Your name is
 &lt;&lt;textbox &quot;$playerName&quot; $playerName autofocus&gt;&gt;
 
 &lt;&lt;button &quot;Submit&quot; &quot;greetings&quot;&gt;&gt;
@@ -1001,7 +1063,7 @@ Want to play?
 
 [[About]]
 
-[[Credits]]</tw-passagedata><tw-passagedata pid="4" name="How to Play" tags="music-ambient" position="30,437" size="100,100">&lt;h2&gt;How to play&lt;/h2&gt;
+[[Credits]]</tw-passagedata><tw-passagedata pid="4" name="How to Play" tags="music-ambient background-pink-light" position="30,437" size="100,100">&lt;h2&gt;How to play&lt;/h2&gt;
 Goal: Make $&lt;&lt;print $incomeTarget&gt;&gt; in $weekLimit weeks.
 
 Make money by:
@@ -1012,7 +1074,7 @@ Avoid:
 * Having your account shut down.
 * Stalkers and harrassment
 
-Use your mouse or finger to click links.  Links look like &lt;&lt;cycle &quot;_temp&quot;&gt;&gt; &lt;&lt;option &quot;THIS&quot;&gt;&gt;&lt;&lt;option &quot;that&quot;&gt;&gt;&lt;&lt;/cycle&gt;&gt;. Sometimes you can also click on photos. There is no undo or back button. There are some videos that you cannot click on; they are just for watching.
+Use your mouse or finger to click links.  Links are underlined and look like &lt;&lt;cycle &quot;_temp&quot;&gt;&gt; &lt;&lt;option &quot;THIS&quot;&gt;&gt;&lt;&lt;option &quot;that&quot;&gt;&gt;&lt;&lt;/cycle&gt;&gt;. Sometimes you can also click on photos. There is no undo or back button. There are some videos that you cannot click on; they are just for watching.
 
 This game is fictionalized, but based on entirely true stories. Throughout the game, facts and real-life experiences will be shared.
 
@@ -1037,7 +1099,7 @@ Thank you Lien Tran, the creator of &lt;a href=&quot;http://copsandrubbers.com/&
 We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an early version of OnlyBans. Thank you to Kelly Strayhorn Theater for supporting the project’s visual development and narrative expansion during the Freshworks residency. This work was also supported by Science Gallery Detroit and the UC Berkeley Center for Long-Term Cybersecurity Arts Contest.
 </tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="216,17" size="100,100">/* GLOBAL STORY VARIABLES */
 
-&lt;&lt;set $income to 13&gt;&gt;
+&lt;&lt;set $income to 1&gt;&gt;
 &lt;&lt;set $incomePerFan to 10&gt;&gt;
 &lt;&lt;set $incomeTarget to 200&gt;&gt;
 
@@ -1069,6 +1131,8 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 
 /* SOUND */
 &lt;&lt;masteraudio muteonhide&gt;&gt; /* mute audio when tab is in background */
+&lt;&lt;set $audioCap to 0.5&gt;&gt;
+&lt;&lt;masteraudio volume $audioCap&gt;&gt; 
 
 
 &lt;&lt;cacheaudio &quot;ambient&quot; &quot;audio/ambient.mp3&quot;&gt;&gt;
@@ -1240,7 +1304,7 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 
   Did you select your &lt;&lt;link &quot;real name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to true&gt;&gt;&lt;&lt;/link&gt;&gt; or 
   a &lt;&lt;link &quot;fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to false&gt;&gt;&lt;&lt;/link&gt;&gt;?
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="motivation" tags="music-sexi" position="300,550" size="100,100">&lt;&lt;browserwindow &quot;&quot; &quot;browser-blue-white&quot;&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="motivation" tags="music-sexi background-cyan" position="300,550" size="100,100">&lt;&lt;browserwindow &quot;&quot; &quot;browser-blue-white&quot;&gt;&gt;
 You&#39;re hoping to earn $&lt;&lt;print &quot;$incomeTarget&quot;&gt;&gt; to pay your bills in $weekLimit weeks. Every fan you get earns you $&lt;&lt;print &quot;$incomePerFan&quot;&gt;&gt;. If you&#39;re lucky, some of them may even tip you extra! 😘
 
 &lt;&lt;link &quot;Let&#39;s get fans!&quot; start-week&gt;&gt;&lt;&lt;audio &quot;glitch&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -1268,13 +1332,10 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 </tw-passagedata><tw-passagedata pid="11" name="outing-side-story" tags="music-dark background-cyan" position="678,493" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _outingBranch to either(&quot;stolen-content&quot;, &quot;personal-data&quot;, &quot;suggested-friends&quot;)&gt;&gt;
 	&lt;&lt;set _outingEquiv to (_outingBranch == &quot;stolen-content&quot;)&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
-
-&lt;&lt;if _outingBranch == &quot;stolen-content&quot;&gt;&gt;
+&lt;&lt;/silently&gt;&gt;&lt;&lt;if _outingBranch == &quot;stolen-content&quot;&gt;&gt;
 	The text is from an old friend you haven&#39;t talked to in years.
 	
-&lt;&lt;browserwindow &quot;sms&quot; &quot;browser-blue-white&quot;&gt;&gt;
-  Hey $playerName. This is kind of awkward, but I just wanted to reach out and let you know I stumbled on this pic of you on PornHubba...
+&lt;&lt;browserwindow &quot;sms&quot; &quot;browser-blue-white&quot;&gt;&gt;Hey $playerName. This is kind of awkward, but I just wanted to reach out and let you know I stumbled on this pic of you on PornHubba...
 &lt;&lt;/browserwindow&gt;&gt;
   The pic is yours, but you didn&#39;t post it on PornHubba. Oh, hell no! 
   Someone is stealing and reposting your content! 
@@ -1313,7 +1374,7 @@ For full access, please verify your phone number.
 Time&#39;s up! Your $&lt;&lt;print $incomeTarget&gt;&gt; is due.
 
 &lt;&lt;linkreplace &quot;Count your money&quot;&gt;&gt;
-	You have $&lt;&lt;print $income&gt;&gt;.
+	&lt;&lt;type 40ms&gt;&gt;You have $&lt;&lt;print $income&gt;&gt;.&lt;&lt;/type&gt;&gt;
 	
 	&lt;&lt;if _hasEnoughMoney&gt;&gt;&lt;&lt;include &quot;got-money-ending&quot;&gt;&gt;
 	&lt;&lt;else&gt;&gt;&lt;&lt;include &quot;not-enough-money-ending&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
@@ -1413,13 +1474,11 @@ You ask a stripper you follow who lost an account with over 10k followers. They 
 
 What do you do?
 
-&lt;&lt;linkreplace &quot;Give up your account.&quot;&gt;&gt;
+&lt;span id=&#39;giveup&#39;&gt;&lt;&lt;linkreplace &quot;Give up your account.&quot;&gt;&gt;&lt;&lt;remove &quot;#contest&quot;&gt;&gt;
 	Even if you tried to fight it, 93% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
 
 	You [[take a moment to reflect -&gt;permabanned-ending]] on everything that&#39;s gone down.
-&lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;linkreplace &quot;Contest the decision.&quot;&gt;&gt;
-	&lt;&lt;if not _hasAppealSuccess&gt;&gt;
+&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;&lt;span id=&#39;contest&#39;&gt;&lt;&lt;linkreplace &quot;Contest the decision.&quot;&gt;&gt;&lt;&lt;remove &quot;#giveup&quot;&gt;&gt;&lt;&lt;if not _hasAppealSuccess&gt;&gt;
 		You lose. 93% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
 	
 	You [[take a moment to reflect-&gt;permabanned-ending]] on everything that&#39;s gone down.
@@ -1428,7 +1487,7 @@ What do you do?
 	
 	[[Continue with your week.-&gt;community-support]]
 	&lt;&lt;/if&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;
+&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;
 
 </tw-passagedata><tw-passagedata pid="26" name="permabanned-ending" tags="music-ambient background-pink" position="1241,1230" size="100,100">On your journey, you’ve learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
 
@@ -1441,6 +1500,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
   Thank you for playing OnlyBans
 
   &lt;&lt;link &quot;Play again?&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
+  (Things are a little different each time.)
 &lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="verify-more" tags="music-dark background-pink-chill" position="898,276" size="100,100">&lt;&lt;browserwindow &quot;STILL LOCKED&quot; &quot;browser-black-gray&quot;&gt;&gt;
 Thank you for verifying your phone number. 
 	
@@ -1450,8 +1510,7 @@ For somewhat vague safety reasons, we still need more information before you can
 &lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedID&quot; false true&gt;&gt; Upload a photo of yourself holding your state ID.&lt;/label&gt;
 
 &lt;&lt;linkreplace &quot;Submit&quot;&gt;&gt;
-	&lt;&lt;if $hasVerifiedName and $hasVerifiedAddress and $hasVerifiedID&gt;&gt;
-		Verified!
+	&lt;&lt;if $hasVerifiedName and $hasVerifiedAddress and $hasVerifiedID&gt;&gt;Verified!
 		
 		Finally! You&#39;re not thrilled about all the personal info you just gave away, but at least now you can [[get back to posting.-&gt;photo-selection]]
 	&lt;&lt;else&gt;&gt;
@@ -1474,9 +1533,12 @@ Give up and [[close your account-&gt;close-account]]
 But you also want to give the platforms another chance. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
 
 So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes-&gt;ending-text]] 😈
-</tw-passagedata><tw-passagedata pid="32" name="stolen-content" tags="music-ambient background-cyan" position="943,670" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="32" name="stolen-content" tags="music-ambient background-cyan-transparent" position="943,670" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _getsTakenDown to either(true, false)&gt;&gt;
+	&lt;&lt;set _bgVideoSource to &quot;images/mannequin1.mp4&quot;&gt;&gt;
+	&lt;&lt;set _bgVideo to &#39;&lt;video autoplay loop muted id=&quot;bgvid&quot;&gt;&lt;source type=&quot;video/mp4&quot; src=&#39;+_bgVideoSource+&#39;&gt;&lt;/video&gt;&#39;&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
+&lt;&lt;backgroundvideo &quot;mannequin1&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 &lt;&lt;browserwindow &quot;IRL.txt&quot; &quot;browser-blue-white&quot;&gt;&gt;
 &quot;It turns out that 45% of sex workers have had their images or content used for a fake account (e.g., catfishing).&quot;
 &lt;&lt;/browserwindow&gt;&gt;
@@ -1486,55 +1548,62 @@ You&#39;re pissed that someone could be impersonating you and providing false in
 &lt;&lt;linkreplace &quot;Report the account.&quot;&gt;&gt;
 	You submit a help request, but a few days later the fake account is still up.
 	
-	&lt;&lt;linkreplace &quot;Find some help.&quot;&gt;&gt;
+	&lt;&lt;linkreplace &quot;&lt;span id=&#39;help&#39;&gt;Find some help.&lt;/span&gt;&quot;&gt;&gt;
 		You ask your sex worker support group to &lt;&lt;linkappend &quot;report the account&quot;&gt;&gt;
 			&lt;&lt;if _getsTakenDown&gt;&gt;
 				The copycat gets taken down. Close call!
 				
-				41% of sex workers have had success in getting fake accounts taken down.
+				Only 41% of sex workers have had success in getting fake accounts taken down.
 				
 				Thank goodness! 🙏 Now you can [[get back to it-&gt;photo-selection]].
 				 
 			&lt;&lt;else&gt;&gt;
 				The account stays up. It makes you nervous to not have control over your content, but this is a common problem. 59% of sex workers don’t manage to get copycat accounts shut down. What can you do?
+				 
 				 [[Shut down your account before more content is stolen-&gt;close-account]].
-	  			Cut your losses and [[continue posting.-&gt;photo-selection]].				
+	  			&lt;span id=&quot;giveup&quot;&gt;Cut your losses and [[continue posting.-&gt;photo-selection]]&lt;/span&gt;		
 			&lt;&lt;/if&gt;&gt;
 		&lt;&lt;/linkappend&gt;&gt;
 	&lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="personal-data" tags="music-ambient" position="945,552" size="100,100">&lt;em&gt; &quot;Hey, this is weird, but don&#39;t I know you from somehwere?&quot; &lt;/em&gt;
-&lt;&lt;linkreplace &quot;Open Message&quot;&gt;&gt; 
-  Your old boss started following your OnlyBans account? How did they find you? It&#39;s not like your account is very popular yet...
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="personal-data" tags="music-ambient background-cyan" position="945,552" size="100,100">&lt;&lt;backgroundvideo &quot;mannequin2&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
+&lt;&lt;linkreplace &quot;&lt;&lt;browserwindow &#39;FAN MAIL&#39; &#39;browser-blue-white&#39;&gt;&gt;Open Message&lt;&lt;/browserwindow&gt;&gt;&quot;&gt;&gt;
+&lt;&lt;browserwindow &#39;FAN MAIL&#39; &#39;browser-blue-white&#39;&gt;&gt;&lt;em&gt;&lt;&lt;type 40ms&gt;&gt;Hey, this is weird, but don&#39;t I know you from somehwere? -Jean&lt;&lt;/type&gt;&gt;&lt;/em&gt;&lt;&lt;/browserwindow&gt;&gt;
+
+
+Your old boss started following your OnlyBans account? How did they find you? It&#39;s not like your account is very popular yet...
 &lt;&lt;if $usedRealName&gt;&gt;
 	When you opened your account, you picked a real name. Maybe your boss searched your name and found your page?
 	&lt;&lt;else&gt;&gt;
-	Did you use verify your account with the same phone number you used for social media? These platforms often sell or share data around with each other, so using the same contact information can lead to your sex work account being recommended to people you may know in real life. (The Algorithm is creepy!)]
+	Did you use verify your account with the same phone number you used for social media? These platforms often sell or share data around with each other, so using the same contact information can lead to your sex work account being recommended to people you may know in real life. (The Algorithm is creepy!)
 
 Now that one person knows you&#39;re doing sex work, others might find out too. Do you want to keep posting on OnlyBans?	
-&lt;&lt;/if&gt;&gt; 
+&lt;&lt;/if&gt;&gt;
 
 [[Yes, take your chances and continue posting.-&gt;photo-selection]] 
 
 No way. [[Close your account.-&gt;close-account]]
 &lt;&lt;/linkreplace&gt;&gt;
+
+
+
 </tw-passagedata><tw-passagedata pid="34" name="suggested-friends" tags="music-ambient background-cyan" position="934,441" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _people to [&quot;mom&quot;,&quot;favorite teacher&quot;,&quot;child&quot;,&quot;landlord&quot;, &quot;godparent&quot;]&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;mannequin2&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 The list of people you should follow includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
 
-
-&lt;&lt;linkreplace &quot;Yes.&quot;&gt;&gt;
+&lt;span id=&#39;yes&#39;&gt;&lt;&lt;linkreplace &quot;Yes.&quot;&gt;&gt;&lt;&lt;remove &quot;#no&quot;&gt;&gt;
 	You&#39;ll take the risk of having an uncomfortable conversation. After all, you need the money and the clock is ticking. 
 
 	&lt;&lt;browserwindow &quot;&quot; &quot;browser-white-blue&quot;&gt;&gt;You imagine telling your @@font-size:1.2em;&lt;&lt;cycle &quot;_person&quot; autoselect&gt;&gt;&lt;&lt;optionsfrom _people&gt;&gt;&lt;&lt;/cycle&gt;&gt;@@ about your account. What would you say?
 	
 	&lt;&lt;textarea &quot;$toldSomeone&quot; &quot;&quot;&gt;&gt;
 	&lt;&lt;/browserwindow&gt;&gt;
-	[[That was awkward...-&gt;photo-selection]].
-&lt;&lt;/linkreplace&gt;&gt;
+	It&#39;s terrifying, but [[you tell them-&gt;photo-selection]].
+	
+	Nevermind, &lt;&lt;linkreplace &quot;it&#39;s too painful.&quot;&gt;&gt;you [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;
+&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;
 
-&lt;&lt;linkreplace &quot;Nope.&quot;&gt;&gt;You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;
-</tw-passagedata><tw-passagedata pid="35" name="got-money-ending" tags="ending music-ambient background-pink" position="1266,757" size="100,100">Congratulations, your booty beat the odds! You reached your goal, learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
+&lt;span id=&#39;no&#39;&gt;&lt;&lt;linkreplace &quot;Nope.&quot;&gt;&gt;&lt;&lt;remove &#39;#yes&#39;&gt;&gt;You contact the platform&#39;s customer support team asking to opt out of the friend algorithm, but they won&#39;t help. You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="35" name="got-money-ending" tags="ending music-ambient background-pink" position="1266,757" size="100,100">Congratulations, your booty beat the odds! You reached your goal, learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
 
 You were one of the lucky ones. Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
 
@@ -1572,18 +1641,23 @@ Digital discrimination and deplatforming of sex workers is a direct result of FO
 Wallet: $&lt;&lt;print $income&gt;&gt;
 Week: $numWeek</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="music-ambient background-cyan" position="482,1474" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
-	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;
-&lt;&lt;/silently&gt;&gt;&lt;section class=&quot;section&quot;&gt;&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Hey @quiteSaxy, cool account! I’m also selling pics on OnlyBans. Do you wanna do a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
+	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;	
+&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;section class=&quot;section&quot;&gt;&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Hey @quiteSaxy, cool account! I’m also selling pics on OnlyBans. Do you wanna do a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 	&lt;&lt;linkreplace &quot;What&#39;s a share4share?&quot;&gt;&gt;&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;What’s a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
-	&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms start 1s&gt;&gt;I’ll share your content with my followers, if you do the same for me. It’s a way to build a bigger fanbase!&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
-	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;		
+	&lt;&lt;type 40ms start 1s&gt;&gt;&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;I’ll share your content with my followers, if you do the same for me. It’s a way to build a bigger fanbase!&lt;/p&gt;&lt;/div&gt;&lt;&lt;/type&gt;&gt;	
+	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+	
 	&lt;&lt;linkreplace &quot;&lt;span id=&#39;yes&#39;&gt;Sure, let&#39;s share!&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;silently&gt;&gt;
 		&lt;&lt;remove &quot;#no&quot;&gt;&gt;
 		&lt;&lt;addfans _numNewFans&gt;&gt;
 		&lt;&lt;audio &quot;cashregister&quot; play&gt;&gt;
-		&lt;&lt;/silently&gt;&gt;&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Sure, let&#39;s share!&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
+		&lt;&lt;/silently&gt;&gt;
+		&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+		&lt;&lt;type 40ms&gt;&gt;&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;Sure, let&#39;s share!&lt;/p&gt;&lt;/div&gt;&lt;&lt;/type&gt;&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+	
+	
 They share your pics to their feed. You attract _numNewFans new fans and make some more money. 
 	Wallet: $&lt;&lt;print $income&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
@@ -1593,7 +1667,7 @@ They share your pics to their feed. You attract _numNewFans new fans and make so
 &lt;&lt;/linkreplace&gt;&gt;
 &lt;/section&gt;
 
-[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="40" name="tip" tags="music-sexi background-cyan" position="602,1604" size="100,100">&lt;&lt;silently&gt;&gt;
+[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="40" name="tip" tags="music-sexi background-cyan-transparent" position="602,1604" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _tip to random(10,100)&gt;&gt;
 	&lt;&lt;set _intro to either(
 	&quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
@@ -1612,8 +1686,7 @@ They share your pics to their feed. You attract _numNewFans new fans and make so
 	&quot;You poor child, have you no clothes to wear??&quot;, 
 	)&gt;&gt;
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
-_intro
+&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-scrolling&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;_intro
 
 &lt;&lt;browserwindow &quot;FAN MAIL&quot; &quot;browser-white-blue&quot;&gt;&gt;
   &lt;&lt;linkreplace &quot;Open fan mail!&quot;&gt;&gt;&lt;&lt;silently&gt;&gt;
@@ -1626,19 +1699,20 @@ _intro
   You&#39;ve earned a tip! The wallet&#39;s at $&lt;&lt;print $income&gt;&gt;.
   &lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;
-Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.</tw-passagedata><tw-passagedata pid="41" name="attendWorkshop" tags="music-outsideclub background-cyan" position="476,1605" size="100,100">&lt;&lt;silently&gt;&gt;
+Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.</tw-passagedata><tw-passagedata pid="41" name="attendWorkshop" tags="music-outsideclub background-cyan-transparent" position="476,1605" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $outingRisk to $outingRisk - 2&gt;&gt;
 	&lt;&lt;set _lesson to either(&quot;You overhear a conversation in the bathroom about how the same tactics used to repress sex workers online have also been used against activists, such as those posting about Black Lives Matter.&quot;,
 		&quot;A cam performer there mentions that they posted the same cute bikini photo to their sex worker account and their personal account. One of their clients ran a reverse image search on their photo and found out their real identity. Apparently, it’s not just the algorithm that’s stalking you!&quot;,
 		&quot;You learn from other sex workers that they&#39;ve had more luck avoiding shadowbanning by identifying as “male” on their profile.&quot;)&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-selfies&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 You see a post about a workshop led by sex workers to learn how to stay safe digitally. 
 
 &lt;&lt;linkreplace &quot;&lt;span id=&#39;yes&#39;&gt;Check it out.&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;remove &quot;#no&quot;&gt;&gt;
+_lesson
+
 You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out. Plus, there&#39;s pizza. &lt;&lt;linkappend &quot;Grab a slice &quot;&gt;&gt; (a little stale, but still delicious) &lt;&lt;/linkappend&gt;&gt; on &lt;&lt;link &quot;your way out.&quot; &quot;start-week&quot;&gt;&gt;&lt;&lt;audio &quot;neutral&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;	
 &lt;&lt;/linkreplace&gt;&gt; 
 &lt;span id=&#39;no&#39;&gt;It looks cool, but your time is precious. [[Skip it.-&gt;start-week]]&lt;/span&gt;
-
 </tw-passagedata><tw-passagedata pid="42" name="cutscene-test" tags="" position="1558,1404" size="100,100">Here is a cutscene. It should play and move you to the next screen.
 
 &lt;&lt;cutscene &quot;help-hands&quot; &quot;cut&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="cut" tags="" position="1749,1482" size="100,100">&lt;&lt;silently&gt;&gt;
@@ -1764,7 +1838,7 @@ IRL info for $currentPhoto
 		&lt;&lt;goto &quot;joinedGroup&quot;&gt;&gt;
 		[[dummy-&gt;joinedGroup]] 
 		&lt;&lt;/if&gt;&gt;	
-&lt;&lt;/silently&gt;&gt;
+&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands2&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 You get a DM from a sex worker you follow...
 &lt;section class=&quot;chat-section&quot;&gt;
 &lt;&lt;type 40ms&gt;&gt;&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;Hi $playerName :) I’m a cam performer and think your pics are awesome!&lt;/p&gt;&lt;/div&gt;&lt;&lt;/type&gt;&gt;
@@ -1777,10 +1851,11 @@ You get a DM from a sex worker you follow...
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 &lt;&lt;type 40ms start 1.9s&gt;&gt;&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;All kinds of things: how to make more money, keep ourselves safe, and avoid getting banned!&lt;/p&gt;&lt;/div&gt;&lt;&lt;/type&gt;&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
-&lt;&lt;type 10ms start 2.1s&gt;&gt;&lt;&lt;linkreplace &quot;&lt;span id=&#39;yes&#39;&gt;Oh, that sounds like what I need, I’d love to join!&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;remove &quot;#no&quot;&gt;&gt;
+&lt;&lt;type 1ms start 1.9s&gt;&gt;&lt;&lt;linkreplace &quot;&lt;span id=&#39;yes&#39;&gt;Oh, that sounds like what I need, I’d love to join!&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;remove &quot;#no&quot;&gt;&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 	&lt;&lt;type 40ms&gt;&gt;&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;Oh, that sounds like what I need, I’d love to join!&lt;/p&gt;&lt;/div&gt;&lt;&lt;/type&gt;&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+	
 	&lt;&lt;type 40ms start 0.25s&gt;&gt;&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;Sure, just click this &lt;&lt;link &quot;invite link&quot; &quot;joinedGroup&quot;&gt;&gt;&lt;&lt;set $joinedGroup to true&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/p&gt;&lt;/div&gt;&lt;&lt;/type&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
 &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
@@ -1790,20 +1865,15 @@ You get a DM from a sex worker you follow...
 
 [[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="53" name="joinedGroup" tags="background-cyan music-sexi" position="742,1480" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
-
-  &lt;&lt;set _groupLesson to either( 
-	  &quot;watermark your images. (Otherwise, impersonators could steal your content and set up fake social media accounts.)&quot;, 
-	  &quot;disable location sharing when taking photos. A photo’s EXIF data can expose your exact location.&quot;, 
-	  )&gt;&gt;
 	 &lt;&lt;switch visited()&gt;&gt;
 	 	&lt;&lt;case 1&gt;&gt;
 			&lt;&lt;set _greeting to &quot;Welcome to the group $playerName!&quot;&gt;&gt;
 			&lt;&lt;set _topic to &quot;how to disable location sharing when taking photos&quot;&gt;&gt;
-			&lt;&lt;set _lesson to &quot;A photo’s EXIF data can expose the exact location of where you took a photo. So if you’re shooting pics at home, people can find out where you live!&quot;&gt;&gt;
+			&lt;&lt;set _lesson to &quot;A photo’s &lt;strong&gt;EXIF data&lt;/strong&gt; can expose the exact location of where you took a photo. So if you’re shooting pics at home, people can find out where you live!&quot;&gt;&gt;
 			&lt;&lt;set _reaction to &quot;Wow, that’s creepy. I’ll definitely be careful with that.&quot;&gt;&gt;
 		&lt;&lt;case 2&gt;&gt;
 			&lt;&lt;set _greeting to &quot;Heyyy $playerName! Where you been?&quot;&gt;&gt;
-			&lt;&lt;set _topic to &quot;how to watermark your images&quot;&gt;&gt;
+			&lt;&lt;set _topic to &quot;how to &lt;strong&gt;watermark your images&lt;/strong&gt;&quot;&gt;&gt;
 			&lt;&lt;set _lesson to &quot;You put a logo on your content, so impersonators can’t steal your pics and set up fake social media accounts with them.&quot;&gt;&gt;
 			&lt;&lt;set _reaction to &quot;That sounds like great advice! Thanks for letting me know.&quot;&gt;&gt;
 		&lt;&lt;default&gt;&gt;
