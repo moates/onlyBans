@@ -532,8 +532,9 @@ a.link-broken {
 /* ************* */
 /* Based on n7best's codepen */
 section {
-  max-width: 50%;
-  margin: 50px auto;
+  max-width: 70%;
+  margin: auto;
+  padding: 1em;
   background: #7bd2ed;
 }
 section.div {
@@ -572,11 +573,11 @@ section.div {
     z-index: 1;
     bottom: -2px;
     right: -56px;
-    width: 26px;
+    width: 10px;
     height: 20px;
     background: #7bd2ed ;
     border-bottom-left-radius: 10px;
-    -webkit-transform: translate(-30px, -2px);
+    -webkit-transform: translate(-46px, -2px);
   }
 
 
@@ -607,11 +608,11 @@ section.div {
     z-index: 3;
     bottom: -2px;
     left: 4px;
-    width: 26px;
+    width: 10px;
     height: 20px;
     background: #7bd2ed ;
     border-bottom-right-radius: 10px;
-    -webkit-transform: translate(-30px, -2px);
+    -webkit-transform: translate(-14px, -2px);
 }
 
 
@@ -981,7 +982,8 @@ console.log("All Passages", passageTitles);*/
 &lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;
 !Welcome to &lt;strong&gt;OnlyBans&lt;/strong&gt;!
 
-OnlyBans is an online platform where fans pay for your sexy content. You advertise your Only Bans by offering previews of this content on social media sites to attract fans. The sexier the photo, the more fans! The more fans, the more money! But if you’re too sexy, then your social media account might get suspended, shadowbanned, or deleted - and then you’ll have to start over with a new account. Besides avoiding social media censorship, you also want to make sure that you don’t get outed as a sex worker.
+OnlyBans is an online platform where you post sexy content to attract fans and earn money. The sexier the photo, the more fans! The more fans, the more money! But if you’re too sexy, then your account might get suspended, shadowbanned, or deleted - and then you’ll have to start over. Besides avoiding censorship, you also want to protect your privacy as a sex worker.
+
 
 Want to play?
 
@@ -1442,9 +1444,9 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 Thank you for verifying your phone number. 
 	
 For somewhat vague safety reasons, we still need more information before you can cash out any money from your account.
-&lt;&lt;checkbox &quot;$hasVerifiedName&quot; false true&gt;&gt; Add your legal name.
-&lt;&lt;checkbox &quot;$hasVerifiedAddress&quot; false true&gt;&gt; Add a personal email.
-&lt;&lt;checkbox &quot;$hasVerifiedID&quot; false true&gt;&gt; Upload a photo of yourself holding your state ID.
+&lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedName&quot; false true&gt;&gt; Add your legal name.&lt;/label&gt;
+&lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedAddress&quot; false true&gt;&gt; Add a personal email.&lt;/label&gt;
+&lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedID&quot; false true&gt;&gt; Upload a photo of yourself holding your state ID.&lt;/label&gt;
 
 &lt;&lt;linkreplace &quot;Submit&quot;&gt;&gt;
 	&lt;&lt;if $hasVerifiedName and $hasVerifiedAddress and $hasVerifiedID&gt;&gt;
@@ -1570,30 +1572,23 @@ Wallet: $&lt;&lt;print $income&gt;&gt;
 Week: $numWeek</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="music-ambient background-cyan" position="476,1470" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
-	&lt;section class=&quot;chat-section&quot;&gt;
-	&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Hey @quiteSaxy, cool account! I’m also selling pics on OnlyBans. Do you wanna do a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;&lt;/silently&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Hey @quiteSaxy, cool account! I’m also selling pics on OnlyBans. Do you wanna do a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 	&lt;&lt;linkreplace &quot;What&#39;s a share4share?&quot;&gt;&gt;&lt;div class=&quot;from-me loud&quot;&gt;
 		&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;What’s a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;
-	&lt;/div&gt;
-	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
-	&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms start 1s&gt;&gt;I’ll share your content with my followers, if you do the same for me. It’s a way to build a bigger fanbase!&lt;&lt;/type&gt;&gt;&lt;/p&gt;	&lt;/div&gt;
-	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
-		
-	&lt;&lt;linkreplace &quot;Sure, let&#39;s share!&quot;&gt;&gt;&lt;&lt;silently&gt;&gt;
+	&lt;/div&gt;&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+	&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms start 1s&gt;&gt;I’ll share your content with my followers, if you do the same for me. It’s a way to build a bigger fanbase!&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
+	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;		
+	&lt;&lt;linkreplace &quot;&lt;span id=&#39;yes&#39;&gt;Sure, let&#39;s share!&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;silently&gt;&gt;
+		&lt;&lt;remove &quot;#no&quot;&gt;&gt;
 		&lt;&lt;addfans _numNewFans&gt;&gt;
 		&lt;&lt;audio &quot;cashregister&quot; play&gt;&gt;
-		&lt;&lt;/silently&gt;&gt;
-	&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Sure, let&#39;s share!&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
+		&lt;&lt;/silently&gt;&gt;&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Sure, let&#39;s share!&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 They share your pics to their feed. You attract _numNewFans new fans and make some more money. 
 	Wallet: $&lt;&lt;print $income&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;linkreplace &quot;Nah.&quot;&gt;&gt;
-		&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Nah, sorry.&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
-		&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
+&lt;&lt;linkreplace &quot;&lt;span id=&#39;no&#39;&gt;Nah.&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;remove &quot;#yes&quot;&gt;&gt;&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Nah, sorry.&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 		&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms start 1s&gt;&gt;Okay, suit yourself.&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
@@ -1640,6 +1635,7 @@ Your new friends also share your content with their followers and you get _numNe
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 _intro
+
 &lt;&lt;browserwindow &quot;FAN MAIL&quot; &quot;browser-white-blue&quot;&gt;&gt;
   &lt;&lt;linkreplace &quot;Open fan mail!&quot;&gt;&gt;&lt;&lt;silently&gt;&gt;
 		&lt;&lt;audio &quot;cashregister&quot; play&gt;&gt;
@@ -1735,7 +1731,7 @@ This seems completely unfair, but you&#39;re not the first sex worker to have th
 &lt;&lt;if $wasSuspended&gt;&gt;
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
-	Well, that sucks, but [[maybe your luck will improve?-&gt;community-support]]
+	Well, that sucks, but [[let&#39;s do some research?-&gt;community-support]]
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="shadowBan-real-story" tags="background-purple" position="465,1227" size="100,100">&lt;&lt;silently&gt;&gt;
   &lt;&lt;set _currentStat to either(
 	  &#39;&quot;We are reducing the spread of posts that are inappropriate but do not go against guidelines, limiting them from being recommended on our Explore and hashtag pages. For example, a sexually suggestive post will still appear in Feed if you follow the account that posts it, but this type of content may not appear for the broader community.&quot; –Instagram&quot;&#39;,
