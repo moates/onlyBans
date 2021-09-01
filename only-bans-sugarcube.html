@@ -712,13 +712,97 @@ section.div {
   transform-origin: center center;
   animation-name: loud;
 }
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* UI Sidebar Config */
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">/***********************/
+/*   USER SETTINGS     */
+/***********************/
+Setting.addHeader("Sound", "Use the sliders to control the audio volume.");
+// BIG thanks to HiEv Heavy Industries for the code sample
+// https://qjzhvmqlzvoo5lqnrvuhmg-on.drv.tw/UInv/Sample_Code.html#Main%20Menu
+Setting.addRange("bgmVolume", {
+		label    : "Music volume.",
+    //desc     : "Volume control for background music.",
+    min      : 0,
+   	max      : 1,
+    step     : 0.05,
+		default	 :	0.5,
+    onInit   : bgmVolumeInitHandler,
+    onChange : bgmVolumeHandler,
+});
+
+function bgmVolumeInitHandler() {
+    try {
+        bgmVolumeHandler();
+    }
+    catch (ex) {
+        setTimeout(bgmVolumeInitHandler, 50); //ms
+    }
+}
+
+function bgmVolumeHandler() {
+	var _newCap = settings["bgmVolume"];
+	State.setVar("$volumeCap", _newCap);		
+SimpleAudio.select(State.getVar("$bgmusicgroupID")).volume(_newCap);
+}
+
+
+Setting.addRange("fxVolume", {
+		label    : "Sound effects volume.",
+    //desc     : "Volume control for sound effects music.",
+    min      : 0,
+   	max      : 1,
+    step     : 0.05,
+		default	 :	0.5,
+    onInit   : fxVolumeInitHandler,
+    onChange : fxVolumeHandler,
+});
+
+function fxVolumeInitHandler() {
+    try {
+        fxVolumeHandler();
+    }
+    catch (ex) {
+        setTimeout(bgmVolumeInitHandler, 50); //ms
+    }
+}
+
+function fxVolumeHandler() {
+	SimpleAudio.select(":soundeffects").volume(settings["fxVolume"]);
+}
+
+Setting.addHeader("Accessibility", "These settings don't do anything yet.");
+
+var settingDisableAnimationsHandler = function () {
+	if (settings.disableAnimations) {
+			//disable animations here
+		console.warn("Not implemented.");
+	}
+	else {
+		console.log("Enable animations: Not implemented.");
+	}
+}
+
+Setting.addToggle("disableAnimations", {
+				label: "Disable animations and video", 
+				default: false,
+				onInit: settingDisableAnimationsHandler,
+				onInit: settingDisableAnimationsHandler,
+				});
+
+
+	
+
+
+/***********************/
+/* UI Sidebar Config */
+/***********************/
 // UIBar.destroy() /* hide the UI bar altogether */
 Config.ui.stowBarInitially = 1200; //close sidebar if viewport less than X pixels
 Config.history.controls = false; //disable backward and forward buttons
 Config.saves.slots = 0; //num of save slots available
 
+/***********************/
 /* GAMEPLAY UTILITIES */
+/***********************/
 Macro.add("addfans", {
 		handler: function() {
 				if (this.args.length !== 1) {
@@ -731,6 +815,9 @@ Macro.add("addfans", {
 	}
 });
 
+/***********************/
+/*  PHOTOGRID MACROs */
+/***********************/
 Macro.add("photogrid", {
 		handler: function() {
 			if (this.args.length !== 1) {
@@ -780,13 +867,21 @@ Macro.add("photogrid", {
 							.appendTo($photoRow);						
 					}
 					
-					// Add link navigation. 
-				 	// Be very cautious here with nested quotes, bleh.
-					var _wikiString = '<<link '+ '"'+_imgObj.toVaporHTML('selector-photo')+'"'
-						+ " " + _photoOutcome 
-						+'>>  <<set $currentPhoto to '+ '"' + _imgKey+'"'
-						+'>>  <<run $availablePhotos.delete('+ '"' +_imgKey+'"'
-						+')>>	<</link>>';								
+					var _wikiString = "";
+					// if default, make it not clickable, no link navigation
+					if (_imgKey == "default"){
+						// Be very cautious here with nested quotes, bleh.
+						_wikiString = _imgObj.toVaporHTML('selector-photo');
+					}
+					else{					
+						// Add link navigation. 
+						// Be very cautious here with nested quotes, bleh.
+						_wikiString = '<<link '+ '"'+_imgObj.toVaporHTML('selector-photo')+'"'
+							+ " " + _photoOutcome 
+							+'>>  <<set $currentPhoto to '+ '"' + _imgKey+'"'
+							+'>>  <<run $availablePhotos.delete('+ '"' +_imgKey+'"'
+							+')>>	<</link>>';
+					}
 					$photoColumn.wiki(_wikiString);					
 				}
 				
@@ -801,7 +896,9 @@ Macro.add("photogrid", {
 	}
 });
 
+/***********************/
 /* BROWSER WINDOW MACRO */
+/***********************/
 Macro.add("browserwindow", {
 		tags: null,
 		handler	: function() {								
@@ -850,15 +947,16 @@ Macro.add("browserwindow", {
 /***************/
 /*     AUDIO   */
 /***************/
+//See also: Settings 
+
 var $musicFadeTime = 2;
 
 // At each passage transition, control background music transitions
-$(document).on(':passagerender', function (ev) {	
+$(document).on(':passagedisplay', function (ev) {	
 	// first, check for music passage tags
 	var _musictags = tags().filter(t => t.includes("music"));
 	var $audioTagMap = State.variables.audioTagMap || {};
 	var $bgmusicgroupID = State.variables.bgmusicgroupID || "";
-	var $volumeCap = State.variables.audioCap;
 	
 	if (_musictags.length != 1 || !(_musictags[0] in $audioTagMap)){
 		console.warn("Missing or extra music tags for passage: ", State.passage, _musictags);
@@ -867,14 +965,20 @@ $(document).on(':passagerender', function (ev) {
 		//match tag to track or playlist ID
 		var _musictag =$audioTagMap[_musictags[0]];
 		var _bggroup = SimpleAudio.select($bgmusicgroupID);
+		var _playingbg = SimpleAudio.select(":playing:not(:soundeffects)");
 		
-		//if a song exists, and isn't already playing, play it!
-		// fade out all other bg tracks
+		// check if target track exists
 		if (SimpleAudio.tracks.has(_musictag)){ 
 			var _track = SimpleAudio.tracks.get(_musictag);
-			if(!_track.isPlaying()){				
-				_bggroup.fadeOut($musicFadeTime);
-				_track.fade($musicFadeTime, $volumeCap, 0);	//fade in
+
+			//if target target is alrady playing, do nothing
+			if(!_track.isPlaying()){
+				//otherwise, fade out and stop previous tracks.
+				_playingbg.fadeOut($musicFadeTime); //fade out
+				//_playingbg.stop();
+				
+				//fade in and loop target track
+				_track.fade($musicFadeTime, settings["bgmVolume"], 0);	//fade in
 				_track.loop(true);			
 			}
 		}
@@ -1029,25 +1133,6 @@ Photo.prototype.getPostOutcome = function(outcomeDistribution) {
 	return _outcome;	
 }
 
-/* USER SETTINGS */
-Setting.addHeader("Accessibility", "These settings don't do anything yet.");
-
-var settingDisableAnimationsHandler = function () {
-	if (settings.disableAnimations) {
-			//disable animations here
-		console.warn("Not implemented.");
-	}
-	else {
-		console.log("Enable animations: Not implemented.");
-	}
-}
-
-Setting.addToggle("disableAnimations", {
-				label: "Disable animations and video", 
-				default: false,
-				onInit: settingDisableAnimationsHandler,
-				onInit: settingDisableAnimationsHandler,
-				});
 
 
 /* DEBUG UTILITIES */
@@ -1128,7 +1213,7 @@ Thank you to &quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;. We are indeb
 
 Thank you Lien Tran, the creator of &lt;a href=&quot;http://copsandrubbers.com/&quot;&gt;&quot;Cops &amp; Rubbers&quot;&lt;/a&gt;, which was hugely inspirational as we considered how to design a game that could also compel real-world policy change.
 
-We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an early version of OnlyBans. Thank you to Kelly Strayhorn Theater for supporting the project’s visual development and narrative expansion during the Freshworks residency. This work was also supported by Science Gallery Detroit and the UC Berkeley Center for Long-Term Cybersecurity Arts Contest.
+We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an early version of OnlyBans. Thank you to Kelly Strayhorn Theater for supporting the project’s visual development and narrative expansion during the Freshworks residency. This work was also supported by the UC Berkeley Center for Long-Term Cybersecurity, the Carnegie Mellon School of Art, and Science Gallery Detroit.
 </tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="62,37" size="100,100">/* GLOBAL STORY VARIABLES */
 
 &lt;&lt;set $income to 1&gt;&gt;
@@ -1163,9 +1248,6 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 
 /* SOUND */
 &lt;&lt;masteraudio muteonhide&gt;&gt; /* mute audio when tab is in background */
-&lt;&lt;set $audioCap to 0.5&gt;&gt;
-&lt;&lt;masteraudio volume $audioCap&gt;&gt; 
-
 
 &lt;&lt;cacheaudio &quot;ambient&quot; &quot;audio/ambient.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;dark&quot; &quot;audio/dark.mp3&quot;&gt;&gt;
@@ -1544,10 +1626,10 @@ But you also want to give the platforms the chance to change. Even though it’s
 
 So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes-&gt;ending]] 😈
 </tw-passagedata><tw-passagedata pid="27" name="ending" tags="music-outsideclub background-pink" position="1402,797" size="100,100">&lt;&lt;backgroundvideo &quot;ending-boots&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;the-end.exe&quot; &quot;browser-pink-pink&quot;&gt;&gt;Thank you for playing OnlyBans
-
-	[[Credits-&gt;Credits]] 
+	Based on research by &lt;a href=&quot;https://hackinghustling.org/posting-into-the-void-content-moderation/&quot;&gt;&quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;&lt;/a&gt;. 
+	More info in the [[Credits-&gt;Credits]] and [[About-&gt;About]] pages.
 	
-  &lt;&lt;link &quot;Play again?&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
+  &lt;&lt;link &quot;&lt;div style=&#39;font-size:2em&#39;&gt;Play again?&lt;/div&gt;&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
   &lt;em&gt;(Things are a little different each time.)&lt;/em&gt;
 &lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="verify-more" tags="music-dark background-pink-chill" position="886,204" size="100,100">&lt;&lt;browserwindow &quot;STILL LOCKED&quot; &quot;browser-black-gray&quot;&gt;&gt;
 Thank you for verifying your phone number. 
@@ -1665,7 +1747,7 @@ But you also want to give the platforms the chance to change. Even though it’s
 </tw-passagedata><tw-passagedata pid="37" name="About" tags="music-ambient background-pink-light" position="125,387" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
 &lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;&lt;h2&gt; Home Page &lt;/h2&gt;This game lives at &lt;a href=&quot;https://www.onlybansgame.com&quot;&gt;www.onlybansgame.com&lt;/a&gt;.
 
-&lt;h2&gt; About the game &lt;/h2&gt;Created by a team of sex workers and allies, OnlyBans is an interactive game that critically examines the policing of marginalized bodies and sexual labor to empathetically teach people about discrimination faced by sex workers online. Players encounter content moderation algorithms, shadowbanning, “real name” policies, facial recognition software, and other threats based on actual experiences of sex workers. Featuring real images and stories from sex workers themselves, OnlyBans offers a speculative vision of how marginalized communities can unite to protest these unjust policies and create better alternatives.
+&lt;h2&gt; About the game &lt;/h2&gt;Created by a team of sex workers and allies, Created by a team of sex workers and allies, OnlyBans is an interactive game that critically examines the policing of marginalized bodies and sexual labor to empathetically teach people about discrimination faced by sex workers online. Players encounter content moderation algorithms, shadowbanning, &quot;real name&quot; policies, facial recognition software, and other threats based on actual experiences of sex workers. Based on research by &lt;a href=&quot;https://hackinghustling.org/posting-into-the-void-content-moderation/&quot;&gt;&quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;&lt;/a&gt; and featuring real images and stories from sex workers themselves, OnlyBans offers a speculative vision of how marginalized communities can unite to protest these unjust policies and create better alternatives.
 
 This game is still a living document, a work-in-progress. We welcome &lt;a href=&quot;https://www.onlybansgame.com/feedback&quot;&gt;feedback&lt;/a&gt;!
 &lt;&lt;/browserwindow&gt;&gt;
@@ -1767,7 +1849,7 @@ Thursday at 3pm.&lt;/div&gt;
 It looks cool, but your time and energy are precious. [[Make some more content.-&gt;start-week]]&lt;/span&gt;
 </tw-passagedata><tw-passagedata pid="42" name="Load-screen" tags="background-pink-light" position="305,6" size="100,100">&lt;&lt;browserwindow &quot;music-is-gonna-start-put-in-headphones.exe&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;!OnlyBans
 
-[[Enter.-&gt;opening-screen]]
+Take a moment to change &lt;&lt;link &quot;your settings&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.settings();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; and then...&lt;div style=&quot;font-size:2em&quot;&gt;[[Enter.-&gt;opening-screen]]&lt;/div&gt;
 &lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="too-sexy-real-story" tags="background-dark music-dark" position="351,1025" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
 &lt;&lt;set _currentStat to either(
@@ -1835,28 +1917,7 @@ This seems completely unfair, but you&#39;re not the first sex worker to have th
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your business skills-&gt;community-support]].
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="image-overlay-test" tags="" position="36,1099" size="100,100">&lt;&lt;silently&gt;&gt;
-&lt;&lt;set _currentStat to either(
-	&quot;42% of sex workers said they have received a warning that their social media account is close to deletion.&quot;, 
-	&quot;67% of sex workers have had a post removed from social media.&quot;,
-	&quot;Plus-size users&#39; accounts are flagged for excessive nudity and sexual solicitation more frequently than thin users’ accounts. Women of color and queer people experience platform punishment and policing more frequently than their white, cishetero counterparts.&quot; )&gt;&gt;
-
-&lt;&lt;set $currentPhoto to &quot;nimina&quot;&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
-  _currentStat
-
-&lt;div class=&quot;photo-container&quot;&gt;&lt;div class=&quot;underlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toHTML()&gt;&gt;&lt;/div&gt;&lt;div class=&quot;overlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toVaporHTML()&gt;&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-  
-  &lt;&lt;print $photoPool[$currentPhoto].context &gt;&gt;
-  &lt;/em&gt;
-
-&lt;&lt;if $wasSuspended&gt;&gt;
-	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
-&lt;&lt;else&gt;&gt;	
-	You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;photo-selection]]?
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="joinGroup" tags="music-sexi background-cyan" position="571,1395" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="joinGroup" tags="music-sexi background-cyan" position="571,1395" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;if $joinedGroup&gt;&gt;
 		&lt;&lt;goto &quot;joinedGroup&quot;&gt;&gt;
 		[[dummy-&gt;joinedGroup]] 
@@ -1895,7 +1956,7 @@ You get a DM from a sex worker you follow...
 &lt;&lt;/nobr&gt;&gt;
 
 
-[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="48" name="joinedGroup" tags="background-cyan music-sexi" position="567,1510" size="100,100">&lt;&lt;silently&gt;&gt;
+[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="47" name="joinedGroup" tags="background-cyan music-sexi" position="567,1510" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 	 &lt;&lt;switch [1,2].random()&gt;&gt;
 	 	&lt;&lt;case 1&gt;&gt;
@@ -1931,7 +1992,7 @@ You get a DM from a sex worker you follow...
 &lt;/section&gt;
 &lt;&lt;/nobr&gt;&gt;
 	
-Stop chatting and [[continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="49" name="attendWorkshop-gender" tags="included" position="389,1556" size="100,100">&lt;&lt;silently&gt;&gt;
+Stop chatting and [[continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="48" name="attendWorkshop-gender" tags="included" position="389,1556" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $gender to &quot;Not Specified&quot;&gt;&gt;
 	&lt;&lt;set $genderOutcome to &quot;Your follower count stays the same.&quot;&gt;&gt;
 &lt;&lt;/silently&gt;&gt;You learn from other sex workers that they&#39;ve had more luck &lt;strong&gt;avoiding shadowbanning by identifying as &#39;male&#39;&lt;/strong&gt; on their profile.	
@@ -1959,9 +2020,9 @@ Your profile doesn’t currently indicate a gender...Do you want to add one?
 &lt;&lt;/silently&gt;&gt;You selected &lt;&lt;print $gender&gt;&gt;. &lt;&lt;print $genderOutcome&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;
 
-You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out.</tw-passagedata><tw-passagedata pid="50" name="attendWorkshop-activism" tags="included" position="262,1564" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;set _activism to [&#39;Black Lives Matter&#39;,&#39;#MeToo&#39;,&#39;the Landback movement&#39;,&#39;abortion&#39;,&#39;disability rights&#39;,&#39;climate change&#39;]&gt;&gt;&lt;&lt;/silently&gt;&gt;You overhear a conversation in the bathroom about how the same tactics used to repress sex workers online have also been used against activists, such as those posting about &lt;&lt;cycle &#39;_cause&#39; autoselect&gt;&gt;&lt;&lt;optionsfrom _activism&gt;&gt;&lt;&lt;/cycle&gt;&gt;
+You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out.</tw-passagedata><tw-passagedata pid="49" name="attendWorkshop-activism" tags="included" position="262,1564" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;set _activism to [&#39;Black Lives Matter&#39;,&#39;#MeToo&#39;,&#39;the Landback movement&#39;,&#39;abortion&#39;,&#39;disability rights&#39;,&#39;climate change&#39;]&gt;&gt;&lt;&lt;/silently&gt;&gt;You overhear a conversation in the bathroom about how the same tactics used to repress sex workers online have also been used against activists, such as those posting about &lt;&lt;cycle &#39;_cause&#39; autoselect&gt;&gt;&lt;&lt;optionsfrom _activism&gt;&gt;&lt;&lt;/cycle&gt;&gt;
 
-Upsetting, but you&#39;re glad you learned about the risks of sharing &quot;political&quot; content.</tw-passagedata><tw-passagedata pid="51" name="attendWorkshop-reverseimage" tags="included" position="342,1677" size="100,100">A cam performer there mentions that they posted the same cute bikini photo to their sex worker account and their personal account. One of their clients ran a &lt;strong&gt;reverse image search&lt;/strong&gt; on their photo and found out their real identity. Apparently, it’s not just the algorithm that’s stalking you!	
+Upsetting, but you&#39;re glad you learned about the risks of sharing &quot;political&quot; content.</tw-passagedata><tw-passagedata pid="50" name="attendWorkshop-reverseimage" tags="included" position="342,1677" size="100,100">A cam performer there mentions that they posted the same cute bikini photo to their sex worker account and their personal account. One of their clients ran a &lt;strong&gt;reverse image search&lt;/strong&gt; on their photo and found out their real identity. Apparently, it’s not just the algorithm that’s stalking you!	
 
 You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out.</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
