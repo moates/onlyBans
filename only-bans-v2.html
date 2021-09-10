@@ -1212,13 +1212,7 @@ Thank you to &quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;. We are indeb
 Thank you Lien Tran, the creator of &lt;a href=&quot;http://copsandrubbers.com/&quot;&gt;&quot;Cops &amp; Rubbers&quot;&lt;/a&gt;, which was hugely inspirational as we considered how to design a game that could also compel real-world policy change.
 
 We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an early version of OnlyBans. Thank you to Kelly Strayhorn Theater for supporting the project’s visual development and narrative expansion during the Freshworks residency. This work was also supported by the UC Berkeley Center for Long-Term Cybersecurity, the Carnegie Mellon School of Art, and Science Gallery Detroit.
-</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="62,37" size="100,100">/* PLAY MODES */
-&lt;&lt;set $isGalleryMode to false&gt;&gt; /* disables some features */ 
-
-&lt;&lt;set $isPerformanceMode to false&gt;&gt; /* hardcodes some tracks so the game doesn&#39;t end too early */
-
-
-/* GLOBAL STORY VARIABLES */
+</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="62,37" size="100,100">/* GLOBAL STORY VARIABLES */
 
 &lt;&lt;set $income to 1&gt;&gt;
 &lt;&lt;set $incomePerFan to 10&gt;&gt;
@@ -1249,7 +1243,6 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 
 &lt;&lt;set $currentPhoto to &quot;default&quot;&gt;&gt;
 &lt;&lt;set $numPhotosQueued to 9&gt;&gt;
-
 
 /* SOUND */
 &lt;&lt;masteraudio muteonhide&gt;&gt; /* mute audio when tab is in background */
@@ -1457,9 +1450,6 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 &lt;&lt;/switch&gt;&gt;
 </tw-passagedata><tw-passagedata pid="11" name="outing-side-story" tags="music-dark background-cyan" position="701,445" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _outingBranch to either(&quot;stolen-content&quot;, &quot;personal-data&quot;, &quot;suggested-friends&quot;)&gt;&gt;
-	&lt;&lt;if $isPerformanceMode&gt;&gt;
-		&lt;&lt;set _outingBranch to &quot;suggested-friends&quot;&gt;&gt;
-	&lt;&lt;/if&gt;&gt;
 	&lt;&lt;set _outingEquiv to (_outingBranch == &quot;stolen-content&quot;)&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;if _outingBranch == &quot;stolen-content&quot;&gt;&gt;
 	The text is from an old friend you haven&#39;t talked to in years.
@@ -1608,9 +1598,6 @@ Another banned photo? That&#39;s $numPhotosFlagged banned photos //and// you wer
 
 </tw-passagedata><tw-passagedata pid="25" name="permabanned-appeal" tags="music-dark background-pink-chill background-pink-transparent" position="902,1115" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _hasAppealSuccess to either(true, false)&gt;&gt;
-	&lt;&lt;if $isPerformanceMode&gt;&gt;
-		&lt;&lt;set _hasAppealSuccess to true&gt;&gt;
-	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-scrolling&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 You ask a stripper you follow who lost an account with over 10k followers. They tell you that you can try to get your account back by submitting a support request, but the odds are against you.
 
@@ -1742,7 +1729,7 @@ The list of people you should follow includes tons of friends and … even your 
 	&lt;&lt;/browserwindow&gt;&gt;
 	It&#39;s terrifying, but [[you tell them-&gt;photo-selection]].
 	
-	Nevermind, &lt;&lt;linkreplace &quot;it&#39;s too painful or dangerous.&quot;&gt;&gt;you [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;
+	Nevermind, &lt;&lt;linkreplace &quot;it&#39;s too painful.&quot;&gt;&gt;you [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;
 
 &lt;span id=&#39;no&#39;&gt;&lt;&lt;linkreplace &quot;Nope.&quot;&gt;&gt;&lt;&lt;remove &#39;#yes&#39;&gt;&gt;You contact the platform&#39;s customer support team asking to opt out of the friend algorithm, but they won&#39;t help. You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="35" name="got-money-ending" tags="ending music-ambient" position="1141,713" size="100,100">&lt;&lt;backgroundvideo &quot;pizza&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
