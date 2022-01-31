@@ -753,7 +753,7 @@ SimpleAudio.select(State.getVar("$bgmusicgroupID")).volume(_newCap);
 
 Setting.addRange("fxVolume", {
 		label    : "Sound effects volume.",
-    //desc     : "Volume control for sound effects music.",
+    //desc     : "Volume control for sound effects.",
     min      : 0,
    	max      : 1,
     step     : 0.05,
@@ -777,22 +777,25 @@ function fxVolumeHandler() {
 
 Setting.addHeader("Accessibility", "More accessibility features coming in future version.");
 
-/*var settingDisableAnimationsHandler = function () {
-	if (settings.disableAnimations) {
-			//disable animations here
-		console.warn("Disable Animations feature Not Yet Implemented.");
+var settingEnableVideoHandler = function () {
+	if (settings.enableVideo) {
+			//Videos handled by the bgvideo macro		
 	}
-	else {
-		console.warn("Enable Animations feature Not Yet Implemented.");
+	else { 
+		//disable any active background videos
+		var _activeVid = document.getElementById('bgvid');
+		if (_activeVid){
+			_activeVid.remove();	
+		}
 	}
-}
+};
 
-Setting.addToggle("disableAnimations", {
-				label: "Disable animations and video", 
-				default: false,
-				onInit: settingDisableAnimationsHandler,
-				onInit: settingDisableAnimationsHandler,
-				});*/
+Setting.addToggle("enableVideo", {
+				label: "Background videos",
+				desc: "'Off' will turn off background videos. You might want this to reduce motion or to make the game load faster.",
+				default: true,
+				onChange: settingEnableVideoHandler,
+				});
 
 	
 
@@ -1012,19 +1015,27 @@ Macro.add("backgroundvideo", {
 					// handling some arguments
 				var _vidName = (this.args.length > 0) ? this.args[0] : '';		
 				
-			// piecing together HTML. This is hacky, but for the life of me
-			// I can't figure out how to make autoplay work with proper DOM injection
-			var _src1 = '<source type="video/mp4" src=' + '"' +'images\\'+_vidName+'.mp4' +'"' +'>';				
-				var _bkgVideoOpen = '<video autoplay loop muted id="bgvid">';	
-				var _bkgVideoClose ='</video>';			
-				var _bgvideo = _bkgVideoOpen + _src1 + _bkgVideoClose;
-			
-				//inject HTML with wikifier
-				var $videoWrapper = $(document.createElement("span"))
-					.addClass('macro-' + this.name)
-					.wiki(_bgvideo)
-					.appendTo(this.output);	
-}});
+			// Check to see if EnableVideo is on or off
+			if(settings.enableVideo){			
+				
+				// piecing together HTML. This is hacky, but for the life of me
+				// I can't figure out how to make autoplay work with proper DOM injection
+				var _src1 = '<source type="video/mp4" src=' + '"' +'images\\'+_vidName+'.mp4' +'"' +'>';				
+					var _bkgVideoOpen = '<video autoplay loop muted id="bgvid">';	
+					var _bkgVideoClose ='</video>';			
+					var _bgvideo = _bkgVideoOpen + _src1 + _bkgVideoClose;
+
+					//inject HTML with wikifier
+					var $videoWrapper = $(document.createElement("span"))
+						.addClass('macro-' + this.name)
+						.wiki(_bgvideo)
+								.appendTo(this.output);	
+			}
+			else{
+				console.log("INFO:Video is disabled by enableVideo setting.");	
+			}
+		}
+});
 
 /* PASSAGEDISPLAY HANDLER, CUT SCENE VIDEO */
 /*$(document).on(':passagedisplay', function(ev) {
@@ -1166,6 +1177,12 @@ OnlyBans is an online platform where you post sexy content to attract fans and e
 
 
 Want to play?
+
+&lt;label&gt;&lt;&lt;checkbox &quot;$enableVideoCheckbox&quot; false true&gt;&gt; Play with video?&lt;/label&gt;
+&lt;label&gt;&lt;&lt;checkbox &quot;$enableAudioCheckbox&quot; false true&gt;&gt; Play with audio? &lt;/label&gt;
+
+Example code: &lt;&lt;link &quot;toggle  bkg video&quot; &gt;&gt;&lt;&lt;script&gt;&gt; settings.enableVideo = !settings.enableVideo; Setting.save();&lt;&lt;/script&gt;&gt; &lt;&lt;/link&gt;&gt;
+
 
 [[Play.-&gt;what-is-your-name]]
 &lt;&lt;linkreplace &quot;Read more&quot;&gt;&gt;&lt;&lt;include &quot;StoryMenu&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;
