@@ -580,14 +580,15 @@ video#bgvid {
 /* ************* */
 /* Based on n7best's codepen */
 
-section {
-  max-width: 70%;
-  margin: auto;
-  padding: 3em;
-  border-radius: 1em;
+.chat-section {
+	max-width: 70%;
+  	margin: auto;
+  	padding: 2em;
+  	border-radius: 1em;
   background: #7bd2ed;
 }
-section.div {
+
+.chat-section.div {
   max-width: 255px;
     word-wrap: break-word;
     margin-bottom: 10px;
@@ -675,7 +676,48 @@ section.div {
 }
 
 
+
 @keyframes loud {
+  
+  5% {
+    transform: rotate3d(0, 0, 1, 5deg) 
+  }
+  10% {
+    transform: rotate3d(0, 0, 1, -5deg) 
+  }
+  20% {
+    transform: rotate3d(0, 0, 1, 25deg) 
+  }
+  25% {
+    transform: rotate3d(0, 0, 1, -25deg) scale3d(1, 1, 1);
+  }
+  30% {
+    transform: rotate3d(0, 0, 1, 5deg) scale3d(1, 1, 1);
+  }
+  35% {
+    transform: rotate3d(0, 0, 1, -5deg) scale3d(1, 1, 1);
+  }
+  40% {
+    transform: rotate3d(0, 0, 1, 5deg) scale3d(1, 1, 1);
+  }
+  45% {
+    transform: rotate3d(0, 0, 1, -5deg)
+  }
+  50% {
+    transform: rotate3d(0, 0, 1, 5deg) scale3d(1.5, 1, 1.);
+  }
+  55% {
+    transform: rotate3d(0, 0, 1, -5deg) ;
+  }
+  70% {
+    transform: rotate3d(0, 0, 1, 3deg);
+  }
+  to {
+    transform: rotate3d(0,0,1,0deg) scale3d(1, 1, 1);    
+  }
+}
+
+@keyframes loudOld {
   20% {
     transform: rotate3d(0, 0, 1, 5deg) scale3d(1.5, 1.5, 1.5);
   }
@@ -718,6 +760,11 @@ section.div {
 var $isQATestMode = false;
 State.setVar("$isQATestMode", $isQATestMode);
 
+// GalleryMode disables Saves. 
+// Someday it should auto-restart the game after a timeout
+var $isGalleryMode = false; 
+State.setVar("$isGalleryMode", $isGalleryMode);
+console.log("gallery,", $isGalleryMode);
 
 
 /*********************/
@@ -906,13 +953,19 @@ if($isQATestMode){
 	console.log("QA Test Mode Enabled");
 	Config.passages.descriptions = true; //sets descriptions for Jump To
 	Config.history.controls = true; //enables back button
-	
 }
 else{
 	console.log("NOT QA");
 	Config.history.controls = false; //disable backward and forward buttons
 }
-Config.saves.slots = 0; //num of save slots available
+
+if($isGalleryMode){
+	console.log("Gallery Mode enabled. Not all features available.");
+	Config.saves.autoload = false;
+	Config.saves.isAllowed = function () { return false; };
+}
+
+Config.saves.slots = 2; //num of save slots available
 
 /***********************/
 /* GAMEPLAY UTILITIES */
@@ -1133,52 +1186,6 @@ Macro.add("backgroundvideo", {
 		}
 });
 
-/* PASSAGEDISPLAY HANDLER, CUT SCENE VIDEO */
-/*$(document).on(':passagedisplay', function(ev) {
-	function cutHandler(e) {
-			Engine.play("cutscene-end");
-		}
-	
-	var $cutvideo = document.getElementById("cutscene");
-	//console.log('cut video IDs:', $cutvideo);
-	if($cutvideo){
-		$cutvideo.addEventListener('ended',cutHandler,false);
-	}	
-});*/
-
-/* CUTSCENE MACRO */
-/*Macro.add("cutscene", {
-	handler: function() {
-		if (this.args.length !== 2) {
-			return this.error('custom <<cutscene>> macro takes 2 parameters. <<cutscene "videoID" "goto passage">>');
-		}
-		var _videoID = this.args[0];
-		var _passage = this.args[1];
-		
-		//Build an HTML video tag
-		var $videoWrapper = $(document.createElement("video"));		
-		var _content = "<source src=images\\" + _videoID + ".mp4 type='video/mp4'>";
-		
-		//Add cutscene 'ended' handler to the video
-		//Advance to next passage when video ends
-		$videoWrapper.on('ended', this.createShadowWrapper( function(ev) {
-			console.log('<<cutscene>> video ended!');
-			Engine.play(_passage);
-		}));
-		
-		$videoWrapper
-			.wiki(_content)
-			.addClass('macro-' + this.name)
-			.addClass('cutscene')
-			.attr({
-				'muted':true, //videos need to be muted to autoplay in chrome
-				'autoplay':true,
-				'controls':true,
-			})
-			.appendTo(this.output)
-	}
-});*/
-	
 
 /* PHOTO CLASS */
 window.Photo = function (key, filename, riskLevel, alt, model, context) {
@@ -1342,8 +1349,8 @@ Thank you to &quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;. We are indeb
 Thank you Lien Tran, the creator of &lt;a href=&quot;http://copsandrubbers.com/&quot;&gt;&quot;Cops &amp; Rubbers&quot;&lt;/a&gt;, which was hugely inspirational as we considered how to design a game that could also compel real-world policy change.
 
 We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an early version of OnlyBans. Thank you to Kelly Strayhorn Theater for supporting the project’s visual development and narrative expansion during the Freshworks residency. This work was also supported by the UC Berkeley Center for Long-Term Cybersecurity, the Carnegie Mellon School of Art, and Science Gallery Detroit.
-</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="62,37" size="100,100">/* PLAY MODES */
-&lt;&lt;set $isGalleryMode to false&gt;&gt; /* disables some features */ 
+</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="92,56" size="100,100">/* PLAY MODES */
+/* &lt;&lt;$isGalleryMode&gt;&gt; is controlled by Javascript, disables some features */ 
 /* &lt;&lt;$isQATestMode&gt;&gt; is controlled by the Javascript */
 
 &lt;&lt;set $isPerformanceMode to false&gt;&gt; /* hardcodes some tracks so the game doesn&#39;t end too early */
@@ -1558,7 +1565,7 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 You&#39;re hoping to earn $&lt;&lt;print &quot;$incomeTarget&quot;&gt;&gt; to pay your gas and water bills in $weekLimit weeks. Every fan you get earns you $&lt;&lt;print &quot;$incomePerFan&quot;&gt;&gt;. If you&#39;re lucky, some of them may even tip you extra! 😘
 
 &lt;&lt;link &quot;Let&#39;s get fans!&quot; start-week&gt;&gt;&lt;&lt;audio &quot;glitch&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="start-week" tags="music-sexi background-pink background-pink-transparent bookmark" position="297,451" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="start-week" tags="music-sexi background-pink background-pink-transparent bookmark" position="339,473" size="100,100">&lt;&lt;silently&gt;&gt;
   &lt;&lt;set $numWeek to visited()&gt;&gt;
   &lt;&lt;set _toGo = Math.clamp($incomeTarget - $income, 0, $incomeTarget + $income) &gt;&gt;
   [[dummy-&gt;photo-selection]] 
@@ -1918,7 +1925,7 @@ Wallet: $&lt;&lt;print $income&gt;&gt;
 Week: $numWeek</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="music-ambient background-cyan bookmark" position="198,1402" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;	
-&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;nobr&gt;&gt;&lt;section class=&quot;section&quot;&gt;&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Hey $playerName, cool account! I’m also selling pics on OnlyBans. Do you wanna do a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Hey $playerName, cool account! I’m also selling pics on OnlyBans. Do you wanna do a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 	&lt;&lt;linkreplace &quot;What&#39;s a share4share?&quot;&gt;&gt;&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;What’s a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 	&lt;&lt;type 40ms start 1s&gt;&gt;&lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;I’ll share your content with my followers, if you do the same for me. It’s a way to build a bigger fanbase!&lt;/p&gt;&lt;/div&gt;&lt;&lt;/type&gt;&gt;	
@@ -1989,8 +1996,12 @@ Thursday at 3pm.&lt;/div&gt;
 &lt;&lt;/linkreplace&gt;&gt;&lt;span id=&#39;no&#39;&gt;
 
 It looks cool, but your time and energy are precious. [[Make some more content.-&gt;start-week]]&lt;/span&gt;
-</tw-passagedata><tw-passagedata pid="42" name="load-screen" tags="background-pink-light bookmark music-silent" position="305,6" size="200,100">&lt;&lt;browserwindow &quot;music-is-gonna-start-put-in-headphones.exe&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;&lt;h1&gt;OnlyBans&lt;/h1&gt;
-Wanna play, honey? Tell us how you like it:&lt;h2 style=&quot;font-size:2em&quot;&gt;&lt;&lt;link &quot;Pick Your Settings.&quot;&gt;&gt;&lt;&lt;script&gt;&gt; UI.settings() &lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; &lt;/h2&gt;
+</tw-passagedata><tw-passagedata pid="42" name="load-screen" tags="background-pink-light bookmark music-silent" position="305,6" size="200,100">&lt;&lt;browserwindow &quot;music-is-gonna-start-put-in-headphones.exe&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;
+
+&lt;h1&gt;OnlyBans&lt;/h1&gt;
+Wanna play, honey? Tell us how you like it:&lt;h2 style=&quot;font-size:2em&quot;&gt;&lt;&lt;link &quot;Pick Your Settings.&quot;&gt;&gt;&lt;&lt;script&gt;&gt; UI.settings() &lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; 
+&lt;/h2&gt;
+
 You can change the settings at any time in &lt;&lt;link &quot;the sidebar&quot;&gt;&gt;&lt;&lt;script&gt;&gt;if(UIBar.isStowed()){UIBar.unstow()}else{UIBar.stow()}&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;.
 
 
@@ -2069,7 +2080,7 @@ This seems completely unfair, but you&#39;re not the first sex worker to have th
 		&lt;&lt;/if&gt;&gt;	
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands2&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 You get a DM from a sex worker you follow...
-&lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;
+&lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot; aria-label=&quot;&quot;&gt;
 	&lt;&lt;type 40ms&gt;&gt;&lt;div class=&quot;from-them loud&quot;&gt;
 		&lt;p&gt;Hi $playerName :) I’m a cam performer and think your pics are awesome!&lt;/p&gt;&lt;/div&gt;&lt;&lt;/type&gt;&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
@@ -2253,7 +2264,7 @@ You pick up some digital harm reduction tools that will come in handy to prevent
 if(UIBar.isStowed()){UIBar.unstow();}else{UIBar.stow();}
 &lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; </tw-passagedata><tw-passagedata pid="52" name="start-screen" tags="" position="581,253" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="53" name="chat-testing" tags="background-cyan" position="63,1276" size="100,100">Double-click this passage to edit it.&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
-&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;nobr&gt;&gt;&lt;section class=&quot;section&quot;&gt;&lt;&lt;chat &#39;from-me&#39; 4s&gt;&gt;Howdy, boy, howdy!!&lt;&lt;/chat&gt;&gt;
+&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;&lt;&lt;chat &#39;from-me&#39; 4s&gt;&gt;Howdy, boy, howdy!!&lt;&lt;/chat&gt;&gt;
 &lt;div class=&quot;from-them loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;Hey $playerName, cool account! I’m also selling pics on OnlyBans. Do you wanna do a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;
 	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 	&lt;&lt;linkreplace &quot;What&#39;s a share4share?&quot;&gt;&gt;&lt;div class=&quot;from-me loud&quot;&gt;&lt;p&gt;&lt;&lt;type 40ms&gt;&gt;What’s a share4share?&lt;&lt;/type&gt;&gt;&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
