@@ -881,7 +881,7 @@ function fxVolumeInitHandler() {
 }
 
 function fxVolumeHandler() {
-	SimpleAudio.select(":soundeffects").volume(settings["fxVolume"]);
+	SimpleAudio.select(State.getVar("$fxgroupID")).volume(settings["fxVolume"]);
 }
 
 Setting.addHeader("Accessibility");
@@ -1404,8 +1404,8 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 &lt;&lt;cacheaudio &quot;click&quot; &quot;audio/click.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;neutral&quot; &quot;audio/neutral.mp3&quot;&gt;&gt;
 
-
-&lt;&lt;createaudiogroup &quot;:soundeffects&quot;&gt;&gt;
+&lt;&lt;set $fxgroupID to &quot;:soundeffects&quot;&gt;&gt;
+&lt;&lt;createaudiogroup $fxgroupID&gt;&gt;
 	&lt;&lt;track &quot;glitch&quot;&gt;&gt;
 	&lt;&lt;track &quot;cashregister&quot;&gt;&gt;
 	&lt;&lt;track &quot;bad&quot;&gt;&gt;
