@@ -757,7 +757,7 @@ video#bgvid {
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">/***********************/
 /*     GAME MODES      */
 /***********************/
-var $isQATestMode = false;
+var $isQATestMode = true;
 State.setVar("$isQATestMode", $isQATestMode);
 
 // GalleryMode disables Saves. 
@@ -1325,7 +1325,7 @@ There is no undo or back button. If you get stuck or something is broken, you ca
 &lt;&lt;linkappend &quot;&lt;strong&gt;Narration Nympho&lt;/strong&gt;&quot;&gt;&gt; (Writer)&lt;&lt;/linkappend&gt;&gt;: Lena Chen
 &lt;&lt;linkappend &quot;&lt;strong&gt;Software Princess&lt;/strong&gt;&quot;&gt;&gt; (Software Engineer)&lt;&lt;/linkappend&gt;&gt;: Maggie Oates
 &#39;&#39;Graphic Designer &amp; Videographer:&#39;&#39; &lt;a href=&quot;http://goofytoof.com/&quot;&gt;Goofy Toof&lt;/a&gt;
-&#39;&#39;Sound Designer&#39;&#39;: &lt;a href=&quot;http://adriennecassel.com/&quot;&gt;Adrienne Cassel&lt;/a&gt; &lt;a href=&quot;https://www.instagram.com/l.i.lith/&quot;&gt;(insta)&lt;/a&gt;
+&#39;&#39;Sound Designer&#39;&#39;: &lt;a href=&quot;https://aethercomplex.com/Avatar-Lilith&quot;&gt;Avatar Lilith&lt;/a&gt; &lt;a href=&quot;https://www.instagram.com/l.i.lith/&quot;&gt;(insta)&lt;/a&gt;
 
 &#39;&#39;Image and Story Contributors:&#39;&#39;
 &lt;a href=&quot;https://www.twitter.com/amalaxazul&quot;&gt;Amala Azul&lt;/a&gt;
@@ -1867,7 +1867,7 @@ No way. [[Close your account.-&gt;close-account]]
 
 
 </tw-passagedata><tw-passagedata pid="34" name="suggested-friends" tags="music-ambient background-cyan bookmark" position="899,351" size="100,100">&lt;&lt;silently&gt;&gt;
-	&lt;&lt;set _people to [&quot;mom&quot;,&quot;favorite teacher&quot;,&quot;child&quot;,&quot;landlord&quot;, &quot;godparent&quot;]&gt;&gt;
+	&lt;&lt;set _people to [&quot;mom&quot;,&quot;favorite teacher&quot;,&quot;child&quot;,&quot;landlord&quot;, &quot;godparent&quot;,&quot;rabbi&quot;]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;mannequin2&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 The list of people you should follow includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
 
@@ -1876,7 +1876,7 @@ The list of people you should follow includes tons of friends and … even your 
 
 	&lt;&lt;browserwindow &quot;&quot; &quot;browser-white-blue&quot;&gt;&gt;You imagine telling your @@font-size:1.2em;&lt;&lt;cycle &quot;_person&quot; autoselect&gt;&gt;&lt;&lt;optionsfrom _people&gt;&gt;&lt;&lt;/cycle&gt;&gt;@@ about your account. What would you say?
 	
-	&lt;&lt;textarea &quot;$toldSomeone&quot; &quot;&quot;&gt;&gt;
+	&lt;&lt;textarea &quot;$toldSomeone&quot; &quot;Hey mom. We need to talk...  &quot;&gt;&gt;
 	&lt;&lt;/browserwindow&gt;&gt;
 	It&#39;s terrifying, but [[you tell them-&gt;photo-selection]].
 	
