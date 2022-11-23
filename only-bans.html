@@ -186,6 +186,16 @@ a.link-broken {
 #passage-opening-screen {
   background-color: none;
 }
+
+/* ************* */
+/*   SETTINGS UI */
+/* ************* */
+.strike {
+  text-decoration: line-through;
+}
+
+
+
 /* ************* */
 /*     WORKSHOP  */
 /* ************* */
@@ -196,6 +206,9 @@ a.link-broken {
   border: 0.2em yellow dotted;
   padding:1em;
 }
+
+
+
 
 /* ************* */
 /*     VIDEO     */
@@ -831,7 +844,37 @@ Macro.add("chat", {
 // BIG thanks to HiEv Heavy Industries for the code sample
 // https://qjzhvmqlzvoo5lqnrvuhmg-on.drv.tw/UInv/Sample_Code.html#Main%20Menu
 
+// Utility. idName is the base name of the setting, all lowercase probably
+function disableSetting(idName) {
+	var _labelID = "setting-label-"+idName;
+	var _controlID = "setting-control-"+idName;
+	
+	$(document.getElementById(_labelID)).addClass("strike");
+	$(document.getElementById(_controlID)).attr("disabled","disabled");
+	$(document.getElementById(_controlID)).hide();		
+}
+
+// Utility. idName is the base name of the setting, all lowercase probably
+function enableSetting(idName){
+	var _labelID = "setting-label="+idName;
+	var _controlID = "setting-control-"+idName;
+	
+	$(document.getElementById(_labelID)).removeClass("strike");
+	$(document.getElementById(_controlID)).removeAttr("disabled");
+	$(document.getElementById(_controlID)).show();
+}
+
+
 Setting.addHeader("Sound", "Use the sliders to control the audio volume.");
+
+Setting.addToggle("mute", {
+	label: "Mute sound.",
+	desc: "On means quiet.",
+	default: false,
+	onInit: muteInitHandler,
+	onChange: muteHandler,
+});
+
 
 Setting.addRange("bgmVolume", {
 		label    : "Music volume.",
@@ -853,10 +896,13 @@ function bgmVolumeInitHandler() {
     }
 }
 
+
 function bgmVolumeHandler() {
+	if(!settings.mute){	
 	var _newCap = settings["bgmVolume"];
 	State.setVar("$volumeCap", _newCap);		
-SimpleAudio.select(State.getVar("$bgmusicgroupID")).volume(_newCap);
+	SimpleAudio.select(State.getVar("$bgmusicgroupID")).volume(_newCap);
+	}
 }
 
 
@@ -872,7 +918,11 @@ Setting.addRange("fxVolume", {
 });
 
 function fxVolumeInitHandler() {
-    try {
+  if(settings.mute){
+			
+	}
+	
+	try {
         fxVolumeHandler();
     }
     catch (ex) {
@@ -880,8 +930,9 @@ function fxVolumeInitHandler() {
     }
 }
 
-function fxVolumeHandler() {
-	SimpleAudio.select(State.getVar("$fxgroupID")).volume(settings["fxVolume"]);
+function fxVolumeHandler() {	
+	if(!settings.mute){			SimpleAudio.select(State.getVar("$fxgroupID")).volume(settings.fxVolume);
+	}
 }
 
 Setting.addHeader("Accessibility");
@@ -900,6 +951,50 @@ var settingEnableVideoHandler = function () {
 		console.log('disabled video');
 	}
 };
+
+
+
+function muteInitHandler() {
+	try {
+		muteHandler();
+	}
+	catch (ex) {
+		setTimeout(muteInitHandler, 70); //ms
+	}
+};
+
+
+function muteHandler () {
+	if(settings.mute) {
+		
+		// Strike out the other volume controls
+		disableSetting("bgmvolume");
+		disableSetting("fxvolume");
+		
+		// Set volume to 0
+		State.setVar("$volumeCap", 0);
+		settings.bgmVolume = 0;		
+		bgmVolumeHandler();
+		Setting.save();
+		settings.fxVolume = 0;
+		fxVolumeHandler();
+		Setting.save();
+		console.log("Muted", settings.bgmVolume, settings.fxVolume);
+	}
+	else{
+		
+		// Remove strikethrough on other volume settings
+		enableSetting("bgmvolume");
+		enableSetting("fxvolume");
+		
+		// Reset volume levels
+		Setting.reset("bgmVolume");
+		Setting.reset("fxVolume");
+		Setting.save();
+		console.log("Unmuted", settings.bgmVolume, settings.fxVolume);
+	}	
+}
+
 
 Setting.addToggle("enableVideo", {
 				label: "Show background videos",
@@ -1428,6 +1523,7 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 	&quot;music-dark&quot; : &quot;dark&quot;,
 	&quot;music-outsideclub&quot; : &quot;outsideclub&quot;,
 	&quot;music-sexi&quot; : &quot;sexi&quot;,
+	&quot;music-silent&quot; : &quot;&quot;,
 }&gt;&gt;
 
 
