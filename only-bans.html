@@ -888,7 +888,6 @@ Setting.addRange("bgmVolume", {
 });
 
 function bgmVolumeInitHandler() {
-		console.log("bg init, mute? ", settings.mute);
     if(settings.mute){
 			disableSetting("bgmvolume");	
 		}	
@@ -922,7 +921,6 @@ Setting.addRange("fxVolume", {
 });
 
 function fxVolumeInitHandler() {
-	console.log("fx init, mute? ", settings.mute);
   if(settings.mute){
 			disableSetting("fxvolume");
 	}
@@ -960,7 +958,6 @@ var settingEnableVideoHandler = function () {
 
 
 function muteInitHandler() {
-	console.log("mute init");
 	try {
 		muteHandler();
 	}
@@ -1238,7 +1235,9 @@ $(document).on(':passagedisplay', function (ev) {
 			}
 		}
 		else {
+			if(_musictag != "silent"){
 			console.warn("Cannot find audio track for tag ", _musictag);	
+			}
 		}
 	}
 });
@@ -1275,15 +1274,17 @@ Macro.add("backgroundvideo", {
 		}
 });
 
-
+/*********************/
 /* PHOTO CLASS */
-window.Photo = function (key, filename, riskLevel, alt, model, context) {
+/*********************/
+window.Photo = function (key, filename, riskLevel, alt, vaporAlt, model, context) {
 	this.key				= key || "default";
 	this.filename 	= filename || "default";
 	this.original		=	"images/"+this.filename+".jpg";
 	this.vapor			=	"images/"+this.filename+"_Square.jpg";
 	this.riskLevel	= riskLevel || "medium";
 	this.alt				= alt || "Default image";
+	this.vaporAlt		= vaporAlt || "Default image, vaporwave style.";
 	this.model			= model || "Model Name";
 	this.context		= context || "This is the story behind who I am, this photo, and how it was censored.";	
 };
@@ -1295,6 +1296,7 @@ Photo.prototype.clone = function () {
 		this.filename,
 		this.riskLevel,
 		this.alt,
+		this.vaporAlt,
 		this.model,
 		this.context
 	);
@@ -1305,22 +1307,23 @@ Photo.prototype.toJSON = function() {
 	//copied from Sugarcube docs 
 	// http://www.motoslave.net/sugarcube/2/docs/#guide-tips-non-generic-object-types
 	return JSON.reviveWrapper(String.format(
-		'new Photo({0},{1},{2},{3},{4},{5},{6})',
+		'new Photo({0},{1},{2},{3},{4},{5},{6}, {7})',
 		JSON.stringify(this.key),
 		JSON.stringify(this.filename),
 		JSON.stringify(this.riskLevel),
 		JSON.stringify(this.alt),
+		JSON.stringify(this.vaporAlt),
 		JSON.stringify(this.model),
 		JSON.stringify(this.context),
 	));
 };
 
 Photo.prototype.toHTML = function(CSSclass) {
-	return "<img src='"+this.original+"' class='original "+CSSclass+"'>";
+	return "<img src='"+this.original+ "' alt='" + this.alt + "' class='original "+CSSclass+"'>";
 }
 
 Photo.prototype.toVaporHTML = function(CSSclass) {
-	return "<img src='"+this.vapor+"' class='vapor "+CSSclass+"'>";
+	return "<img src='"+this.vapor+ "' alt='" + this.vaporAlt + "' class='vapor "+CSSclass+"'>";
 }
 
 Photo.prototype.getPostOutcome = function(outcomeDistribution) {
@@ -1517,7 +1520,7 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 	&quot;music-dark&quot; : &quot;dark&quot;,
 	&quot;music-outsideclub&quot; : &quot;outsideclub&quot;,
 	&quot;music-sexi&quot; : &quot;sexi&quot;,
-	&quot;music-silent&quot; : &quot;&quot;,
+	&quot;music-silent&quot; : &quot;silent&quot;,
 }&gt;&gt;
 
 
@@ -1559,6 +1562,7 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 			&quot;1_JP&quot;,
 			&quot;high&quot;,
 			&quot;A person with medium dark skin, buzzed hair, and a mustache. The person is kneeling in an orange fishnet body stocking and a matching banana hammock. Nipples are faintly visible.&quot;,
+			&quot;JP vaporAlt&quot;,
 			&quot;J.P. (Themme)&quot;,
 			&quot;I&#39;m a trans diasporic person by way of the Dominican Republic. These pictures were flagged on Instagram, and I&#39;m currently on probation, with my account near deletion.&quot;),
 			
@@ -1566,6 +1570,7 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 			&quot;3_Quin&quot;,
 			&quot;medium&quot;,
 			&quot;A light-skinned, tattooed, thin person lies chest-down on a cushion with their butt lifted slightly into the air. They are wearing strong eyelines, a nose ring, and pink thong bodysuit lingerie with a few bows. No nipples or genitals are in view.&quot;,
+			&quot;q vapor&quot;,
 			&quot;Quin&quot;,
 			&quot;I&#39;m a gay, non-binary, Latinx sex worker. I’ve been working for 9 years and have been flagged so many times that I can&#39;t keep count. My personal account of 10 years was taken away from me.&quot;
 			),
@@ -1573,7 +1578,8 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 	&quot;stonerdomme&quot; : new Photo(&quot;stonerdomme&quot;,
 			&quot;4_Stonerdomme&quot;,
 			&quot;medium&quot;,
-			&quot;Stonerdomme holds two peace signs up to the camera with their legs spread. Dressed in yellow lingerie, Stonerdomme is a Black person with pink and purple-dyed natural hair, big curves, and a knowing smirk.&quot;,
+			&quot;Stonerdomme (they/them) holds up two peace signs to the camera with their legs spread. Dressed in yellow lingerie, Stonerdomme is a Black, dark-skinned fat person with pink and purple-dyed natural hair, a belly, curves, and a devilish smirk.&quot;,
+			&quot;sd vapor&quot;,
 			&quot;Stonerdomme&quot;,
 			&quot;I&#39;m Black, pansexual, and non-binary. This image was used against me in a Twitter debate. Someone reported my content and they banned me.&quot;	
 		),
@@ -1581,7 +1587,8 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 	&quot;fae&quot; : new Photo(&quot;fae&quot;,
 			&quot;12_Fae&quot;,
 			&quot;low&quot;,
-			&quot;A person with tight curly hair, glasses, and dark lipstick gazes listlessly at the camera. They are wearing a leather chest harness and fishnet tights. Their arms cover most of their flat chest, but the faint outline of a nipple is visible.&quot;,
+			&quot;A Black, light skinned femme with tight curly hair, glasses, and dark lipstick gazes listlessly at the camera. They are wearing a leather chest harness and fishnet tights. Their arms cover most of their flat chest, but the faint outline of a nipple is visible.&quot;,
+			&quot;fae alt&quot;,
 			&quot;Fae Brite&quot;,
 			&quot;I&#39;m AMAB (assigned male at birth) and non-binary so it&#39;s frustrating to have my body policed in a way where the more feminine I look, the more incriminating it is and thus more of a liability.&quot;
 		),
@@ -1590,6 +1597,7 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 			&quot;5_Amala&quot;,
 			&quot;low&quot;,
 			&quot;Amala Azul leans shirtless toward the camera with one hand covering both breasts. Amala is Black and wear a checkered skirt, hoop earrings, a head scarf, and fantastic eyebrows. No nipples are showing.&quot;,
+			&quot;amala alt&quot;,
 			&quot;Amala Azul&quot;,
 			&quot;I&#39;m a Black, queer, non-binary, and disabled sex worker. This photo was deleted for violating community guidelines, and I was threatened with account deletion if I continued. I no longer promote on Instagram due to the immense censorship and whorephobia.&quot;
 	),	
@@ -1598,6 +1606,7 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 			&quot;6_Nimina&quot;,
 			&quot;low&quot;,
 			&quot;A medium-skinned, large person with a bright green wig winks and holds two peace signs up. They are wearing a sleeveless velvety pink top with the word Angel, glasses, impeccable stilleto nails, dimple piercings, and a studded leather collar. There is a small amount of cleavage visible.&quot;,
+			&quot;nimina vapor alt&quot;,
 			&quot;Nimina Harley&quot;,
 			&quot;This image was deleted only minutes after uploading, and I am fully dressed. I’m queer and a person of color.&quot;
 	),
@@ -1605,7 +1614,8 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 	&quot;hellbait&quot; : new Photo(&quot;hellbait&quot;,
 			&quot;11_Hellbait&quot;,
 			&quot;medium&quot;,
-			&quot;A Vietnamese person with long hair holds two butt plugs to their head like alien antennae. A yellow tellytubby toy sits on their lap. They are shirtless, but their hair fully covers their breasts. Their mouth is held open with a hook gag, tongue out.&quot;,
+			&quot;A pale-skinned Vietnamese woman with long black hair and half bleached bangs holds two black butt plugs to her head like alien antennae. A yellow Tellytubby toy sits on her lap. She is topless, wearing high-waisted black lace underwear. Her hair fully covers her breasts. Her mouth is held open with a metal gag device, tongue out, as she gazes directly at you.&quot;,
+			&quot;hellbait vapor alt&quot;,
 			&quot;Hellbait&quot;,
 			&quot;I&#39;m Vietnamese and queer. My image was removed for &#39;sexual activity&#39; on Instagram. For the next two weeks, I did not show up in search results or on my followers&#39; feeds at all.&quot;	
 	),
@@ -1613,7 +1623,8 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 	&quot;karren&quot; : new Photo(&quot;karren&quot;,
 			&quot;9_Karren1&quot;,
 			&quot;high&quot;,
-			&quot;A shiftless woman slides one hand under sheer tights into her crotch. She is thin, has light skin, dark hair, and a perfect manicure. The portion of her face above the lips has been cropped off.&quot;,
+			&quot;Karren is a thin, shirtless woman with has light skin, dark hair, and a perfect manicure. She sultrily slides one hand under sheer tights into her crotch. The portion of her face above the lips has been cropped off of the intimate monochrome image.&quot;,
+			&quot;karren vapor alt&quot;,
 			&quot;Karren&quot;,
 			&quot;I am an erotic artist in the Philippines using photography and collage to express myself. Censorship on almost all platforms has made it difficult for me to pursue my art.&quot;	
 	),
@@ -1621,7 +1632,8 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 	&quot;karren2&quot; : new Photo(&quot;karren2&quot;,
 			&quot;10_Karren2&quot;,
 			&quot;high&quot;,
-			&quot;A thin, light-skinned woman stands angled slightly away from the camera. She is shirtless with dark brief underwear. One nipple is visible.&quot;,
+			&quot;Karren is a voluptuous, tan skinned woman standing at an angle slightly away from the camera. She is shirtless with dark brief underwear. One nipple is visible.&quot;,
+			&quot;karren2 vapor alt&quot;,
 			&quot;Karren&quot;,
 			&quot;I am an erotic artist in the Philippines using photography and collage to express myself. Censorship on almost all platforms has made it difficult for me to pursue my art.&quot;
 	),
@@ -1630,6 +1642,7 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 			&quot;8_Lync2&quot;,
 			&quot;high&quot;,
 			&quot;A thin, muscular Black man stares into the camera. One hand lifts up his shirt above his nipple. The other hand reaches down into his pants, revealing the edge of public hair.&quot;,
+			&quot;lync2 vapor alt&quot;,
 			&quot;Lync Johnson&quot;,
 			&quot;This image was deleted by Instagram.  I had to crop or edit the photo in order to successfully repost it.&quot;
 	),
@@ -1638,6 +1651,7 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 			&quot;7_Lync1&quot;,
 			&quot;high&quot;,
 			&quot;A naked, thin, muscular Black man stares into the camera. The image is cropped at the edge of his groin, revealing the faintest suggestion of genitals. Both nipples are visible. A water mark says RoyMayh.&quot;,
+			&quot;lync vapor alt&quot;,
 			&quot;Lync Johnson&quot;,
 			&quot;This image was deleted by Instagram.  I had to crop or edit the photo in order to successfully repost it.&quot;
 	),
