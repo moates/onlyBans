@@ -856,7 +856,7 @@ function disableSetting(idName) {
 
 // Utility. idName is the base name of the setting, all lowercase probably
 function enableSetting(idName){
-	var _labelID = "setting-label="+idName;
+	var _labelID = "setting-label-"+idName;
 	var _controlID = "setting-control-"+idName;
 	
 	$(document.getElementById(_labelID)).removeClass("strike");
@@ -888,7 +888,11 @@ Setting.addRange("bgmVolume", {
 });
 
 function bgmVolumeInitHandler() {
-    try {
+		console.log("bg init, mute? ", settings.mute);
+    if(settings.mute){
+			disableSetting("bgmvolume");	
+		}	
+		try {
         bgmVolumeHandler();
     }
     catch (ex) {
@@ -918,8 +922,9 @@ Setting.addRange("fxVolume", {
 });
 
 function fxVolumeInitHandler() {
+	console.log("fx init, mute? ", settings.mute);
   if(settings.mute){
-			
+			disableSetting("fxvolume");
 	}
 	
 	try {
@@ -931,7 +936,7 @@ function fxVolumeInitHandler() {
 }
 
 function fxVolumeHandler() {	
-	if(!settings.mute){			SimpleAudio.select(State.getVar("$fxgroupID")).volume(settings.fxVolume);
+	if(!settings.mute){				SimpleAudio.select(State.getVar("$fxgroupID")).volume(settings.fxVolume);
 	}
 }
 
@@ -955,6 +960,7 @@ var settingEnableVideoHandler = function () {
 
 
 function muteInitHandler() {
+	console.log("mute init");
 	try {
 		muteHandler();
 	}
@@ -971,27 +977,15 @@ function muteHandler () {
 		disableSetting("bgmvolume");
 		disableSetting("fxvolume");
 		
-		// Set volume to 0
-		State.setVar("$volumeCap", 0);
-		settings.bgmVolume = 0;		
-		bgmVolumeHandler();
-		Setting.save();
-		settings.fxVolume = 0;
-		fxVolumeHandler();
-		Setting.save();
-		console.log("Muted", settings.bgmVolume, settings.fxVolume);
+		SimpleAudio.mute(true);
 	}
 	else{
+		
+		SimpleAudio.mute(false);
 		
 		// Remove strikethrough on other volume settings
 		enableSetting("bgmvolume");
 		enableSetting("fxvolume");
-		
-		// Reset volume levels
-		Setting.reset("bgmVolume");
-		Setting.reset("fxVolume");
-		Setting.save();
-		console.log("Unmuted", settings.bgmVolume, settings.fxVolume);
 	}	
 }
 
