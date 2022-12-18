@@ -122,15 +122,24 @@ body.background-messy {
   background-image: url("images/windows-background.jpg");
 }
 
-body.background-dark {
+body.background-gray {
   background-color: #45373c;
 }
+
+body.background-dark {
+  background-color: #642d4b;
+}
+
+body.background-black {
+  background-color: black;
+}
+
 body.background-purple {
   background-color: #4d314f;
 }
 
 body.background-cyan {
-  background-color: #7bd2ed;
+  background-color: #9ADDF4;
 }
 
 body.background-cyan-transparent{
@@ -144,23 +153,64 @@ body.background-cyan-transparent .passage{
 }
 
 body.background-pink {
- background-color:  #bb276d;
+ background-color:  #850049;
 }
 body.background-pink-chill {
  background-color:  #cb5494;
 }
 
 body.background-pink-light {
-	background-color: #e97fb8;	
- 	color: #bb276d;
+	background-color: #D874AB;	
+ 	color: #a90e57; /* might be incorrect */
 }
 
-body.background-pink-transparent .passage{
-  background-color: hsla(328, 71%, 71%, 0.8);
+body.background-box-pink-light .passage{
+  /*background-color: hsla(328, 71%, 71%, 0.8); */
+  background-color: #D874AB;
   padding: 1em;
   border-radius: 1em;
-  color: #333;
+  color: white;
 }
+
+
+
+body.background-pink-transparent .passage{
+  /*background-color: hsla(328, 71%, 71%, 0.8); */
+  background-color: #FFD1EA;
+  padding: 1em;
+  border-radius: 1em;
+  color: #850049;
+}
+
+
+
+.background-pink-transparent .link-internal{
+  color: #a90e57;
+}
+.background-pink-transparent .link{
+  color: #a90e57;
+}
+
+.background-pink-transparent .link-internal:hover{
+  color: #850049;
+}
+
+.background-pink-transparent .link-external{
+  color: #a90e57;
+}
+
+.background-pink-transparent .link-external:hover{
+  color: #850049;
+}
+
+.background-pink-transparent .a{
+  color: #a90e57;
+}
+
+.background-pink-transparent .a:hover{
+  color: #850049;
+}
+
 
 a {
 	color: white;
@@ -186,6 +236,10 @@ a.link-broken {
 #passage-opening-screen {
   background-color: none;
 }
+
+
+
+
 
 /* ************* */
 /*   SETTINGS UI */
@@ -295,15 +349,25 @@ video#bgvid {
 }
 
 .browser-pink-pink {
-  --outlineColor: #cb5494;
-  --topColor: #ffd9ff;
-  --topTextColor: #cb5494;
-  --bottomColor: #cb5494;
+  --outlineColor: BLACK;
+  --topColor: #D874AB;
+  --topTextColor: #850049;
+  --bottomColor: #850049;
   --bottomTextColor: white;
   --xColor: var(--topColor);
   --iconColor: var(--outlineColor);
 }
 .browser-pink-black {
+  --outlineColor: black;
+  --bottomColor: #642d4b;
+  --topColor: #cb5494;
+  --topTextColor: #642d4b;
+  --bottomTextColor: white;
+  --xColor: var(--topColor);
+  --iconColor: var(--outlineColor);
+}
+
+.browser-pink-gray {
   --outlineColor: black;
   --bottomColor: #642d4b;
   --topColor: #cb5494;
@@ -325,18 +389,46 @@ video#bgvid {
 
 .browser-black-gray {
   --outlineColor: black;
-  --topColor: #45373c;
-  --topTextColor: white;
-  --bottomColor: black;
+  --topColor: #FFD1EA;
+  --topTextColor: #850049;
+  --bottomColor: #45373c ;
   --bottomTextColor: white;
   --xColor: var(--topColor);
   --iconColor: var(--outlineColor);
 }
 
-.browser-white-blue {  
-  --outlineColor: #0473e8; 
-  --topColor: white;
-  --topTextColor: #0473e8;
+.browser-black-gray .link-internal{
+  color: #FFD1EA;
+}
+.browser-black-gray .link{
+  color: #FFD1EA;
+}
+
+.browser-black-gray .link-internal:hover{
+  color: #850049;
+}
+
+.browser-black-gray .link-external{
+  color: #FFD1EA;
+}
+
+.browser-black-gray .link-external:hover{
+  color: #850049;
+}
+
+.browser-black-gray .a{
+  color: #FFD1EA;
+}
+
+.browser-black-gray .a:hover{
+  color: #850049;
+}
+
+
+.browser-white-blue {  /* more accurately lightpink-white */
+  --outlineColor: #1129B0; 
+  --topColor: #FFD1EA;
+  --topTextColor: #1129B0;
    --bottomColor: #0473e8;
   --bottomTextColor: white;
   --xColor: var(--topColor);
@@ -345,10 +437,10 @@ video#bgvid {
 
 
 .browser-lightpink-lightpink {  
-  --outlineColor: #bb276d; 
-  --topColor: #db68a6;
-  --topTextColor: #fbc5d8;
-   --bottomColor: #bb276d;
+  --outlineColor: #a90e57; 
+  --topColor: #FFD1EA;
+  --topTextColor: #850049;
+   --bottomColor: #a90e57;
   --bottomTextColor: white;
   --xColor: var(--topColor);
   --iconColor: var(--outlineColor);
@@ -356,67 +448,67 @@ video#bgvid {
 
 .browser-lightpink-white {  
   /* keep eye on link colors */
-  --outlineColor: #bb276d; 
-  --topColor: #db68a6;
-  --topTextColor: #fbc5d8;
+  --outlineColor: #a90e57; 
+  --topColor: #FFD1EA;
+  --topTextColor: #850049;
    --bottomColor: white;
-  --bottomTextColor: #bb276d;
+  --bottomTextColor: #a90e57;
   --xColor: var(--topColor);
   --iconColor: var(--outlineColor);
 }
 
 .browser-lightpink-white .link-internal{
-  color: #bb276d;
+  color: #850049;
 }
 .browser-lightpink-white .link{
-  color: #bb276d;
+  color: #850049;
 }
 
 .browser-lightpink-white .link-internal:hover{
-  color: purple;
+  color: #a90e57;
 }
 
 .browser-lightpink-white .link-external{
-  color: #bb276d;
+  color: #850049;
 }
 
 .browser-lightpink-white .link-external:hover{
-  color: purple;
+  color: #a90e57;
 }
 
 .browser-lightpink-white .a{
-  color: #bb276d;
+  color: #850049;
 }
 
 .browser-lightpink-white .a:hover{
-  color: purple;
+  color: #a90e57;
 }
 
 .browser-blue-white {
   /* keep eye on link colors */
-  --outlineColor: #0473e8; 
+  --outlineColor: #1129B0; 
   --topColor: white;
-  --topTextColor: #0473e8;
-   --bottomColor: white;
-  --bottomTextColor: #0473e8;
+  --topTextColor: #1129B0;
+   --bottomColor: #1129B0;
+  --bottomTextColor: white;
   --xColor: var(--topColor);
   --iconColor: var(--outlineColor);
 }
 
 .browser-blue-white .link-internal{
-  color: #68d;
+  color: #9ADDF4;
 }
 
 .browser-blue-white .link-internal:hover{
-  color: purple;
+  color: #D874AB;
 }
 
 .browser-blue-white .a{
-  color: #68d;
+  color: #9ADDF4;
 }
 
 .browser-blue-white .a:hover{
-  color: purple;
+  color: #D874AB;
 }
 
 .browser-white-white {  
@@ -454,6 +546,85 @@ video#bgvid {
   color: purple;
 }
 
+
+.browser-pink-white-blue {  
+  /* keep eye on link colors */
+  --outlineColor: #1129B0; 
+  --topColor: #FFD1EA;
+  --topTextColor: #850049;
+   --bottomColor: white;
+  --bottomTextColor: #1129B0;
+  --xColor: var(--topColor);
+  --iconColor: var(--outlineColor);
+}
+
+.browser-pink-white-blue .link-internal{
+  color: #850049;
+}
+.browser-pink-white-blue .link{
+  color: #850049;
+}
+
+.browser-pink-white-blue .link-internal:hover{
+  color: #1129B0;
+}
+
+.browser-pink-white-blue .link-external{
+  color: #850049;
+}
+
+.browser-pink-white-blue .link-external:hover{
+  color: #1129B0;
+}
+
+.browser-pink-white-blue .a{
+  color: #850049;
+}
+
+.browser-pink-white-blue .a:hover{
+  color: #1129B0;
+}
+
+.browser-pink-white-blue .macro-textbox {
+  /* TEXTAREA */ 
+ background-color: none;  
+ color: #1129B0;  
+}
+
+
+.browser-pink-white-blue .macro-textbox:hover {
+  /* TEXTAREA */ 
+ background-color: #FFD1EA;  
+ color: #1129B0;  
+}
+
+.browser-pink-white-blue .macro-textbox:focus {
+  /* TEXTAREA */ 
+ background-color: #FFD1EA;  
+ color: #1129B0;  
+}
+
+
+
+.browser-pink-gray {  
+  --outlineColor: black; 
+  --topColor: #D874AB;
+  --topTextColor: black;
+   --bottomColor: #45373c ;
+  --bottomTextColor: white;
+  --xColor: var(--topColor);
+  --iconColor: var(--outlineColor);
+}
+
+.browser-pink-purple {  
+  --outlineColor: black; 
+  --topColor: #D874AB;
+  --topTextColor: black;
+   --bottomColor: #642d4b;
+  --bottomTextColor: white;
+  --xColor: var(--topColor);
+  --iconColor: var(--outlineColor);
+}
 
 /* ************* */
 /* BROWSER STYLE */
@@ -770,7 +941,7 @@ video#bgvid {
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">/***********************/
 /*     GAME MODES      */
 /***********************/
-var $isQATestMode = true;
+var $isQATestMode = false;
 State.setVar("$isQATestMode", $isQATestMode);
 
 // GalleryMode disables Saves. 
@@ -1370,7 +1541,7 @@ var passageTitles = Story.lookupWith(function (p) {
 	return anyRegExp.test(p.title);
 								 }).map(psg => psg.title);
 console.log("All Passages", passageTitles);*/
-</script><tw-passagedata pid="1" name="opening-screen" tags="music-ambient background-messy bookmark" position="303,133" size="100,100">&lt;&lt;silently&gt;&gt;
+</script><tw-passagedata pid="1" name="opening-screen" tags="music-ambient background-messy bookmark background-pink-light" position="303,133" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;
 !Welcome to &lt;strong&gt;OnlyBans&lt;/strong&gt;!
@@ -1728,7 +1899,7 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 	OnlyBans sent you a list of suggested followers. You think you recognize one of the people? [[Take a closer look.-&gt;suggested-friends]] 
 &lt;&lt;else&gt;&gt;
 	Your friend asks you to feed their cat (again). [[Get back to making content.-&gt;photo-selection]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="suspension-side-story" tags="music-dark background-pink-chill bookmark" position="700,740" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="suspension-side-story" tags="music-dark bookmark background-pink-light" position="700,740" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $wasSuspended to true&gt;&gt;
 	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;browserwindow &quot;too-sus.cry&quot; &quot;browser-black-gray&quot;&gt;&gt;	&lt;h2&gt;SUSPENDED!&lt;/h2&gt;
@@ -1737,7 +1908,7 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 	We restrict certain content to protect our community. If you continue to post dangerous content, you may be banned permanently.
 &lt;&lt;/browserwindow&gt;&gt;
 [[Continue.-&gt;suspension-consequence]]
-</tw-passagedata><tw-passagedata pid="13" name="outing-prelude" tags="music-dark background-cyan bookmark" position="701,204" size="100,100">&lt;&lt;browserwindow &quot;locked&quot; &quot;browser-blue-white&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="13" name="outing-prelude" tags="music-dark background-cyan bookmark" position="701,204" size="100,100">&lt;&lt;browserwindow &quot;locked&quot; &quot;browser-pink-white-blue&quot;&gt;&gt;
 &lt;h2&gt;LOCKED&lt;/h2&gt;
 We&#39;ve temporarily limited some of your account features. In order to make sure OnlyBans is as safe as possible, you may be asked to confirm you&#39;re not a robot. Easy, right? 
 
@@ -1767,7 +1938,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 &lt;&lt;browserwindow &quot;MY PHOTOS&quot; &quot;browser-lightpink-white&quot;&gt;&gt;
 	Which photo do you want to post today?
 	&lt;&lt;photogrid $availablePhotos&gt;&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="newFans" tags="music-outsideclub background-pink background-pink-transparent bookmark" position="109,909" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="newFans" tags="music-outsideclub bookmark background-box-pink-light background-pink-light" position="109,909" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _newFansRange to $fanRewardDists[$photoPool[$currentPhoto].riskLevel] &gt;&gt;
 	&lt;&lt;set _numNewFans to random(_newFansRange[0], _newFansRange[1])&gt;&gt;
 	&lt;&lt;addfans _numNewFans&gt;&gt;
@@ -1778,13 +1949,13 @@ Yay, you’re getting the hang of this! [[What else could you do-&gt;community-s
 	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;	
 	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;browserwindow &quot;FLAGGED&quot; &quot;browser-black-black&quot;&gt;&gt;&lt;h2&gt;FLAGGED!&lt;/h2&gt;
+&lt;&lt;browserwindow &quot;FLAGGED&quot; &quot;browser-pink-gray&quot;&gt;&gt;&lt;h2&gt;FLAGGED!&lt;/h2&gt;
   Your photo is &lt;strong&gt;too&lt;/strong&gt; sexy. It’s been taken down. If you post something that goes against our guidelines again, your account may be deleted.
 
   You’ve made no new fans and earned no new money.
 
   [[Continue-&gt;too-sexy-real-story]]
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="shadowBan" tags="music-dark background-purple bookmark" position="463,908" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="shadowBan" tags="music-dark bookmark background-black" position="463,908" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;	
 	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
@@ -1800,7 +1971,7 @@ Sorry, no new fans. No new money.
 	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;	
 	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;browserwindow &quot;f l a g g e d&quot; &quot;browser-black-black&quot;&gt;&gt;&lt;h2&gt;FLAGGED!&lt;/h2&gt;
+&lt;&lt;browserwindow &quot;f l a g g e d&quot; &quot;browser-pink-gray&quot;&gt;&gt;&lt;h2&gt;FLAGGED!&lt;/h2&gt;
 The algorithm flagged your content even though you followed all the guidelines! If you get flagged again, your account may be deleted.
 &lt;&lt;/browserwindow&gt;&gt;
 Sorry, no new fans. 
@@ -1892,7 +2063,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	
   &lt;&lt;link &quot;&lt;div style=&#39;font-size:2em&#39;&gt;Play again?&lt;/div&gt;&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
   &lt;em&gt;(Things are a little different each time.)&lt;/em&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="verify-more" tags="music-dark background-pink-chill bookmark" position="886,204" size="100,100">&lt;&lt;browserwindow &quot;STILL LOCKED&quot; &quot;browser-black-gray&quot;&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="verify-more" tags="music-dark bookmark background-pink-light" position="886,204" size="100,100">&lt;&lt;browserwindow &quot;STILL LOCKED&quot; &quot;browser-black-gray&quot;&gt;&gt;
 Thank you for verifying your phone number. 
 	
 For somewhat vague safety reasons, we still need more information before you can cash out any money from your account.
@@ -1909,12 +2080,12 @@ For somewhat vague safety reasons, we still need more information before you can
 		&lt;&lt;goto &quot;skip-verify-more&quot;&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="skip-verify-phone" tags="music-dark background-pink-chill bookmark" position="881,81" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="skip-verify-phone" tags="music-dark bookmark background-pink-light" position="881,81" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;audio &quot;glitch&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-black-gray&quot;&gt;&gt;
 You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
 
-[[Verify your number.-&gt;outing-prelude]]&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="skip-verify-more" tags="music-dark background-pink-chill bookmark" position="1008,215" size="100,100">&lt;&lt;browserwindow &quot;&quot; &quot;browser-black-gray&quot;&gt;&gt;
+[[Verify your number.-&gt;outing-prelude]]&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="skip-verify-more" tags="music-dark bookmark background-pink-light" position="1008,215" size="100,100">&lt;&lt;browserwindow &quot;&quot; &quot;browser-black-gray&quot;&gt;&gt;
 You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making content if you can&#39;t even get paid? 
 
 [[Verify the rest.-&gt;verify-more]]
@@ -2138,7 +2309,7 @@ When you&#39;re ready:&lt;h2 style=&quot;font-size:2em&quot;&gt;[[Enter-&gt;open
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;	
 	You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="noReason-real-story" tags="background-dark music-dark bookmark" position="238,1022" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="noReason-real-story" tags="music-dark bookmark background-gray" position="238,1022" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
 &lt;&lt;set _currentStat to either(
 	&quot;77% of those who have done sex work avoid posting content for fear of being kicked off, shadowbanned, or facing legal action.&quot;,
@@ -2147,7 +2318,7 @@ When you&#39;re ready:&lt;h2 style=&quot;font-size:2em&quot;&gt;[[Enter-&gt;open
 	)&gt;&gt;
 &lt;&lt;/silently&gt;&gt;	
 This seems completely unfair, but you&#39;re not the first sex worker to have this problem...
-&lt;&lt;browserwindow &quot;IRL.exe&quot; &quot;browser-pink-black&quot;&gt;&gt;
+&lt;&lt;browserwindow &quot;IRL.exe&quot; &quot;browser-pink-purple&quot;&gt;&gt;
 	_currentStat
   &lt;div class=&quot;photo-container&quot;&gt;
 	  &lt;div class=&quot;&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toHTML(&quot;underlay&quot;)&gt;&gt;		&lt;/div&gt;
