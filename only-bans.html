@@ -134,34 +134,151 @@ body.background-black {
   background-color: black;
 }
 
-body.background-purple {
-  background-color: #4d314f;
+
+body.background-purple-light {
+  background-color: #FFF0FF;
+  }
+
+.background-purple-light .passage{
+  color: #45373c;
 }
+
+
+
+body.background-purple {
+  background-color: #8025a1;
+}
+
+body.background-purple .passage{
+  color: white;
+}
+
+.background-purple .link-internal {
+  color: #FFD1EA;
+}
+
+.background-purple .link-internal:hover {
+  color: #9ADDF4;
+}
+
+.background-purple a {
+  color: #FFD1EA;
+}
+
+.background-purple a:hover {
+  color: #9ADDF4;
+}
+
 
 body.background-cyan {
   background-color: #9ADDF4;
 }
 
+body.background-cyan .passage{
+  color: #45373c;
+}
+
+.background-cyan .passage a{
+  color: #1129B0;
+}
+
+.background-cyan .passage .link-internal{
+  color: #1129B0;
+}
+
+.background-cyan .passage .link-external{
+  color: #1129B0;
+}
+
+.background-cyan .passage a:hover{
+  color: black;
+}
+
+.background-cyan .passage .link-internal:hover{
+  color: black;
+}
+
+.background-cyan .passage .link-external:hover{
+  color: black;
+}
+
+
+
 body.background-cyan-transparent{
-  background-color: #7bd2ed;
+  background-color: #9ADDF4;
 }
 
 body.background-cyan-transparent .passage{
-  background-color: hsla(194,76%,71%,0.8);
+  background-color: #9ADDF4;
   padding: 1em;
   border-radius: 1em;
+  color: #1129B0;
+}
+
+.background-cyan-transparent .link-internal {
+  color: #0473e8;
+}
+
+.background-cyan-transparent .link-internal:hover {
+  color: #1129B0;
+}
+
+.background-cyan-transparent a {
+  color: #0473e8;
+}
+
+.background-cyan-transparent a:hover {
+  color: #1129B0;
+}
+
+
+body.background-pink {
+ background-color:  #850049;
 }
 
 body.background-pink {
  background-color:  #850049;
 }
-body.background-pink-chill {
- background-color:  #cb5494;
+
+
+.background-pink .passage{
+ color: white;
 }
+
+.background-pink .link-internal{
+  color: #FFD1EA;
+}
+.background-pink .link{
+  color: #FFD1EA;
+}
+
+.background-pink .link-internal:hover{
+  color: #9ADDF4;
+}
+
+.background-pink .link-external{
+  color: #FFD1EA;
+}
+
+.background-pink .link-external:hover{
+  color: #9ADDF4;
+}
+
+.background-pink .a{
+  color: #FFD1EA;
+}
+
+.background-pink .a:hover{
+  color: #9ADDF4;
+}
+
 
 body.background-pink-light {
 	background-color: #D874AB;	
- 	color: #a90e57; /* might be incorrect */
+ }
+
+body.background-pink-light .passage{
+ 	color: black; 
 }
 
 body.background-box-pink-light .passage{
@@ -212,6 +329,43 @@ body.background-pink-transparent .passage{
 }
 
 
+
+body.background-box-gray .passage{
+  /*background-color: hsla(328, 71%, 71%, 0.8); */
+  background-color: #45373c;
+  padding: 1em;
+  border-radius: 1em;
+  color: white;
+}
+
+.background-box-gray .link-internal{
+  color: #9ADDF4;
+}
+.background-box-gray .link{
+  color: #9ADDF4;
+}
+
+.background-box-gray .link-internal:hover{
+  color: #FFD1EA;
+}
+
+.background-box-gray .link-external{
+  color: #9ADDF4;
+}
+
+.background-box-gray .link-external:hover{
+  color: #FFD1EA;
+}
+
+.background-box-gray .a{
+  color: #9ADDF4;
+}
+
+.background-box-gray .a:hover{
+  color: #FFD1EA;
+}
+
+
 a {
 	color: white;
   	text-decoration: underline;  	
@@ -254,10 +408,10 @@ a.link-broken {
 /*     WORKSHOP  */
 /* ************* */
 .workshop-banner {
-  background-color: pink;
-  color: gray;
+  background-color: WHITE;
+  color: #1129B0;
   text-align: center;
-  border: 0.2em yellow dotted;
+  border: 0.2em #FFD1EA dotted;
   padding:1em;
 }
 
@@ -357,6 +511,36 @@ video#bgvid {
   --xColor: var(--topColor);
   --iconColor: var(--outlineColor);
 }
+
+
+
+.browser-pink-pink .link-internal{
+  color: #9ADDF4;
+}
+
+.browser-pink-pink .link-internal:hover{
+  color: #D874AB;
+}
+
+
+.browser-pink-pink .link-external{
+  color: #9ADDF4;
+}
+
+.browser-pink-pink .link-external:hover{
+  color: #D874AB;
+}
+
+.browser-pink-pink .a{
+  color: #9ADDF4;
+}
+
+.browser-pink-pink .a:hover{
+  color: #D874AB;
+}
+
+
+
 .browser-pink-black {
   --outlineColor: black;
   --bottomColor: #642d4b;
@@ -377,6 +561,7 @@ video#bgvid {
   --iconColor: var(--outlineColor);
 }
 
+/*
 .browser-black-black {
   --outlineColor: black;
   --topColor: #cb5494;
@@ -385,7 +570,7 @@ video#bgvid {
   --bottomTextColor: white;
   --xColor: var(--topColor);
   --iconColor: var(--outlineColor);
-}
+}*/
 
 .browser-black-gray {
   --outlineColor: black;
@@ -436,6 +621,36 @@ video#bgvid {
 }
 
 
+.browser-white-blue .link-internal{
+  color: #9ADDF4;
+}
+.browser-white-blue .link{
+  color: #9ADDF4;
+}
+
+.browser-white-blue .link-internal:hover{
+  color: #FFD1EA;
+}
+
+.browser-white-blue .link-external{
+  color: #9ADDF4;
+}
+
+.browser-white-blue .link-external:hover{
+  color: #FFD1EA;
+}
+
+.browser-white-blue a{
+  color: #9ADDF4;
+}
+
+.browser-white-blue a:hover{
+  color: #FFD1EA;
+}
+
+
+
+
 .browser-lightpink-lightpink {  
   --outlineColor: #a90e57; 
   --topColor: #FFD1EA;
@@ -445,6 +660,36 @@ video#bgvid {
   --xColor: var(--topColor);
   --iconColor: var(--outlineColor);
 }
+
+
+.browser-lightpink-lightpink .link-internal{
+  color: #FFD1EA;
+}
+.browser-lightpink-lightpink .link{
+  color: #FFD1EA;
+}
+
+.browser-lightpink-lightpink .link-internal:hover{
+  color: #9ADDF4;
+}
+
+.browser-lightpink-lightpink .link-external{
+  color: #FFD1EA;
+}
+
+.browser-lightpink-lightpink .link-external:hover{
+  color: #9ADDF4;
+}
+
+.browser-lightpink-lightpink a{
+  color: #FFD1EA;
+}
+
+.browser-lightpink-lightpink a:hover{
+  color: #9ADDF4;
+}
+
+
 
 .browser-lightpink-white {  
   /* keep eye on link colors */
@@ -476,11 +721,11 @@ video#bgvid {
   color: #a90e57;
 }
 
-.browser-lightpink-white .a{
+.browser-lightpink-white a{
   color: #850049;
 }
 
-.browser-lightpink-white .a:hover{
+.browser-lightpink-white a:hover{
   color: #a90e57;
 }
 
@@ -511,8 +756,8 @@ video#bgvid {
   color: #D874AB;
 }
 
+/*
 .browser-white-white {  
-  /* keep eye on link colors */
   --outlineColor: #0473e8; 
   --topColor: white;
   --topTextColor: #0473e8;
@@ -538,13 +783,13 @@ video#bgvid {
   color: purple;
 }
 
-.browser-white-white .a{
+.browser-white-white a{
   color: #bb276d;
 }
 
-.browser-white-white .a:hover{
+.browser-white-white a:hover{
   color: purple;
-}
+}*/
 
 
 .browser-pink-white-blue {  
@@ -577,11 +822,11 @@ video#bgvid {
   color: #1129B0;
 }
 
-.browser-pink-white-blue .a{
+.browser-pink-white-blue a{
   color: #850049;
 }
 
-.browser-pink-white-blue .a:hover{
+.browser-pink-white-blue a:hover{
   color: #1129B0;
 }
 
@@ -602,9 +847,45 @@ video#bgvid {
   /* TEXTAREA */ 
  background-color: #FFD1EA;  
  color: #1129B0;  
+}chang
+
+.browser-pink-black {  
+  /* keep eye on link colors */
+  --outlineColor: black; 
+  --topColor: #D874AB;
+  --topTextColor: #850049;
+   --bottomColor: black;
+  --bottomTextColor: white;
+  --xColor: var(--topColor);
+  --iconColor: var(--outlineColor);
 }
 
+.browser-pink-black .link-internal{
+  color: #FFD1EA;
+}
+.browser-pink-black .link{
+  color: #FFD1EA;
+}
 
+.browser-pink-black .link-internal:hover{
+  color: WHITE;
+}
+
+.browser-pink-black .link-external{
+  color: #FFD1EA;
+}
+
+.browser-pink-black .link-external:hover{
+  color: WHITE;
+}
+
+.browser-pink-black a{
+  color: #FFD1EA;
+}
+
+.browser-pink-black a:hover{
+  color: WHITE;
+}
 
 .browser-pink-gray {  
   --outlineColor: black; 
@@ -624,6 +905,45 @@ video#bgvid {
   --bottomTextColor: white;
   --xColor: var(--topColor);
   --iconColor: var(--outlineColor);
+}
+
+
+.browser-purple {  
+  /* keep eye on link colors */
+  --outlineColor: #8025a1; 
+  --topColor: #FFF0FF;
+  --topTextColor: #8025a1;
+   --bottomColor: #8025a1;
+  --bottomTextColor: white;
+  --xColor: var(--topColor);
+  --iconColor: var(--outlineColor);
+}
+
+.browser-purple .link-internal{
+  color: #FFF0FF;
+}
+.browser-purple .link{
+  color: #FFF0FF;
+}
+
+.browser-purple .link-internal:hover{
+  color: #FFD1EA;
+}
+
+.browser-purple .link-external{
+  color: #FFF0FF;
+}
+
+.browser-purple .link-external:hover{
+  color: #FFD1EA;
+}
+
+.browser-purple a{
+  color: #FFF0FF;
+}
+
+.browser-purple a:hover{
+  color: #FFD1EA;
 }
 
 /* ************* */
@@ -769,7 +1089,8 @@ video#bgvid {
   	margin: auto;
   	padding: 2em;
   	border-radius: 1em;
-  background: #7bd2ed;
+  background: #9ADDF4;
+  color: #3B3B3B;
 }
 
 .chat-section.div {
@@ -777,6 +1098,18 @@ video#bgvid {
     word-wrap: break-word;
     margin-bottom: 10px;
     line-height: 24px;
+}
+
+.chat-section .a {
+ color: #3B3B3B; 
+}
+
+.chat-section .link-internal {
+ color: #3B3B3B; 
+}
+
+.chat-section .link-internal:hover {
+ color:  #1129B0;
 }
 
 .clear {
@@ -788,7 +1121,7 @@ video#bgvid {
   position: relative;
   padding: 10px 15px;
   color: white;
-  background: #0B93F6;
+  background: #1129B0;
   border-radius: 25px;
   float: right;
 }
@@ -799,7 +1132,7 @@ video#bgvid {
     bottom: -2px;
     right: -7px;
     height: 20px;
-    border-right: 20px solid #0B93F6;
+    border-right: 20px solid #1129B0;
     border-bottom-left-radius: 16px 14px;
     -webkit-transform: translate(0, -2px);
   }
@@ -811,7 +1144,7 @@ video#bgvid {
     right: -56px;
     width: 10px;
     height: 20px;
-    background: #7bd2ed ;
+    background: #9ADDF4;
     border-bottom-left-radius: 10px;
     -webkit-transform: translate(-46px, -2px);
   }
@@ -820,18 +1153,18 @@ video#bgvid {
 .from-them {
   position: relative;
   padding: 10px 20px;
-  background: #E5E5EA;  
+  background: white;  
   border-radius: 25px;
-  color: black;
+  color: #3B3B3B;
   float: left;
 }
 
 .from-them .link-internal {
- 	color: black; 
+ 	color: #1129B0; 
 }
 
 .from-them .link-internal:hover {
- 	color: #0B93F6; 
+ 	color: #3B3B3B; 
 }
 
 .from-them:before {
@@ -841,7 +1174,7 @@ video#bgvid {
     bottom: -2px;
     left: -7px;
     height: 20px;
-    border-left: 20px solid #E5E5EA;
+    border-left: 20px solid white;
     border-bottom-right-radius: 16px 14px;
     -webkit-transform: translate(0, -2px);
   }
@@ -854,7 +1187,7 @@ video#bgvid {
     left: 4px;
     width: 10px;
     height: 20px;
-    background: #7bd2ed ;
+    background: #9ADDF4;
     border-bottom-right-radius: 10px;
     -webkit-transform: translate(-14px, -2px);
 }
@@ -1601,7 +1934,7 @@ There is no undo or back button. If you get stuck or something is broken, you ca
 &lt;a href=&quot;https://www.twitter.com/amalaxazul&quot;&gt;Amala Azul&lt;/a&gt;
 &lt;a href=&quot;https://www.instagram.com/light.fae&quot;&gt;Fae Brite&lt;/a&gt; 
 &lt;a href=&quot;https://www.instagram.com/___hellbait___&quot;&gt;Hellbait&lt;/a&gt;
-&lt;a href=&quot;https://www.instagram.com/_Glitchthemme&quot;&gt;.P. (Themme)&lt;/a&gt;
+&lt;a href=&quot;https://www.instagram.com/_Glitchthemme&quot;&gt;J.P. (Themme)&lt;/a&gt;
 &lt;a href=&quot;https://twitter.com/LyncJohnson&quot;&gt;Lync Johnson&lt;/a&gt;
 Quin
 &lt;a href=&quot;https://www.instagram.com/not.your.e.girl/&quot;&gt;Karren&lt;/a&gt;
@@ -1611,7 +1944,7 @@ Quin
 
 Thank you to all the sex workers, artists, and activists who continue to work, create, and agitate online and offline. You are our heroes, and we made OnlyBans for and with you.
 
-&lt;h2&gt;ACKOWLEDGEMENTS&lt;/h2&gt;
+&lt;h2&gt;ACKNOWLEDGEMENTS&lt;/h2&gt;
 Thank you to all our contributors who have been brave enough to share their real stories and photos. Your generosity and trust has been a gift.
 
 Thank you to &quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;. We are indebted to your research, in particular the report, &lt;a href=&quot;https://hackinghustling.org/posting-into-the-void-content-moderation/&quot;&gt;&quot;Posting Into The Void&quot;&lt;/a&gt;, from which we drew many of our statistics on shadowbanning and deplatforming. You have been an invaluable resource to those fighting on the digital frontlines.
@@ -1876,7 +2209,7 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
 		&lt;&lt;set _line to [&quot;Time to set some thirst traps.&quot;, &quot;You get out the selfie stick and start snapping away.&quot;, &quot;You love the camera and the camera loves you&quot;].pluck()&gt;&gt;
 		&lt;&lt;link _line &quot;photo-selection&quot;&gt;&gt;&lt;&lt;audio &quot;neutral&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;/switch&gt;&gt;
-</tw-passagedata><tw-passagedata pid="11" name="outing-side-story" tags="music-dark background-cyan bookmark" position="701,445" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="11" name="outing-side-story" tags="music-dark bookmark background-cyan-transparent" position="701,445" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _outingBranch to either(&quot;stolen-content&quot;, &quot;personal-data&quot;, &quot;suggested-friends&quot;)&gt;&gt;
 	&lt;&lt;if $isPerformanceMode&gt;&gt;
 		&lt;&lt;set _outingBranch to &quot;suggested-friends&quot;&gt;&gt;
@@ -1920,7 +2253,7 @@ For full access, please verify your phone number.
 [[Submit.-&gt;verify-more]]
 
 [[Skip verification.-&gt;skip-verify-phone]]
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="money-ending" tags="ending background-pink background-cyan-transparent music-ambient bookmark" position="1208,601" size="100,100">Time&#39;s up! Your $&lt;&lt;print $incomeTarget&gt;&gt; is due.
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="money-ending" tags="ending background-pink music-ambient bookmark background-box-gray" position="1208,601" size="100,100">Time&#39;s up! Your $&lt;&lt;print $incomeTarget&gt;&gt; is due.
 
 &lt;&lt;linkreplace &quot;Count your money&quot;&gt;&gt;&lt;&lt;set _hasEnoughMoney to $income &gt; $incomeTarget&gt;&gt;&lt;&lt;type 40ms&gt;&gt;You have $&lt;&lt;print $income&gt;&gt;.&lt;&lt;/type&gt;&gt;
 	
@@ -2004,22 +2337,22 @@ Sorry, no new fans.
 	
 	&lt;&lt;goto $communityOutcome&gt;&gt;
 &lt;&lt;/silently&gt;&gt;[[logic error -&gt;tip]] 
-</tw-passagedata><tw-passagedata pid="21" name="suspension-consequence" tags="music-dark background-pink-chill background-pink-transparent bookmark" position="901,731" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="21" name="suspension-consequence" tags="music-dark bookmark background-box-pink-light background-pink-light" position="901,731" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;stress-nails&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 You&#39;re locked out of OnlyBans for the rest of the week. You can&#39;t gain new followers and or accept new money. 
 
 But hey, [[others have been through this before-&gt;community-support]]. Maybe your luck will improve?
 
-</tw-passagedata><tw-passagedata pid="22" name="permaban-transition" tags="background-dark background-pink-transparent bookmark" position="700,902" size="100,100">&lt;&lt;backgroundvideo &quot;stress-temples&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
+</tw-passagedata><tw-passagedata pid="22" name="permaban-transition" tags="bookmark background-box-pink-light background-pink-light" position="700,902" size="100,100">&lt;&lt;backgroundvideo &quot;stress-temples&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 Another banned photo? That&#39;s $numPhotosFlagged banned photos //and// you were recently suspended? 
-			[[Oh shit...-&gt;permabanned]]</tw-passagedata><tw-passagedata pid="23" name="permabanned" tags="music-dark background-dark bookmark" position="903,901" size="100,100">&lt;&lt;silently&gt;&gt;
+			[[Oh shit...-&gt;permabanned]]</tw-passagedata><tw-passagedata pid="23" name="permabanned" tags="music-dark bookmark background-gray" position="903,901" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;browserwindow &quot;oh-no.exe&quot; &quot;browser-black-gray&quot;&gt;&gt;&lt;h2&gt;DEACTIVATED&lt;/h2&gt;
+&lt;&lt;browserwindow &quot;oh-no.exe&quot; &quot;browser-pink-black&quot;&gt;&gt;&lt;h2&gt;DEACTIVATED&lt;/h2&gt;
 	  You&#39;ve violated the rules one too many times. Your account has been permanently disabled. 
 
   [[CONTINUE-&gt;permabanned-real-story]].
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="permabanned-real-story" tags="music-dark background-dark bookmark" position="901,1006" size="100,100">&lt;&lt;browserwindow &quot;not-alone.exe&quot; &quot;browser-pink-black&quot;&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="permabanned-real-story" tags="music-dark bookmark background-gray" position="901,1006" size="100,100">&lt;&lt;browserwindow &quot;not-alone.exe&quot; &quot;browser-pink-black&quot;&gt;&gt;
   41.01% of those who have done sex work said they have been deplatformed or kicked off of a social media account.
 
   [[CONTINUE.-&gt;permabanned-appeal]]
@@ -2027,15 +2360,15 @@ Another banned photo? That&#39;s $numPhotosFlagged banned photos //and// you wer
 
 
 
-</tw-passagedata><tw-passagedata pid="25" name="permabanned-appeal" tags="music-dark background-pink-chill background-pink-transparent bookmark" position="902,1115" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="25" name="permabanned-appeal" tags="music-dark background-pink-transparent bookmark" position="902,1115" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _hasAppealSuccess to either(true, false)&gt;&gt;
 	&lt;&lt;if $isPerformanceMode&gt;&gt;
 		&lt;&lt;set _hasAppealSuccess to true&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
-&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-scrolling&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
-You ask a stripper you follow who lost an account with over 10k followers. They tell you that you can try to get your account back by submitting a support request, but the odds are against you.
+&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-scrolling&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;You ask a stripper you follow who lost an account with over 10k followers. They tell you that you can try to get your account back by submitting a support request, but the odds are against you.
 
 What do you do?
+
 &lt;span id=&#39;giveup&#39;&gt;&lt;&lt;linkreplace &quot;Give up your account.&quot;&gt;&gt;&lt;&lt;remove &quot;#contest&quot;&gt;&gt;
 	Even if you tried to fight it, 93% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
 
@@ -2057,7 +2390,7 @@ Social media is obviously rigged against sex workers. You want to reach your dre
 But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
 
 So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes-&gt;ending]] 😈
-</tw-passagedata><tw-passagedata pid="27" name="ending" tags="music-outsideclub background-pink bookmark" position="1402,797" size="100,100">&lt;&lt;backgroundvideo &quot;ending-boots&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;the-end.exe&quot; &quot;browser-pink-pink&quot;&gt;&gt;Thank you for playing OnlyBans
+</tw-passagedata><tw-passagedata pid="27" name="ending" tags="music-outsideclub bookmark background-purple-light" position="1402,797" size="100,100">&lt;&lt;backgroundvideo &quot;ending-boots&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;the-end.exe&quot; &quot;browser-purple&quot;&gt;&gt;Thank you for playing OnlyBans
 	Based on research by &lt;a href=&quot;https://hackinghustling.org/posting-into-the-void-content-moderation/&quot;&gt;&quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;&lt;/a&gt;. 
 	More info in the [[Credits-&gt;Credits]] and [[About-&gt;About]] pages.
 	
@@ -2102,7 +2435,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 	&lt;&lt;set _bgVideo to &#39;&lt;video autoplay loop muted id=&quot;bgvid&quot;&gt;&lt;source type=&quot;video/mp4&quot; src=&#39;+_bgVideoSource+&#39;&gt;&lt;/video&gt;&#39;&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;backgroundvideo &quot;mannequin1&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
-&lt;&lt;browserwindow &quot;IRL.txt&quot; &quot;browser-blue-white&quot;&gt;&gt;
+&lt;&lt;browserwindow &quot;IRL.txt&quot; &quot;browser-pink-white-blue&quot;&gt;&gt;
 &quot;It turns out that 45% of sex workers have had their images or content used for a fake account (e.g., catfishing).&quot;
 &lt;&lt;/browserwindow&gt;&gt;
 
@@ -2124,13 +2457,14 @@ You&#39;re pissed that someone could be impersonating you and providing false in
 				The account stays up. It makes you nervous to not have control over your content, but this is a common problem. 59% of sex workers don’t manage to get copycat accounts shut down. What can you do?
 				 
 				 [[Shut down your account before more content is stolen-&gt;close-account]].
+				 
 	  			&lt;span id=&quot;giveup&quot;&gt;Cut your losses and [[continue posting.-&gt;photo-selection]]&lt;/span&gt;		
 			&lt;&lt;/if&gt;&gt;
 		&lt;&lt;/linkappend&gt;&gt;
 	&lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="personal-data" tags="music-ambient background-cyan background-cyan-transparent bookmark" position="900,472" size="100,100">&lt;&lt;backgroundvideo &quot;mannequin3&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
-&lt;&lt;linkreplace &quot;&lt;&lt;browserwindow &#39;💌 FAN MAIL 💌&#39; &#39;browser-blue-white&#39;&gt;&gt;Open Message&lt;&lt;/browserwindow&gt;&gt;&quot;&gt;&gt;
-&lt;&lt;browserwindow &#39;FAN MAIL&#39; &#39;browser-blue-white&#39;&gt;&gt;&lt;em&gt;&lt;&lt;type 40ms&gt;&gt;Hey, this is weird, but don&#39;t I know you from somehwere? -Jean&lt;&lt;/type&gt;&gt;&lt;/em&gt;&lt;&lt;/browserwindow&gt;&gt;
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="personal-data" tags="music-ambient background-cyan-transparent bookmark" position="900,472" size="100,100">&lt;&lt;backgroundvideo &quot;mannequin3&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
+&lt;&lt;linkreplace &quot;&lt;&lt;browserwindow &#39;💌 FAN MAIL 💌&#39; &#39;browser-pink-white-blue&#39;&gt;&gt;Open Message&lt;&lt;/browserwindow&gt;&gt;&quot;&gt;&gt;
+&lt;&lt;browserwindow &#39;FAN MAIL&#39; &#39;browser-pink-white-blue&#39;&gt;&gt;&lt;em&gt;&lt;&lt;type 40ms&gt;&gt;Hey, this is weird, but don&#39;t I know you from somewhere? -Jean&lt;&lt;/type&gt;&gt;&lt;/em&gt;&lt;&lt;/browserwindow&gt;&gt;
 
 
 Your old boss started following your OnlyBans account? How did they find you? It&#39;s not like your account is very popular yet...
@@ -2149,10 +2483,9 @@ No way. [[Close your account.-&gt;close-account]]
 
 
 
-</tw-passagedata><tw-passagedata pid="34" name="suggested-friends" tags="music-ambient background-cyan bookmark" position="899,351" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="34" name="suggested-friends" tags="music-ambient bookmark background-box-gray" position="899,351" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _people to [&quot;mom&quot;,&quot;favorite teacher&quot;,&quot;child&quot;,&quot;landlord&quot;, &quot;godparent&quot;,&quot;rabbi&quot;]&gt;&gt;
-&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;mannequin2&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
-The list of people you should follow includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
+&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;mannequin2&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;The list of people you should follow includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
 
 &lt;span id=&#39;yes&#39;&gt;&lt;&lt;linkreplace &quot;Yes.&quot;&gt;&gt;&lt;&lt;remove &quot;#no&quot;&gt;&gt;
 	You&#39;ll take the risk of having an uncomfortable conversation. After all, you need the money and the clock is ticking. 
@@ -2163,10 +2496,9 @@ The list of people you should follow includes tons of friends and … even your 
 	&lt;&lt;/browserwindow&gt;&gt;
 	It&#39;s terrifying, but [[you tell them-&gt;photo-selection]].
 	
-	Nevermind, &lt;&lt;linkreplace &quot;it&#39;s too painful or dangerous.&quot;&gt;&gt;you [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;
+	Nevermind, &lt;&lt;linkreplace &quot;it&#39;s too painful or dangerous.&quot;&gt;&gt;you [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;
 
-&lt;span id=&#39;no&#39;&gt;&lt;&lt;linkreplace &quot;Nope.&quot;&gt;&gt;&lt;&lt;remove &#39;#yes&#39;&gt;&gt;You contact the platform&#39;s customer support team asking to opt out of the friend algorithm, but they won&#39;t help. You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="35" name="got-money-ending" tags="ending music-ambient" position="1141,713" size="100,100">&lt;&lt;backgroundvideo &quot;pizza&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
+&lt;span id=&#39;no&#39;&gt;&lt;&lt;linkreplace &quot;Nope.&quot;&gt;&gt;&lt;&lt;remove &#39;#yes&#39;&gt;&gt;You contact the platform&#39;s customer support team asking to opt out of the friend algorithm, but they won&#39;t help. You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="35" name="got-money-ending" tags="ending music-ambient background-purple" position="1141,713" size="100,100">&lt;&lt;backgroundvideo &quot;pizza&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 Congratulations, your booty beat the odds! You reached your goal, learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
 
 You were one of the lucky ones. Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
@@ -2186,7 +2518,7 @@ This game is still a living document, a work-in-progress. We welcome &lt;a href=
 
 
 
-&lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-white&quot;&gt;&gt;
+&lt;&lt;browserwindow &quot;&quot; &quot;browser-pink-pink&quot;&gt;&gt;
 &lt;h2&gt;More Resources&lt;/h2&gt;
 OnlyBans is a journey into a world of increasing censorship, restrictive content policy changes, and user account shutdowns. It is the world we are living in today, as platforms such as YouTube, Instagram, Craigslist, Reddit, and Tumblr, adopt an umbrella ban on “adult content”, which has not only impacted sex workers, but also artists, activists, and Internet users of all backgrounds.
 
@@ -2253,7 +2585,7 @@ They share your pics to their feed. You attract _numNewFans new fans and make so
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-scrolling&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;_intro
 
-&lt;&lt;browserwindow &quot;💌 FAN MAIL 💌&quot; &quot;browser-white-blue&quot;&gt;&gt;
+&lt;&lt;browserwindow &quot;💌 FAN MAIL 💌&quot; &quot;browser-pink-white-blue&quot;&gt;&gt;
   &lt;&lt;linkreplace &quot;Open fan mail!&quot;&gt;&gt;&lt;&lt;silently&gt;&gt;
 		&lt;&lt;audio &quot;cashregister&quot; play&gt;&gt;
 		&lt;&lt;set $income += _tip&gt;&gt;&lt;&lt;/silently&gt;&gt;&lt;&lt;type 40ms&gt;&gt;_message
@@ -2264,7 +2596,7 @@ They share your pics to their feed. You attract _numNewFans new fans and make so
   You&#39;ve earned a tip! The wallet&#39;s at $&lt;&lt;print $income&gt;&gt;.
   &lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;
-Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.</tw-passagedata><tw-passagedata pid="41" name="attendWorkshop" tags="music-outsideclub background-cyan-transparent bookmark" position="324,1406" size="100,100">&lt;&lt;silently&gt;&gt;
+Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.</tw-passagedata><tw-passagedata pid="41" name="attendWorkshop" tags="music-outsideclub bookmark background-cyan-transparent" position="324,1406" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $outingRisk to $outingRisk - 2&gt;&gt;
 	&lt;&lt;set _activism to [&#39;Black Lives Matter&#39;,&#39;Me Too&#39;,&#39;the Landback movement&#39;,&#39;abortion&#39;,&#39;the disability community&#39;,&#39;climate change&#39;]&gt;&gt;
 	&lt;&lt;set _lesson to [&quot;attendWorkshop-activism&quot;, &quot;attendWorkshop-reverseimage&quot;, &quot;attendWorkshop-gender&quot;].pluck()&gt;&gt;
@@ -2287,14 +2619,14 @@ You can change the settings at any time in &lt;&lt;link &quot;the sidebar&quot;&
 
 
 When you&#39;re ready:&lt;h2 style=&quot;font-size:2em&quot;&gt;[[Enter-&gt;opening-screen]]&lt;/h2&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="too-sexy-real-story" tags="background-dark music-dark bookmark" position="351,1025" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="too-sexy-real-story" tags="music-dark bookmark background-gray" position="351,1025" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
 &lt;&lt;set _currentStat to either(
 	&quot;42% of sex workers said they have received a warning that their social media account is close to deletion.&quot;, 
 	&quot;67% of sex workers have had a post removed from social media.&quot;,
 	&quot;Plus-size users&#39; accounts are flagged for excessive nudity and sexual solicitation more frequently than thin users’ accounts. Women of color and queer people experience platform punishment and policing more frequently than their white, cishetero counterparts.&quot; )&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;browserwindow &quot;IRL.txt&quot; &quot;browser-pink-black&quot;&gt;&gt;
+&lt;&lt;browserwindow &quot;IRL.txt&quot; &quot;browser-pink-purple&quot;&gt;&gt;
   &lt;div class=&quot;photo-container&quot;&gt;
 	  &lt;div class=&quot;underlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toHTML(&quot;underlay&quot;)&gt;&gt;&lt;/div&gt;
 	  &lt;div class=&quot;overlay&quot;&gt;&lt;&lt;print $photoPool[$currentPhoto].toVaporHTML(&quot;overlay&quot;)&gt;&gt;&lt;/div&gt;
@@ -2331,7 +2663,7 @@ This seems completely unfair, but you&#39;re not the first sex worker to have th
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	Well, that sucks, but [[let&#39;s do some research?-&gt;community-support]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="shadowBan-real-story" tags="background-purple music-dark bookmark" position="463,1023" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="shadowBan-real-story" tags="music-dark bookmark background-gray" position="463,1023" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
   &lt;&lt;set _currentStat to either(
 	  &#39;&quot;We are reducing the spread of posts that are inappropriate but do not go against guidelines, limiting them from being recommended on our Explore and hashtag pages. For example, a sexually suggestive post will still appear in Feed if you follow the account that posts it, but this type of content may not appear for the broader community.&quot; –Instagram&quot;&#39;,
@@ -2341,7 +2673,7 @@ This seems completely unfair, but you&#39;re not the first sex worker to have th
 		  &#39;55% of those who have done sex work avoid specific words to avoid being shadowbanned. You can get shadowbanned for using banned phrases and hashtags like #asiangirl, #curvygirls, or #lesbian.&#39;
 	  )&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
-&lt;&lt;browserwindow &quot;real-story.txt&quot; &quot;browser-pink-white&quot;&gt;&gt;
+&lt;&lt;browserwindow &quot;real-story.txt&quot; &quot;browser-pink-purple&quot;&gt;&gt;
 	_currentStat
 	
    &lt;div class=&quot;photo-container&quot;&gt;
@@ -2354,14 +2686,15 @@ This seems completely unfair, but you&#39;re not the first sex worker to have th
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your business skills-&gt;community-support]].
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="joinGroup" tags="music-sexi background-cyan bookmark" position="571,1395" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="joinGroup" tags="music-sexi bookmark background-dark" position="571,1395" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;if $joinedGroup&gt;&gt;
 		&lt;&lt;goto &quot;joinedGroup&quot;&gt;&gt;
 		[[dummy-&gt;joinedGroup]] 
 		&lt;&lt;/if&gt;&gt;	
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands2&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
-You get a DM from a sex worker you follow...
 &lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot; aria-label=&quot;&quot;&gt;
+You get a DM from a sex worker you follow...
+	&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 	&lt;&lt;chat &#39;from-them&#39; 10ms&gt;&gt;Hi $playerName :) I’m a cam performer and think your pics are awesome!&lt;&lt;/chat&gt;&gt;
 	&lt;&lt;chat &#39;from-me&#39; 40ms&gt;&gt;Aww, thanks *blush*&lt;&lt;/chat&gt;&gt;
 	&lt;&lt;chat &#39;from-them&#39; 90ms&gt;&gt;Do you wanna join a private group chat with some other sex workers?&lt;&lt;/chat&gt;&gt;
@@ -2379,7 +2712,7 @@ You get a DM from a sex worker you follow...
 	&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/type&gt;&gt;
 &lt;/section&gt;
 &lt;&lt;/nobr&gt;&gt;
-[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="47" name="joinedGroup" tags="background-cyan music-sexi bookmark" position="567,1510" size="100,100">&lt;&lt;silently&gt;&gt;
+[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="47" name="joinedGroup" tags="music-sexi bookmark background-dark" position="567,1510" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 	&lt;&lt;set $lessonNumbers to [1,2]&gt;&gt;
 	&lt;&lt;set _lessonNumber to $lessonNumbers.random()&gt;&gt;
@@ -2432,7 +2765,7 @@ Stop chatting and [[continue to your next week.-&gt;start-week]]</tw-passagedata
 
 Your profile doesn’t currently indicate a gender...Do you want to add one? 
 
-&lt;&lt;browserwindow &quot;PICK YOUR &lt;&lt;linkreplace &#39;FIGHTER&#39;&gt;&gt;GENDER&lt;&lt;/linkreplace&gt;&gt;&quot; &quot;browser-pink-pink&quot;&gt;&gt;&lt;div id=&quot;gender-options&quot; style=&quot;text-align:left&quot;&gt;
+&lt;&lt;browserwindow &quot;PICK YOUR &lt;&lt;linkreplace &#39;FIGHTER&#39;&gt;&gt;GENDER&lt;&lt;/linkreplace&gt;&gt;&quot; &quot;browser-pink-white-blue&quot;&gt;&gt;&lt;div id=&quot;gender-options&quot; style=&quot;text-align:left&quot;&gt;
 &lt;label&gt;&lt;&lt;radiobutton &quot;$gender&quot; &quot;Male&quot;&gt;&gt;Male&lt;/label&gt;
 &lt;label&gt;&lt;&lt;radiobutton &quot;$gender&quot; &quot;Female&quot;&gt;&gt;Female&lt;/label&gt;
 &lt;label&gt;&lt;&lt;radiobutton &quot;$gender&quot; &quot;Not specified&quot; autocheck&gt;&gt;Not specified&lt;/label&gt;
@@ -2453,7 +2786,7 @@ Your profile doesn’t currently indicate a gender...Do you want to add one?
 &lt;&lt;/silently&gt;&gt;You selected &lt;&lt;print $gender&gt;&gt;. &lt;&lt;print $genderOutcome&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;
 
-You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out.</tw-passagedata><tw-passagedata pid="49" name="attendWorkshop-activism" tags="included" position="262,1564" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;set _activism to [&#39;Black Lives Matter&#39;,&#39;#MeToo&#39;,&#39;the Landback movement&#39;,&#39;abortion&#39;,&#39;disability rights&#39;,&#39;climate change&#39;]&gt;&gt;&lt;&lt;/silently&gt;&gt;You overhear a conversation in the bathroom about how the same tactics used to repress sex workers online have also been used against activists, such as those posting about &lt;&lt;cycle &#39;_cause&#39; autoselect&gt;&gt;&lt;&lt;optionsfrom _activism&gt;&gt;&lt;&lt;/cycle&gt;&gt;
+You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out.</tw-passagedata><tw-passagedata pid="49" name="attendWorkshop-activism" tags="included" position="262,1564" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;set _activism to [&#39;Black Lives Matter&#39;,&#39;#MeToo&#39;,&#39;the Landback movement&#39;,&#39;abortion&#39;,&#39;disability rights&#39;,&#39;climate change&#39;]&gt;&gt;&lt;&lt;/silently&gt;&gt;You overhear a conversation in the bathroom about how the same tactics used to repress sex workers online have also been used against activists, such as those posting about &lt;&lt;cycle &#39;_cause&#39; autoselect&gt;&gt;&lt;&lt;optionsfrom _activism&gt;&gt;&lt;&lt;/cycle&gt;&gt;.
 
 Upsetting, but you&#39;re glad you learned about the risks of sharing &quot;political&quot; content.</tw-passagedata><tw-passagedata pid="50" name="attendWorkshop-reverseimage" tags="included" position="342,1677" size="100,100">A cam performer there mentions that they posted the same cute bikini photo to their sex worker account and their personal account. One of their clients ran a &lt;strong&gt;reverse image search&lt;/strong&gt; on their photo and found out their real identity. Apparently, it’s not just the algorithm that’s stalking you!	
 
@@ -2539,7 +2872,7 @@ You pick up some digital harm reduction tools that will come in handy to prevent
 [[QA Test]] 
 &lt;&lt;link &quot;The Menu Sidebar&quot;&gt;&gt;&lt;&lt;script&gt;&gt;
 if(UIBar.isStowed()){UIBar.unstow();}else{UIBar.stow();}
-&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; </tw-passagedata><tw-passagedata pid="52" name="start-screen" tags="" position="581,253" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="53" name="chat-testing" tags="background-cyan" position="63,1276" size="100,100">Double-click this passage to edit it.&lt;&lt;silently&gt;&gt;
+&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; </tw-passagedata><tw-passagedata pid="52" name="chat-testing" tags="background-cyan" position="63,1276" size="100,100">Double-click this passage to edit it.&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;&lt;&lt;chat &#39;from-me&#39; 0s&gt;&gt;Howdy, boy, howdy!!&lt;&lt;/chat&gt;&gt;
 &lt;&lt;chat &#39;from-them&#39; 40ms&gt;&gt;Hey $playerName, cool account! I’m also selling pics on OnlyBans. Do you wanna do a share4share?&lt;&lt;/chat&gt;&gt;	
