@@ -1427,7 +1427,7 @@ Macro.add("chat", {
 		
 		
 		//If animations are enabled, add the <<TYPE>> animations
-		if(!settings.reduceMotion){			
+		if(settings.showMotion){			
 			_contents = _typeTag + _contents + _typeCloseTag;
 			_animateClass = 'loud';
 		}
@@ -1612,36 +1612,41 @@ Setting.addToggle("enableVideo", {
 				onChange: settingEnableVideoHandler,
 				});
 
-var settingReduceMotionHandler = function () {
-	console.log('reduce motion handler', settings.reduceMotion);
-	if(settings.reduceMotion) {
+var settingShowMotionHandler = function () {	
+	if(!settings.showMotion) {
 		//disable background videos
 		settings.enableVideo = false;
 		Setting.save();
 		settingEnableVideoHandler(); //this is cheating! bad!
 		
-		//disable chat animations
+		//also disables chat animations
 	}
 };
 
 // PREFERS-REDUCED-MOTION BROWSER CHECK
 const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-var reduceMotionInit = mediaQuery | false;
+var $reduceMotionInit = mediaQuery.matches | false;
+if ($reduceMotionInit){
+	console.info("Show Motion settings was set by user OS preferences", mediaQuery.media, mediaQuery.matches);	
+}
+
+
 mediaQuery.addEventListener('change', () => {
-	console.log(mediaQuery.media, mediaQuery.matches);
+	console.info("User changed OS motion settings: ", mediaQuery.media, mediaQuery.matches);
 	if(mediaQuery.matches){
-		settings.reduceMotion = mediaQuery.matches;
-		settingReduceMotionHandler(); // kind of cheating!
+		var _newShowMotion = !mediaQuery.matches;
+		settings.showMotion = _newShowMotion;
+		settingShowMotionHandler(); // kind of cheating!
 		Setting.save();
 	}
 });
 	
-Setting.addToggle("reduceMotion", {
-	label: "Reduce motion and animations",
-	desc: "'On' will reduce animations in the game. It also disables background videos. (This setting also tries to respect your operating system preferences on motion.)",
-	default: reduceMotionInit,
-	onInit: settingReduceMotionHandler,
-	onChange: settingReduceMotionHandler,
+Setting.addToggle("showMotion", {
+	label: "Show motion and animations",
+	desc: "'Off' will reduce animations in the game. It also disables background videos. (This setting also tries to respect your operating system preferences on motion.)",
+	default: !$reduceMotionInit,
+	onInit: settingShowMotionHandler,
+	onChange: settingShowMotionHandler,
 });
 
 
