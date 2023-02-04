@@ -118,7 +118,7 @@ body { /* override */
 
 body.background-messy {
   background-color: #e97fb8;	
-  color: #bb276d;
+  /*color: #bb276d;*/
   background-image: url("images/windows-background.jpg");
 }
 
@@ -127,27 +127,27 @@ body.background-gray {
   color: white;
 }
 
-.background-gray .passage a{
+.background-gray  a{
   color: #FFD1EA;
 }
 
-.background-gray .passage .link-internal{
+.background-gray  .link-internal{
   color: #FFD1EA;
 }
 
-.background-gray .passage .link-external{
+.background-gray  .link-external{
   color: #FFD1EA;
 }
 
-.background-gray .passage a:hover{
+.background-gray  a:hover{
   color: #D874AB;
 }
 
-.background-gray .passage .link-internal:hover{
+.background-gray  .link-internal:hover{
   color: #D874AB;
 }
 
-.background-gray .passage .link-external:hover{
+.background-gray .link-external:hover{
   color: #D874AB;
 }
 
@@ -160,27 +160,27 @@ body.background-dark {
   background-color: #642d4b;
 }
 
-.background-dark .passage a{
+.background-dark  a{
   color:;
 }
 
-.background-dark .passage .link-internal{
+.background-dark .link-internal{
   color: ;
 }
 
-.background-dark .passage .link-external{
+.background-dark .link-external{
   color: #FFD1EA;
 }
 
-.background-dark .passage a:hover{
+.background-dark   a:hover{
   color: #FFD1EA;
 }
 
-.background-dark .passage .link-internal:hover{
+.background-dark   .link-internal:hover{
   color: #FFD1EA;
 }
 
-.background-dark .passage .link-external:hover{
+.background-dark   .link-external:hover{
   color: #FFD1EA;
 }
 
@@ -236,27 +236,27 @@ body.background-cyan .passage{
 }
 
 
-.background-cyan .passage a{
+.background-cyan a{
   color: #1129B0;
 }
 
-.background-cyan .passage .link-internal{
+.background-cyan  .link-internal{
   color: #1129B0;
 }
 
-.background-cyan .passage .link-external{
+.background-cyan .link-external{
   color: #1129B0;
 }
 
-.background-cyan .passage a:hover{
+.background-cyan  a:hover{
   color: black;
 }
 
-.background-cyan .passage .link-internal:hover{
+.background-cyan .link-internal:hover{
   color: black;
 }
 
-.background-cyan .passage .link-external:hover{
+.background-cyan  .link-external:hover{
   color: black;
 }
 
@@ -348,31 +348,31 @@ body.background-box-pink-light .passage{
 }
 
 
-.background-box-pink-light .passage .link-internal{
+.background-box-pink-light  .link-internal{
   color: #850049;
 }
 
-.background-box-pink-light .passage .link{
+.background-box-pink-light  .link{
   color: #850049;
 }
 
-.background-box-pink-light .passage .link-internal:hover{
+.background-box-pink-light  .link-internal:hover{
   color: white;
 }
 
-.background-box-pink-light .passage .link-external{
+.background-box-pink-light  .link-external{
   color: #850049;
 }
 
-.background-box-pink-light .passage .link-external:hover{
+.background-box-pink-light  .link-external:hover{
   color: white;
 }
 
-.background-box-pink-light .passage .a{
+.background-box-pink-light  .a{
   color: #850049;
 }
 
-.background-box-pink-light .passage .a:hover{
+.background-box-pink-light .a:hover{
   color: white;
 }
 
@@ -459,12 +459,12 @@ a {
 }
 
 a:hover {
-  	color: purple;
+  	color: #FFD1EA;
   	text-decoration: underline wavy 0.05em
 }
 
 a.link-broken {
-	color: #c22;
+	color: red;
 }
 
 #story {
@@ -1381,7 +1381,7 @@ video#bgvid {
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">/***********************/
 /*     GAME MODES      */
 /***********************/
-var $isQATestMode = false;
+var $isQATestMode = true;
 State.setVar("$isQATestMode", $isQATestMode);
 
 // GalleryMode disables Saves. 
@@ -1993,7 +1993,7 @@ Want to play?
 
 [[Play.-&gt;what-is-your-name]]
 &lt;&lt;linkreplace &quot;Read more&quot;&gt;&gt;&lt;&lt;include &quot;StoryMenu&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="what-is-your-name" tags="music-sexi background-cyan bookmark" position="297,252" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;greetings]] 
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="what-is-your-name" tags="music-sexi background-cyan bookmark" position="299,253" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;greetings]] 
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;typing&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-white-blue&quot;&gt;&gt;Your name is
 &lt;&lt;textbox &quot;$playerName&quot; $playerName autofocus&gt;&gt;
 
