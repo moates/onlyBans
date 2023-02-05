@@ -503,7 +503,15 @@ a.link-broken {
   padding:1em;
 }
 
-
+.workshop-title {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
 
 
 /* ************* */
@@ -2715,7 +2723,7 @@ Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re get
 	&lt;&lt;set _lesson to [&quot;attendWorkshop-activism&quot;, &quot;attendWorkshop-reverseimage&quot;, &quot;attendWorkshop-gender&quot;].pluck()&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;span id=&quot;intro&quot;&gt;
 You see this post on your timeline...
-&lt;div id=&quot;workshop-banner&quot; class=&quot;workshop-banner&quot;&gt;&lt;h2&gt;Workshop: Digital Harm Reduction For Sex Workers&lt;/h2&gt;Attend our workshop for tips on avoiding censors, stalkers, and impersonators!
+&lt;div id=&quot;workshop-banner&quot; class=&quot;workshop-banner&quot;&gt;&lt;div class=&quot;workshop-title&quot;&gt;Workshop: Digital Harm Reduction For Sex Workers&lt;/div&gt;Attend our workshop for tips on avoiding censors, stalkers, and impersonators!
 Thursday at 3pm.&lt;/div&gt;
 &lt;/span&gt;
 &lt;&lt;linkreplace &quot;&lt;span id=&#39;yes&#39;&gt;Check it out.&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;remove &quot;#no&quot;&gt;&gt;&lt;&lt;remove &quot;#intro&quot;&gt;&gt;&lt;&lt;backgroundvideo &quot;help-selfies&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;include _lesson&gt;&gt; Plus, there&#39;s pizza. &lt;&lt;linkappend &quot;Grab a slice &quot;&gt;&gt; (a little stale, but still delicious) &lt;&lt;/linkappend&gt;&gt; on &lt;&lt;link &quot;your way out.&quot; &quot;start-week&quot;&gt;&gt;&lt;&lt;audio &quot;neutral&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;	
