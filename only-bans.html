@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="only-bans" startnode="42" creator="Twine" creator-version="2.3.12" ifid="42759014-81BE-426C-AAEA-A6D8DEB88873" zoom="1" format="SugarCube" format-version="2.34.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* ************* */
+	<tw-storydata name="only-bans" startnode="42" creator="Twine" creator-version="2.3.12" ifid="42759014-81BE-426C-AAEA-A6D8DEB88873" zoom="0.6" format="SugarCube" format-version="2.34.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* ************* */
 /* GENERAL STYLE  */
 /* ************* */
 
@@ -1389,7 +1389,7 @@ video#bgvid {
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">/***********************/
 /*     GAME MODES      */
 /***********************/
-var $isQATestMode = true;
+var $isQATestMode = false;
 State.setVar("$isQATestMode", $isQATestMode);
 
 // GalleryMode disables Saves. 
@@ -1398,6 +1398,14 @@ var $isGalleryMode = false;
 State.setVar("$isGalleryMode", $isGalleryMode);
 console.log("gallery,", $isGalleryMode);
 
+/*********************/
+/*     HTML MAGIC    */
+/*********************/
+// Set the document language
+document.documentElement.setAttribute("lang", 'en');
+
+// Remove an empty header injected by the engine
+//document.getElementById('ui-dialog-title').remove();
 
 /*********************/
 /* CHAT BUBBLE MACRO */
@@ -2042,7 +2050,7 @@ Sometimes, parts of the game will require you to click on photos to advance the 
 Sometimes, there are videos; they are just for background viewing.
 
 There is no undo or back button. If you get stuck or something is broken, you can &lt;&lt;link &quot;Restart&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; (found in the left sidebar). 
-</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="127,516" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="music-ambient background-pink" position="16,516" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="147,516" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="music-ambient background-pink" position="16,516" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
 &lt;h1&gt;Credits &lt;/h1&gt;
 &#39;&#39;Creator&#39;&#39;: &lt;a href=&quot;https://www.lenachen.com/&quot;&gt;Lena Chen&lt;/a&gt;
 &lt;&lt;linkappend &quot;&lt;strong&gt;Narration Nympho&lt;/strong&gt;&quot;&gt;&gt; (Writer)&lt;&lt;/linkappend&gt;&gt;: Lena Chen
