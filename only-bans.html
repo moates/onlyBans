@@ -480,7 +480,9 @@ a.link-broken {
 }
 
 
-
+.big-line-height {
+ line-height: 2.5; 
+}
 
 
 /* ************* */
@@ -2050,9 +2052,8 @@ Sometimes, parts of the game will require you to click on photos to advance the 
 Sometimes, there are videos; they are just for background viewing.
 
 There is no undo or back button. If you get stuck or something is broken, you can &lt;&lt;link &quot;Restart&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; (found in the left sidebar). 
-</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="147,516" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="music-ambient background-pink" position="25,525" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
-&lt;h1&gt;Credits &lt;/h1&gt;
-&#39;&#39;Creator&#39;&#39;: &lt;a href=&quot;https://www.lenachen.com/&quot;&gt;Lena Chen&lt;/a&gt;
+</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="147,516" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="music-ambient background-pink" position="0,500" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
+&lt;h1&gt;Credits &lt;/h1&gt;&lt;p class=&quot;big-line-height&quot;&gt;&#39;&#39;Creator&#39;&#39;: &lt;a href=&quot;https://www.lenachen.com/&quot;&gt;Lena Chen&lt;/a&gt;
 &lt;&lt;linkappend &quot;&lt;strong&gt;Narration Nympho&lt;/strong&gt;&quot;&gt;&gt; (Writer)&lt;&lt;/linkappend&gt;&gt;: Lena Chen
 &lt;&lt;linkappend &quot;&lt;strong&gt;Software Princess&lt;/strong&gt;&quot;&gt;&gt; (Software Engineer)&lt;&lt;/linkappend&gt;&gt;: Maggie Oates
 &#39;&#39;Graphic Designer &amp; Videographer:&#39;&#39; &lt;a href=&quot;http://goofytoof.com/&quot;&gt;Goofy Toof&lt;/a&gt;
@@ -2069,6 +2070,7 @@ Quin
 &lt;a href=&quot;https://www.instagram.com/not.your.e.girl/&quot;&gt;Karren&lt;/a&gt;
 &lt;a href=&quot;https://www.twitter.com/missharleykinz&quot;&gt;Nimina Harley&lt;/a&gt;
 &lt;a href=&quot;https://twitter.com/mac_thigh/&quot;&gt;Stonerdomme&lt;/a&gt;
+&lt;/p&gt;
 
 &#39;&#39;Hosting Angel:&#39;&#39; Anonymous Donor 🚲
 
@@ -2304,11 +2306,14 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 &lt;&lt;set $availablePhotos to clone(Object.keys($photoPool))&gt;&gt;
 &lt;&lt;run $availablePhotos.delete(&quot;default&quot;) &gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="8" name="greetings" tags="music-sexi background-cyan bookmark" position="413,252" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;motivation]]&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;makeup&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-blue-white&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="8" name="greetings" tags="music-sexi background-cyan bookmark" position="400,250" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;motivation]]&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;makeup&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-blue-white&quot;&gt;&gt;
 	&lt;&lt;type 60ms&gt;&gt;Welcome, $playerName.&lt;&lt;/type&gt;&gt;
 
-  Did you select your &lt;&lt;link &quot;real name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to true&gt;&gt;&lt;&lt;/link&gt;&gt; or 
-  a &lt;&lt;link &quot;fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to false&gt;&gt;&lt;&lt;/link&gt;&gt;?
+What kind of name did you pick? 
+
+&lt;&lt;link &quot;a real name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to true&gt;&gt;&lt;&lt;/link&gt;&gt; 
+
+&lt;&lt;link &quot;a fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to false&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="motivation" tags="music-sexi background-cyan bookmark" position="524,250" size="100,100">&lt;&lt;backgroundvideo &quot;empty-wallet&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;GOALS&quot; &quot;browser-blue-white&quot;&gt;&gt;
 You&#39;re hoping to earn $&lt;&lt;print &quot;$incomeTarget&quot;&gt;&gt; to pay your gas and water bills in $weekLimit weeks. Every fan you get earns you $&lt;&lt;print &quot;$incomePerFan&quot;&gt;&gt;. If you&#39;re lucky, some of them may even tip you extra! 😘
 
@@ -2640,7 +2645,7 @@ But you also want to give the platforms the chance to change. Even though it’s
 Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
 
 But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
-</tw-passagedata><tw-passagedata pid="37" name="About" tags="music-ambient background-pink-light" position="125,387" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="37" name="About" tags="music-ambient background-pink-light" position="125,400" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
 &lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;&lt;h2&gt; Home Page &lt;/h2&gt;This game lives at &lt;a href=&quot;https://www.onlybansgame.com&quot;&gt;www.onlybansgame.com&lt;/a&gt;.
 
 &lt;h2&gt; About the game &lt;/h2&gt;Created by a team of sex workers and allies, Created by a team of sex workers and allies, OnlyBans is an interactive game that critically examines the policing of marginalized bodies and sexual labor to empathetically teach people about discrimination faced by sex workers online. Players encounter content moderation algorithms, shadowbanning, &quot;real name&quot; policies, facial recognition software, and other threats based on actual experiences of sex workers. Based on research by &lt;a href=&quot;https://hackinghustling.org/posting-into-the-void-content-moderation/&quot;&gt;&quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;&lt;/a&gt; and featuring real images and stories from sex workers themselves, OnlyBans offers a speculative vision of how marginalized communities can unite to protest these unjust policies and create better alternatives.
