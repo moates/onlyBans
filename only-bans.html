@@ -480,9 +480,29 @@ a.link-broken {
 }
 
 
+
+/********************** */
+/* LINE SPACING & SIZE  */
+/* ******************** */
+
 .big-line-height {
  line-height: 2.5; 
 }
+
+.bigger-font {
+ font-size: 1.25em; 
+}
+
+
+/* ************* */
+/*   CHECKBOXES  */
+/* ************* */
+input[type=checkbox] {
+ width: 1.5em;
+ height: 1.5em;
+ margin: 0.5em; 
+}
+
 
 
 /* ************* */
@@ -2015,6 +2035,7 @@ OnlyBans is an online platform where you post sexy content to attract fans and e
 Want to play?
 
 [[Play.-&gt;what-is-your-name]]
+
 &lt;&lt;linkreplace &quot;Read more&quot;&gt;&gt;&lt;&lt;include &quot;StoryMenu&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="what-is-your-name" tags="music-sexi background-cyan bookmark" position="299,253" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;greetings]] 
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;typing&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-white-blue&quot;&gt;&gt;Your name is
@@ -2052,7 +2073,7 @@ Sometimes, parts of the game will require you to click on photos to advance the 
 Sometimes, there are videos; they are just for background viewing.
 
 There is no undo or back button. If you get stuck or something is broken, you can &lt;&lt;link &quot;Restart&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; (found in the left sidebar). 
-</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="147,516" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="music-ambient background-pink" position="0,500" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="147,516" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="music-ambient background-pink" position="0,500" size="100,100">&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;
 &lt;h1&gt;Credits &lt;/h1&gt;&lt;p class=&quot;big-line-height&quot;&gt;&#39;&#39;Creator&#39;&#39;: &lt;a href=&quot;https://www.lenachen.com/&quot;&gt;Lena Chen&lt;/a&gt;
 &lt;&lt;linkappend &quot;&lt;strong&gt;Narration Nympho&lt;/strong&gt;&quot;&gt;&gt; (Writer)&lt;&lt;/linkappend&gt;&gt;: Lena Chen
 &lt;&lt;linkappend &quot;&lt;strong&gt;Software Princess&lt;/strong&gt;&quot;&gt;&gt; (Software Engineer)&lt;&lt;/linkappend&gt;&gt;: Maggie Oates
@@ -2086,7 +2107,9 @@ Thank you Lien Tran, the creator of &lt;a href=&quot;http://copsandrubbers.com/&
 We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an early version of OnlyBans. Thank you to Kelly Strayhorn Theater for supporting the project’s visual development and narrative expansion during the Freshworks residency. This work was also supported by the UC Berkeley Center for Long-Term Cybersecurity, the Carnegie Mellon School of Art, and Science Gallery Detroit.
 
 The OnlyBans narrative is inspired by contributions gathered in workshops we held with &lt;a href=&quot;https://decodingstigma.tech/&quot;&gt;Decoding Stigma&lt;/a&gt; in fall 2022. Participants included … The M0THER ending also includes language from Gabriella Garcia.
-</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="92,56" size="100,100">/* PLAY MODES */
+
+
+&lt;h2&gt;&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;&lt;/h2&gt;</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="92,56" size="100,100">/* PLAY MODES */
 /* &lt;&lt;$isGalleryMode&gt;&gt; is controlled by Javascript, disables some features */ 
 /* &lt;&lt;$isQATestMode&gt;&gt; is controlled by the Javascript */
 
@@ -2306,7 +2329,7 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 &lt;&lt;set $availablePhotos to clone(Object.keys($photoPool))&gt;&gt;
 &lt;&lt;run $availablePhotos.delete(&quot;default&quot;) &gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="8" name="greetings" tags="music-sexi background-cyan bookmark" position="400,250" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;motivation]]&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;makeup&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-blue-white&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="8" name="greetings" tags="music-sexi background-cyan bookmark" position="425,250" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;motivation]]&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;makeup&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-blue-white&quot;&gt;&gt;
 	&lt;&lt;type 60ms&gt;&gt;Welcome, $playerName.&lt;&lt;/type&gt;&gt;
 
 What kind of name did you pick? 
@@ -2363,8 +2386,8 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
   Do you want to [[ask other sex workers for advice-&gt;stolen-content]] or [[ignore it-&gt;photo-selection]]?
 &lt;&lt;elseif  _outingBranch == &quot;personal-data&quot;&gt;&gt;
 	Shooting and posting content is hard work, but what nobody told you about was all the invisible effort of chatting with fans. Like working in a coffee shop, you start to get regular customers who tip you again and again. And then there are some people who are just there for freebies or who are just plain rude.
-	There&#39;s yet another [[fan message to deal with.-&gt;personal-data]]
-
+	
+    There&#39;s yet another [[fan message to deal with.-&gt;personal-data]]
 &lt;&lt;elseif _outingBranch == &quot;suggested-friends&quot;&gt;&gt;
 	OnlyBans sent you a list of suggested followers. You think you recognize one of the people? [[Take a closer look.-&gt;suggested-friends]] 
 &lt;&lt;else&gt;&gt;
@@ -2537,7 +2560,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 Thank you for verifying your phone number. 
 	
 For somewhat vague safety reasons, we still need more information before you can cash out any money from your account.
-&lt;div style=&quot;text-align:left&quot;&gt;
+&lt;div style=&quot;text-align:left&quot; class=&quot;big-line-height&quot;&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedName&quot; false true&gt;&gt; Add your legal name.&lt;/label&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedAddress&quot; false true&gt;&gt; Add a personal email.&lt;/label&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedID&quot; false true&gt;&gt; Upload a photo of yourself holding your state ID.&lt;/label&gt;&lt;/div&gt;
@@ -2645,7 +2668,8 @@ But you also want to give the platforms the chance to change. Even though it’s
 Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
 
 But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
-</tw-passagedata><tw-passagedata pid="37" name="About" tags="music-ambient background-pink-light" position="125,400" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="37" name="About" tags="music-ambient background-pink-light" position="125,400" size="100,100">&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;
+
 &lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;&lt;h2&gt; Home Page &lt;/h2&gt;This game lives at &lt;a href=&quot;https://www.onlybansgame.com&quot;&gt;www.onlybansgame.com&lt;/a&gt;.
 
 &lt;h2&gt; About the game &lt;/h2&gt;Created by a team of sex workers and allies, Created by a team of sex workers and allies, OnlyBans is an interactive game that critically examines the policing of marginalized bodies and sexual labor to empathetically teach people about discrimination faced by sex workers online. Players encounter content moderation algorithms, shadowbanning, &quot;real name&quot; policies, facial recognition software, and other threats based on actual experiences of sex workers. Based on research by &lt;a href=&quot;https://hackinghustling.org/posting-into-the-void-content-moderation/&quot;&gt;&quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;&lt;/a&gt; and featuring real images and stories from sex workers themselves, OnlyBans offers a speculative vision of how marginalized communities can unite to protest these unjust policies and create better alternatives.
@@ -2671,7 +2695,8 @@ Digital discrimination and deplatforming of sex workers is a direct result of FO
 
 &lt;a href= &quot;https://decodingstigma.tech/&quot;&gt;Decoding Stigma&lt;/a&gt; bridges the gap between sex workers, academics, technologists, and anyone who holds multiples of these identities. Their goal is to prioritize sexual autonomy as a necessary ethics question for researchers and technologists and to design a liberatory future in which sexually stigmatized voices are amplified and celebrated.
 &lt;&lt;/browserwindow&gt;&gt;
-&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
+
+&lt;h2&gt;&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;&lt;/h2&gt;
 </tw-passagedata><tw-passagedata pid="38" name="StorySubtitle" tags="" position="15,631" size="100,100">Goal: Get $&lt;&lt;print $incomeTarget&gt;&gt; by week $weekLimit
 Wallet: $&lt;&lt;print $income&gt;&gt;
 Week: $numWeek</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="music-ambient background-cyan bookmark" position="198,1402" size="100,100">&lt;&lt;silently&gt;&gt;
@@ -2701,7 +2726,7 @@ They share your pics to their feed. You attract _numNewFans new fans and make so
 &lt;&lt;/linkreplace&gt;&gt;
 &lt;/section&gt;&lt;&lt;/nobr&gt;&gt;
 
-[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="40" name="tip" tags="music-sexi background-cyan-transparent bookmark" position="449,1398" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="40" name="tip" tags="music-sexi background-cyan-transparent bookmark" position="449,1398" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _tip to random(10,100)&gt;&gt;
 	&lt;&lt;set _intro to either(
 	&quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
@@ -2849,7 +2874,7 @@ You get a DM from a sex worker you follow...
 	&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/type&gt;&gt;
 &lt;/section&gt;
 &lt;&lt;/nobr&gt;&gt;
-[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="47" name="joinedGroup" tags="music-sexi bookmark background-dark" position="567,1510" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="47" name="joinedGroup" tags="music-sexi bookmark background-dark" position="567,1510" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 	&lt;&lt;set $lessonNumbers to [1,2]&gt;&gt;
 	&lt;&lt;set _lessonNumber to $lessonNumbers.random()&gt;&gt;
