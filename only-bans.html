@@ -99,87 +99,6 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
 	<tw-storydata name="only-bans" startnode="42" creator="Twine" creator-version="2.6.1" format="SugarCube" format-version="2.36.1" ifid="42759014-81BE-426C-AAEA-A6D8DEB88873" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">
-/* ******************************* */
-/*    REAL STORY PHOTO OVERLAY     */
-/* ******************************* */
-/* Container needed to position the overlay. Adjust the width as needed */
-.photo-sidebyside {
-  display: inline-flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  max-width: 100%;
-  max-height: 22em;
-  
-  justify-content:space-evenly;
-  align-items: center;
-  align-content: center;
-}
-
-.side-stacked {
-  max-width:10em; 
-  max-height:10em; 
-  margin: 1em;
-}
-
-.photo-stack{
-	display: inline-flex;
-  	position: relative;
-    align-items: center;
-    justify-content:center;
-    height:10em;
-    width:10em;
-  }
-
-.over-stack {
-  	max-height:100%;
-  	position: absolute;
-    top: 0em;
-  	left:0em;	
-  	z-index: 3;  	
-}
-
-.fade-top {
-  	opacity: 1;
-  	-webkit-animation: fadeInOut 10s infinite ease-in-out;
-    -ms-animation: fadeInOut 10s infinite ease-in-out;  
-    -o-animation: fadeInOut 10s infinite ease-in-out;
-    animation: fadeInOut 10s infinite ease-in-out;  
-}
-
-/* The overlay effect (full height and width) - lays on top of the container and over the image */
-.under-stack {
-  	max-height:100%;
-  	position: absolute;
-    top: 0em;
-  	left:0em;
-  	z-index:2;
-}
-
-@keyframes fadeInOut { 
-  0%   { opacity:1; }
-  10%  { opacity:0; }
-  50%  { opacity:0; }
-  60% { opacity:1; }
-}
-
-@-o-keyframes fadeInOut{
-  0%   { opacity:1; }
-  10%  { opacity:0; }
-  50%  { opacity:0; }
-  60% { opacity:1; }
-}
-@-moz-keyframes fadeInOut{
-  0%   { opacity:1; }
-  10%  { opacity:0; }
-  50%  { opacity:0; }
-  60% { opacity:1; }
-}
-@-webkit-keyframes fadeInOut{
-  0%   { opacity:1; }
-  10%  { opacity:0; }
-  50%  { opacity:0; }
-  60% { opacity:1; }
-}
 
 
 /* ************* */
@@ -563,6 +482,88 @@ a.link-broken {
   background-color: none;
 }
 
+
+/* ******************************* */
+/*    REAL STORY PHOTO OVERLAY     */
+/* ******************************* */
+/* Container needed to position the overlay. Adjust the width as needed */
+.photo-sidebyside {
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  max-width: 100%;
+  max-height: 22em;
+  
+  justify-content:space-evenly;
+  align-items: center;
+  align-content: center;
+}
+
+.side-stacked {
+  max-width:10em; 
+  max-height:10em; 
+  margin: 1em;
+}
+
+.photo-stack{
+	display: inline-flex;
+  	position: relative;
+    align-items: center;
+    justify-content:center;
+    height:10em;
+    width:10em;
+  }
+
+.over-stack {
+  	max-height:100%;
+  	position: absolute;
+    top: 0em;
+  	left:0em;	
+  	z-index: 3;  	
+}
+
+.fade-top {
+  	opacity: 1;
+  	-webkit-animation: fadeInOut 10s infinite ease-in-out;
+    -ms-animation: fadeInOut 10s infinite ease-in-out;  
+    -o-animation: fadeInOut 10s infinite ease-in-out;
+    animation: fadeInOut 10s infinite ease-in-out;  
+}
+
+/* The overlay effect (full height and width) - lays on top of the container and over the image */
+.under-stack {
+  	max-height:100%;
+  	position: absolute;
+    top: 0em;
+  	left:0em;
+  	z-index:2;
+}
+
+@keyframes fadeInOut { 
+  0%   { opacity:1; }
+  10%  { opacity:0; }
+  50%  { opacity:0; }
+  60% { opacity:1; }
+}
+
+@-o-keyframes fadeInOut{
+  0%   { opacity:1; }
+  10%  { opacity:0; }
+  50%  { opacity:0; }
+  60% { opacity:1; }
+}
+@-moz-keyframes fadeInOut{
+  0%   { opacity:1; }
+  10%  { opacity:0; }
+  50%  { opacity:0; }
+  60% { opacity:1; }
+}
+@-webkit-keyframes fadeInOut{
+  0%   { opacity:1; }
+  10%  { opacity:0; }
+  50%  { opacity:0; }
+  60% { opacity:1; }
+}
 
 
 /********************** */
@@ -2143,7 +2144,8 @@ We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an
 The OnlyBans narrative is inspired by contributions gathered in workshops we held with &lt;a href=&quot;https://decodingstigma.tech/&quot;&gt;Decoding Stigma&lt;/a&gt; in fall 2022. Participants included … The M0THER ending also includes language from Gabriella Garcia.
 
 
-&lt;h2&gt;&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;&lt;/h2&gt;</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="92,56" size="100,100">/* PLAY MODES */
+&lt;h2&gt;&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;&lt;/h2&gt;
+</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="92,56" size="100,100">/* PLAY MODES */
 /* &lt;&lt;$isGalleryMode&gt;&gt; is controlled by Javascript, disables some features */ 
 /* &lt;&lt;$isQATestMode&gt;&gt; is controlled by the Javascript */
 
