@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="only-bans" startnode="42" creator="Twine" creator-version="2.6.1" format="SugarCube" format-version="2.36.1" ifid="42759014-81BE-426C-AAEA-A6D8DEB88873" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* ************* */
+	<tw-storydata name="only-bans" startnode="42" creator="Twine" creator-version="2.6.2" format="SugarCube" format-version="2.36.1" ifid="42759014-81BE-426C-AAEA-A6D8DEB88873" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* ************* */
 /* GENERAL STYLE  */
 /* ************* */
 
@@ -2785,7 +2785,7 @@ This seems completely unfair, but you&#39;re not the first sex worker to have th
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	Well, that sucks, but [[let&#39;s do some research?-&gt;community-support]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="shadowBan-real-story" tags="music-dark bookmark background-gray" position="463,1023" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="shadowBan-real-story" tags="music-dark bookmark background-gray" position="475,1025" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
   &lt;&lt;set _currentStat to either(
 	  &#39;&quot;We are reducing the spread of posts that are inappropriate but do not go against guidelines, limiting them from being recommended on our Explore and hashtag pages. For example, a sexually suggestive post will still appear in Feed if you follow the account that posts it, but this type of content may not appear for the broader community.&quot; –Instagram&quot;&#39;,
@@ -3028,34 +3028,73 @@ They share your pics to their feed. You attract _numNewFans new fans and make so
 
 [[sex-worker-help]] look at share-for-share passage
 
-[[challenge-the-decision]]</tw-passagedata><tw-passagedata pid="55" name="user-agreement" tags="" position="1650,1250" size="100,100">The policy says: “We don’t allow users to buy or sell sexually oriented digital goods or content delivered through a digital medium.”
+[[challenge-the-decision]]
+
+
+&lt;&lt;if visited(&quot;user-agreement&quot;)&gt;&gt;&lt;s&gt;Read more about the user agreement.&lt;/s&gt;&lt;&lt;else&gt;&gt;[[Read more about the user agreement.|user-agreement]]&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;if visited(&quot;sex-worker-help&quot;)&gt;&gt;&lt;s&gt;Ask a sex worker friend for help.&lt;/s&gt;&lt;&lt;else&gt;&gt;[[Ask a sex worker friend for help.|sex-worker-help]]&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;if visited(&quot;challenge-the-decision&quot;)&gt;&gt;&lt;s&gt;Challenge the decision.&lt;/s&gt;&lt;&lt;else&gt;&gt;[[Challenge the decision.|challenge-the-decision]]&lt;&lt;/if&gt;&gt;
+</tw-passagedata><tw-passagedata pid="55" name="user-agreement" tags="" position="1650,1250" size="100,100">The policy says: “We don’t allow users to buy or sell sexually oriented digital goods or content delivered through a digital medium.”
 
 Hmm … “sexually oriented” sounds so vague. How does the platform decide what isn’t allowed? You do Google search and find out that most decisions are made by AI, which can even flag the tips from your clients.
 
 
-[[What else can you do?-&gt;action-items]] </tw-passagedata><tw-passagedata pid="56" name="sex-worker-help" tags="" position="1775,1075" size="100,100">You: Hey Stonerdomme, it’s XXX. I just lost access to my account with all my money 🙁
-Stonerdomme: Oh no!! That sucks. That happened to me last year and I never got my account back. Now I can’t even make a new one with the same bank information.
+[[What else can you do?-&gt;action-items]] </tw-passagedata><tw-passagedata pid="56" name="sex-worker-help" tags="" position="1775,1075" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;	
+&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;
+&lt;&lt;chat &#39;from-me&#39;&gt;&gt;
+Hey Stonerdomme, it’s $playerName. I just lost access to my account with all my money 🙁
+&lt;&lt;/chat&gt;&gt;
+&lt;&lt;chat &#39;from-them&#39;  10ms&gt;&gt;
+Oh no!! That sucks. That happened to me last year and I never got my account back. Now I can’t even make a new one with the same bank information.
+&lt;&lt;/chat&gt;&gt;
+&lt;&lt;chat &#39;from-me&#39;  10ms&gt;&gt;
+Ugh, I’m so sorry. Do you know why is this happening?
+&lt;&lt;/chat&gt;&gt;
+&lt;&lt;chat &#39;from-them&#39;  10ms&gt;&gt;
+So after the US Congress passed a law called FOSTA-SESTA in 2018, platforms started making stricter moderation policies and banning sex worker accounts. They didn’t want to get in trouble for facilitating sex trafficking.
+&lt;&lt;/chat&gt;&gt;
+&lt;&lt;chat &#39;from-me&#39;  10ms&gt;&gt;
+Yeah, I noticed photos were getting flagged, but I didn’t realize they wouldn’t let me withdraw my money. That’s basically stealing from me!
+&lt;&lt;/chat&gt;&gt;
+&lt;&lt;chat &#39;from-them&#39;  10ms&gt;&gt;
+ It’s so messed up. I wish I could help, but maybe you can challenge the decision? Don’t hold your breath though.
+&lt;&lt;/chat&gt;&gt;
+&lt;&lt;chat &#39;from-me&#39;  10ms&gt;&gt;
+I guess I have nothing left to lose.
+&lt;&lt;/chat&gt;&gt;
+&lt;/section&gt;&lt;&lt;/nobr&gt;&gt;
 
-You: Ugh, I’m so sorry. Do you know why is this happening?
+&lt;&lt;type 0ms start 0.5s&gt;&gt;[[What should you do now?-&gt;action-items]] &lt;&lt;/type&gt;&gt;
 
-Stonerdomme: So after the US Congress passed a law called FOSTA-SESTA in 2018, platforms started making stricter moderation policies and banning sex worker accounts. They didn’t want to get in trouble for facilitating sex trafficking.
 
-You: Yeah, I noticed photos were getting flagged, but I didn’t realize they wouldn’t let me withdraw my money. That’s basically stealing from me!
 
-Stonerdomme: It’s so messed up. I wish I could help, but maybe you can challenge the decision? Don’t hold your breath though.
 
-You: I guess I have nothing left to lose.
-
-[[What should you do now?-&gt;action-items]] </tw-passagedata><tw-passagedata pid="57" name="challenge-the-decision" tags="" position="1300,1150" size="100,100">You look up the customer service page to reach someone who can help you, but all you can find is a feedback form.
+</tw-passagedata><tw-passagedata pid="57" name="challenge-the-decision" tags="" position="1300,1150" size="100,100">You look up the customer service page to reach someone who can help you, but all you can find is a feedback form.
 
 Tell us about your issue. [Allow player to fill out feedback form]
 
-48 hours later, you receive this message: After a review, we decided to permanently limit your account as we found potential risk associated with it. You&#39;ll not be able to conduct any further business with us. Any money in your balance will be held for 180 days. After that, we&#39;ll send you an email with instructions on how to access your money.
+&lt;&lt;set $submitClicked to false&gt;&gt;
 
-180 days?! You have bills to pay TODAY. You’re pissed, broke, and tired of fighting an unfair system. [[immobile-community-chat]]
+&lt;&lt;browserwindow &quot;&quot; &quot;browser-white-blue&quot;&gt;&gt;Tell us about your issue.
+&lt;&lt;textarea &quot;$challengeIssueText&quot; &quot;My issue is...&quot;&gt;&gt;
+&lt;&lt;linkreplace &quot;Submit&quot;&gt;&gt;Submitted&lt;&lt;/linkreplace&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;
 
+48 hours later, you receive this message: 
 
-example in suggested-friends (for text input)
+&lt;&lt;browserwindow &quot;&quot; &quot;browser-white-blue&quot;&gt;&gt;
+
+After a review, we decided to permanently limit your account as we found potential risk associated with it. You&#39;ll not be able to conduct any further business with us. Any money in your balance will be held for 180 days. After that, we&#39;ll send you an email with instructions on how to access your money.
+
+&lt;&lt;/browserwindow&gt;&gt;
+
+180 days?! You have bills to pay TODAY. You’re pissed, broke, and tired of fighting an unfair system. 
+
+[[It’s time to mobilize your community.|immobile-community-chat]]
+
 </tw-passagedata><tw-passagedata pid="58" name="immobile-community-chat" tags="" position="1300,1275" size="100,100">You: Hey y’all, I started this group chat because am SO DONE with getting flagged, censored, and deplatformed!
 
 Moonie: Thank you for inviting me here. I’ve been trying for months to reach a human being who can unlock my account.
