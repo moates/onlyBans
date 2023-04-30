@@ -99,87 +99,6 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
 	<tw-storydata name="only-bans" startnode="42" creator="Twine" creator-version="2.6.1" format="SugarCube" format-version="2.36.1" ifid="42759014-81BE-426C-AAEA-A6D8DEB88873" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">
-/* ******************************* */
-/*    REAL STORY PHOTO OVERLAY     */
-/* ******************************* */
-/* Container needed to position the overlay. Adjust the width as needed */
-.photo-sidebyside {
-  display: inline-flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  max-width: 100%;
-  max-height: 22em;
-  
-  justify-content:space-evenly;
-  align-items: center;
-  align-content: center;
-}
-
-.side-stacked {
-  max-width:10em; 
-  max-height:10em; 
-  margin: 1em;
-}
-
-.photo-stack{
-	display: inline-flex;
-  	position: relative;
-    align-items: center;
-    justify-content:center;
-    height:10em;
-    width:10em;
-  }
-
-.over-stack {
-  	max-height:100%;
-  	position: absolute;
-    top: 0em;
-  	left:0em;	
-  	z-index: 3;  	
-}
-
-.fade-top {
-  	opacity: 1;
-  	-webkit-animation: fadeInOut 10s infinite ease-in-out;
-    -ms-animation: fadeInOut 10s infinite ease-in-out;  
-    -o-animation: fadeInOut 10s infinite ease-in-out;
-    animation: fadeInOut 10s infinite ease-in-out;  
-}
-
-/* The overlay effect (full height and width) - lays on top of the container and over the image */
-.under-stack {
-  	max-height:100%;
-  	position: absolute;
-    top: 0em;
-  	left:0em;
-  	z-index:2;
-}
-
-@keyframes fadeInOut { 
-  0%   { opacity:1; }
-  10%  { opacity:0; }
-  50%  { opacity:0; }
-  60% { opacity:1; }
-}
-
-@-o-keyframes fadeInOut{
-  0%   { opacity:1; }
-  10%  { opacity:0; }
-  50%  { opacity:0; }
-  60% { opacity:1; }
-}
-@-moz-keyframes fadeInOut{
-  0%   { opacity:1; }
-  10%  { opacity:0; }
-  50%  { opacity:0; }
-  60% { opacity:1; }
-}
-@-webkit-keyframes fadeInOut{
-  0%   { opacity:1; }
-  10%  { opacity:0; }
-  50%  { opacity:0; }
-  60% { opacity:1; }
-}
 
 
 /* ************* */
@@ -564,6 +483,110 @@ a.link-broken {
 }
 
 
+/* ******************************* */
+/*    REAL STORY PHOTO OVERLAY     */
+/* ******************************* */
+/* Container needed to position the overlay. Adjust the width as needed */
+.photo-sidebyside {
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  max-width: 100%;
+  max-height: 22em;
+  
+  justify-content:space-evenly;
+  align-items: center;
+  align-content: center;
+}
+
+.side-stacked {
+  max-width:10em; 
+  max-height:10em; 
+  margin: 1em;
+}
+
+.photo-stack{
+	display: inline-flex;
+  	position: relative;
+    align-items: center;
+    justify-content:center;
+    height:10em;
+    width:10em;
+  }
+
+.over-stack {
+  	max-height:100%;
+  	position: absolute;
+    top: 0em;
+  	left:0em;	
+  	z-index: 3;  	
+}
+
+.fade-top {
+  	opacity: 1;
+  	-webkit-animation: fadeInOut 10s infinite ease-in-out;
+    -ms-animation: fadeInOut 10s infinite ease-in-out;  
+    -o-animation: fadeInOut 10s infinite ease-in-out;
+    animation: fadeInOut 10s infinite ease-in-out;  
+}
+
+/* The overlay effect (full height and width) - lays on top of the container and over the image */
+.under-stack {
+  	max-height:100%;
+  	position: absolute;
+    top: 0em;
+  	left:0em;
+  	z-index:2;
+}
+
+@keyframes fadeInOut { 
+  0%   { opacity:1; }
+  10%  { opacity:0; }
+  50%  { opacity:0; }
+  60% { opacity:1; }
+}
+
+@-o-keyframes fadeInOut{
+  0%   { opacity:1; }
+  10%  { opacity:0; }
+  50%  { opacity:0; }
+  60% { opacity:1; }
+}
+@-moz-keyframes fadeInOut{
+  0%   { opacity:1; }
+  10%  { opacity:0; }
+  50%  { opacity:0; }
+  60% { opacity:1; }
+}
+@-webkit-keyframes fadeInOut{
+  0%   { opacity:1; }
+  10%  { opacity:0; }
+  50%  { opacity:0; }
+  60% { opacity:1; }
+}
+
+
+/********************** */
+/* LINE SPACING & SIZE  */
+/* ******************** */
+
+.big-line-height {
+ line-height: 2.5; 
+}
+
+.bigger-font {
+ font-size: 1.25em; 
+}
+
+
+/* ************* */
+/*   CHECKBOXES  */
+/* ************* */
+input[type=checkbox] {
+ width: 1.5em;
+ height: 1.5em;
+ margin: 0.5em; 
+}
 
 
 
@@ -2047,6 +2070,7 @@ OnlyBans is an online platform where you post sexy content to attract fans and e
 Want to play?
 
 [[Play.-&gt;what-is-your-name]]
+
 &lt;&lt;linkreplace &quot;Read more&quot;&gt;&gt;&lt;&lt;include &quot;StoryMenu&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="what-is-your-name" tags="music-sexi background-cyan bookmark" position="299,253" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;greetings]] 
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;typing&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-white-blue&quot;&gt;&gt;Your name is
@@ -2084,9 +2108,8 @@ Sometimes, parts of the game will require you to click on photos to advance the 
 Sometimes, there are videos; they are just for background viewing.
 
 There is no undo or back button. If you get stuck or something is broken, you can &lt;&lt;link &quot;Restart&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; (found in the left sidebar). 
-</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="147,516" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="music-ambient background-pink" position="25,525" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
-&lt;h1&gt;Credits &lt;/h1&gt;
-&#39;&#39;Creator&#39;&#39;: &lt;a href=&quot;https://www.lenachen.com/&quot;&gt;Lena Chen&lt;/a&gt;
+</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="147,516" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="music-ambient background-pink" position="0,500" size="100,100">&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;
+&lt;h1&gt;Credits &lt;/h1&gt;&lt;p class=&quot;big-line-height&quot;&gt;&#39;&#39;Creator&#39;&#39;: &lt;a href=&quot;https://www.lenachen.com/&quot;&gt;Lena Chen&lt;/a&gt;
 &lt;&lt;linkappend &quot;&lt;strong&gt;Narration Nympho&lt;/strong&gt;&quot;&gt;&gt; (Writer)&lt;&lt;/linkappend&gt;&gt;: Lena Chen
 &lt;&lt;linkappend &quot;&lt;strong&gt;Software Princess&lt;/strong&gt;&quot;&gt;&gt; (Software Engineer)&lt;&lt;/linkappend&gt;&gt;: Maggie Oates
 &#39;&#39;Graphic Designer &amp; Videographer:&#39;&#39; &lt;a href=&quot;http://goofytoof.com/&quot;&gt;Goofy Toof&lt;/a&gt;
@@ -2103,6 +2126,7 @@ Quin
 &lt;a href=&quot;https://www.instagram.com/not.your.e.girl/&quot;&gt;Karren&lt;/a&gt;
 &lt;a href=&quot;https://www.twitter.com/missharleykinz&quot;&gt;Nimina Harley&lt;/a&gt;
 &lt;a href=&quot;https://twitter.com/mac_thigh/&quot;&gt;Stonerdomme&lt;/a&gt;
+&lt;/p&gt;
 
 &#39;&#39;Hosting Angel:&#39;&#39; Anonymous Donor 🚲
 
@@ -2118,7 +2142,10 @@ Thank you Lien Tran, the creator of &lt;a href=&quot;http://copsandrubbers.com/&
 We also thank Polis 180 and Violeta Mezeklieva, with whom Lena conceptualized an early version of OnlyBans. Thank you to Kelly Strayhorn Theater for supporting the project’s visual development and narrative expansion during the Freshworks residency. This work was also supported by the UC Berkeley Center for Long-Term Cybersecurity, the Carnegie Mellon School of Art, and Science Gallery Detroit.
 
 The OnlyBans narrative is inspired by contributions gathered in workshops we held with &lt;a href=&quot;https://decodingstigma.tech/&quot;&gt;Decoding Stigma&lt;/a&gt; in fall 2022. Participants included … The M0THER ending also includes language from Gabriella Garcia.
-</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="100,50" size="100,100">/* PLAY MODES */
+
+
+&lt;h2&gt;&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;&lt;/h2&gt;
+</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="92,56" size="100,100">/* PLAY MODES */
 /* &lt;&lt;$isGalleryMode&gt;&gt; is controlled by Javascript, disables some features */ 
 /* &lt;&lt;$isQATestMode&gt;&gt; is controlled by the Javascript */
 
@@ -2240,15 +2267,15 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 			&quot;1_JP&quot;,
 			&quot;high&quot;,
 			&quot;A person with medium dark skin, buzzed hair, and a mustache. The person is kneeling in an orange fishnet body stocking and a matching banana hammock. Nipples are faintly visible.&quot;,
-			&quot;JP vaporAlt&quot;,
+			&quot;A flirty vaporwave photo of a person with medium dark skin, buzzed hair, and a mustache. The person is kneeling in an orange fishnet body stocking and a matching banana hammock. Nipples are faintly visible.&quot;,
 			&quot;J.P. (Themme)&quot;,
 			&quot;I&#39;m a trans diasporic person by way of the Dominican Republic. These pictures were flagged on Instagram, and I&#39;m currently on probation, with my account near deletion.&quot;),
 			
 	&quot;quin&quot; : new Photo(&quot;quin&quot;,
 			&quot;3_Quin&quot;,
 			&quot;medium&quot;,
-			&quot;A light-skinned, tattooed, thin person lies chest-down on a cushion with their butt lifted slightly into the air. They are wearing strong eyelines, a nose ring, and pink thong bodysuit lingerie with a few bows. No nipples or genitals are in view.&quot;,
-			&quot;q vapor&quot;,
+			&quot;A light-skinned, tattooed, thin femme lies chest-down on a cushion with their butt lifted slightly into the air. They are wearing strong eyelines, a nose ring, and pink thong bodysuit lingerie with a few bows. No nipples or genitals are in view.&quot;,
+			&quot;A flirty vaporwave photo of a light-skinned, tattooed, thin femme lies chest-down on a cushion with their butt lifted slightly into the air. They are wearing strong eyelines, a nose ring, and pink thong bodysuit lingerie with a few bows. No nipples or genitals are in view.&quot;,
 			&quot;Quin&quot;,
 			&quot;I&#39;m a gay, non-binary, Latinx sex worker. I’ve been working for 9 years and have been flagged so many times that I can&#39;t keep count. My personal account of 10 years was taken away from me.&quot;
 			),
@@ -2257,7 +2284,7 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 			&quot;4_Stonerdomme&quot;,
 			&quot;medium&quot;,
 			&quot;Stonerdomme (they/them) holds up two peace signs to the camera with their legs spread. Dressed in yellow lingerie, Stonerdomme is a Black, dark-skinned fat person with pink and purple-dyed natural hair, a belly, curves, and a devilish smirk.&quot;,
-			&quot;sd vapor&quot;,
+			&quot;A flirty vaporwave graphic. Stonerdomme (they/them) holds up two peace signs to the camera with their legs spread. Dressed in yellow lingerie, Stonerdomme is a Black, dark-skinned fat person with pink and purple-dyed natural hair, a belly, curves, and a devilish smirk.&quot;,
 			&quot;Stonerdomme&quot;,
 			&quot;I&#39;m Black, pansexual, and non-binary. This image was used against me in a Twitter debate. Someone reported my content and they banned me.&quot;	
 		),
@@ -2266,7 +2293,7 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 			&quot;12_Fae&quot;,
 			&quot;low&quot;,
 			&quot;A Black, light skinned femme with tight curly hair, glasses, and dark lipstick gazes listlessly at the camera. They are wearing a leather chest harness and fishnet tights. Their arms cover most of their flat chest, but the faint outline of a nipple is visible.&quot;,
-			&quot;fae alt&quot;,
+			&quot;A flirty vaporwave photo of a Black, light skinned femme with tight curly hair, glasses, and dark lipstick gazes listlessly at the camera. They are wearing a leather chest harness and fishnet tights. Their arms cover most of their flat chest, but the faint outline of a nipple is visible.&quot;,
 			&quot;Fae Brite&quot;,
 			&quot;I&#39;m AMAB (assigned male at birth) and non-binary so it&#39;s frustrating to have my body policed in a way where the more feminine I look, the more incriminating it is and thus more of a liability.&quot;
 		),
@@ -2275,7 +2302,7 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 			&quot;5_Amala&quot;,
 			&quot;low&quot;,
 			&quot;Amala Azul leans shirtless toward the camera with one hand covering both breasts. Amala is Black and wear a checkered skirt, hoop earrings, a head scarf, and fantastic eyebrows. No nipples are showing.&quot;,
-			&quot;amala alt&quot;,
+			&quot;A flirty vaporwave photo. Someone leans shirtless toward the camera with one hand covering both breasts. Amala is Black and wear a checkered skirt, hoop earrings, a head scarf, and fantastic eyebrows. No nipples are showing.&quot;,
 			&quot;Amala Azul&quot;,
 			&quot;I&#39;m a Black, queer, non-binary, and disabled sex worker. This photo was deleted for violating community guidelines, and I was threatened with account deletion if I continued. I no longer promote on Instagram due to the immense censorship and whorephobia.&quot;
 	),	
@@ -2284,7 +2311,7 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 			&quot;6_Nimina&quot;,
 			&quot;low&quot;,
 			&quot;A medium-skinned, large person with a bright green wig winks and holds two peace signs up. They are wearing a sleeveless velvety pink top with the word Angel, glasses, impeccable stilleto nails, dimple piercings, and a studded leather collar. There is a small amount of cleavage visible.&quot;,
-			&quot;nimina vapor alt&quot;,
+			&quot;Flirty vaporwave. A medium-skinned, large person with a bright green wig winks and holds two peace signs up. They are wearing a sleeveless velvety pink top with the word Angel, glasses, impeccable stilleto nails, dimple piercings, and a studded leather collar. There is a small amount of cleavage visible.&quot;,
 			&quot;Nimina Harley&quot;,
 			&quot;This image was deleted only minutes after uploading, and I am fully dressed. I’m queer and a person of color.&quot;
 	),
@@ -2293,7 +2320,7 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 			&quot;11_Hellbait&quot;,
 			&quot;medium&quot;,
 			&quot;A pale-skinned Vietnamese woman with long black hair and half bleached bangs holds two black butt plugs to her head like alien antennae. A yellow Tellytubby toy sits on her lap. She is topless, wearing high-waisted black lace underwear. Her hair fully covers her breasts. Her mouth is held open with a metal gag device, tongue out, as she gazes directly at you.&quot;,
-			&quot;hellbait vapor alt&quot;,
+			&quot;Flirty vaporwave photo of a pale-skinned Vietnamese woman with long black hair and half bleached bangs holds two black butt plugs to her head like alien antennae. A yellow Tellytubby toy sits on her lap. She is topless, wearing high-waisted black lace underwear. Her hair fully covers her breasts. Her mouth is held open with a metal gag device, tongue out, as she gazes directly at you.&quot;,
 			&quot;Hellbait&quot;,
 			&quot;I&#39;m Vietnamese and queer. My image was removed for &#39;sexual activity&#39; on Instagram. For the next two weeks, I did not show up in search results or on my followers&#39; feeds at all.&quot;	
 	),
@@ -2302,7 +2329,7 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 			&quot;9_Karren1&quot;,
 			&quot;high&quot;,
 			&quot;Karren is a thin, shirtless woman with has light skin, dark hair, and a perfect manicure. She sultrily slides one hand under sheer tights into her crotch. The portion of her face above the lips has been cropped off of the intimate monochrome image.&quot;,
-			&quot;karren vapor alt&quot;,
+			&quot;A flirty vaporwave stylized photo. Karren is a thin, shirtless woman with has light skin, dark hair, and a perfect manicure. She sultrily slides one hand under sheer tights into her crotch. The portion of her face above the lips has been cropped off of the intimate image.&quot;,
 			&quot;Karren&quot;,
 			&quot;I am an erotic artist in the Philippines using photography and collage to express myself. Censorship on almost all platforms has made it difficult for me to pursue my art.&quot;	
 	),
@@ -2311,7 +2338,7 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 			&quot;10_Karren2&quot;,
 			&quot;high&quot;,
 			&quot;Karren is a voluptuous, tan skinned woman standing at an angle slightly away from the camera. She is shirtless with dark brief underwear. One nipple is visible.&quot;,
-			&quot;karren2 vapor alt&quot;,
+			&quot;A flirty vaporwave-styled photo. A voluptuous, tan skinned woman standing at an angle slightly away from the camera. She is shirtless with dark brief underwear. One nipple is visible.&quot;,
 			&quot;Karren&quot;,
 			&quot;I am an erotic artist in the Philippines using photography and collage to express myself. Censorship on almost all platforms has made it difficult for me to pursue my art.&quot;
 	),
@@ -2319,8 +2346,8 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 	&quot;lync2&quot; : new Photo(&quot;lync2&quot;,
 			&quot;8_Lync2&quot;,
 			&quot;high&quot;,
-			&quot;A thin, muscular Black man stares into the camera. One hand lifts up his shirt above his nipple. The other hand reaches down into his pants, revealing the edge of public hair.&quot;,
-			&quot;lync2 vapor alt&quot;,
+			&quot;A naked, thin, muscular Black man stares into the camera. The image is cropped at the edge of his groin, revealing the faintest suggestion of genitals. Both nipples are visible. Watermarked with RoyMayh.&quot;,
+			&quot;Flirty, vaporwave styled. A naked, thin, muscular Black man stares into the camera. The image is cropped at the edge of his groin, revealing the faintest suggestion of genitals. Both nipples are visible.&quot;,
 			&quot;Lync Johnson&quot;,
 			&quot;This image was deleted by Instagram.  I had to crop or edit the photo in order to successfully repost it.&quot;
 	),
@@ -2328,8 +2355,8 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 	&quot;lync&quot; : new Photo(&quot;lync&quot;,
 			&quot;7_Lync1&quot;,
 			&quot;high&quot;,
-			&quot;A naked, thin, muscular Black man stares into the camera. The image is cropped at the edge of his groin, revealing the faintest suggestion of genitals. Both nipples are visible. A water mark says RoyMayh.&quot;,
-			&quot;lync vapor alt&quot;,
+			&quot;A thin, muscular Black man stares into the camera. One hand lifts up his shirt above his nipple. The other hand reaches down into his pants, revealing the edge of public hair. Watermarked RoyMayh.&quot;,
+			&quot;Flirty, vaporwave stylized. A thin, muscular Black man stares into the camera. One hand lifts up his shirt above his nipple. The other hand reaches down into his pants, revealing the edge of public hair.&quot;,
 			&quot;Lync Johnson&quot;,
 			&quot;This image was deleted by Instagram.  I had to crop or edit the photo in order to successfully repost it.&quot;
 	),
@@ -2338,11 +2365,14 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 &lt;&lt;set $availablePhotos to clone(Object.keys($photoPool))&gt;&gt;
 &lt;&lt;run $availablePhotos.delete(&quot;default&quot;) &gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="8" name="greetings" tags="music-sexi background-cyan bookmark" position="413,252" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;motivation]]&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;makeup&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-blue-white&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="8" name="greetings" tags="music-sexi background-cyan bookmark" position="425,250" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;motivation]]&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;makeup&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-blue-white&quot;&gt;&gt;
 	&lt;&lt;type 60ms&gt;&gt;Welcome, $playerName.&lt;&lt;/type&gt;&gt;
 
-  Did you select your &lt;&lt;link &quot;real name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to true&gt;&gt;&lt;&lt;/link&gt;&gt; or 
-  a &lt;&lt;link &quot;fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to false&gt;&gt;&lt;&lt;/link&gt;&gt;?
+What kind of name did you pick? 
+
+&lt;&lt;link &quot;a real name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to true&gt;&gt;&lt;&lt;/link&gt;&gt; 
+
+&lt;&lt;link &quot;a fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to false&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="motivation" tags="music-sexi background-cyan bookmark" position="524,250" size="100,100">&lt;&lt;backgroundvideo &quot;empty-wallet&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;GOALS&quot; &quot;browser-blue-white&quot;&gt;&gt;
 You&#39;re hoping to earn $&lt;&lt;print &quot;$incomeTarget&quot;&gt;&gt; to pay your gas and water bills in $weekLimit weeks. Every fan you get earns you $&lt;&lt;print &quot;$incomePerFan&quot;&gt;&gt;. If you&#39;re lucky, some of them may even tip you extra! 😘
 
@@ -2392,8 +2422,8 @@ You have $&lt;&lt;print &quot;$income&quot;&gt;&gt; in your pocket and $&lt;&lt;
   Do you want to [[ask other sex workers for advice-&gt;stolen-content]] or [[ignore it-&gt;photo-selection]]?
 &lt;&lt;elseif  _outingBranch == &quot;personal-data&quot;&gt;&gt;
 	Shooting and posting content is hard work, but what nobody told you about was all the invisible effort of chatting with fans. Like working in a coffee shop, you start to get regular customers who tip you again and again. And then there are some people who are just there for freebies or who are just plain rude.
-	There&#39;s yet another [[fan message to deal with.-&gt;personal-data]]
-
+	
+    There&#39;s yet another [[fan message to deal with.-&gt;personal-data]]
 &lt;&lt;elseif _outingBranch == &quot;suggested-friends&quot;&gt;&gt;
 	OnlyBans sent you a list of suggested followers. You think you recognize one of the people? [[Take a closer look.-&gt;suggested-friends]] 
 &lt;&lt;else&gt;&gt;
@@ -2566,7 +2596,7 @@ So, how to best tell this story? Hmm ... maybe you need to [[put them in your sh
 Thank you for verifying your phone number. 
 	
 For somewhat vague safety reasons, we still need more information before you can cash out any money from your account.
-&lt;div style=&quot;text-align:left&quot;&gt;
+&lt;div style=&quot;text-align:left&quot; class=&quot;big-line-height&quot;&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedName&quot; false true&gt;&gt; Add your legal name.&lt;/label&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedAddress&quot; false true&gt;&gt; Add a personal email.&lt;/label&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedID&quot; false true&gt;&gt; Upload a photo of yourself holding your state ID.&lt;/label&gt;&lt;/div&gt;
@@ -2669,7 +2699,8 @@ But you also want to give the platforms the chance to change. Even though it’s
 Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own!
 
 But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
-</tw-passagedata><tw-passagedata pid="37" name="About" tags="music-ambient background-pink-light" position="125,387" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="37" name="About" tags="music-ambient background-pink-light" position="125,400" size="100,100">&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;
+
 &lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;&lt;h2&gt; Home Page &lt;/h2&gt;This game lives at &lt;a href=&quot;https://www.onlybansgame.com&quot;&gt;www.onlybansgame.com&lt;/a&gt;.
 
 &lt;h2&gt; About the game &lt;/h2&gt;Created by a team of sex workers and allies, Created by a team of sex workers and allies, OnlyBans is an interactive game that critically examines the policing of marginalized bodies and sexual labor to empathetically teach people about discrimination faced by sex workers online. Players encounter content moderation algorithms, shadowbanning, &quot;real name&quot; policies, facial recognition software, and other threats based on actual experiences of sex workers. Based on research by &lt;a href=&quot;https://hackinghustling.org/posting-into-the-void-content-moderation/&quot;&gt;&quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;&lt;/a&gt; and featuring real images and stories from sex workers themselves, OnlyBans offers a speculative vision of how marginalized communities can unite to protest these unjust policies and create better alternatives.
@@ -2695,7 +2726,8 @@ Digital discrimination and deplatforming of sex workers is a direct result of FO
 
 &lt;a href= &quot;https://decodingstigma.tech/&quot;&gt;Decoding Stigma&lt;/a&gt; bridges the gap between sex workers, academics, technologists, and anyone who holds multiples of these identities. Their goal is to prioritize sexual autonomy as a necessary ethics question for researchers and technologists and to design a liberatory future in which sexually stigmatized voices are amplified and celebrated.
 &lt;&lt;/browserwindow&gt;&gt;
-&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
+
+&lt;h2&gt;&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;&lt;/h2&gt;
 </tw-passagedata><tw-passagedata pid="38" name="StorySubtitle" tags="" position="15,631" size="100,100">Goal: Get $&lt;&lt;print $incomeTarget&gt;&gt; by week $weekLimit
 Wallet: $&lt;&lt;print $income&gt;&gt;
 Week: $numWeek</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="music-ambient background-cyan bookmark" position="198,1402" size="100,100">&lt;&lt;silently&gt;&gt;
@@ -2725,7 +2757,7 @@ They share your pics to their feed. You attract _numNewFans new fans and make so
 &lt;&lt;/linkreplace&gt;&gt;
 &lt;/section&gt;&lt;&lt;/nobr&gt;&gt;
 
-[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="40" name="tip" tags="music-sexi background-cyan-transparent bookmark" position="449,1398" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="40" name="tip" tags="music-sexi background-cyan-transparent bookmark" position="449,1398" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _tip to random(10,100)&gt;&gt;
 	&lt;&lt;set _intro to either(
 	&quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
@@ -2892,7 +2924,7 @@ You get a DM from a sex worker you follow...
 	&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/type&gt;&gt;
 &lt;/section&gt;
 &lt;&lt;/nobr&gt;&gt;
-[[Continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="47" name="joinedGroup" tags="music-sexi bookmark background-dark" position="567,1510" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="47" name="joinedGroup" tags="music-sexi bookmark background-dark" position="567,1510" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 	&lt;&lt;set $lessonNumbers to [1,2]&gt;&gt;
 	&lt;&lt;set _lessonNumber to $lessonNumbers.random()&gt;&gt;
