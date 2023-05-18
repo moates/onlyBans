@@ -1546,7 +1546,7 @@ Macro.add("chat", {
 // BIG thanks to HiEv Heavy Industries for the code sample
 // https://qjzhvmqlzvoo5lqnrvuhmg-on.drv.tw/UInv/Sample_Code.html#Main%20Menu
 
-// Utility. idName is the base name of the setting, all lowercase probably
+// Utility func. idName is the base name of the setting, all lowercase probably
 function disableSetting(idName) {
 	var _labelID = "setting-label-"+idName;
 	var _controlID = "setting-control-"+idName;
@@ -1556,7 +1556,7 @@ function disableSetting(idName) {
 	$(document.getElementById(_controlID)).hide();		
 }
 
-// Utility. idName is the base name of the setting, all lowercase probably
+// Utility func. idName is the base name of the setting, all lowercase probably
 function enableSetting(idName){
 	var _labelID = "setting-label-"+idName;
 	var _controlID = "setting-control-"+idName;
@@ -1566,7 +1566,9 @@ function enableSetting(idName){
 	$(document.getElementById(_controlID)).show();
 }
 
-
+	/***********************/
+	/*   SOUND SETTINGS    */
+	/***********************/
 Setting.addHeader("Sound", "Use the sliders to control the audio volume.");
 
 Setting.addToggle("mute", {
@@ -1636,27 +1638,10 @@ function fxVolumeInitHandler() {
 }
 
 function fxVolumeHandler() {	
-	if(!settings.mute){				SimpleAudio.select(State.getVar("$fxgroupID")).volume(settings.fxVolume);
+	if(!settings.mute){
+      	SimpleAudio.select(State.getVar("$fxgroupID")).volume(settings.fxVolume);
 	}
 }
-
-Setting.addHeader("Accessibility");
-
-var settingEnableVideoHandler = function () {
-	console.log('video handler', settings.enableVideo);
-	if (settings.enableVideo) {
-			//Videos handled by the bgvideo macro				
-	}
-	else { 
-		//disable any active background videos
-		var _activeVid = document.getElementById('bgvid');
-		if (_activeVid){
-			_activeVid.remove();	
-		}
-		console.log('disabled video');
-	}
-};
-
 
 
 function muteInitHandler() {
@@ -1687,6 +1672,51 @@ function muteHandler () {
 		enableSetting("fxvolume");
 	}	
 }
+
+
+
+	/***********************/
+	/*   VISUAL SETTINGS   */
+	/***********************/
+Setting.addHeader("Visuals & Video");
+
+
+Setting.addList("textSize", {
+	label    : "Text Size",
+	list	: ["Smallest", "Smaller", "Medium (Default)", "Larger", "Largest"],
+  	default	 :	"Medium (Default)",
+    onInit   : textSizeHandler,
+    onChange : textSizeHandler,
+});
+
+function textSizeHandler () {
+  var fontSizeMap = {
+    				"Smallest" : 0.5,
+    				"Smaller": 0.75, 
+                     "Medium (Default)" : 1,
+                     "Larger" : 1.25,
+                     "Largest" : 1.5,
+                    };
+  
+  $("body").css("font-size", fontSizeMap[settings.textSize] + "rem");
+}
+
+
+function settingEnableVideoHandler () {
+	//console.log('video handler', settings.enableVideo);
+	if (settings.enableVideo) {
+			//Videos handled by the bgvideo macro				
+	}
+	else { 
+		//disable any active background videos
+		var _activeVid = document.getElementById('bgvid');
+		if (_activeVid){
+			_activeVid.remove();	
+		}
+		console.log('disabled video');
+	}
+};
+
 
 
 Setting.addToggle("enableVideo", {
