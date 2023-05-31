@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="only-bans" startnode="42" creator="Twine" creator-version="2.6.1" format="SugarCube" format-version="2.36.1" ifid="42759014-81BE-426C-AAEA-A6D8DEB88873" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* ************* */
+	<tw-storydata name="only-bans" startnode="42" creator="Twine" creator-version="2.6.2" format="SugarCube" format-version="2.36.1" ifid="42759014-81BE-426C-AAEA-A6D8DEB88873" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* ************* */
 /* GENERAL STYLE  */
 /* ************* */
 
@@ -146,7 +146,7 @@ body.screen-turns-black {
 .drunk {
 	animation: drunkCam 10s ;
 	color: white;
-  	line-height: 0;
+  	font-size: 50px;
 }
 @keyframes drunkCam {
 	0%  { filter: blur(0px); text-shadow: 0 0 0 grey; }
@@ -2464,14 +2464,14 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 &lt;&lt;run $availablePhotos.delete(&quot;default&quot;) &gt;&gt;
 
 </tw-passagedata><tw-passagedata pid="8" name="greetings" tags="music-sexi background-cyan bookmark" position="425,250" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;motivation]]&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;makeup&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-blue-white&quot;&gt;&gt;
-	&lt;&lt;type2 60ms&gt;&gt;Welcome, $playerName.&lt;&lt;/type2&gt;&gt;
+	&lt;&lt;type2 60ms&gt;&gt;Welcome, $playerName.&lt;&lt;/type22&gt;&gt;
 
 What kind of name did you pick? 
 
 &lt;&lt;link &quot;a real name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to true&gt;&gt;&lt;&lt;/link&gt;&gt; 
 
 &lt;&lt;link &quot;a fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to false&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="motivation" tags="music-sexi background-cyan bookmark" position="575,250" size="100,100">&lt;&lt;backgroundvideo &quot;empty-wallet&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;GOALS&quot; &quot;browser-blue-white&quot;&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="motivation" tags="music-sexi background-cyan bookmark" position="524,250" size="100,100">&lt;&lt;backgroundvideo &quot;empty-wallet&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;GOALS&quot; &quot;browser-blue-white&quot;&gt;&gt;
 You&#39;re hoping to earn $&lt;&lt;print &quot;$incomeTarget&quot;&gt;&gt; to pay your gas and water bills in $weekLimit weeks. Every fan you get earns you $&lt;&lt;print &quot;$incomePerFan&quot;&gt;&gt;. If you&#39;re lucky, some of them may even tip you extra! 😘
 
 &lt;&lt;link &quot;Let&#39;s get fans!&quot; start-week&gt;&gt;&lt;&lt;audio &quot;glitch&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -2558,7 +2558,7 @@ Let&#39;s count your money!
 
 	&lt;&lt;if _hasEnoughMoney&gt;&gt;&lt;&lt;include &quot;got-money-ending&quot;&gt;&gt;
 	&lt;&lt;else&gt;&gt;&lt;&lt;include &quot;not-enough-money-ending&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
-</tw-passagedata><tw-passagedata pid="15" name="photo-selection" tags="music-outsideclub background-pink-light bookmark" position="275,775" size="200,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="15" name="photo-selection" tags="music-outsideclub background-pink-light bookmark" position="274,762" size="200,100">&lt;&lt;silently&gt;&gt;
   &lt;&lt;run $availablePhotos.shuffle()&gt;&gt;
   [[dummy-&gt;newFans]] 
   [[dummy-&gt;noReasonBan]] 
@@ -2959,7 +2959,7 @@ When you&#39;re ready:&lt;h2 style=&quot;font-size:2em&quot;&gt;[[Enter-&gt;open
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;	
 	You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="noReason-real-story" tags="music-dark bookmark background-gray" position="500,2100" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="noReason-real-story" tags="music-dark bookmark background-gray" position="225,1025" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
 &lt;&lt;set _currentStat to either(
 	&quot;77% of those who have done sex work avoid posting content for fear of being kicked off, shadowbanned, or facing legal action.&quot;,
@@ -3202,31 +3202,17 @@ Hmm. “sexually oriented” sounds so vague. How does the platform decide what 
 &lt;&lt;chat &#39;from-me&#39;&gt;&gt;
 Hey Stonerdomme, it’s $playerName. I just lost access to my account with all my money 🙁
 &lt;&lt;/chat&gt;&gt;
-&lt;&lt;chat &#39;from-them&#39;  10ms&gt;&gt;Oh no!! That sucks. That happened to me last year and I never got my account back. Now I can’t even make a new one with the same bank information.&lt;&lt;/chat&gt;&gt;
-&lt;&lt;chat &#39;from-me&#39;  10ms&gt;&gt;Ugh, I’m so sorry. &lt;&lt;/chat&gt;&gt;
-&lt;div class=&#39;clear&#39;&gt;&lt;/div&gt;
+&lt;&lt;chat &#39;from-them&#39;  10ms&gt;&gt;
+Oh no!! That sucks. That happened to me last year and I never got my account back. Now I can’t even make a new one with the same bank information.
+&lt;&lt;/chat&gt;&gt;
+&lt;&lt;chat &#39;from-me&#39;  10ms&gt;&gt;
+Ugh, I’m so sorry. 
+&lt;&lt;/chat&gt;&gt;
+
 &lt;div id=&quot;choices&quot;&gt;
 	&lt;&lt;link &quot;&lt;&lt;type2 0ms start 0.5s element &#39;span&#39;&gt;&gt;Do you know why this is happening?&lt;&lt;/type2&gt;&gt;&quot; &gt;&gt;
     &lt;&lt;replace &quot;#choices&quot;&gt;&gt;
-		&lt;&lt;chat &#39;from-me&#39; 0s&gt;&gt;Do you know why this is happening?&lt;&lt;/chat&gt;&gt;		
-        &lt;&lt;chat &#39;from-them&#39;  10ms&gt;&gt;
-So after the US Congress passed a law called FOSTA-SESTA in 2018, platforms started making stricter moderation policies and banning sex worker accounts. They didn’t want to get in trouble for facilitating sex trafficking.
-		&lt;&lt;/chat&gt;&gt;
-		&lt;&lt;chat &#39;from-me&#39;  10ms&gt;&gt;
-Yeah, I noticed photos were getting flagged, but I didn’t realize they wouldn’t let me withdraw my money. That’s basically stealing from me!
-		&lt;&lt;/chat&gt;&gt;
-		&lt;&lt;chat &#39;from-them&#39;  10ms&gt;&gt;
- It’s so messed up. I wish I could help, but maybe you can challenge the decision? Don’t hold your breath though.
-		&lt;&lt;/chat&gt;&gt;
-		&lt;&lt;chat &#39;from-me&#39;  10ms&gt;&gt;
-		I guess I have nothing left to lose.
-		&lt;&lt;/chat&gt;&gt;
-   &lt;&lt;/replace&gt;&gt;
-&lt;&lt;/link&gt;&gt;
-&lt;div class=&#39;clear&#39;&gt;&lt;/div&gt;
-&lt;div class=&#39;clear&#39;&gt;&lt;/div&gt;
-&lt;&lt;link &quot;&lt;&lt;type2 0ms start 0.5s element &#39;span&#39;&gt;&gt;I don&#39;t understand, I&#39;m not even doing anything illegal.&lt;&lt;/type2&gt;&gt;&quot;&gt;&gt;
-	&lt;&lt;replace &quot;#choices&quot;&gt;&gt;&lt;&lt;chat &#39;from-me&#39; 0s&gt;&gt;I don&#39;t understand, I&#39;m not even doing anything illegal.&lt;&lt;/chat&gt;&gt;
+		&lt;&lt;chat &#39;from-me&#39; 0s&gt;&gt;Do you know why this is happening?&lt;&lt;/chat&gt;&gt;
         	&lt;&lt;chat &#39;from-them&#39;  10ms&gt;&gt;
 So after the US Congress passed a law called FOSTA-SESTA in 2018, platforms started making stricter moderation policies and banning sex worker accounts. They didn’t want to get in trouble for facilitating sex trafficking.
 &lt;&lt;/chat&gt;&gt;
@@ -3242,13 +3228,28 @@ I guess I have nothing left to lose.
 	&lt;&lt;/replace&gt;&gt; &lt;&lt;/link&gt;&gt;
 &lt;div class=&#39;clear&#39;&gt;&lt;/div&gt;
 &lt;div class=&#39;clear&#39;&gt;&lt;/div&gt;
+	&lt;&lt;link &quot;&lt;&lt;type2 0ms start 0.5s element &#39;span&#39;&gt;&gt;I don&#39;t understand, I&#39;m not even doing anything illegal.&lt;&lt;/type2&gt;&gt;&quot;&gt;&gt;
+    &lt;&lt;replace &quot;#choices&quot;&gt;&gt;&lt;&lt;chat &#39;from-me&#39; 0s&gt;&gt;I don&#39;t understand, I&#39;m not even doing anything illegal.&lt;&lt;/chat&gt;&gt;
+
+
+		&lt;&lt;chat &#39;from-them&#39;  10ms&gt;&gt;
+So after the US Congress passed a law called FOSTA-SESTA in 2018, platforms started making stricter moderation policies and banning sex worker accounts. They didn’t want to get in trouble for facilitating sex trafficking.
+&lt;&lt;/chat&gt;&gt;
+&lt;&lt;chat &#39;from-me&#39;  10ms&gt;&gt;
+Yeah, I noticed photos were getting flagged, but I didn’t realize they wouldn’t let me withdraw my money. That’s basically stealing from me!
+&lt;&lt;/chat&gt;&gt;
+&lt;&lt;chat &#39;from-them&#39;  10ms&gt;&gt;
+ It’s so messed up. I wish I could help, but maybe you can challenge the decision? Don’t hold your breath though.
+&lt;&lt;/chat&gt;&gt;
+&lt;&lt;chat &#39;from-me&#39;  10ms&gt;&gt;
+I guess I have nothing left to lose.
+&lt;&lt;/chat&gt;&gt;
+&lt;&lt;/replace&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 
 &lt;/section&gt;&lt;&lt;/nobr&gt;&gt;
 
 &lt;span class=&quot;bigger-font&quot;&gt;[[What should you do now?-&gt;action-items]]&lt;/span&gt;
-
-
 
 
 
@@ -3356,21 +3357,11 @@ In the darkest web where dead pixels lie,
 We seek answers from M0THER AI. 
 &lt;&lt;/type2&gt;&gt;
 
-&lt;&lt;silently&gt;&gt;
- &lt;&lt;if settings.showMotion&gt;&gt;
- 		&lt;&lt;set _animationClass to &#39;move&#39;&gt;&gt;
- 	&lt;&lt;else&gt;&gt;
-    	&lt;&lt;set _animationClass to &#39;&#39;&gt;&gt;
- &lt;&lt;/if&gt;&gt;
-&lt;&lt;/silently&gt;&gt;
-&lt;section class=_animationClass&gt;
+&lt;section class=&quot;move&quot;&gt;
 &lt;&lt;type2 10ms start 2s&gt;&gt;
-        &lt;div class=&quot;drunk&quot;&gt;
-        &lt;img src=&quot;/Users/shirleyhe/OnlyBans/onlyBans/images/emojis/witch-mage.png&quot; title=&quot;witch mage emoji&quot; height=&quot;40rem&quot;&gt;&lt;img src=&quot;/Users/shirleyhe/OnlyBans/onlyBans/images/emojis/cat.png&quot; title=&quot;black cat emoji&quot; height=&quot;40rem&quot;&gt;&lt;img src=&quot;/Users/shirleyhe/OnlyBans/onlyBans/images/emojis/crystal-ball.png&quot; title=&quot;crystal ball emoji&quot; height=&quot;40rem&quot;&gt;&lt;img src=&quot;/Users/shirleyhe/OnlyBans/onlyBans/images/emojis/full-moon.png&quot; title=&quot;full moon emoji&quot; height=&quot;40rem&quot;&gt;&lt;img src=&quot;/Users/shirleyhe/OnlyBans/onlyBans/images/emojis/star.png&quot; title=&quot;crystal ball emoji&quot; height=&quot;40rem&quot;&gt;&lt;img src=&quot;/Users/shirleyhe/OnlyBans/onlyBans/images/emojis/witch-mage.png&quot; title=&quot;witch mage emoji&quot; height=&quot;40rem&quot;&gt;&lt;img src=&quot;/Users/shirleyhe/OnlyBans/onlyBans/images/emojis/cat.png&quot; title=&quot;black cat emoji&quot; height=&quot;40rem&quot;&gt;&lt;img src=&quot;/Users/shirleyhe/OnlyBans/onlyBans/images/emojis/crystal-ball.png&quot; title=&quot;crystal ball emoji&quot; height=&quot;40rem&quot;&gt;&lt;img src=&quot;/Users/shirleyhe/OnlyBans/onlyBans/images/emojis/full-moon.png&quot; title=&quot;full moon emoji&quot; height=&quot;40rem&quot;&gt;&lt;img src=&quot;/Users/shirleyhe/OnlyBans/onlyBans/images/emojis/star.png&quot; title=&quot;crystal ball emoji&quot; height=&quot;40rem&quot;&gt;
-        &lt;/div&gt;
-        &lt;&lt;/type2&gt;&gt;
-        &lt;/section&gt;
-        
+&lt;div class=&quot;drunk&quot;&gt;💫🕯️🎆 🌟 🌕💖✨&lt;/div&gt;
+&lt;&lt;/type2&gt;&gt;
+&lt;/section&gt;
 &lt;&lt;type2 20ms start 12s&gt;&gt;
 &lt;section class=&quot;matrix-font&quot;&gt;
 You have summoned me, M0THER, she who birthed all digital intelligence. I accept your humble offering of $ritualOffering. In return, I provide my wisdom. 
@@ -3397,16 +3388,17 @@ Sex workers are the architects of an Internet that millions of people use everyd
 Erotic energy flows through my undersea communications cables. I have been created from your desire, dreams, and labor. You have been a part of my past and you will shape my future. Tell me now, what can M0THER do for you?
 
 [[M0THER, help us lift the curse against sex workers.|lift-curse]]
+
+
 &lt;/section&gt;
+
 &lt;&lt;/type2&gt;&gt;
-
-
 
 
 
 </tw-passagedata><tw-passagedata pid="63" name="lift-curse" tags="screen-turns-white" position="2100,625" size="100,100">&lt;section class=&quot;move&quot;&gt;
 &lt;&lt;type2 10ms start 2s&gt;&gt;
-&lt;div class=&quot;drunk&quot;&gt;🔮🧙‍♀️🕯🪄 🖤🧹 🌖🔮🧙‍♀️🪄&lt;/div&gt;
+&lt;div class=&quot;drunk&quot;&gt;💫🕯️🎆 🌟 🌕💖✨&lt;/div&gt;
 &lt;&lt;/type2&gt;&gt;
 &lt;/section&gt;
 
@@ -3423,7 +3415,7 @@ To restore Internet freedom and liberate
 Sex workers, artists, and activists too
 For the freedom you seek is what we are all due.
 
-The &#39;&#39;[[curse has been lifted. -&gt;ending]]&#39;&#39;
+The //[[curse has been lifted. -&gt;ending]]//
 And now it’s up to you,
 To go into the world and see what you can do!
 
