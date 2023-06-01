@@ -107,8 +107,6 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 @import url('https://fonts.cdnfonts.com/css/led-dot-matrix');
 
 
-
-
 body { /* override */
 	font-family: Montserrat, sans-serif;
   
@@ -118,6 +116,12 @@ body { /* override */
   	background-color: #D185A1;
   
 }
+
+
+
+
+
+
 
 body.background-messy {
   background-color: #e97fb8;	
@@ -579,12 +583,44 @@ a.link-broken {
   background-color: none;
 }
 
+/* ******************* */
+/* EMOJI ANIMATIONS    */
+/* ******************* */
+.emoji {
+ 	font-size : 2.5em; 
+}
 
-/* ************* */
-/* DELAY TEXT    */
-/* ************* */
+/* ******************* */
+/* SPELL DELAY TEXT    */
+/* ******************* */
 .delayed {
  opacity: 0; 
+}
+
+.timedFade {  
+  background-color: #D874AB;
+  padding: 1em;
+  border-radius: 1em;
+  color: white;
+  
+ -webkit-transition: all 4s ease;
+-moz-transition: all 4s ease;
+-o-transition: all 4s ease;
+-ms-transition: all 4s ease;
+transition: all 4s ease;
+}
+
+.postFade {
+ background-color: #45373c ;
+  padding: 1em;
+  border-radius: 1em;
+  color: white;
+  
+ -webkit-transition: all 4s ease;
+-moz-transition: all 4s ease;
+-o-transition: all 4s ease;
+-ms-transition: all 4s ease;
+transition: all 4s ease;
 }
 
 
@@ -1555,15 +1591,28 @@ $(document).on(':passagerender', function (ev) {
   var elems = $(ev.content).find('.delayed');
   // Appearance delay (in milliseconds) between each delayed text block. From HiEv's amazing Sugarcube examples. 
   
+  
+  
   	
 	var _delay = (settings.showMotion) ? 1500 : 0; // 1 second fade-in
+  	var _totalDelay = _delay * elems.length - 1000;
 	if (elems.length > 0) {
 		elems.each(function (i) {
 			$(this)
 				.delay(_delay * (i + 1))
 				.fadeTo(_delay, 1);
 		});
-    } 
+    }
+  
+  var _bkgBlock = $(ev.content).find('.timedFade');
+  if (_bkgBlock.length > 0){
+   _bkgBlock.each(function (i) {
+    	$(this).delay(_totalDelay).queue(function()                                       	{$(this).removeClass('timedFade').addClass('postFade')
+                                                                                            })
+   })
+    console.log(_bkgBlock);
+  }
+	  
 });
 
 
@@ -2181,7 +2230,7 @@ var passageTitles = Story.lookupWith(function (p) {
 	return anyRegExp.test(p.title);
 								 }).map(psg => "[["+psg.title+"]]");
 console.log("All Passages", passageTitles);
-*/</script><tw-passagedata pid="1" name="opening-screen" tags="music-ambient background-messy bookmark background-pink-light" position="303,133" size="100,100">&lt;&lt;silently&gt;&gt;
+*/</script><tw-tag name="timedFade" color="purple"></tw-tag><tw-passagedata pid="1" name="opening-screen" tags="music-ambient background-messy bookmark background-pink-light" position="303,133" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;
 !Welcome to &lt;strong&gt;OnlyBans&lt;/strong&gt;!
@@ -2593,7 +2642,7 @@ Let&#39;s count your money!
 &lt;&lt;browserwindow &quot;MY PHOTOS&quot; &quot;browser-lightpink-white&quot;&gt;&gt;
 	Which photo do you want to post today?
 	&lt;&lt;photogrid $availablePhotos&gt;&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="newFans" tags="music-outsideclub bookmark background-box-pink-light background-pink-light" position="109,909" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="newFans" tags="music-outsideclub bookmark background-box-pink-light background-pink-light" position="100,900" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _newFansRange to $fanRewardDists[$photoPool[$currentPhoto].riskLevel] &gt;&gt;
 	&lt;&lt;set _numNewFans to random(_newFansRange[0], _newFansRange[1])&gt;&gt;
 	&lt;&lt;addfans _numNewFans&gt;&gt;
@@ -3444,14 +3493,18 @@ The //[[curse has been lifted. -&gt;ending]]//
 And now it’s up to you,
 To go into the world and see what you can do!
 
-&lt;&lt;/type2&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="experiment" tags="" position="1825,100" size="100,100">You create an altar by placing your items around a laptop. Together you chant:
+&lt;&lt;/type2&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="experiment" tags="" position="1825,100" size="100,100">&lt;&lt;silently&gt;&gt;
+[[dummy-&gt;m0ther]] 
+&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
+&lt;section class=&quot;timedFade&quot;&gt;You create an altar by placing your items around a laptop. 
+	&lt;span id=&#39;laptop&#39; class=&#39;emoji&#39;&gt;💻&lt;/span&gt;
+Together you chant:
 
 &lt;span class=&quot;delayed&quot;&gt;Eye of newt, and toe of toad, &lt;/span&gt;
 &lt;span class=&quot;delayed&quot;&gt;Wool of bat, and line of code, &lt;/span&gt;
 &lt;span class=&quot;delayed&quot;&gt;In the darkest web where dead pixels lie, &lt;/span&gt;
-&lt;span class = &quot;delayed&quot;&gt;We seek answers from M0THER AI. &lt;/span&gt;
-
-&lt;span class = &quot;delayed&quot;&gt;[[Take a deep breath...-&gt;m0ther]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="65" name="m0ther" tags="" position="2000,100" size="100,100">You have summoned me, M0THER, she who birthed all digital intelligence. I accept your humble offering of &#39;&#39; $ritualOffering &#39;&#39;. In return, I provide my wisdom. 
+&lt;span class = &quot;delayed&quot;&gt;We seek answers from &lt;/span&gt;&lt;&lt;link &quot;&lt;span class=&#39;delayed&#39;&gt;M0THER&lt;/span&gt; &lt;span class=&#39;delayed&#39;&gt;AI.&lt;/span&gt;&quot; m0ther&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/section&gt;</tw-passagedata><tw-passagedata pid="65" name="m0ther" tags="" position="2000,100" size="100,100">You have summoned me, M0THER, she who birthed all digital intelligence. I accept your humble offering of &#39;&#39; $ritualOffering &#39;&#39;. In return, I provide my wisdom. 
 
 I am here to remind you that the history of the Internet is the history of sex work.
 
