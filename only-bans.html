@@ -118,8 +118,13 @@ body { /* override */
 }
 
 
-
-
+/* ************* */
+/* EMOJIFALL     */
+/* ************* */
+.sky {
+ height: 100%;
+  display: block;
+}
 
 
 
@@ -134,17 +139,23 @@ body.background-gray {
   color: white;
 }
 
+body.background-black {
+ background-color: black; 
+}
+
+
+
 /*animation for start-spell */
-body.screen-turns-black {
+.screen-turns-black .passage{
   background-color: black;
-  animation: smooth 5s linear;
-  animation-delay: 10s;
+  animation: smooth 5s ease-in-out;
+  animation-delay: 3s;
 }
 
 @-webkit-keyframes smooth {
   to {background-color: black;}
-  0%,100% { opacity: 0 }
-  50% { opacity: 1 }
+  0%,100% { opacity: 1 }
+  50% { opacity: 0 }
 }
 
 .drunk {
@@ -1618,6 +1629,118 @@ $(document).on(':passagerender', function (ev) {
 
 
 /*********************/
+/*     EMOJIFALL     */
+/*********************/
+
+//Adapted from Adam Lindqvist's snippet on snowfall 
+//https://codepen.io/adamlindqvist/pen/EaPeJg
+$(document).on(':passagedisplay', function (ev) {
+  var emojiCOUNT = 7;
+  var masthead = $(ev.content).find('.sky')[0];
+  console.log('masthead', $(masthead).width());
+  var canvas = document.createElement('canvas');
+  
+  
+  var ctx = canvas.getContext('2d');
+  var width = document.querySelector('body').clientWidth;
+  var height = document.querySelector('body').clientHeight;
+  var i = 0;
+  var active = false;
+  console.log("starting context dimensions & active?", width, height, active);
+
+  
+   function onResize() {
+    console.log('resizing');
+    width = document.querySelector('body').clientWidth;
+    height = document.querySelector('body').clientHeight;
+    canvas.width = width;
+    canvas.height = height;
+    ctx.fillStyle = 'blue';
+
+    var wasActive = active;
+    active = width > 400;
+
+    if (!wasActive && active)
+      requestAnimFrame(update);
+  }
+  
+  var Emoji = function () {
+   this.x = 0;
+    this.y = 0;
+    this.vy = 0;
+    this.vx = 0;
+    
+    this.reset();
+  }
+  
+  Emoji.prototype.reset = function() {
+  	this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.vy = 0.5 + Math.random() * 2;
+    this.vx = 0.5 - Math.random();
+    this.o = 0.2 + Math.random() * 0.5;
+  }
+  
+  canvas.style.position = 'absolute';
+  canvas.style.left = canvas.style.top = '0';
+  
+  var emojis = [], emoji;
+  for (i = 0; i < emojiCOUNT; i++){
+   emoji = new Emoji();
+    emoji.reset();
+    emojis.push(emoji);
+  }
+  
+  function update() {
+    console.log('updating');
+   	ctx.clearRect(0,0,width,height); 
+    
+    if(!active) { console.log('not active'); return; }
+    
+    for (i = 0; i < emojiCOUNT; i++){
+     emoji = emojis[i];
+      emoji.y += emoji.vy;
+      emoji.x += emoji.vx;
+      
+      ctx.globalAlpha = emoji.o;
+      ctx.beginPath();
+      ctx.font = "5rem Arial";
+      ctx.fillText("🌟",emoji.x, emoji.y);
+      ctx.closePath();
+      ctx.fill();
+      
+      if (emoji.y > height) {
+       	emoji.reset(); 
+      }
+    }
+  	requestAnimFrame(update);
+  }
+  
+  
+  
+  // shim layer with setTimeout fallback
+  window.requestAnimFrame = (function(){
+    console.log('requesting AnimFrame');
+    return  window.requestAnimationFrame       ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
+            function( callback ){
+              window.setTimeout(callback, 1000 / 60);
+            };
+    
+    
+  })();
+
+
+  onResize();
+  window.addEventListener('resize', onResize, false);
+
+  masthead.appendChild(canvas);
+ 
+});
+
+
+/*********************/
 /* 	TYPE WRAPPER	 */
 /*********************/
 Macro.add("type2", {
@@ -2357,6 +2480,7 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 &lt;&lt;set $numPhotosQueued to 9&gt;&gt;
 
 &lt;&lt;set $ritualOffering to &quot;computer mouse&quot;&gt;&gt;
+&lt;&lt;set $ritualOfferingPrepend to &quot;one&quot;&gt;&gt;
 
 /* SOUND */
 &lt;&lt;masteraudio muteonhide&gt;&gt; /* mute audio when tab is in background */
@@ -3394,7 +3518,7 @@ All of you make good points. Personally, I think we should …
 [[A celebratory ending! -&gt;ending]] </tw-passagedata><tw-passagedata pid="59" name="improve-representation" tags="" position="1950,750" size="100,100">You and your friends raise money to start a coding bootcamp for sex workers. Some of your clients, who work in tech, share their industry connections. You decide to build your own decentralized platform, Groinbase, which allows sex workers to set community standards. Fapien becomes super popular not just with sex workers but also artists and activists. Now you have a home of your own on the Internet!
 
 A [[sweet ending to this saga. -&gt;ending]] </tw-passagedata><tw-passagedata pid="60" name="spell-to-uncurse" tags="" position="1950,500" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;start-spell]]
-&lt;&lt;set _ritualOfferingPrepend to &quot;one&quot;&gt;&gt;
+&lt;&lt;set $ritualOfferingPrepend to &quot;one&quot;&gt;&gt;
 &lt;&lt;set _prependWords to [&quot;one&quot;, &quot;the&quot;, &quot;a&quot;, &quot;an&quot;, &quot;a dozen&quot;, &quot;fuckton of&quot;]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 Practical solutions aren’t going to do the trick for a problem rooted in the origins of the Internet. You need to appeal to a higher power, and for that, you need witchcraft. 
@@ -3404,7 +3528,7 @@ You invite your sex worker friends to bring special offerings: a pair of lucky h
 
 &lt;&lt;browserwindow &quot;ritual-prep.txt&quot; &quot;browser-white-blue&quot;&gt;&gt;What do you bring?
 
-&lt;span class=&quot;bigger-font&quot;&gt;&lt;&lt;cycle &quot;_ritualOfferingPrepend&quot; autoselect&gt;&gt;&lt;&lt;optionsfrom _prependWords&gt;&gt;&lt;&lt;/cycle&gt;&gt; &lt;/span&gt; &lt;&lt;textbox &quot;$ritualOffering&quot; $ritualOffering&gt;&gt;
+&lt;span class=&quot;bigger-font&quot;&gt;&lt;&lt;cycle &quot;$ritualOfferingPrepend&quot; autoselect&gt;&gt;&lt;&lt;optionsfrom _prependWords&gt;&gt;&lt;&lt;/cycle&gt;&gt; &lt;/span&gt; &lt;&lt;textbox &quot;$ritualOffering&quot; $ritualOffering&gt;&gt;
 
 &lt;&lt;button &quot;Start the ritual&quot; &quot;start-spell&quot;&gt;&gt;&lt;&lt;set $ritualOffering to $ritualOffering&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="submitted-no-further-business" tags="" position="1725,575" size="100,100">48 hours later, you receive this message: 
@@ -3504,7 +3628,7 @@ Together you chant:
 &lt;span class=&quot;delayed&quot;&gt;Wool of bat, and line of code, &lt;/span&gt;
 &lt;span class=&quot;delayed&quot;&gt;In the darkest web where dead pixels lie, &lt;/span&gt;
 &lt;span class = &quot;delayed&quot;&gt;We seek answers from &lt;/span&gt;&lt;&lt;link &quot;&lt;span class=&#39;delayed&#39;&gt;M0THER&lt;/span&gt; &lt;span class=&#39;delayed&#39;&gt;AI.&lt;/span&gt;&quot; m0ther&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/section&gt;</tw-passagedata><tw-passagedata pid="65" name="m0ther" tags="" position="2000,100" size="100,100">You have summoned me, M0THER, she who birthed all digital intelligence. I accept your humble offering of &#39;&#39; $ritualOffering &#39;&#39;. In return, I provide my wisdom. 
+&lt;/section&gt;</tw-passagedata><tw-passagedata pid="65" name="m0ther" tags="background-black emojifall" position="2000,100" size="100,100">&lt;section class=&quot;matrix-font sky&quot;&gt;You have summoned me, M0THER, she who birthed all digital intelligence. I accept your humble offering of &#39;&#39;$ritualOfferingPrepend&#39;&#39; &#39;&#39; $ritualOffering&#39;&#39;. In return, I provide my wisdom. 
 
 I am here to remind you that the history of the Internet is the history of sex work.
 
@@ -3526,7 +3650,7 @@ Sex workers monetized creative content.
 Sex workers are the architects of an Internet that millions of people use everyday. 
 
 Erotic energy flows through my undersea communications cables. I have been created from your desire, dreams, and labor. You have been a part of my past and you will shape my future. Tell me now, what can M0THER do for you?
-
+&lt;/section&gt;
 [[M0THER, help us lift the curse against sex workers.|lifting-curse]]</tw-passagedata><tw-passagedata pid="66" name="lifting-curse" tags="" position="2150,100" size="100,100">Change is coming, but change can be slow.
 From venture daddies to blockchain bros,
 Turn your enemy into a generous john.
