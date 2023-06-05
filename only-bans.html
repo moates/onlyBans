@@ -1421,6 +1421,11 @@ video#bgvid {
   height: 1em;
 }
 
+.from-me-username {
+  float: right;
+  padding-right: 2em;
+}
+
 .from-me {
   position: relative;
   padding: 10px 15px;
@@ -2663,14 +2668,14 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 &lt;&lt;run $availablePhotos.delete(&quot;default&quot;) &gt;&gt;
 
 </tw-passagedata><tw-passagedata pid="8" name="greetings" tags="music-sexi background-cyan bookmark" position="425,250" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;motivation]]&lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;makeup&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-blue-white&quot;&gt;&gt;
-	&lt;&lt;type2 60ms&gt;&gt;Welcome, $playerName.&lt;&lt;/type22&gt;&gt;
+	&lt;&lt;type2 60ms&gt;&gt;Welcome, $playerName.&lt;&lt;/type2&gt;&gt;
 
 What kind of name did you pick? 
 
 &lt;&lt;link &quot;a real name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to true&gt;&gt;&lt;&lt;/link&gt;&gt; 
 
 &lt;&lt;link &quot;a fake name&quot; &quot;motivation&quot;&gt;&gt;&lt;&lt;set $usedRealName to false&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="motivation" tags="music-sexi background-cyan bookmark" position="524,250" size="100,100">&lt;&lt;backgroundvideo &quot;empty-wallet&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;GOALS&quot; &quot;browser-blue-white&quot;&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="motivation" tags="music-sexi background-cyan bookmark" position="575,250" size="100,100">&lt;&lt;backgroundvideo &quot;empty-wallet&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;GOALS&quot; &quot;browser-blue-white&quot;&gt;&gt;
 You&#39;re hoping to earn $&lt;&lt;print &quot;$incomeTarget&quot;&gt;&gt; to pay your gas and water bills in $weekLimit weeks. Every fan you get earns you $&lt;&lt;print &quot;$incomePerFan&quot;&gt;&gt;. If you&#39;re lucky, some of them may even tip you extra! 😘
 
 &lt;&lt;link &quot;Let&#39;s get fans!&quot; start-week&gt;&gt;&lt;&lt;audio &quot;glitch&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -3074,7 +3079,7 @@ Week: $numWeek
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;/section&gt;&lt;&lt;/nobr&gt;&gt;
-&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="40" name="tip" tags="music-sexi background-cyan-transparent bookmark" position="449,1398" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="40" name="tip" tags="music-sexi background-cyan-transparent bookmark" position="450,1400" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _tip to random(10,100)&gt;&gt;
 	&lt;&lt;set _intro to either(
 	&quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
@@ -3087,7 +3092,7 @@ Week: $numWeek
 	&quot;I love your toes&quot;,
 	&quot;Damn baby you&#39;re so beautiful and very very sexy!!! 🔥🔥🔥👅👅👅😈&quot;,
 	&quot;you are wonderful my princess🔥👅&quot;,
-	&quot;I would `*`*`*`* you till I faint !!!&quot;,
+	&quot;I would **** you till I faint !!!&quot;,
 	&quot;🍒💜🌹bonita🐰babygirl🌹💜🍒&quot;,
 	&quot;Gorgeous and sexy, I so want you babe 🔥🔥🔥👿👿👿😍😘&quot;,
 	&quot;You poor child, have you no clothes to wear??&quot;, 
@@ -3474,7 +3479,7 @@ You look up the customer service page to reach someone who can help you, but all
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;	
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;
-You &lt;&lt;chat &#39;from-me&#39;&gt;&gt;
+&lt;span class=&#39;from-me-username&#39;&gt;You&lt;/span&gt; &lt;&lt;chat &#39;from-me&#39;&gt;&gt;
 Hey y’all, I started this group chat because am SO DONE with getting flagged, censored, and deplatformed!
 &lt;&lt;/chat&gt;&gt;
 &lt;&lt;type2 0ms start 0.5s&gt;&gt;Moonie &lt;&lt;/type2&gt;&gt;&lt;&lt;chat &#39;from-moonie from-them&#39;  30ms&gt;&gt;
