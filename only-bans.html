@@ -582,6 +582,19 @@ a.link-broken {
 	color: red;
 }
 
+
+.float-white {
+ 	background-color:white;
+  	padding: 1em;
+  	border-radius: 1em;
+}
+
+.float-dark {
+ 	background-color:#642d4b;
+  	padding: 1em;
+  	border-radius: 1em;
+}
+
 #story {
 
 }
@@ -609,7 +622,7 @@ a.link-broken {
 }
 
 .timedFade {  
-  background-color: #D874AB;
+  background-color: #642d4b;
   padding: 1em;
   border-radius: 1em;
   color: white;
@@ -2359,7 +2372,7 @@ var passageTitles = Story.lookupWith(function (p) {
 	return anyRegExp.test(p.title);
 								 }).map(psg => "[["+psg.title+"]]");
 console.log("All Passages", passageTitles);
-*/</script><tw-tag name="timedFade" color="purple"></tw-tag><tw-passagedata pid="1" name="opening-screen" tags="music-ambient background-messy bookmark background-pink-light" position="303,133" size="100,100">&lt;&lt;silently&gt;&gt;
+*/</script><tw-passagedata pid="1" name="opening-screen" tags="music-ambient background-messy bookmark background-pink-light" position="303,133" size="100,100">&lt;&lt;silently&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;
 !Welcome to &lt;strong&gt;OnlyBans&lt;/strong&gt;!
@@ -3073,7 +3086,8 @@ Week: $numWeek
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;/section&gt;&lt;&lt;/nobr&gt;&gt;
-&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="39" name="tip" tags="music-sexi background-cyan-transparent bookmark" position="450,1400" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;/br&gt;
+&lt;span class=&quot;bigger-font float-white&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="39" name="tip" tags="music-sexi background-cyan-transparent bookmark" position="450,1400" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _tip to random(10,100)&gt;&gt;
 	&lt;&lt;set _intro to either(
 	&quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
@@ -3245,7 +3259,7 @@ You get a DM from a sex worker you follow...
     &lt;/div&gt;&lt;&lt;/type2&gt;&gt;
 &lt;/section&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="46" name="joinedGroup" tags="music-sexi bookmark background-dark" position="575,1500" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;span class=&quot;bigger-font float-dark&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="46" name="joinedGroup" tags="music-sexi bookmark background-dark" position="575,1500" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 	&lt;&lt;set $lessonNumbers to [1,2]&gt;&gt;
 	&lt;&lt;set _lessonNumber to $lessonNumbers.random()&gt;&gt;
@@ -3394,7 +3408,7 @@ We don’t allow users to buy or sell sexually oriented digital goods or content
 Hmm. “sexually oriented” sounds so vague. How does the platform decide what isn’t allowed? You do Google search and find out that most decisions are made by AI, which can even flag the tips from your clients.
 
 
-[[What else can you do?-&gt;action-items]] </tw-passagedata><tw-passagedata pid="54" name="sex-worker-help" tags="" position="1575,750" size="100,100">&lt;&lt;silently&gt;&gt;
+[[What else can you do?-&gt;action-items]] </tw-passagedata><tw-passagedata pid="54" name="sex-worker-help" tags="background-dark" position="1575,750" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;	
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;
 &lt;&lt;chat &#39;from-me&#39;&gt;&gt;
@@ -3447,7 +3461,7 @@ I guess I have nothing left to lose.
 
 &lt;/section&gt;&lt;&lt;/nobr&gt;&gt;
 
-&lt;span class=&quot;bigger-font&quot;&gt;[[What should you do now?-&gt;action-items]]&lt;/span&gt;
+&lt;span class=&quot;bigger-font float-dark&quot;&gt;[[What should you do now?-&gt;action-items]]&lt;/span&gt;
 
 
 
@@ -3542,7 +3556,7 @@ After a review, we decided to permanently limit your account as we found potenti
 
 [[It’s time to mobilize your community.|immobile-community-chat]]
 
-</tw-passagedata><tw-passagedata pid="61" name="start-spell" tags="" position="2025,500" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="61" name="start-spell" tags="background-gray" position="2025,500" size="100,100">&lt;&lt;silently&gt;&gt;
 [[dummy-&gt;m0ther-appears]] 
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 &lt;section class=&quot;timedFade&quot;&gt;You create an altar by placing your items around a laptop. 
@@ -3552,7 +3566,7 @@ Together you chant:
 &lt;span class=&quot;delayed&quot;&gt;Eye of newt, and toe of toad, &lt;/span&gt;
 &lt;span class=&quot;delayed&quot;&gt;Wool of bat, and line of code, &lt;/span&gt;
 &lt;span class=&quot;delayed&quot;&gt;In the darkest web where dead pixels lie, &lt;/span&gt;
-&lt;span class = &quot;delayed&quot;&gt;We seek answers from &lt;/span&gt;&lt;&lt;link &quot;&lt;span class=&#39;delayed&#39;&gt;M0THER&lt;/span&gt; &lt;span class=&#39;delayed&#39;&gt;AI.&lt;/span&gt;&quot; m0ther-appears&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;span class = &quot;delayed&quot;&gt;We seek answers from &lt;/span&gt;&lt;&lt;link &quot;&lt;span class=&#39;delayed&#39;&gt;M0THER&lt;/span&gt;&lt;span class=&#39;delayed&#39;&gt; AI.&lt;/span&gt;&quot; m0ther-appears&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/section&gt;</tw-passagedata><tw-passagedata pid="62" name="lift-curse" tags="screen-turns-white" position="2275,500" size="100,100">&lt;section class=&quot;move&quot;&gt;
 &lt;&lt;type2 10ms start 2s&gt;&gt;
 &lt;div class=&quot;drunk&quot;&gt;💫🕯️🎆 🌟 🌕💖✨&lt;/div&gt;
