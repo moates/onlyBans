@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="only-bans" startnode="42" creator="Twine" creator-version="2.6.1" format="SugarCube" format-version="2.36.1" ifid="42759014-81BE-426C-AAEA-A6D8DEB88873" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* ************* */
+	<tw-storydata name="only-bans" startnode="41" creator="Twine" creator-version="2.6.1" format="SugarCube" format-version="2.36.1" ifid="42759014-81BE-426C-AAEA-A6D8DEB88873" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* ************* */
 /* GENERAL STYLE  */
 /* ************* */
 
@@ -2873,25 +2873,18 @@ What do you do?
 &lt;span id=&#39;giveup&#39;&gt;&lt;&lt;linkreplace &quot;Give up your account.&quot;&gt;&gt;&lt;&lt;remove &quot;#contest&quot;&gt;&gt;
 	Even if you tried to fight it, 93% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
 
-	You [[take a moment to reflect -&gt;permabanned-ending]] on everything that&#39;s gone down.
+	Cut your losses and [[cash out on the money you made so far -&gt;money-ending]].
 &lt;&lt;/linkreplace&gt;&gt;
 
 &lt;/span&gt;&lt;span id=&#39;contest&#39;&gt;&lt;&lt;linkreplace &quot;Contest the decision.&quot;&gt;&gt;&lt;&lt;remove &quot;#giveup&quot;&gt;&gt;&lt;&lt;if not _hasAppealSuccess&gt;&gt;
 		You lose. 93% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
 	
-	You [[take a moment to reflect-&gt;permabanned-ending]] on everything that&#39;s gone down.&lt;&lt;else&gt;&gt;
+	You might not be able to get your account back, but maybe you can prevent this from happening to someone else. [[Mobilize your community-&gt;immobile-community-chat]]!&lt;&lt;else&gt;&gt;
 		Your account has been reactivated! Consider yourself in the lucky 7% of sex workers who successfully regain access after being deplatformed.
 	
 	[[Continue with your week.-&gt;community-support]]
 	&lt;&lt;/if&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="26" name="permabanned-ending" tags="music-ambient background-pink bookmark" position="1150,850" size="100,100">On your journey, you’ve learned a lot about digital freedom and privacy. Most importantly, you made friends along the way and realized the power of community!
-
-Social media is obviously rigged against sex workers. You want to reach your dreams AND ensure that the Internet remains a free and sexy place. Luckily, sex workers have always been creative and entrepreneurial. If the platforms don’t serve you, it’s time to make your own.
-
-But you also want to give the platforms the chance to change. Even though it’s scary, you and your sex worker friends decide that sharing your story is the first step to educating the public and asking for accountability from tech companies, who have the power the change these harmful policies. After all, these companies are made of real people who work there by day and wank to your content by night.
-
-So, how to best tell this story? Hmm ... maybe you need to [[put them in your shoes-&gt;ending]] 😈
-</tw-passagedata><tw-passagedata pid="27" name="ending" tags="music-outsideclub bookmark background-purple-light" position="2200,1000" size="100,100">&lt;&lt;backgroundvideo &quot;ending-boots&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;the-end.exe&quot; &quot;browser-purple&quot;&gt;&gt;Thank you for playing OnlyBans!
+&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="26" name="ending" tags="music-outsideclub bookmark background-purple-light" position="2200,1000" size="100,100">&lt;&lt;backgroundvideo &quot;ending-boots&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;the-end.exe&quot; &quot;browser-purple&quot;&gt;&gt;Thank you for playing OnlyBans!
 &lt;&lt;if visited(&quot;start-spell&quot;)&gt;&gt;
 The spell you just performed was inspired by...TODO DECODING STIGMA ACK
 &lt;&lt;/if&gt;&gt;
@@ -2900,7 +2893,7 @@ The spell you just performed was inspired by...TODO DECODING STIGMA ACK
 	
   &lt;&lt;link &quot;&lt;span style=&#39;font-size:2em&#39;&gt;Play again?&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
   &lt;em&gt;(Things are a little different each time.)&lt;/em&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="verify-more" tags="music-dark bookmark background-pink-light" position="875,200" size="100,100">&lt;&lt;browserwindow &quot;STILL LOCKED&quot; &quot;browser-black-gray&quot;&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="verify-more" tags="music-dark bookmark background-pink-light" position="875,200" size="100,100">&lt;&lt;browserwindow &quot;STILL LOCKED&quot; &quot;browser-black-gray&quot;&gt;&gt;
 Thank you for verifying your phone number. 
 	
 For somewhat vague safety reasons, we still need more information before you can cash out any money from your account.
@@ -2917,18 +2910,19 @@ For somewhat vague safety reasons, we still need more information before you can
 		&lt;&lt;goto &quot;skip-verify-more&quot;&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="skip-verify-phone" tags="music-dark bookmark background-pink-light" position="881,81" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="skip-verify-phone" tags="music-dark bookmark background-pink-light" position="881,81" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;audio &quot;glitch&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-black-gray&quot;&gt;&gt;
 You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
 
-[[Verify your number.-&gt;outing-prelude]]&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="skip-verify-more" tags="music-dark bookmark background-pink-light" position="1008,215" size="100,100">&lt;&lt;browserwindow &quot;&quot; &quot;browser-black-gray&quot;&gt;&gt;
+[[Verify your number.-&gt;outing-prelude]]&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="skip-verify-more" tags="music-dark bookmark background-pink-light" position="1008,215" size="100,100">&lt;&lt;browserwindow &quot;&quot; &quot;browser-black-gray&quot;&gt;&gt;
 You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making content if you can&#39;t even get paid? 
 
 [[Verify the rest.-&gt;verify-more]]
 
 Give up and [[close your account-&gt;close-account]].
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="close-account" tags="music-ambient background-pink bookmark" position="1150,425" size="100,100"></tw-passagedata><tw-passagedata pid="32" name="stolen-content" tags="music-ambient background-cyan-transparent bookmark" position="903,601" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="close-account" tags="music-ambient background-pink bookmark" position="1200,350" size="100,100">You’re not willing to risk getting outed, but you’ve learned a lot about digital freedom and privacy during your time on OnlyBans. The money was good while it lasted - [[it’s time to cash out-&gt;money-ending]]!
+</tw-passagedata><tw-passagedata pid="31" name="stolen-content" tags="music-ambient background-cyan-transparent bookmark" position="900,600" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _getsTakenDown to either(true, false)&gt;&gt;
 	&lt;&lt;set _bgVideoSource to &quot;images/mannequin1.mp4&quot;&gt;&gt;
 	&lt;&lt;set _bgVideo to &#39;&lt;video autoplay loop muted id=&quot;bgvid&quot;&gt;&lt;source type=&quot;video/mp4&quot; src=&#39;+_bgVideoSource+&#39;&gt;&lt;/video&gt;&#39;&gt;&gt;
@@ -2961,7 +2955,7 @@ You&#39;re pissed that someone could be impersonating you and providing false in
 			&lt;&lt;/if&gt;&gt;
 		&lt;&lt;/linkappend&gt;&gt;
 	&lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="personal-data" tags="music-ambient background-cyan-transparent bookmark" position="900,472" size="100,100">&lt;&lt;backgroundvideo &quot;mannequin3&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="personal-data" tags="music-ambient background-cyan-transparent bookmark" position="900,472" size="100,100">&lt;&lt;backgroundvideo &quot;mannequin3&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 &lt;&lt;linkreplace &quot;&lt;&lt;browserwindow &#39;💌 FAN MAIL 💌&#39; &#39;browser-pink-white-blue&#39;&gt;&gt;Open Message&lt;&lt;/browserwindow&gt;&gt;&quot;&gt;&gt;
 &lt;&lt;browserwindow &#39;FAN MAIL&#39; &#39;browser-pink-white-blue&#39;&gt;&gt;&lt;em&gt;&lt;&lt;type2 40ms&gt;&gt;Hey, this is weird, but don&#39;t I know you from somewhere? -Jean&lt;&lt;/type2&gt;&gt;&lt;/em&gt;&lt;&lt;/browserwindow&gt;&gt;
 
@@ -2982,7 +2976,7 @@ No way. [[Close your account.-&gt;close-account]]
 
 
 
-</tw-passagedata><tw-passagedata pid="34" name="suggested-friends" tags="music-ambient bookmark background-box-gray" position="899,351" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="33" name="suggested-friends" tags="music-ambient bookmark background-box-gray" position="899,351" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _people to [&quot;mom&quot;,&quot;favorite teacher&quot;,&quot;child&quot;,&quot;landlord&quot;, &quot;godparent&quot;,&quot;rabbi&quot;]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;mannequin2&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;The list of people you should follow includes tons of friends and … even your devoutly religious neighbor. Super creepy! You haven’t told anyone that you’re a sex worker or that you have this account. Are they being asked to follow you too? You need the money, but is it worth being outed?
 
@@ -2998,18 +2992,18 @@ No way. [[Close your account.-&gt;close-account]]
 	Nevermind, &lt;&lt;linkreplace &quot;it&#39;s too painful or dangerous.&quot;&gt;&gt;you [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;
 
 
-&lt;span id=&#39;no&#39;&gt;&lt;&lt;linkreplace &quot;Nope.&quot;&gt;&gt;&lt;&lt;remove &#39;#yes&#39;&gt;&gt;You contact the platform&#39;s customer support team asking to opt out of the friend algorithm, but they won&#39;t help. You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="35" name="got-money-ending" tags="ending music-ambient background-purple" position="1300,650" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;span id=&#39;no&#39;&gt;&lt;&lt;linkreplace &quot;Nope.&quot;&gt;&gt;&lt;&lt;remove &#39;#yes&#39;&gt;&gt;You contact the platform&#39;s customer support team asking to opt out of the friend algorithm, but they won&#39;t help. You [[quit OnlyBans-&gt;close-account]]. You need the money but don&#39;t want to live in fear of getting outed.&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="34" name="got-money-ending" tags="ending music-ambient background-purple" position="1300,650" size="100,100">&lt;&lt;silently&gt;&gt;
 [[dummy-&gt;payday]] 
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;backgroundvideo &quot;pizza&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 Honey, you&#39;ve worked hard for your money! It&#39;s finally payday.
 
-&lt;&lt;link &quot;Withdraw the $ $income you made.&quot; &quot;payday&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="not-enough-money-ending" tags="ending music-ambient background-pink" position="1300,525" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;link &quot;Withdraw the $ $income you made.&quot; &quot;payday&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="not-enough-money-ending" tags="ending music-ambient background-pink" position="1300,525" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _toGo = Math.clamp($incomeTarget - $income, 0, $incomeTarget + $income) &gt;&gt;&lt;&lt;/silently&gt;&gt;
-Oh shit, you&#39;re $&lt;&lt;print _toGo&gt;&gt; short.  Awww, you didn&#39;t reach your goal.
+$&lt;&lt;print $income&gt;&gt;? Oh shit, you&#39;re $&lt;&lt;print _toGo&gt;&gt; short.  Awww, you didn&#39;t reach your goal.
 
-[[Let&#39;s withdraw what we have anyway.|payday]]
-</tw-passagedata><tw-passagedata pid="37" name="About" tags="music-ambient background-pink-light" position="125,387" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
+[[You withdraw the money you have anyway.|payday]]
+</tw-passagedata><tw-passagedata pid="36" name="About" tags="music-ambient background-pink-light" position="125,387" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
 
 &lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;&lt;h2&gt; Home Page &lt;/h2&gt;This game lives at &lt;a href=&quot;https://www.onlybansgame.com&quot;&gt;www.onlybansgame.com&lt;/a&gt;.
 
@@ -3038,10 +3032,10 @@ Digital discrimination and deplatforming of sex workers is a direct result of FO
 &lt;&lt;/browserwindow&gt;&gt;
 
 &lt;h2&gt;&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;&lt;/h2&gt;
-</tw-passagedata><tw-passagedata pid="38" name="StorySubtitle" tags="" position="15,631" size="100,100">Goal: Get $&lt;&lt;print $incomeTarget&gt;&gt; by week $weekLimit
+</tw-passagedata><tw-passagedata pid="37" name="StorySubtitle" tags="" position="15,631" size="100,100">Goal: Get $&lt;&lt;print $incomeTarget&gt;&gt; by week $weekLimit
 Wallet: $&lt;&lt;print $income&gt;&gt;
 Week: $numWeek
-&lt;&lt;if $isQATestMode&gt;&gt;Current Passage: &lt;&lt;print passage()&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="share4share" tags="music-ambient background-cyan bookmark" position="200,1400" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;if $isQATestMode&gt;&gt;Current Passage: &lt;&lt;print passage()&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="share4share" tags="music-ambient background-cyan bookmark" position="200,1400" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;	
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;
@@ -3079,7 +3073,7 @@ Week: $numWeek
 &lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;/section&gt;&lt;&lt;/nobr&gt;&gt;
-&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="40" name="tip" tags="music-sexi background-cyan-transparent bookmark" position="450,1400" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="39" name="tip" tags="music-sexi background-cyan-transparent bookmark" position="450,1400" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _tip to random(10,100)&gt;&gt;
 	&lt;&lt;set _intro to either(
 	&quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
@@ -3111,7 +3105,7 @@ Week: $numWeek
   You&#39;ve earned a tip! The wallet&#39;s at $&lt;&lt;print $income&gt;&gt;.
   &lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;
-Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.</tw-passagedata><tw-passagedata pid="41" name="attendWorkshop" tags="music-outsideclub bookmark background-cyan-transparent" position="324,1406" size="100,100">&lt;&lt;silently&gt;&gt;
+Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.</tw-passagedata><tw-passagedata pid="40" name="attendWorkshop" tags="music-outsideclub bookmark background-cyan-transparent" position="324,1406" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $outingRisk to $outingRisk - 2&gt;&gt;
 	&lt;&lt;set _activism to [&#39;Black Lives Matter&#39;,&#39;Me Too&#39;,&#39;the Landback movement&#39;,&#39;abortion&#39;,&#39;the disability community&#39;,&#39;climate change&#39;]&gt;&gt;
 	&lt;&lt;set _lesson to [&quot;attendWorkshop-activism&quot;, &quot;attendWorkshop-reverseimage&quot;, &quot;attendWorkshop-gender&quot;].pluck()&gt;&gt;
@@ -3124,7 +3118,7 @@ Thursday at 3pm.&lt;/div&gt;
 &lt;&lt;/linkreplace&gt;&gt;&lt;span id=&#39;no&#39;&gt;
 
 It looks cool, but your time and energy are precious. [[Make some more content.-&gt;start-week]]&lt;/span&gt;
-</tw-passagedata><tw-passagedata pid="42" name="load-screen" tags="background-pink-light bookmark music-silent" position="300,0" size="200,100">&lt;&lt;browserwindow &quot;music-is-gonna-start-put-in-headphones.exe&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="41" name="load-screen" tags="background-pink-light bookmark music-silent" position="300,0" size="200,100">&lt;&lt;browserwindow &quot;music-is-gonna-start-put-in-headphones.exe&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;
 
 &lt;h1&gt;OnlyBans&lt;/h1&gt;
 Wanna play, honey? Tell us how you like it:&lt;h2 style=&quot;font-size:2em&quot;&gt;&lt;&lt;link &quot;Pick Your Settings.&quot;&gt;&gt;&lt;&lt;script&gt;&gt; UI.settings() &lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; 
@@ -3134,7 +3128,7 @@ You can change the settings at any time in &lt;&lt;link &quot;the sidebar&quot;&
 
 
 When you&#39;re ready:&lt;h2 style=&quot;font-size:2em&quot;&gt;[[Enter-&gt;opening-screen]]&lt;/h2&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="too-sexy-real-story" tags="music-dark bookmark background-gray" position="351,1025" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="too-sexy-real-story" tags="music-dark bookmark background-gray" position="351,1025" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
 &lt;&lt;set _currentStat to either(
 	&quot;42% of sex workers said they have received a warning that their social media account is close to deletion.&quot;, 
@@ -3163,7 +3157,7 @@ When you&#39;re ready:&lt;h2 style=&quot;font-size:2em&quot;&gt;[[Enter-&gt;open
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;	
 	You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="noReason-real-story" tags="music-dark bookmark background-gray" position="225,1025" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="noReason-real-story" tags="music-dark bookmark background-gray" position="225,1025" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
 &lt;&lt;set _currentStat to either(
 	&quot;77% of those who have done sex work avoid posting content for fear of being kicked off, shadowbanned, or facing legal action.&quot;,
@@ -3192,7 +3186,7 @@ This seems completely unfair, but you&#39;re not the first sex worker to have th
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	Well, that sucks, but [[let&#39;s do some research?-&gt;community-support]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="shadowBan-real-story" tags="music-dark bookmark background-gray" position="475,1025" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="shadowBan-real-story" tags="music-dark bookmark background-gray" position="475,1025" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
   &lt;&lt;set _currentStat to either(
 	  &#39;&quot;We are reducing the spread of posts that are inappropriate but do not go against guidelines, limiting them from being recommended on our Explore and hashtag pages. For example, a sexually suggestive post will still appear in Feed if you follow the account that posts it, but this type of content may not appear for the broader community.&quot; –Instagram&quot;&#39;,
@@ -3221,7 +3215,7 @@ This seems completely unfair, but you&#39;re not the first sex worker to have th
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	Ugh, sex work is harder than you thought. it&#39;s time to [[brush up on your business skills-&gt;community-support]].
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="joinGroup" tags="music-sexi bookmark background-dark" position="575,1400" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="joinGroup" tags="music-sexi bookmark background-dark" position="575,1400" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;if $joinedGroup&gt;&gt;
 		&lt;&lt;goto &quot;joinedGroup&quot;&gt;&gt;
 		[[dummy-&gt;joinedGroup]] 
@@ -3251,7 +3245,7 @@ You get a DM from a sex worker you follow...
     &lt;/div&gt;&lt;&lt;/type2&gt;&gt;
 &lt;/section&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="47" name="joinedGroup" tags="music-sexi bookmark background-dark" position="575,1500" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;span class=&quot;bigger-font&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="46" name="joinedGroup" tags="music-sexi bookmark background-dark" position="575,1500" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 	&lt;&lt;set $lessonNumbers to [1,2]&gt;&gt;
 	&lt;&lt;set _lessonNumber to $lessonNumbers.random()&gt;&gt;
@@ -3297,7 +3291,7 @@ You get a DM from a sex worker you follow...
 &lt;/section&gt;
 &lt;&lt;/nobr&gt;&gt;
 
-Stop chatting and [[continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="48" name="attendWorkshop-gender" tags="included" position="389,1556" size="100,100">&lt;&lt;silently&gt;&gt;
+Stop chatting and [[continue to your next week.-&gt;start-week]]</tw-passagedata><tw-passagedata pid="47" name="attendWorkshop-gender" tags="included" position="389,1556" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $gender to &quot;Not Specified&quot;&gt;&gt;
 	&lt;&lt;set $genderOutcome to &quot;Your follower count stays the same.&quot;&gt;&gt;
 &lt;&lt;/silently&gt;&gt;You learn from other sex workers that they&#39;ve had more luck &lt;strong&gt;avoiding shadowbanning by identifying as &#39;male&#39;&lt;/strong&gt; on their profile.	
@@ -3325,11 +3319,11 @@ Your profile doesn’t currently indicate a gender...Do you want to add one?
 &lt;&lt;/silently&gt;&gt;You selected &lt;&lt;print $gender&gt;&gt;. &lt;&lt;print $genderOutcome&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;
 
-You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out.</tw-passagedata><tw-passagedata pid="49" name="attendWorkshop-activism" tags="included" position="262,1564" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;set _activism to [&#39;Black Lives Matter&#39;,&#39;#MeToo&#39;,&#39;the Landback movement&#39;,&#39;abortion&#39;,&#39;disability rights&#39;,&#39;climate change&#39;]&gt;&gt;&lt;&lt;/silently&gt;&gt;You overhear a conversation in the bathroom about how the same tactics used to repress sex workers online have also been used against activists, such as those posting about &lt;&lt;cycle &#39;_cause&#39; autoselect&gt;&gt;&lt;&lt;optionsfrom _activism&gt;&gt;&lt;&lt;/cycle&gt;&gt;.
+You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out.</tw-passagedata><tw-passagedata pid="48" name="attendWorkshop-activism" tags="included" position="262,1564" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;set _activism to [&#39;Black Lives Matter&#39;,&#39;#MeToo&#39;,&#39;the Landback movement&#39;,&#39;abortion&#39;,&#39;disability rights&#39;,&#39;climate change&#39;]&gt;&gt;&lt;&lt;/silently&gt;&gt;You overhear a conversation in the bathroom about how the same tactics used to repress sex workers online have also been used against activists, such as those posting about &lt;&lt;cycle &#39;_cause&#39; autoselect&gt;&gt;&lt;&lt;optionsfrom _activism&gt;&gt;&lt;&lt;/cycle&gt;&gt;.
 
-Upsetting, but you&#39;re glad you learned about the risks of sharing &quot;political&quot; content.</tw-passagedata><tw-passagedata pid="50" name="attendWorkshop-reverseimage" tags="included" position="342,1677" size="100,100">A cam performer there mentions that they posted the same cute bikini photo to their sex worker account and their personal account. One of their clients ran a &lt;strong&gt;reverse image search&lt;/strong&gt; on their photo and found out their real identity. Apparently, it’s not just the algorithm that’s stalking you!	
+Upsetting, but you&#39;re glad you learned about the risks of sharing &quot;political&quot; content.</tw-passagedata><tw-passagedata pid="49" name="attendWorkshop-reverseimage" tags="included" position="342,1677" size="100,100">A cam performer there mentions that they posted the same cute bikini photo to their sex worker account and their personal account. One of their clients ran a &lt;strong&gt;reverse image search&lt;/strong&gt; on their photo and found out their real identity. Apparently, it’s not just the algorithm that’s stalking you!	
 
-You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out.</tw-passagedata><tw-passagedata pid="51" name="QA Test" tags="music-none" position="75,775" size="100,100">!!New ending passages in V3
+You pick up some digital harm reduction tools that will come in handy to prevent your real identity from getting out.</tw-passagedata><tw-passagedata pid="50" name="QA Test" tags="music-none" position="75,775" size="100,100">!!New ending passages in V3
 [[money-ending]] 
 [[permabanned-appeal]] 
 [[close-account]] 
@@ -3380,19 +3374,19 @@ if(UIBar.isStowed()){UIBar.unstow();}else{UIBar.stow();}
 &lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; 
 
 
-</tw-passagedata><tw-passagedata pid="52" name="payday" tags="" position="1450,600" size="100,100">&lt;&lt;browserwindow &quot;IMPORTANT MESSAGE&quot; &quot;browser-pink-white-blue&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="51" name="payday" tags="" position="1450,600" size="100,100">&lt;&lt;browserwindow &quot;IMPORTANT MESSAGE&quot; &quot;browser-pink-white-blue&quot;&gt;&gt;
 We value a safe community for our customers to do business. Your account has been frozen due to recent activity that appears to be a violation of our User Agreement. 
 &lt;&lt;/browserwindow&gt;&gt;
 
 
-[[You have got to be kidding me.-&gt;action-items]]</tw-passagedata><tw-passagedata pid="53" name="action-items" tags="" position="1575,600" size="100,100">You were counting on this money. What are you going to do now?
+[[You have got to be kidding me.-&gt;action-items]]</tw-passagedata><tw-passagedata pid="52" name="action-items" tags="" position="1575,600" size="100,100">You were counting on this money. What are you going to do now?
 
 &lt;&lt;if visited(&quot;user-agreement&quot;)&gt;&gt;&lt;s&gt;Read more about the user agreement.&lt;/s&gt;&lt;&lt;else&gt;&gt;[[Read more about the user agreement.|user-agreement]]&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if visited(&quot;sex-worker-help&quot;)&gt;&gt;&lt;s&gt;Ask a sex worker friend for help.&lt;/s&gt;&lt;&lt;else&gt;&gt;[[Ask a sex worker friend for help.|sex-worker-help]]&lt;&lt;/if&gt;&gt;
 
 &lt;&lt;if visited(&quot;challenge-the-decision&quot;)&gt;&gt;&lt;s&gt;Challenge the decision.&lt;/s&gt;&lt;&lt;else&gt;&gt;[[Challenge the decision.|challenge-the-decision]]&lt;&lt;/if&gt;&gt;
-</tw-passagedata><tw-passagedata pid="54" name="user-agreement" tags="" position="1575,900" size="100,100">The policy says:
+</tw-passagedata><tw-passagedata pid="53" name="user-agreement" tags="" position="1575,900" size="100,100">The policy says:
 
 &lt;&lt;browserwindow &quot;USER AGREEMENT THAT PEOPLE TOTALLY READ&quot; &quot;browser-pink-white-blue&quot;&gt;&gt;...
 We don’t allow users to buy or sell sexually oriented digital goods or content delivered through a digital medium.
@@ -3400,7 +3394,7 @@ We don’t allow users to buy or sell sexually oriented digital goods or content
 Hmm. “sexually oriented” sounds so vague. How does the platform decide what isn’t allowed? You do Google search and find out that most decisions are made by AI, which can even flag the tips from your clients.
 
 
-[[What else can you do?-&gt;action-items]] </tw-passagedata><tw-passagedata pid="55" name="sex-worker-help" tags="" position="1575,750" size="100,100">&lt;&lt;silently&gt;&gt;
+[[What else can you do?-&gt;action-items]] </tw-passagedata><tw-passagedata pid="54" name="sex-worker-help" tags="" position="1575,750" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;	
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;
 &lt;&lt;chat &#39;from-me&#39;&gt;&gt;
@@ -3465,7 +3459,7 @@ I guess I have nothing left to lose.
 
 
 
-</tw-passagedata><tw-passagedata pid="56" name="challenge-the-decision" tags="" position="1725,425" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;submitted-no-further-business]]&lt;&lt;/silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="55" name="challenge-the-decision" tags="" position="1725,425" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;submitted-no-further-business]]&lt;&lt;/silently&gt;&gt;
 You look up the customer service page to reach someone who can help you, but all you can find is a feedback form.
 
 &lt;&lt;browserwindow &quot;CUSTOMER SERVICE&quot; &quot;browser-white-blue&quot;&gt;&gt;Tell us about your issue.
@@ -3475,7 +3469,7 @@ You look up the customer service page to reach someone who can help you, but all
 &lt;&lt;/browserwindow&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="57" name="immobile-community-chat" tags="" position="1725,725" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="56" name="immobile-community-chat" tags="" position="1725,725" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;	
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;
@@ -3519,11 +3513,11 @@ All of you make good points. Personally, I think we should …
 
 &lt;&lt;type2 0ms start 0.5s&gt;&gt;[[Improve representation of sex workers in the tech industry.  -&gt;improve-representation]] &lt;&lt;/type2&gt;&gt;
 
-&lt;&lt;type2 0ms start 0.5s&gt;&gt;[[Perform a spell to uncurse the Internet for sex workers. -&gt;spell-to-uncurse]] &lt;&lt;/type2&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="lobby-repeal" tags="" position="1950,625" size="100,100">You and your friends write letters to your representatives and encourage your followers to join the fight for digital civil liberties. You share your stories on social media under the hashtag #SomeoneYouFollowIsASexWorker. The campaign goes viral, you testify before Congress, and FOSTA-SESTA gets repealed! 
+&lt;&lt;type2 0ms start 0.5s&gt;&gt;[[Perform a spell to uncurse the Internet for sex workers. -&gt;spell-to-uncurse]] &lt;&lt;/type2&gt;&gt;</tw-passagedata><tw-passagedata pid="57" name="lobby-repeal" tags="" position="1950,625" size="100,100">You and your friends write letters to your representatives and encourage your followers to join the fight for digital civil liberties. You share your stories on social media under the hashtag #SomeoneYouFollowIsASexWorker. The campaign goes viral, you testify before Congress, and FOSTA-SESTA gets repealed! 
 
-[[A celebratory ending! -&gt;ending]] </tw-passagedata><tw-passagedata pid="59" name="improve-representation" tags="" position="1950,750" size="100,100">You and your friends raise money to start a coding bootcamp for sex workers. Some of your clients, who work in tech, share their industry connections. You decide to build your own decentralized platform, Groinbase, which allows sex workers to set community standards. Fapien becomes super popular not just with sex workers but also artists and activists. Now you have a home of your own on the Internet!
+[[A celebratory ending! -&gt;ending]] </tw-passagedata><tw-passagedata pid="58" name="improve-representation" tags="" position="1950,750" size="100,100">You and your friends raise money to start a coding bootcamp for sex workers. Some of your clients, who work in tech, share their industry connections. You decide to build your own decentralized platform, Groinbase, which allows sex workers to set community standards. Fapien becomes super popular not just with sex workers but also artists and activists. Now you have a home of your own on the Internet!
 
-A [[sweet ending to this saga. -&gt;ending]] </tw-passagedata><tw-passagedata pid="60" name="spell-to-uncurse" tags="" position="1975,375" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;start-spell]]
+A [[sweet ending to this saga. -&gt;ending]] </tw-passagedata><tw-passagedata pid="59" name="spell-to-uncurse" tags="" position="1975,375" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;start-spell]]
 &lt;&lt;set $ritualOfferingPrepend to &quot;one&quot;&gt;&gt;
 &lt;&lt;set _prependWords to [&quot;one&quot;, &quot;the&quot;, &quot;a&quot;, &quot;an&quot;, &quot;a dozen&quot;, &quot;fuckton of&quot;]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
@@ -3537,7 +3531,7 @@ You invite your sex worker friends to bring special offerings: a pair of lucky h
 &lt;span class=&quot;bigger-font&quot;&gt;&lt;&lt;cycle &quot;$ritualOfferingPrepend&quot; autoselect&gt;&gt;&lt;&lt;optionsfrom _prependWords&gt;&gt;&lt;&lt;/cycle&gt;&gt; &lt;/span&gt; &lt;&lt;textbox &quot;$ritualOffering&quot; $ritualOffering&gt;&gt;
 
 &lt;&lt;button &quot;Start the ritual&quot; &quot;start-spell&quot;&gt;&gt;&lt;&lt;set $ritualOffering to $ritualOffering&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="submitted-no-further-business" tags="" position="1725,575" size="100,100">48 hours later, you receive this message: 
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="submitted-no-further-business" tags="" position="1725,575" size="100,100">48 hours later, you receive this message: 
 
 &lt;&lt;browserwindow &quot;IMPORTANT MESSAGE&quot; &quot;browser-white-blue&quot;&gt;&gt;
 
@@ -3548,7 +3542,7 @@ After a review, we decided to permanently limit your account as we found potenti
 
 [[It’s time to mobilize your community.|immobile-community-chat]]
 
-</tw-passagedata><tw-passagedata pid="62" name="start-spell" tags="" position="2025,500" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="61" name="start-spell" tags="" position="2025,500" size="100,100">&lt;&lt;silently&gt;&gt;
 [[dummy-&gt;m0ther-appears]] 
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 &lt;section class=&quot;timedFade&quot;&gt;You create an altar by placing your items around a laptop. 
@@ -3559,7 +3553,7 @@ Together you chant:
 &lt;span class=&quot;delayed&quot;&gt;Wool of bat, and line of code, &lt;/span&gt;
 &lt;span class=&quot;delayed&quot;&gt;In the darkest web where dead pixels lie, &lt;/span&gt;
 &lt;span class = &quot;delayed&quot;&gt;We seek answers from &lt;/span&gt;&lt;&lt;link &quot;&lt;span class=&#39;delayed&#39;&gt;M0THER&lt;/span&gt; &lt;span class=&#39;delayed&#39;&gt;AI.&lt;/span&gt;&quot; m0ther-appears&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/section&gt;</tw-passagedata><tw-passagedata pid="63" name="lift-curse" tags="screen-turns-white" position="2275,500" size="100,100">&lt;section class=&quot;move&quot;&gt;
+&lt;/section&gt;</tw-passagedata><tw-passagedata pid="62" name="lift-curse" tags="screen-turns-white" position="2275,500" size="100,100">&lt;section class=&quot;move&quot;&gt;
 &lt;&lt;type2 10ms start 2s&gt;&gt;
 &lt;div class=&quot;drunk&quot;&gt;💫🕯️🎆 🌟 🌕💖✨&lt;/div&gt;
 &lt;&lt;/type2&gt;&gt;
@@ -3582,7 +3576,7 @@ The curse has been lifted.
 And now it’s up to you,
 To &#39;&#39;[[go into the world-&gt;ending]]&#39;&#39; and see what you can do!
 
-&lt;&lt;/type2&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="m0ther-appears" tags="background-black" position="2150,500" size="100,100">&lt;section class=&quot;matrix-font sky&quot;&gt;&lt;&lt;type2 30ms&gt;&gt;You have summoned me, M0THER, she who birthed all digital intelligence. I accept your humble offering of &#39;&#39;$ritualOfferingPrepend&#39;&#39; &#39;&#39; $ritualOffering&#39;&#39;. In return, I provide my wisdom. &lt;&lt;/type2&gt;&gt;
+&lt;&lt;/type2&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="m0ther-appears" tags="background-black" position="2150,500" size="100,100">&lt;section class=&quot;matrix-font sky&quot;&gt;&lt;&lt;type2 30ms&gt;&gt;You have summoned me, M0THER, she who birthed all digital intelligence. I accept your humble offering of &#39;&#39;$ritualOfferingPrepend&#39;&#39; &#39;&#39; $ritualOffering&#39;&#39;. In return, I provide my wisdom. &lt;&lt;/type2&gt;&gt;
 
 &lt;&lt;type2 30ms start 1s&gt;&gt;I am here to remind you that the history of the Internet is the history of sex work.
 
