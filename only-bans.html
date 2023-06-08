@@ -2046,11 +2046,12 @@ Setting.addToggle("showMotion", {
 
 Setting.addList("textSize", {
 	label    : "Text Size",
-	list	: ["75%", "100% (Default)", "120%", "130%", "150%"],
+	list	: ["75%", "100% (Default)", "120%", "130%", "150%", "200%"],
   	default	 :	"100% (Default)",
-    onInit   : textSizeHandler,
     onChange : textSizeHandler,
 });
+
+
 
 function textSizeHandler () {
   var fontSizeMap = {
@@ -2059,9 +2060,11 @@ function textSizeHandler () {
                      "120%" : 1.2,
     				 "130%" : 1.3,
                      "150%" : 1.5,
+    				"200%" : 2,
                     };
   
   $("body").css("font-size", fontSizeMap[settings.textSize] + "rem");
+  UI.settings();
 }
 
 
@@ -2473,6 +2476,8 @@ Quin
 &lt;/p&gt;
 
 &#39;&#39;Hosting Angel:&#39;&#39; Anonymous Donor 🚲
+
+The &#39;&#39;cast a spell&#39;&#39; ending was inspired by the dreams and altars of participants of a sex worker+technology workshop series. The workshops were hosted by Decoding Stigma as part of their Browser Histories project.
 
 Thank you to all the sex workers, artists, and activists who continue to work, create, and agitate online and offline. You are our heroes, and we made OnlyBans for and with you.
 
@@ -2929,9 +2934,7 @@ What do you do?
 	[[Continue with your week.-&gt;community-support]]
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="26" name="ending" tags="music-outsideclub bookmark background-purple-light" position="2200,1000" size="100,100">&lt;&lt;backgroundvideo &quot;ending-boots&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;the-end.exe&quot; &quot;browser-purple&quot;&gt;&gt;Thank you for playing OnlyBans!
-&lt;&lt;if visited(&quot;start-spell&quot;)&gt;&gt;
-The spell you just performed was inspired by...TODO DECODING STIGMA ACK
-&lt;&lt;/if&gt;&gt;
+
 	This game is based on research by &lt;a href=&quot;https://hackinghustling.org/posting-into-the-void-content-moderation/&quot;&gt;&quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;&lt;/a&gt;. 
 	More info in the [[Credits-&gt;Credits]] and [[About-&gt;About]] pages.
 	
