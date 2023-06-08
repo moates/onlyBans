@@ -778,7 +778,9 @@ input[type=checkbox] {
   text-decoration: line-through;
 }
 
-
+#ui-dialog-body  {
+ 	overflow: scroll; 
+}
 
 /* ************* */
 /*     WORKSHOP  */
@@ -1840,9 +1842,9 @@ Macro.add("chat", {
 
 
 
-/***********************/
-/*   USER SETTINGS     */
-/***********************/
+/******************************/
+/*   USER AUDIO SETTINGS     */
+/*****************************/
 // BIG thanks to HiEv Heavy Industries for the code sample
 // https://qjzhvmqlzvoo5lqnrvuhmg-on.drv.tw/UInv/Sample_Code.html#Main%20Menu
 
@@ -1940,7 +1942,14 @@ function fxVolumeHandler() {
 	}
 }
 
-Setting.addHeader("Accessibility", "You might need to reload the page or continue to the next page of the game to see changes.");
+/******************************/
+/*   USER VISUAL SETTINGS    */
+/*****************************/
+Setting.addHeader("Visuals & Video", "You might need to reload the page or continue to the next page of the game to see changes.");
+
+
+
+
 
 var settingEnableVideoHandler = function () {
 	console.log('video handler', settings.enableVideo);
@@ -2033,6 +2042,27 @@ Setting.addToggle("showMotion", {
 	onInit: settingShowMotionHandler,
 	onChange: settingShowMotionHandler,
 });
+
+
+Setting.addList("textSize", {
+	label    : "Text Size",
+	list	: ["75%", "100% (Default)", "120%", "130%", "150%"],
+  	default	 :	"100% (Default)",
+    onInit   : textSizeHandler,
+    onChange : textSizeHandler,
+});
+
+function textSizeHandler () {
+  var fontSizeMap = {
+    				"75%": 0.75, 
+                     "100% (Default)" : 1,
+                     "120%" : 1.2,
+    				 "130%" : 1.3,
+                     "150%" : 1.5,
+                    };
+  
+  $("body").css("font-size", fontSizeMap[settings.textSize] + "rem");
+}
 
 
 
@@ -2382,9 +2412,9 @@ OnlyBans is an online platform where you post sexy content to attract fans and e
 
 Want to play?
 
-[[Play.-&gt;what-is-your-name]]
+&lt;span class=&quot;bigger-font&quot;&gt;[[Play.-&gt;what-is-your-name]]&lt;/span&gt;
 
-&lt;&lt;linkreplace &quot;Read more&quot;&gt;&gt;&lt;&lt;include &quot;StoryMenu&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;
+&lt;span class=&quot;bigger-font&quot;&gt;&lt;&lt;linkreplace &quot;Read more&quot;&gt;&gt;&lt;&lt;include &quot;StoryMenu&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;
 &lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="what-is-your-name" tags="music-sexi background-cyan bookmark" position="299,253" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;greetings]] 
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;typing&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-white-blue&quot;&gt;&gt;Your name is
 &lt;&lt;textbox &quot;$playerName&quot; $playerName autofocus&gt;&gt;
@@ -2398,6 +2428,7 @@ Want to play?
 [[About]]
 
 [[Credits]]
+
 &lt;&lt;if $isQATestMode &gt;&gt;[[QA Test]]
 &lt;&lt;/if&gt;&gt;
 </tw-passagedata><tw-passagedata pid="4" name="How to Play" tags="music-ambient background-pink" position="13,393" size="100,100">&lt;&lt;back &quot;Back to game.&quot;&gt;&gt;
