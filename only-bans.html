@@ -706,10 +706,10 @@ transition: all 4s ease;
 
 .fade-top {
   	opacity: 1;
-  	-webkit-animation: fadeInOut 10s infinite ease-in-out;
-    -ms-animation: fadeInOut 10s infinite ease-in-out;  
-    -o-animation: fadeInOut 10s infinite ease-in-out;
-    animation: fadeInOut 10s infinite ease-in-out;  
+  	-webkit-animation: fadeInOut 6s infinite ease-in-out;
+    -ms-animation: fadeInOut 6s infinite ease-in-out;  
+    -o-animation: fadeInOut 6s infinite ease-in-out;
+    animation: fadeInOut 6s infinite ease-in-out;  
 }
 
 /* The overlay effect (full height and width) - lays on top of the container and over the image */
@@ -725,26 +725,26 @@ transition: all 4s ease;
   0%   { opacity:1; }
   10%  { opacity:0; }
   50%  { opacity:0; }
-  60% { opacity:1; }
+  70% { opacity:1; }
 }
 
 @-o-keyframes fadeInOut{
   0%   { opacity:1; }
   10%  { opacity:0; }
   50%  { opacity:0; }
-  60% { opacity:1; }
+  70% { opacity:1; }
 }
 @-moz-keyframes fadeInOut{
   0%   { opacity:1; }
   10%  { opacity:0; }
   50%  { opacity:0; }
-  60% { opacity:1; }
+  70% { opacity:1; }
 }
 @-webkit-keyframes fadeInOut{
   0%   { opacity:1; }
   10%  { opacity:0; }
   50%  { opacity:0; }
-  60% { opacity:1; }
+  70% { opacity:1; }
 }
 
 /********************** */
@@ -2494,7 +2494,7 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 
 
 &lt;h2&gt;&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;&lt;/h2&gt;
-</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="92,56" size="100,100">/* PLAY MODES */
+</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="100,50" size="100,100">/* PLAY MODES */
 /* &lt;&lt;$isGalleryMode&gt;&gt; is controlled by Javascript, disables some features */ 
 /* &lt;&lt;$isQATestMode&gt;&gt; is controlled by the Javascript */
 
@@ -2580,8 +2580,52 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 }&gt;&gt;
 
 
+/* STATS */
+&lt;&lt;set $shadowBanFacts to [
+	  &#39;&quot;We are reducing the spread of posts that are inappropriate but do not go against guidelines, limiting them from being recommended on our Explore and hashtag pages. For example, a sexually suggestive post will still appear in Feed if you follow the account that posts it, but this type of content may not appear for the broader community.&quot; –Instagram&quot;&#39;,
+		  &#39;A shadowban ensures that content that platforms deem inappropriate, high-risk, or low value speech is invisible to other users, but still allows an account to remain on the platform in order to make ad revenue off of the shadowbanned individual.&#39;,
+		  &#39;You can get shadowbanned for following other sex workers. 73% of sex workers have experienced social media platforms suppressing their friends’ content from their timelines.&#39;,
+		  &#39;59% of sex workers have found their username does not show up in searches.&#39;,
+		  &#39;55% of those who have done sex work avoid specific words to avoid being shadowbanned. You can get shadowbanned for using banned phrases and hashtags like #asiangirl, #curvygirls, or #lesbian.&#39;
+	  ] &gt;&gt;
+      
+ &lt;&lt;set $tooSexyFacts to [
+	&quot;42% of sex workers said they have received a warning that their social media account is close to deletion.&quot;, 
+	&quot;67% of sex workers have had a post removed from social media.&quot;,
+	&quot;Plus-size users&#39; accounts are flagged for excessive nudity and sexual solicitation more frequently than thin users’ accounts. Women of color and queer people experience platform punishment and policing more frequently than their white, cishetero counterparts.&quot; ,
+    &quot;42% of sex workers said they have received a warning that their social media account is close to deletion.&quot;, 
+	&quot;67% of sex workers have had a post removed from social media.&quot;,
+	&quot;Plus-size users&#39; accounts are flagged for excessive nudity and sexual solicitation more frequently than thin users’ accounts. Women of color and queer people experience platform punishment and policing more frequently than their white, cishetero counterparts.&quot; 
+    ] &gt;&gt;
+
+
+&lt;&lt;set $noReasonFacts to [
+	&quot;77% of those who have done sex work avoid posting content for fear of being kicked off, shadowbanned, or facing legal action.&quot;,
+	&quot;68% of those who have done sex work have had content that does not violate a sensitive media policy marked as sensitive media on their profile.&quot;,
+	&quot;74% of those who have done sex work are noticing trends in the suppression of information on social media.&quot;,
+    &quot;77% of those who have done sex work avoid posting content for fear of being kicked off, shadowbanned, or facing legal action.&quot;,
+	&quot;68% of those who have done sex work have had content that does not violate a sensitive media policy marked as sensitive media on their profile.&quot;,
+	&quot;74% of those who have done sex work are noticing trends in the suppression of information on social media.&quot;
+	 ] &gt;&gt;
+
+
+&lt;&lt;set $tipMessages to [
+	&quot;Can you keep me warm? 🔥😘&quot;,
+	&quot;🔥What a beautiful sexy perfect body 🔥&quot;,
+	&quot;Sweet meat baby ❤️&quot;,
+	&quot;Take it all off!!!!!!!&quot;,
+	&quot;I love your toes&quot;,
+	&quot;Damn baby you&#39;re so beautiful and very very sexy!!! 🔥🔥🔥👅👅👅😈&quot;,
+	&quot;you are wonderful my princess🔥👅&quot;,
+	&quot;I would **** you till I faint !!!&quot;,
+	&quot;🍒💜🌹bonita🐰babygirl🌹💜🍒&quot;,
+	&quot;Gorgeous and sexy, I so want you babe 🔥🔥🔥👿👿👿😍😘&quot;,
+	&quot;You poor child, have you no clothes to wear??&quot;, 
+	] &gt;&gt;
+
 
 /* PHOTOS */
+
 /* Outcome/reward distributions for the different photo risks.
 		These should add to 100. */
 &lt;&lt;set $riskDists to {
@@ -2940,10 +2984,10 @@ What do you do?
 	
   &lt;&lt;link &quot;&lt;span style=&#39;font-size:2em&#39;&gt;Play again?&lt;/span&gt;&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;
   &lt;em&gt;(Things are a little different each time.)&lt;/em&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="verify-more" tags="music-dark bookmark background-pink-light" position="875,200" size="100,100">&lt;&lt;browserwindow &quot;STILL LOCKED&quot; &quot;browser-black-gray&quot;&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="verify-more" tags="music-dark bookmark background-pink-light" position="900,200" size="100,100">&lt;&lt;browserwindow &quot;STILL LOCKED&quot; &quot;browser-black-gray&quot;&gt;&gt;
 Thank you for verifying your phone number. 
 	
-For somewhat vague safety reasons, we still need more information before you can cash out any money from your account.
+For somewhat vague safety reasons, we still need more information before you can cash out any money from your account. Do &#39;&#39;all&#39;&#39; of the following:
 &lt;div style=&quot;text-align:left&quot; class=&quot;big-line-height&quot;&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedName&quot; false true&gt;&gt; Add your legal name.&lt;/label&gt;
 &lt;label&gt;&lt;&lt;checkbox &quot;$hasVerifiedAddress&quot; false true&gt;&gt; Add a personal email.&lt;/label&gt;
@@ -2957,7 +3001,7 @@ For somewhat vague safety reasons, we still need more information before you can
 		&lt;&lt;goto &quot;skip-verify-more&quot;&gt;&gt;
 	&lt;&lt;/if&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="skip-verify-phone" tags="music-dark bookmark background-pink-light" position="881,81" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="skip-verify-phone" tags="music-dark bookmark background-pink-light" position="925,50" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;audio &quot;glitch&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-black-gray&quot;&gt;&gt;
 You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
@@ -3123,22 +3167,10 @@ Week: $numWeek
 &lt;/br&gt;
 &lt;span class=&quot;bigger-font float-white&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="39" name="tip" tags="music-sexi background-cyan-transparent bookmark" position="450,1400" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _tip to random(10,100)&gt;&gt;
-	&lt;&lt;set _intro to either(
-	&quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
-  	&quot;Scrolling through your message history with your ex, you find a pic you sent when you two were sexting. Hmm … the relationship might be over, but the relics don’t have to go to waste. You repurpose the photo by sharing it with your followers.&quot;
-	)&gt;&gt;	
-	&lt;&lt;set _message to either(&quot;Can you keep me warm? 🔥😘&quot;,
-	&quot;🔥What a beautiful sexy perfect body 🔥&quot;,
-	&quot;Sweet meat baby ❤️&quot;,
-	&quot;Take it all off!!!!!!!&quot;,
-	&quot;I love your toes&quot;,
-	&quot;Damn baby you&#39;re so beautiful and very very sexy!!! 🔥🔥🔥👅👅👅😈&quot;,
-	&quot;you are wonderful my princess🔥👅&quot;,
-	&quot;I would **** you till I faint !!!&quot;,
-	&quot;🍒💜🌹bonita🐰babygirl🌹💜🍒&quot;,
-	&quot;Gorgeous and sexy, I so want you babe 🔥🔥🔥👿👿👿😍😘&quot;,
-	&quot;You poor child, have you no clothes to wear??&quot;, 
-	)&gt;&gt;
+    &lt;&lt;set _alternateNum to visited() % 2&gt;&gt;
+	&lt;&lt;set _intro to [&quot;You wake up with a headache, but you still need to make money. Instead of shooting something new, you post a photo you took last week. One of the perks of the job is that you don’t have to argue with a boss for time off when you’re feeling sick.&quot;, 
+  	&quot;Scrolling through your message history with your ex, you find a pic you sent when you two were sexting. Hmm … the relationship might be over, but the relics don’t have to go to waste. You repurpose the photo by sharing it with your followers.&quot;][_alternateNum]&gt;&gt;	
+	&lt;&lt;set _message to $tipMessages.pluck()&gt;&gt;
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-scrolling&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;_intro
 
@@ -3149,11 +3181,11 @@ Week: $numWeek
 		
   Tip: $&lt;&lt;print _tip&gt;&gt;&lt;&lt;/type2&gt;&gt;
   
-
   You&#39;ve earned a tip! The wallet&#39;s at $&lt;&lt;print $income&gt;&gt;.
   &lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;/browserwindow&gt;&gt;
-Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.</tw-passagedata><tw-passagedata pid="40" name="attendWorkshop" tags="music-outsideclub bookmark background-cyan-transparent" position="324,1406" size="100,100">&lt;&lt;silently&gt;&gt;
+Wow, the week is already over? [[Time flies-&gt;start-week]] when you&#39;re getting tips.
+</tw-passagedata><tw-passagedata pid="40" name="attendWorkshop" tags="music-outsideclub bookmark background-cyan-transparent" position="324,1406" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $outingRisk to $outingRisk - 2&gt;&gt;
 	&lt;&lt;set _activism to [&#39;Black Lives Matter&#39;,&#39;Me Too&#39;,&#39;the Landback movement&#39;,&#39;abortion&#39;,&#39;the disability community&#39;,&#39;climate change&#39;]&gt;&gt;
 	&lt;&lt;set _lesson to [&quot;attendWorkshop-activism&quot;, &quot;attendWorkshop-reverseimage&quot;, &quot;attendWorkshop-gender&quot;].pluck()&gt;&gt;
@@ -3178,10 +3210,7 @@ You can change the settings at any time in &lt;&lt;link &quot;the sidebar&quot;&
 When you&#39;re ready:&lt;h2 style=&quot;font-size:2em&quot;&gt;[[Enter-&gt;opening-screen]]&lt;/h2&gt;
 &lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="too-sexy-real-story" tags="music-dark bookmark background-gray" position="351,1025" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
-&lt;&lt;set _currentStat to either(
-	&quot;42% of sex workers said they have received a warning that their social media account is close to deletion.&quot;, 
-	&quot;67% of sex workers have had a post removed from social media.&quot;,
-	&quot;Plus-size users&#39; accounts are flagged for excessive nudity and sexual solicitation more frequently than thin users’ accounts. Women of color and queer people experience platform punishment and policing more frequently than their white, cishetero counterparts.&quot; )&gt;&gt;
+&lt;&lt;set _currentStat to $tooSexyFacts.pluck(); &gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;browserwindow &quot;IRL.txt&quot; &quot;browser-pink-purple&quot;&gt;&gt;
   &lt;&lt;if settings.showMotion&gt;&gt;
@@ -3207,11 +3236,7 @@ When you&#39;re ready:&lt;h2 style=&quot;font-size:2em&quot;&gt;[[Enter-&gt;open
 	You’re never going to reach your goal unless you develop some strategies to beat the algorithm. Maybe some [[other sex workers have advice...-&gt;community-support]]?
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="noReason-real-story" tags="music-dark bookmark background-gray" position="225,1025" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
-&lt;&lt;set _currentStat to either(
-	&quot;77% of those who have done sex work avoid posting content for fear of being kicked off, shadowbanned, or facing legal action.&quot;,
-	&quot;68% of those who have done sex work have had content that does not violate a sensitive media policy marked as sensitive media on their profile.&quot;,
-	&quot;74% of those who have done sex work are noticing trends in the suppression of information on social media.&quot;
-	)&gt;&gt;
+&lt;&lt;set _currentStat to $noReasonFacts.pluck()&gt;&gt;
 &lt;&lt;/silently&gt;&gt;	
 This seems completely unfair, but you&#39;re not the first sex worker to have this problem...
 &lt;&lt;browserwindow &quot;IRL.exe&quot; &quot;browser-pink-purple&quot;&gt;&gt;
@@ -3236,13 +3261,7 @@ This seems completely unfair, but you&#39;re not the first sex worker to have th
 	Well, that sucks, but [[let&#39;s do some research?-&gt;community-support]]
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="shadowBan-real-story" tags="music-dark bookmark background-gray" position="475,1025" size="100,100">&lt;&lt;silently&gt;&gt;
 	[[dummy-&gt;permaban-transition]] 
-  &lt;&lt;set _currentStat to either(
-	  &#39;&quot;We are reducing the spread of posts that are inappropriate but do not go against guidelines, limiting them from being recommended on our Explore and hashtag pages. For example, a sexually suggestive post will still appear in Feed if you follow the account that posts it, but this type of content may not appear for the broader community.&quot; –Instagram&quot;&#39;,
-		  &#39;A shadowban ensures that content that platforms deem inappropriate, high-risk, or low value speech is invisible to other users, but still allows an account to remain on the platform in order to make ad revenue off of the shadowbanned individual.&#39;,
-		  &#39;You can get shadowbanned for following other sex workers. 73% of sex workers have experienced social media platforms suppressing their friends’ content from their timelines.&#39;,
-		  &#39;59% of sex workers have found their username does not show up in searches.&#39;,
-		  &#39;55% of those who have done sex work avoid specific words to avoid being shadowbanned. You can get shadowbanned for using banned phrases and hashtags like #asiangirl, #curvygirls, or #lesbian.&#39;
-	  )&gt;&gt;
+  &lt;&lt;set _currentStat to $shadowBanFacts.pluck() &gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;browserwindow &quot;real-story.txt&quot; &quot;browser-pink-purple&quot;&gt;&gt;
 	_currentStat
@@ -3293,7 +3312,7 @@ You get a DM from a sex worker you follow...
     &lt;/div&gt;&lt;&lt;/type2&gt;&gt;
 &lt;/section&gt;
 &lt;&lt;/nobr&gt;&gt;
-&lt;span class=&quot;bigger-font float-dark&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="46" name="joinedGroup" tags="music-sexi bookmark background-dark" position="575,1500" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;span class=&quot;bigger-font float-dark&quot;&gt;[[Continue to your next week.-&gt;start-week]]&lt;/span&gt;</tw-passagedata><tw-passagedata pid="46" name="joinedGroup" tags="music-sexi bookmark background-dark" position="575,1525" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set _numNewFans to 2&gt;&gt;
 	&lt;&lt;set $lessonNumbers to [1,2]&gt;&gt;
 	&lt;&lt;set _lessonNumber to $lessonNumbers.random()&gt;&gt;
@@ -3319,7 +3338,7 @@ You get a DM from a sex worker you follow...
 			&lt;&lt;set _greeting to &quot;Heyyy $playerName! Where you been?&quot;&gt;&gt;
 			&lt;&lt;set _topic to &quot;how to &lt;strong&gt;watermark your images&lt;/strong&gt;&quot;&gt;&gt;
 			&lt;&lt;set _lesson to &quot;You put a logo on your content, so impersonators can’t steal your pics and set up fake social media accounts with them.&quot;&gt;&gt;
-			&lt;&lt;set _reaction to &quot;That sounds like great advice! Thanks for letting me know.&quot;&gt;&gt;
+			&lt;&lt;set _reaction to &quot;Yo I should try that. Thanks for letting me know.&quot;&gt;&gt;
 		&lt;&lt;default&gt;&gt;
 			&lt;&lt;set _greeting to &quot;oh hey!&quot;&gt;&gt;
 			&lt;&lt;set _topic to &quot;cats&quot;&gt;&gt;
@@ -3333,7 +3352,7 @@ You get a DM from a sex worker you follow...
   &lt;&lt;chat &#39;from-me&#39; 40ms&gt;&gt;What does that mean?&lt;&lt;/chat&gt;&gt;
   &lt;&lt;chat &#39;from-them&#39; 50ms&gt;&gt;_lesson&lt;&lt;/chat&gt;&gt;
   &lt;&lt;chat &#39;from-me&#39; 70ms&gt;&gt;_reaction&lt;&lt;/chat&gt;&gt;
-   &lt;&lt;linkreplace &quot;&lt;&lt;type2 40ms start 1.1s element &#39;span&#39;&gt;&gt;Chat some more.&lt;&lt;/type2&gt;&gt;&quot;&gt;&gt;&lt;&lt;addfans _numNewFans&gt;&gt;You set up some collaborations that eventually lead to 2 new fans! Wallet: $&lt;&lt;print $income&gt;&gt;.
+   &lt;&lt;linkreplace &quot;&lt;&lt;type2 40ms start 1.1s element &#39;span&#39;&gt;&gt;Chat some more.&lt;&lt;/type2&gt;&gt;&quot;&gt;&gt;&lt;&lt;addfans _numNewFans&gt;&gt;You set up some collaborations that eventually lead to 2 new fan subscriptions! Wallet: $&lt;&lt;print $income&gt;&gt;.
    &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
   &lt;&lt;/linkreplace&gt;&gt;
 &lt;/section&gt;
