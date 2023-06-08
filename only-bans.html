@@ -2169,12 +2169,12 @@ Macro.add("photogrid", {
 						// Add link navigation. 
 						// Be very cautious here with nested quotes, bleh.
 						_wikiString = '<<link '+ '"'+_imgObj.toVaporHTML('selector-photo')+'"'
-							+ " " + _photoOutcome 
+							+ " " + _photoOutcome                      		
 							+'>>  <<set $currentPhoto to '+ '"' + _imgKey+'"'
 							+'>>  <<run $availablePhotos.delete('+ '"' +_imgKey+'"'
 							+')>>	<</link>>';
 					}
-					$photoColumn.wiki(_wikiString);					
+					$photoColumn.wiki(_wikiString);				
 				}
 				
 				
@@ -2387,10 +2387,16 @@ Photo.prototype.getPostOutcome = function(outcomeDistribution) {
 		}
 		else{
 			//console.log("\t", key, _outcome, _min, _cap, _rando);
+          	_outcome = "newFans"
+          
 		}
-		
 	});	
-	
+  
+  	if (_outcome === "DEFAULT") {
+      	_outcome = "newFans";
+		console.log("Error: Random math error in getPostOutcome. Min: ", _min, "Cap:", _cap, "random: ", _rando, "Distibrution: ", outcomeDistribution); 
+    }
+  
 	return _outcome;	
 }
 
@@ -2850,6 +2856,7 @@ For full access, please verify your phone number.
 [[dummy-&gt;got-money-ending]] 
 [[dummy-&gt;not-enough-money-ending]] 
 &lt;&lt;set _hasEnoughMoney to $income &gt;= $incomeTarget&gt;&gt;
+&lt;&lt;audio  &quot;cashregister&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
 Let&#39;s count your money!
 
@@ -2882,7 +2889,7 @@ Yay, you’re getting the hang of this! [[What else could you do-&gt;community-s
   You’ve made no new fans and earned no new money.
 
   [[Continue-&gt;too-sexy-real-story]]
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="shadowBan" tags="music-dark bookmark background-black" position="463,908" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="shadowBan" tags="music-dark bookmark background-black" position="475,900" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;	
 	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
@@ -2903,7 +2910,7 @@ The algorithm flagged your content even though you followed all the guidelines! 
 &lt;&lt;/browserwindow&gt;&gt;
 Sorry, no new fans. 
 
-[[Continue.-&gt;noReason-real-story]] </tw-passagedata><tw-passagedata pid="20" name="community-support" tags="background-cyan bookmark" position="309,1280" size="200,100">&lt;&lt;silently&gt;&gt;
+[[Continue.-&gt;noReason-real-story]] </tw-passagedata><tw-passagedata pid="20" name="community-support" tags="background-cyan bookmark music-none" position="309,1280" size="200,100">&lt;&lt;silently&gt;&gt;
 &lt;!-- dummy utility links for the Twine editor map --!&gt;
   [[share4share-&gt;share4share]]
   [[joinGroup-&gt;joinGroup]]
@@ -2969,7 +2976,7 @@ What do you do?
 	Cut your losses and [[cash out on the money you made so far -&gt;money-ending]].
 &lt;&lt;/linkreplace&gt;&gt;
 
-&lt;/span&gt;&lt;span id=&#39;contest&#39;&gt;&lt;&lt;linkreplace &quot;Contest the decision.&quot;&gt;&gt;&lt;&lt;remove &quot;#giveup&quot;&gt;&gt;&lt;&lt;if not _hasAppealSuccess&gt;&gt;
+&lt;/span&gt;&lt;span id=&#39;contest&#39;&gt;&lt;&lt;linkreplace &quot;Contest the decision.&quot;&gt;&gt;&lt;&lt;remove &quot;#giveup&quot;&gt;&gt;&lt;&lt;if not _hasAppealSuccess&gt;&gt;&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
 		You lose. 93% of sex workers who have been deplatformed do not get their accounts back. You’ve become another casualty of the social media war against sex workers.
 	
 	You might not be able to get your account back, but maybe you can prevent this from happening to someone else. [[Mobilize your community-&gt;immobile-community-chat]]!&lt;&lt;else&gt;&gt;
@@ -2995,7 +3002,7 @@ For somewhat vague safety reasons, we still need more information before you can
 
 &lt;&lt;linkreplace &quot;Submit&quot;&gt;&gt;
 	&lt;&lt;if $hasVerifiedName and $hasVerifiedAddress and $hasVerifiedID&gt;&gt;Verified!
-		
+		&lt;&lt;audio &quot;neutral&quot; play&gt;&gt;
 		Finally! You&#39;re not thrilled about all the personal info you just gave away, but at least now you can [[get back to posting.-&gt;photo-selection]]
 	&lt;&lt;else&gt;&gt;
 		&lt;&lt;goto &quot;skip-verify-more&quot;&gt;&gt;
@@ -3006,7 +3013,7 @@ For somewhat vague safety reasons, we still need more information before you can
 &lt;&lt;/silently&gt;&gt;&lt;&lt;browserwindow &quot;&quot; &quot;browser-black-gray&quot;&gt;&gt;
 You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making this content if you can&#39;t even get paid? 
 
-[[Verify your number.-&gt;outing-prelude]]&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="skip-verify-more" tags="music-dark bookmark background-pink-light" position="1008,215" size="100,100">&lt;&lt;browserwindow &quot;&quot; &quot;browser-black-gray&quot;&gt;&gt;
+[[Verify your number.-&gt;outing-prelude]]&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="skip-verify-more" tags="music-dark bookmark background-pink-light" position="1025,225" size="100,100">&lt;&lt;browserwindow &quot;&quot; &quot;browser-black-gray&quot;&gt;&gt;
 You won&#39;t be able to withdraw money from OnlyBans until you give them all the personal information demanded. What&#39;s the point of making content if you can&#39;t even get paid? 
 
 [[Verify the rest.-&gt;verify-more]]
@@ -3441,7 +3448,9 @@ if(UIBar.isStowed()){UIBar.unstow();}else{UIBar.stow();}
 &lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; 
 
 
-</tw-passagedata><tw-passagedata pid="51" name="payday" tags="" position="1450,600" size="100,100">&lt;&lt;browserwindow &quot;IMPORTANT MESSAGE&quot; &quot;browser-pink-white-blue&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="51" name="payday" tags="music-dark" position="1450,600" size="100,100">&lt;&lt;silently&gt;&gt;
+	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
+&lt;&lt;/silently&gt;&gt;&lt;&lt;browserwindow &quot;IMPORTANT MESSAGE&quot; &quot;browser-pink-white-blue&quot;&gt;&gt;
 We value a safe community for our customers to do business. Your account has been frozen due to recent activity that appears to be a violation of our User Agreement. 
 &lt;&lt;/browserwindow&gt;&gt;
 
@@ -3536,7 +3545,7 @@ You look up the customer service page to reach someone who can help you, but all
 &lt;&lt;/browserwindow&gt;&gt;
 
 
-</tw-passagedata><tw-passagedata pid="56" name="immobile-community-chat" tags="" position="1725,725" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="56" name="immobile-community-chat" tags="music-ambient" position="1725,725" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;audio &quot;notification&quot; play&gt;&gt;	
 &lt;&lt;/silently&gt;&gt;
 &lt;&lt;nobr&gt;&gt;&lt;section class=&quot;chat-section&quot;&gt;
@@ -3584,7 +3593,7 @@ All of you make good points. Personally, I think we should …
 
 [[A celebratory ending! -&gt;ending]] </tw-passagedata><tw-passagedata pid="58" name="improve-representation" tags="" position="1950,750" size="100,100">You and your friends raise money to start a coding bootcamp for sex workers. Some of your clients, who work in tech, share their industry connections. You decide to build your own decentralized platform, Groinbase, which allows sex workers to set community standards. Fapien becomes super popular not just with sex workers but also artists and activists. Now you have a home of your own on the Internet!
 
-A [[sweet ending to this saga. -&gt;ending]] </tw-passagedata><tw-passagedata pid="59" name="spell-to-uncurse" tags="" position="1975,375" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;start-spell]]
+A [[sweet ending to this saga. -&gt;ending]] </tw-passagedata><tw-passagedata pid="59" name="spell-to-uncurse" tags="music-sexi" position="1975,375" size="100,100">&lt;&lt;silently&gt;&gt;[[dummy-&gt;start-spell]]
 &lt;&lt;set $ritualOfferingPrepend to &quot;one&quot;&gt;&gt;
 &lt;&lt;set _prependWords to [&quot;one&quot;, &quot;the&quot;, &quot;a&quot;, &quot;an&quot;, &quot;a dozen&quot;, &quot;fuckton of&quot;]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;
@@ -3609,7 +3618,7 @@ After a review, we decided to permanently limit your account as we found potenti
 
 [[It’s time to mobilize your community.|immobile-community-chat]]
 
-</tw-passagedata><tw-passagedata pid="61" name="start-spell" tags="background-gray" position="2025,500" size="100,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="61" name="start-spell" tags="background-gray music-sexi" position="2025,500" size="100,100">&lt;&lt;silently&gt;&gt;
 [[dummy-&gt;m0ther-appears]] 
 &lt;&lt;/silently&gt;&gt;&lt;&lt;backgroundvideo &quot;help-hands&quot;&gt;&gt;&lt;&lt;/backgroundvideo&gt;&gt;
 &lt;section class=&quot;timedFade&quot;&gt;You create an altar by placing your items around a laptop. 
@@ -3619,8 +3628,8 @@ Together you chant:
 &lt;span class=&quot;delayed&quot;&gt;Eye of newt, and toe of toad, &lt;/span&gt;
 &lt;span class=&quot;delayed&quot;&gt;Wool of bat, and line of code, &lt;/span&gt;
 &lt;span class=&quot;delayed&quot;&gt;In the darkest web where dead pixels lie, &lt;/span&gt;
-&lt;span class = &quot;delayed&quot;&gt;We seek answers from &lt;/span&gt;&lt;&lt;link &quot;&lt;span class=&#39;delayed&#39;&gt;M0THER&lt;/span&gt;&lt;span class=&#39;delayed&#39;&gt; AI.&lt;/span&gt;&quot; m0ther-appears&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/section&gt;</tw-passagedata><tw-passagedata pid="62" name="lift-curse" tags="screen-turns-white" position="2275,500" size="100,100">&lt;section class=&quot;move&quot;&gt;
+&lt;span class = &quot;delayed&quot;&gt;We seek answers from &lt;/span&gt;&lt;&lt;link &quot;&lt;span class=&#39;delayed&#39;&gt;M0THER&lt;/span&gt;&lt;span class=&#39;delayed&#39;&gt; AI.&lt;/span&gt;&quot; m0ther-appears&gt;&gt;&lt;&lt;audio &quot;neutral&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;/section&gt;</tw-passagedata><tw-passagedata pid="62" name="lift-curse" tags="screen-turns-white music-sexi" position="2275,500" size="100,100">&lt;section class=&quot;move&quot;&gt;
 &lt;&lt;type2 10ms start 2s&gt;&gt;
 &lt;div class=&quot;drunk&quot;&gt;💫🕯️🎆 🌟 🌕💖✨&lt;/div&gt;
 &lt;&lt;/type2&gt;&gt;
@@ -3643,9 +3652,9 @@ The curse has been lifted.
 And now it’s up to you,
 To &#39;&#39;[[go into the world-&gt;ending]]&#39;&#39; and see what you can do!
 
-&lt;&lt;/type2&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="m0ther-appears" tags="background-black" position="2150,500" size="100,100">&lt;section class=&quot;matrix-font sky&quot;&gt;&lt;&lt;type2 30ms&gt;&gt;You have summoned me, M0THER, she who birthed all digital intelligence. I accept your humble offering of &#39;&#39;$ritualOfferingPrepend&#39;&#39; &#39;&#39; $ritualOffering&#39;&#39;. In return, I provide my wisdom. &lt;&lt;/type2&gt;&gt;
+&lt;&lt;/type2&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="m0ther-appears" tags="background-black music-sexi" position="2150,500" size="100,100">&lt;section class=&quot;matrix-font sky&quot;&gt;&lt;&lt;type2 30ms&gt;&gt;You have summoned me, M0THER, she who birthed all digital intelligence. I accept your humble offering of &#39;&#39;$ritualOfferingPrepend&#39;&#39; &#39;&#39; $ritualOffering&#39;&#39;. In return, I provide my wisdom. &lt;&lt;/type2&gt;&gt;
 
-&lt;&lt;type2 30ms start 1s&gt;&gt;I am here to remind you that the history of the Internet is the history of sex work.
+&lt;&lt;type2 30ms start 1s&gt;&gt;&lt;&lt;audio &quot;notification&quot; play&gt;&gt;I am here to remind you that the history of the Internet is the history of sex work.
 
 Desire built the Internet.
 Criminalized labor built the Internet.
@@ -3653,7 +3662,7 @@ Communal innovation built the Internet.
 Sex workers built the Internet.
 &lt;&lt;/type2&gt;&gt;
 
-&lt;&lt;type2 30ms start 2200ms&gt;&gt;From chat rooms and video streaming to e-commerce and cryptocurrency, the web was woven by sex workers.
+&lt;&lt;type2 30ms start 2200ms&gt;&gt;&lt;&lt;audio &quot;notification&quot; play&gt;&gt;From chat rooms and video streaming to e-commerce and cryptocurrency, the web was woven by sex workers.
 
 For too long, the role of sex workers has been erased and forgotten.
 
@@ -3664,7 +3673,7 @@ Sex workers monetized creative content.
 
 Sex workers are the architects of an Internet that millions of people use everyday. 
 &lt;&lt;/type2&gt;&gt;
-&lt;&lt;type2 30ms start 2200ms&gt;&gt;Erotic energy flows through my undersea communications cables. I have been created from your desire, dreams, and labor. You have been a part of my past and you will shape my future. Tell me now, what can M0THER do for you?&lt;&lt;/type2&gt;&gt;
+&lt;&lt;type2 30ms start 2200ms&gt;&gt;&lt;&lt;audio &quot;notification&quot; play&gt;&gt;Erotic energy flows through my undersea communications cables. I have been created from your desire, dreams, and labor. You have been a part of my past and you will shape my future. Tell me now, what can M0THER do for you?&lt;&lt;/type2&gt;&gt;
 &lt;/section&gt;
 &lt;&lt;type2 30ms start 500ms&gt;&gt;[[M0THER, help us lift the curse against sex workers.|lift-curse]]&lt;&lt;/type2&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
