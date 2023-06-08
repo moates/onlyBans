@@ -113,8 +113,22 @@ body { /* override */
   	--transitionTime: 2s;
   	transition: background-color var(--transitionTime, 0.5s) ease-in-out;
   
-  	background-color: #D185A1;
-  
+  	background-color: #D185A1;  
+}
+
+
+.matrix-font {
+  font-family: 'LED Dot-Matrix', sans-serif;
+  color: #a4f644
+}
+
+
+#passages {
+  max-width 100em;  
+}
+
+#passage-opening-screen {
+  background-color: none;
 }
 
 
@@ -128,30 +142,73 @@ body { /* override */
 
 
 
-body.background-messy {
-  background-color: #e97fb8;	
-  /*color: #bb276d;*/
-  background-image: url("images/windows-background.jpg");
+
+
+/* ************* */
+/* EMOJI SCATTER */
+/* ************* */
+.emoji {
+ 	font-size : 2.5em; 
 }
 
-body.background-gray {
-  background-color: #45373c;
-  color: white;
+.emoji-scatter {
+ position: relative;
+  padding: 1em;
+  max-width: 20em;
+  max-height: 20em;
 }
 
-body.background-black {
- background-color: black; 
+#scatter1 {
+ 	position: absolute;
+  	top: 3em;
+  	right: 1em;
 }
 
+#scatter2 {
+ 	position: absolute;
+  	top: 1em;
+  	right: 25%;
+}
 
+#scatter3 {
+ 	position: absolute; 
+  right: 10%;
+  top:10%;
+}
+
+#scatter4 {
+ 	position: absolute; 
+  	top: 10%;
+  	right: 60%;
+}
+
+#scatter5 {
+ 	position: absolute; 
+  	top: 50%;
+  	right:50%;
+      
+}
+
+#scatter6 {
+ 	position: absolute; 
+  	top: 40%
+}
+
+#scatter7 {
+ 	position: absolute;
+  	bottom: -10%
+}
 
 /* ************* */
 /* DRUNK TEXT    */
 /* ************* */
 /* Courtesy of HiEV */
 .drunk {
-	animation: drunkCam 10s ;
-  	font-size: 3em;
+	animation: drunkCam 10s infinite;
+}
+
+.drunk-offset {
+ 	animation: drunkCam 8s infinite; 
 }
 
 @keyframes drunkCam {
@@ -171,11 +228,23 @@ body.background-black {
 	90% { filter: blur(0px); text-shadow: 0 0 0 grey; }
 }
 
+
+/* ************* */
+/* TILTING TEXT  */
+/* ************* */
 .move {
-	animation: tilt-shaking 5s infinite;
-  	animation-delay: 1s;
+	animation: tilt-shaking 4s infinite;
 }
 
+.move-reverse {
+  animation: tilt-shaking 4.5s alternate-reverse infinite;
+  
+ 	 
+}
+
+.move-offset {
+ 	animation: tilt-shaking 6s infinite; 
+}
 
 @keyframes tilt-shaking {
   0% { transform: translate(0, 0) rotate(0deg); }
@@ -186,11 +255,11 @@ body.background-black {
 }
 
 
-.matrix-font {
-  font-family: 'LED Dot-Matrix', sans-serif;
-  color: #a4f644
-}
 
+
+/* ************************** */
+/* FLASH TO BLACK BACKGROUND  */
+/* ************************** */
 body.screen-turns-white {
   background-color:  #642d4b;
   animation: blackToWhite 5s linear;
@@ -213,11 +282,23 @@ body.screen-turns-white {
   },
 }
 
+/* ************************** */
+/* 		BACKGROUND COLORS  	  */
+/* ************************** */
 
+body.background-messy {
+  background-color: #e97fb8;	
+  /*color: #bb276d;*/
+  background-image: url("images/windows-background.jpg");
+}
 
-.emoji-scatter {
- 	display: flex; 
-  	justify-content: space-around;
+body.background-gray {
+  background-color: #45373c;
+  color: white;
+}
+
+body.background-black {
+ background-color: black; 
 }
 
 .background-gray  a{
@@ -243,10 +324,6 @@ body.screen-turns-white {
 .background-gray .link-external:hover{
   color: #D874AB;
 }
-
-
-
-
 
 
 body.background-dark {
@@ -433,7 +510,6 @@ body.background-pink-light .passage{
 }
 
 body.background-box-pink-light .passage{
-  /*background-color: hsla(328, 71%, 71%, 0.8); */
   background-color: #D874AB;
   padding: 1em;
   border-radius: 1em;
@@ -577,20 +653,7 @@ a.link-broken {
 
 }
 
-#passages {
-  max-width 100em;  
-}
 
-#passage-opening-screen {
-  background-color: none;
-}
-
-/* ******************* */
-/* EMOJI ANIMATIONS    */
-/* ******************* */
-.emoji {
- 	font-size : 2.5em; 
-}
 
 /* ******************* */
 /* SPELL DELAY TEXT    */
@@ -3619,22 +3682,15 @@ Together you chant:
 &lt;span class=&quot;delayed&quot;&gt;Wool of bat, and line of code, &lt;/span&gt;
 &lt;span class=&quot;delayed&quot;&gt;In the darkest web where dead pixels lie, &lt;/span&gt;
 &lt;span class = &quot;delayed&quot;&gt;We seek answers from &lt;/span&gt;&lt;&lt;link &quot;&lt;span class=&#39;delayed&#39;&gt;M0THER&lt;/span&gt;&lt;span class=&#39;delayed&#39;&gt; AI.&lt;/span&gt;&quot; m0ther-appears&gt;&gt;&lt;&lt;audio &quot;neutral&quot; play&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/section&gt;</tw-passagedata><tw-passagedata pid="62" name="lift-curse" tags="screen-turns-white music-sexi background-dark" position="2275,425" size="100,100">&lt;&lt;if settings.showMotion&gt;&gt;
-	&lt;section id=&quot;tiltable&quot; class=&quot;emoji-scatter&quot;&gt;
-		&lt;div class=&#39;drunk &#39;&gt;💫&lt;/div&gt;
-		&lt;div class=&quot;drunk move&quot;&gt; 🌟&lt;/div&gt;
-        &lt;div class=&quot;drunk move&quot;&gt;🕯️&lt;/div&gt;
-        &lt;div class=&quot;drunk move&quot;&gt;🌕&lt;/div&gt;
-        &lt;div class=&quot;drunk move&quot;&gt;🎆&lt;/div&gt;
-        &lt;div class=&quot;drunk move&quot;&gt;💖&lt;/div&gt;
-        &lt;div class=&quot;drunk move&quot;&gt;✨&lt;/div&gt;
-        &lt;&lt;type2 1ms start 0.25s&gt;&gt;&lt;div class=&quot;drunk move&quot;&gt; 🌟&lt;/div&gt;&lt;&lt;/type2&gt;&gt;
-        &lt;&lt;type2 1ms start 1s&gt;&gt;&lt;div class=&quot;drunk move&quot;&gt;🎆 🌟&lt;/div&gt;&lt;&lt;/type2&gt;&gt;
+&lt;/section&gt;</tw-passagedata><tw-passagedata pid="62" name="lift-curse" tags="screen-turns-white music-sexi background-dark" position="2275,425" size="100,100">&lt;section id=&quot;&quot; class=&quot;emoji-scatter&quot;&gt;&lt;div id=&#39;scatter1&#39; class=&#39;drunk emoji &#39;&gt;💫&lt;/div&gt;&lt;div id=&#39;scatter2&#39; class=&quot;emoji move-reverse&quot; &gt; 🌟&lt;/div&gt;
+        &lt;div id=&#39;scatter3&#39; class=&quot;emoji move&quot;&gt;🕯️&lt;/div&gt;
+        &lt;div id=&#39;scatter4&#39; class=&quot;emoji move-offset&quot;&gt;🌕&lt;/div&gt;
+        &lt;div id =&#39;scatter5&#39; class=&quot;drunk emoji&quot; &gt;💖&lt;/div&gt;
+        &lt;div id=&#39;scatter6&#39; class=&quot;emoji drunk&quot;&gt;✨&lt;/div&gt;
+        &lt;div id=&#39;scatter7&#39; class=&quot;drunk-offset emoji&quot;&gt; 🎆&lt;/div&gt;
 &lt;/section&gt;
-&lt;&lt;else&gt;&gt;
-	&lt;div class=&quot;bigger-font&quot;&gt;💫🕯️🎆 🌟 🌕💖✨&lt;/div&gt;
-&lt;&lt;/if&gt;&gt;
-&lt;&lt;type2 20ms start 15s&gt;&gt;
+
+&lt;&lt;type2 20ms start 5s&gt;&gt;
 Change is coming, but change can be slow.
 From venture daddies to blockchain bros,
 Turn your enemy into a generous john.
