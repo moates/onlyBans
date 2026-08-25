@@ -1657,9 +1657,10 @@ console.log("gallery,", $isGalleryMode);
 const Translations = {
   profiles: {},
   active: null,
-  	
-  settingName: 'Language',
-  settingLabel: 'Change language : ',
+  
+  settingHeader: 'Language',
+  settingName: 'pickLanguage',
+  settingLabel: 'Pick language 📝 ',
 
   addProfile(name, suffix, l10nStrings, onChange) {
 
@@ -1692,7 +1693,8 @@ const Translations = {
     // has a locale POJO
     if (profile.l10nStrings && profile.l10nStrings.constructor.name === 'Object') {
       for (const name in profile.l10nStrings) l10nStrings[name] = profile.l10nStrings[name];
-      UIBar.update();
+      UIBar.start();
+      UIBar.start();
       	
       	
     }
@@ -1739,6 +1741,7 @@ const Translations = {
 	this.suffixTester = new RegExp(`-(${profiles.map(p => p.suffix).join('|')})$`);
 
     // add setting
+    Setting.addHeader(this.settingHeader);
     Setting.addList(this.settingName, {
 		label: this.settingLabel,
         list: Object.keys(this.profiles),
@@ -2279,10 +2282,10 @@ function enableSetting(idName){
 }
 
 
-Setting.addHeader("Sound", "Use the sliders to control the audio volume.");
+Setting.addHeader("Sound 🔈", "Use the sliders to control the audio volume.");
 
 Setting.addToggle("mute", {
-	label: "Mute sound.",
+	label: "Mute sound. 🔇",
 	desc: "On means quiet.",
 	default: false,
 	onInit: muteInitHandler,
@@ -2291,7 +2294,7 @@ Setting.addToggle("mute", {
 
 
 Setting.addRange("bgmVolume", {
-		label    : "Music volume.",
+		label    : "Music volume. 🎵",
     //desc     : "Volume control for background music.",
     min      : 0,
    	max      : 1,
@@ -2324,7 +2327,7 @@ function bgmVolumeHandler() {
 
 
 Setting.addRange("fxVolume", {
-		label    : "Sound effects volume.",
+		label    : "Sound effects volume. 🔔",
     //desc     : "Volume control for sound effects.",
     min      : 0,
    	max      : 1,
@@ -2409,7 +2412,7 @@ function muteHandler () {
 
 
 Setting.addToggle("enableVideo", {
-				label: "Show background videos",
+				label: "Show background videos 🎥",
 				desc: "'Off' will turn off background videos. You might want this to reduce motion or to make the game load faster.",
 				default: true,
 				onInit: settingEnableVideoHandler,
@@ -2446,7 +2449,7 @@ mediaQuery.addEventListener('change', () => {
 });
 	
 Setting.addToggle("showMotion", {
-	label: "Show motion and animations",
+	label: "Show motion and animations 💥",
 	desc: "'Off' will reduce animations in the game. It also disables background videos. (This setting also tries to respect your operating system preferences on motion.)",
 	default: !$reduceMotionInit,
 	onInit: settingShowMotionHandler,
@@ -2455,7 +2458,7 @@ Setting.addToggle("showMotion", {
 
 
 Setting.addList("textSize", {
-	label    : "Text Size",
+	label    : "Text Size 🔍",
 	list	: ["75%", "100% (Default)", "120%", "130%", "150%", "200%"],
   	default	 :	"100% (Default)",
     onChange : textSizeHandler,
