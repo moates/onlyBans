@@ -1648,200 +1648,6 @@ State.setVar("$isGalleryMode", $isGalleryMode);
 console.log("gallery,", $isGalleryMode);
 
 
-/*****************************************/
-/*   TRANSLATION CUSTOM UI HANDLING      */
-/****************************************/
-function Mstart() {
-		if (BUILD_DEBUG) { console.log('[UIBar/start()]'); }
-
-		if (!$uiBar) {
-			return;
-		}
-
-		// Set up the #ui-bar's initial state.
-		if (
-			typeof Config.ui.stowBarInitially === 'boolean'
-				? Config.ui.stowBarInitially
-				: jQuery(window).width() <= Config.ui.stowBarInitially
-		) {
-			stow(true);
-		}
-
-		// Set up the #ui-bar-toggle and #ui-bar-history widgets.
-		jQuery('#ui-bar-toggle')
-			.ariaClick({
-				label : L10n.get('uiBarLabelToggle')
-			}, () => $uiBar.toggleClass('stowed'));
-
-		if (Config.history.controls) {
-			jQuery('#history-backward')
-				.ariaDisabled(State.length < 2)
-				.ariaClick({
-					label : L10n.get('uiBarLabelBackward')
-				}, () => Engine.backward());
-
-			/* [DEPRECATED] */
-			if (Story.filter(passage => passage.tags.includes('bookmark')).length > 0) {
-				jQuery('#history-jumpto')
-					.ariaClick({
-						label : L10n.get('uiBarLabelJumpto')
-					}, () => UI.jumpto());
-			}
-			else {
-				jQuery('#history-jumpto').remove();
-			}
-			/* [/DEPRECATED] */
-
-			jQuery('#history-forward')
-				.ariaDisabled(State.length === State.size)
-				.ariaClick({
-					label : L10n.get('uiBarLabelForward')
-				}, () => Engine.forward());
-		}
-		else {
-			jQuery('#ui-bar-history').remove();
-		}
-
-		// Create a few `:uiupdate` event helpers.
-		const addUpdaterOrRemove = (selector, passageName) => {
-			const $el = jQuery(selector);
-
-			if (Story.has(passageName)) {
-				jQuery(document)[Config.ui.updateStoryElements ? 'on' : 'one'](`:uiupdate${EVENT_NS}`, () => {
-					if (!$uiBar) {
-						$el.off(`:uiupdate${EVENT_NS}`);
-						return;
-					}
-
-					const frag = document.createDocumentFragment();
-					new Wikifier(frag, Story.get(passageName).processText().trim());
-					$el.empty().append(frag);
-				});
-			}
-			else {
-				$el.remove();
-			}
-		};
-
-		// Set up our dynamic elements.
-		//
-		// NOTE: The `#story-title` element, `StoryTitle` passage, and `StoryDisplayTitle`
-		// passage are handled in `engine.js`.
-		addUpdaterOrRemove('#story-banner', 'StoryBanner');
-		addUpdaterOrRemove('#story-subtitle', 'StorySubtitle');
-		addUpdaterOrRemove('#story-author', 'StoryAuthor');
-		addUpdaterOrRemove('#story-caption', 'StoryCaption');
-
-		if (Story.has('StoryMenu')) {
-			const $menuStory = jQuery('#menu-story');
-
-			jQuery(document).on(`:uiupdate${EVENT_NS}`, () => {
-				if (!$uiBar) {
-					$menuStory.off(`:uiupdate${EVENT_NS}`);
-					return;
-				}
-
-				try {
-					const frag = UI.assembleLinkList('StoryMenu', document.createDocumentFragment());
-					$menuStory.empty().append(frag);
-				}
-				catch (ex) {
-					console.error(ex);
-					Alert.error('StoryMenu', ex.message);
-				}
-			});
-		}
-		else {
-			jQuery('#menu-story').remove();
-		}
-
-		// Set up the Continue menu item.
-		if (Save.browser.size > 0) {
-			jQuery('#menu-item-continue a')
-				.ariaClick({
-					role : 'button'
-				}, ev => {
-					ev.preventDefault();
-					Save.browser.continue()
-						.then(
-							() => {
-								jQuery(document).off('.menu-item-continue');
-								jQuery('#menu-item-continue').remove();
-								Engine.show();
-							},
-							ex => UI.alert(`${ex.message.toUpperFirst()}.</p><p>${L10n.get('textAborting')}.`)
-						);
-				})
-				.text(L10n.get('continueTitle'));
-			jQuery(document).on(':passagestart.menu-item-continue', () => {
-				if (State.turns > 1) {
-					jQuery(document).off('.menu-item-continue');
-					jQuery('#menu-item-continue').remove();
-				}
-			});
-		}
-		else {
-			jQuery('#menu-item-continue').remove();
-		}
-
-		// Set up the Saves menu item.
-		jQuery('#menu-item-saves a')
-			.ariaClick({
-				role : 'button'
-			}, ev => {
-				ev.preventDefault();
-				UI.buildSaves();
-				Dialog.open();
-			})
-			.text(L10n.get('savesTitle'));
-
-		// Set up the Settings menu item.
-		if (Setting.needsMenu()) {
-			jQuery('#menu-item-settings a')
-				.ariaClick({
-					role : 'button'
-				}, ev => {
-					ev.preventDefault();
-					UI.buildSettings();
-					Dialog.open();
-				})
-				.text(L10n.get('settingsTitle'));
-		}
-		else {
-			jQuery('#menu-item-settings').remove();
-		}
-
-		// Set up the Restart menu item.
-		jQuery('#menu-item-restart a')
-			.ariaClick({
-				role : 'button'
-			}, ev => {
-				ev.preventDefault();
-				UI.buildRestart();
-				Dialog.open();
-			})
-			.text(L10n.get('restartTitle'));
-
-		/* [DEPRECATED] */
-		// Set up the Share menu item.
-		if (Story.has('StoryShare')) {
-			jQuery('#menu-item-share a')
-				.ariaClick({
-					role : 'button'
-				}, ev => {
-					ev.preventDefault();
-					UI.buildShare();
-					Dialog.open();
-				})
-				.text(L10n.get('shareTitle'));
-		}
-		else {
-			jQuery('#menu-item-share').remove();
-		}
-		/* [/DEPRECATED] */
-	}
-
-
 /*********************/
 /*    TRANSLATION    */
 /*********************/
@@ -1886,8 +1692,7 @@ const Translations = {
     // has a locale POJO
     if (profile.l10nStrings && profile.l10nStrings.constructor.name === 'Object') {
       for (const name in profile.l10nStrings) l10nStrings[name] = profile.l10nStrings[name];
-      	UIBar.start(); // rebuild UI bar with the next locales
-     	UIBar.start(); // Calling this twice to fix toggling issues. Trust me, it's easier than fixing the actual issue. -Callie
+      UIBar.update();
       	
       	
     }
@@ -3071,7 +2876,7 @@ Sometimes, parts of the game will require you to click on photos to advance the 
 Sometimes, there are videos; they are just for background viewing.
 
 There is no undo or back button. If you get stuck or something is broken, you can &lt;&lt;link &quot;Restart&quot;&gt;&gt;&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt; (found in the left sidebar). 
-</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="350,500" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="music-ambient background-pink" position="75,525" size="100,100">&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="5" name="StoryDisplayTitle" tags="" position="350,525" size="100,100">OnlyBans</tw-passagedata><tw-passagedata pid="6" name="Credits" tags="music-ambient background-pink" position="75,525" size="100,100">&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;
 &lt;h1&gt;Credits &lt;/h1&gt;&lt;p class=&quot;big-line-height&quot;&gt;&#39;&#39;Creator&#39;&#39;: &lt;a href=&quot;https://www.lenachen.com/&quot;&gt;Lena Chen&lt;/a&gt;
 &lt;&lt;linkappend &quot;&lt;strong&gt;Narration Nympho&lt;/strong&gt;&quot;&gt;&gt; (Writer)&lt;&lt;/linkappend&gt;&gt;: Lena Chen
 &lt;&lt;linkappend &quot;&lt;strong&gt;Software Princess&lt;/strong&gt;&quot;&gt;&gt; (Software Engineer)&lt;&lt;/linkappend&gt;&gt;: Calliope O&#39;Kelly
@@ -4380,19 +4185,17 @@ Quer jogar?
 &lt;span class=&quot;bigger-font&quot;&gt;[[Jogar.-&gt;what-is-your-name]]&lt;/span&gt;
 
 &lt;span class=&quot;bigger-font&quot;&gt;&lt;&lt;linkreplace &quot;Ler mais.&quot;&gt;&gt;&lt;&lt;include &quot;StoryMenu&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;/span&gt;
-&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="StoryMenu-pt" tags="" position="350,200" size="100,100">
+&lt;&lt;/browserwindow&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="StoryMenu-pt" tags="" position="325,200" size="100,100">
 &lt;&lt;link &quot;Como Jogar&quot; &quot;How to Play&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 
 &lt;&lt;link &quot;Sobre&quot; &quot;About&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 
 &lt;&lt;link &quot;Créditos&quot; &quot;Credits&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 
-&lt;&lt;if $isQATestMode &gt;&gt;[[QA Test]]
+&lt;&lt;if $isQATestMode &gt;&gt;&lt;&lt;link &quot;QA Test&quot; &quot;QA Test&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 &lt;&lt;silently&gt;&gt;
-[[dummy-&gt;How to Play]]
-[[dummy-&gt;Credits]]
-[[dummy-&gt;About]] 
+
 &lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="How to Play-pt" tags="" position="175,375" size="100,100">&lt;&lt;back &quot;Voltar ao jogo.&quot;&gt;&gt;
 &lt;h2&gt;Como Jogar&lt;/h2&gt;
 Este jogo é ficcionalizado, porém baseado em histórias reais. Ao longo do jogo, fatos e experiências reais serão compartilhados.
