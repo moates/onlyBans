@@ -1651,16 +1651,16 @@ console.log("gallery,", $isGalleryMode);
 /*********************/
 /*    TRANSLATION    */
 /*********************/
-// Incredible tool from Maliface!! 
+// Adapted an incredible tool from Maliface!! 
 // https://github.com/MalifaciousGames/Mali-s-Scripts/blob/main/sugarcube-scripts/translations-api/translations-api.js
 
 const Translations = {
   profiles: {},
   active: null,
   
-  settingHeader: 'Language',
-  settingName: 'pickLanguage',
-  settingLabel: 'Pick language 📝 ',
+  settingHeader: l10nStrings.settingLanguageHeader || 'Language',
+  settingName: l10nStrings.settingLanguageName || 'pickLanguage',
+  settingLabel: l10nStrings.settingLanguageLabel || 'Pick language 📝 ',
 
   addProfile(name, suffix, l10nStrings, onChange) {
 
@@ -1673,39 +1673,24 @@ const Translations = {
   },
 
   
-  change(lang) {
-    if (typeof lang === 'string') {
+  change() {
+   	const selected = settings[this.settingName];
     
-      // override, do it via the settings callback
-      return Setting.setValue(this.settingName, lang);
+    if(this.active && selected && this.active.name != selected){
+      console.log("Lang changed to:", selected);
+      
+      memorize('lang', selected);
+      
+      settings[this.settingName] = selected;
+      Setting.save();
+      
+      setTimeout(() => {
+        //Engine.restart();
+      	window.location.reload(); 
+      }, 50);
+      
     }
     
-    const profile = this.active = this.profiles[settings[this.settingName]];
-    
-    if (!profile) return;
-
-    // global attribute
-    $('html').attr('data-lang', profile.name);
-
-    // change handler
-    if (typeof profile.onChange === 'function') profile.onChange.call(profile);
-
-    // has a locale POJO
-    if (profile.l10nStrings && profile.l10nStrings.constructor.name === 'Object') {
-      for (const name in profile.l10nStrings) l10nStrings[name] = profile.l10nStrings[name];
-      UIBar.start();
-      UIBar.start();
-      	
-      	
-    }
-
-    // reset the state to last history moment before the rerun...
-    const previous = State.history.at(-1);
-    if (previous) {
-      for (const k in previous.variables) State.variables[k] = previous.variables[k];
-    }
-
-    Engine.show(); //@TODO There's some discussion in the Discord about this being brittle
   },
   
   
@@ -1737,16 +1722,34 @@ const Translations = {
 	const profiles = Object.values(this.profiles);
     if (!profiles.length) return; // no profiles
 
-    this.active = profiles[0];
+    const storedLangName = recall('lang', profiles[0].name);
+    const profile = this.profiles[storedLangName] || profilesList[0];
+    this.active = profile;
+    
+    settings[this.settingName] = profile.name;
+    
+    
 	this.suffixTester = new RegExp(`-(${profiles.map(p => p.suffix).join('|')})$`);
 
+    
+    $('html').attr('data-lang', profile.name);
+    
+    
+    if(profile.l10nStrings && typeof profile.l10nStrings == 'object') {
+    	for(const name in profile.l10nStrings) {
+         	l10nStrings[name] = profile.l10nStrings[name]; 
+        }
+    }
+    
+    
     // add setting
-    Setting.addHeader(this.settingHeader);
+    Setting.addHeader(l10nStrings.settingLanguageHeader || this.settingHeader);
     Setting.addList(this.settingName, {
-		label: this.settingLabel,
+		label: l10nStrings.settingLanguageLabel || this.settingLabel,
         list: Object.keys(this.profiles),
+      	default: 'Nonsense',
         onChange: this.change.bind(this),
-        onInit: this.change.bind(this)
+        //onInit: this.change.bind(this)
      });
 
     // register onProcess
@@ -1763,18 +1766,18 @@ const Translations = {
   }
 };
 
-   // add language profiles !HERE!
+ 	/*****************************************************
+ 	*************** 	LANGUAGE PROFILES	***************
+ 	*****************************************************/
+
 
    	Translations.addProfile('English', 'en', { 
     
     /*****************************************************
-	ENGLISH
-	locale/TEMPLATE.js – Localization Template
-	Copyright © 2019–2025 Thomas Michael Edwards <thomasmedwards@gmail.com>. All rights reserved.
-	Use of this source code is governed by a BSD 2-clause "Simplified" License, which may be found in the LICENSE file.
-
-	For more information about the guidelines used to create this localization, see:
-		http://www.motoslave.net/sugarcube/2/docs/#guide-localization**********/
+		ENGLISH
+      locale/TEMPLATE.js – Localization Template
+      Copyright © 2019–2025 Thomas Michael Edwards <thomasmedwards@gmail.com>. All rights reserved.
+     BSD 2-clause "Simplified" License**********/
 	
 	textAbort : 'Abort',
 
@@ -1801,7 +1804,7 @@ const Translations = {
 
 	textOk : 'OK',
 
-	textOn : 'On',
+	textOn : 'OnOINK',
 
 	textSave : 'Save',
 
@@ -1942,8 +1945,33 @@ const Translations = {
     
     });
 
-
-	Translations.addProfile('Nonsense', 'nn', { textSave: 'GGOBBLE', restartTitle : 'GOBBLEY' });
+	/*********** NONSENSE *********************/
+	Translations.addProfile('Nonsense', 'nn', { 
+      textSave: 'GGOBBLE', 
+      settingsTitle: 'GOBBLE SET',
+       
+      settingLanguageHeader: 'GOBLANG',
+      settingLanguageLabel: 'GOBBLE LANGUAGE',
+      
+      settingSoundHeader: 'GOBSOUND',
+      settingSoundHeaderDesc: 'GOBDESC SOUND audio volume',
+      settingMuteLabel: 'mute GOBBLES',
+      settingMuteDesc: 'on meanns GOBBLE',
+      settingBgmVolumeLabel: 'GOBBLE volume. 🎵',
+      settingFxVolumeLabel: 'GOBBLE effects volume. 🔔',
+      
+      settingVisualsHeader: 'GOBBLES & Video',
+      settingVisualsHeaderDesc: 'You GOBBLE need to GOOB the page or continue to the next page of the game to see GOBBLES.',
+      settingEnableVideoLabel: 'Show GOBBLES videos 🎥',
+      settingEnableVideoDesc: "'Off' will GOB off GOBBLEY videos. You might want to gob gob gobble motion or to make the game load faster.",
+      settingShowMotionLabel: 'Show GOBBLE and animations 💥',
+      settingShowMotionDesc: "'Off' will GOBBLE animations in the game. It also disables background videos.",
+      settingTextSizeLabel: 'Text GOB Size 🔍', 
+      
+      textOff: 'GOFF',
+      textOn: 'gON',
+      
+      restartTitle : 'GOBBLEY' });
 
 	Translations.addProfile('Português', 'pt', { 
        /****************
@@ -2282,20 +2310,24 @@ function enableSetting(idName){
 }
 
 
-Setting.addHeader("Sound 🔈", "Use the sliders to control the audio volume.");
+Setting.addHeader( l10nStrings.settingSoundHeader || "Sound 🔈",
+                  l10nStrings.settingSoundDesc || "Use the sliders to control the audio volume.");
 
-Setting.addToggle("mute", {
-	label: "Mute sound. 🔇",
-	desc: "On means quiet.",
-	default: false,
-	onInit: muteInitHandler,
-	onChange: muteHandler,
-});
+
+Setting.addToggle("mute", 
+    {
+      label: l10nStrings.settingMuteLabel || "Mute sound. 🔇",
+      desc: l10nStrings.settingMuteDesc || "On means quiet.",
+      default: false,
+      onInit: muteInitHandler,
+      onChange: muteHandler,
+	}
+ );
+
 
 
 Setting.addRange("bgmVolume", {
-		label    : "Music volume. 🎵",
-    //desc     : "Volume control for background music.",
+	label    : l10nStrings.settingBgmVolumeLabel || "Music volume. 🎵",
     min      : 0,
    	max      : 1,
     step     : 0.05,
@@ -2327,8 +2359,7 @@ function bgmVolumeHandler() {
 
 
 Setting.addRange("fxVolume", {
-		label    : "Sound effects volume. 🔔",
-    //desc     : "Volume control for sound effects.",
+	label    : l10nStrings.settingFxVolumeLabel || "Sound effects volume. 🔔",
     min      : 0,
    	max      : 1,
     step     : 0.05,
@@ -2355,10 +2386,45 @@ function fxVolumeHandler() {
 	}
 }
 
+
+function muteInitHandler() {
+	try {
+		muteHandler();
+	}
+	catch (ex) {
+		setTimeout(muteInitHandler, 70); //ms
+	}
+};
+
+
+function muteHandler () {
+	if(settings.mute) {
+		
+  console.log("mute true"); //
+		// Strike out the other volume controls
+		disableSetting("bgmvolume");
+		disableSetting("fxvolume");
+		
+		SimpleAudio.mute(true);
+	}
+	else{
+		
+		SimpleAudio.mute(false);
+		
+		// Remove strikethrough on other volume settings
+		enableSetting("bgmvolume");
+		enableSetting("fxvolume");
+	}	
+}
+
+
+
 /******************************/
 /*   USER VISUAL SETTINGS    */
 /*****************************/
-Setting.addHeader("Visuals & Video", "You might need to reload the page or continue to the next page of the game to see changes.");
+Setting.addHeader(
+  l10nStrings.settingVisualsHeader || "Visuals & Video", 
+  l10nStrings.settingVisualsHeaderDesc || "You might need to reload the page or continue to the next page of the game to see changes.");
 
 
 
@@ -2381,39 +2447,10 @@ var settingEnableVideoHandler = function () {
 
 
 
-function muteInitHandler() {
-	try {
-		muteHandler();
-	}
-	catch (ex) {
-		setTimeout(muteInitHandler, 70); //ms
-	}
-};
-
-
-function muteHandler () {
-	if(settings.mute) {
-		
-		// Strike out the other volume controls
-		disableSetting("bgmvolume");
-		disableSetting("fxvolume");
-		
-		SimpleAudio.mute(true);
-	}
-	else{
-		
-		SimpleAudio.mute(false);
-		
-		// Remove strikethrough on other volume settings
-		enableSetting("bgmvolume");
-		enableSetting("fxvolume");
-	}	
-}
-
 
 Setting.addToggle("enableVideo", {
-				label: "Show background videos 🎥",
-				desc: "'Off' will turn off background videos. You might want this to reduce motion or to make the game load faster.",
+				label: l10nStrings.settingEnableVideoLabel || "Show background videos 🎥",
+				desc: l10nStrings.settingEnableVideoDesc || "'Off' will turn off background videos. You might want this to reduce motion or to make the game load faster.",
 				default: true,
 				onInit: settingEnableVideoHandler,
 				onChange: settingEnableVideoHandler,
@@ -2449,8 +2486,8 @@ mediaQuery.addEventListener('change', () => {
 });
 	
 Setting.addToggle("showMotion", {
-	label: "Show motion and animations 💥",
-	desc: "'Off' will reduce animations in the game. It also disables background videos. (This setting also tries to respect your operating system preferences on motion.)",
+	label: l10nStrings.settingShowMotionLabel || "Show motion and animations 💥",
+	desc: l10nStrings.settingShowMotionDesc || "'Off' will reduce animations in the game. It also disables background videos. (This setting also tries to respect your operating system preferences on motion.)",
 	default: !$reduceMotionInit,
 	onInit: settingShowMotionHandler,
 	onChange: settingShowMotionHandler,
@@ -2458,9 +2495,9 @@ Setting.addToggle("showMotion", {
 
 
 Setting.addList("textSize", {
-	label    : "Text Size 🔍",
-	list	: ["75%", "100% (Default)", "120%", "130%", "150%", "200%"],
-  	default	 :	"100% (Default)",
+	label    : l10nStrings.settingTextSizeLabel || "Text Size 🔍",
+	list	: ["75%", "100%*", "120%", "130%", "150%", "200%"],
+  	default	 :	l10nStrings.settingTextSizeDefault || "100%*",
     onChange : textSizeHandler,
 });
 
@@ -2469,7 +2506,7 @@ Setting.addList("textSize", {
 function textSizeHandler () {
   var fontSizeMap = {
     				"75%": 0.75, 
-                     "100% (Default)" : 1,
+                     "100%*" : 1,
                      "120%" : 1.2,
     				 "130%" : 1.3,
                      "150%" : 1.5,
