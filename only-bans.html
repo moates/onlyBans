@@ -1681,8 +1681,6 @@ const Translations = {
       
       memorize('lang', selected);
       
-      settings[this.settingName] = selected;
-      Setting.save();
       
       setTimeout(() => {
         //Engine.restart();
@@ -1722,7 +1720,9 @@ const Translations = {
 	const profiles = Object.values(this.profiles);
     if (!profiles.length) return; // no profiles
 
+    
     const storedLangName = recall('lang', profiles[0].name);
+    console.log("Recallend lang,", storedLangName);
     const profile = this.profiles[storedLangName] || profilesList[0];
     this.active = profile;
     
@@ -1737,6 +1737,7 @@ const Translations = {
     
     if(profile.l10nStrings && typeof profile.l10nStrings == 'object') {
     	for(const name in profile.l10nStrings) {
+          	if(name == 'textOn'){console.log("found textOn");}
          	l10nStrings[name] = profile.l10nStrings[name]; 
         }
     }
@@ -1747,9 +1748,9 @@ const Translations = {
     Setting.addList(this.settingName, {
 		label: l10nStrings.settingLanguageLabel || this.settingLabel,
         list: Object.keys(this.profiles),
-      	default: 'Nonsense',
+      	default: profile.name,
         onChange: this.change.bind(this),
-        //onInit: this.change.bind(this)
+        onInit: this.change.bind(this)
      });
 
     // register onProcess
@@ -1778,39 +1779,47 @@ const Translations = {
       locale/TEMPLATE.js – Localization Template
       Copyright © 2019–2025 Thomas Michael Edwards <thomasmedwards@gmail.com>. All rights reserved.
      BSD 2-clause "Simplified" License**********/
-	
+
 	textAbort : 'Abort',
-
 	textAborting : 'Aborting',
-
 	textCancel : 'Cancel',
-
 	textClear : 'Clear',
-
 	textClose : 'Close',
-
 	textDelete : 'Delete',
-
 	textExport : 'Export',
 
 	// In lowercase, if possible.
 	textIdentity : 'game',
-
 	textImport : 'Import',
-
 	textLoad : 'Load',
-
 	textOff : 'Off',
-
 	textOk : 'OK',
-
-	textOn : 'OnOINK',
-
+	textOn : 'On',
 	textSave : 'Save',
-
-	// (noun) chance to act (in a game), moment, period
 	textTurn : 'Turn',
 
+      
+	/**************
+		CUSTOM SETTINGS.
+	**************/
+      settingLanguageHeader: 'Language',
+      settingLanguageLabel: 'Pick language 📝 ',
+      settingSoundHeader:  "Sound 🔈",
+      settingSoundDesc: "Use the sliders to control the audio volume.",
+      settingMuteLabel: 'Mute sound. 🔇',
+      settingMuteDesc: 'On means quiet.',
+      settingBgmVolumeLabel: 'Music volume. 🎵',
+      settingFxVolumeLabel: 'Sound effects volume. 🔔',
+
+      settingVisualsHeader: 'Visuals & Video',
+      settingVisualsHeaderDesc: 'You might need to reload the page or continue to the next page of the game to see changes.',
+      settingEnableVideoLabel: 'Show background videos 🎥',
+      settingEnableVideoDesc: "'Off' will turn off background videos. You might want this to reduce motion or to make the game load faster.",
+      settingShowMotionLabel: 'Show motion and animations 💥',
+      settingShowMotionDesc: "'Off' will reduce animations in the game. It also disables background videos.",
+      settingTextSizeLabel: 'Text Size 🔍', 
+
+      
 
 	/**************
 		Errors.
@@ -1825,75 +1834,40 @@ const Translations = {
 	**************/
 
 	warningNoStorage : 'Usable storage APIs are missing. Possible causes are a disabled third-party cookie setting, which also affects Web Storage, or a private browsing mode.',
-
 	warningDegraded : 'Some capabilities required to support this {textIdentity} are missing, so it is running in a degraded mode. You may be able to continue, however, some parts may not work properly.',
-
 	warningNoSaves : 'Some capabilities required to support saves are missing, so saves have been disabled for this session.',
-
 	saveErrorDisallowed : 'Saving is currently disallowed.',
-
 	saveErrorDecodeFail : 'unable to decode save, likely due to corruption',
-
 	saveErrorDiskLoadFail : 'failed to load save file from disk',
-
 	saveErrorIdMismatch : 'save is from the wrong {textIdentity}',
-
 	saveErrorInvalidData : 'save is missing required data, likely due to corruption',
-
 	saveErrorNonexistent : 'save does not exist',
-
 	uiBarLabelToggle : 'Toggle the UI bar',
-
 	uiBarLabelBackward : 'Go backward within the {textIdentity} history',
-
 	uiBarLabelForward : 'Go forward within the {textIdentity} history',
-
 	uiBarLabelJumpto : 'Jump to a specific point within the {textIdentity} history',
-
 	alertTitle : 'Alert',
-
 	restartTitle : 'Restart',
-
 	restartMesgPrompt : 'All unsaved progress will be lost. Are you sure that you want to restart?',
-
 	continueTitle : 'Continue',
-
 	savesTitle : 'Saves',
-
 	savesHeaderBrowser : 'In Browser',
-
 	savesHeaderDisk : 'On Disk',
-
 	savesLabelBrowserClear : 'Clear all browser saves',
-
 	savesLabelBrowserExport : 'Export browser saves to bundle',
-
 	savesLabelBrowserImport : 'Import browser saves from bundle',
-
 	savesLabelDiskLoad : 'Load from disk',
-
 	savesLabelDiskSave : 'Save to disk',
-
 	savesTextBrowserAuto : 'Auto',
-
 	savesTextBrowserSlot : 'Slot',
-
 	savesTextNoDate : 'unknown date',
-
 	settingsTitle : 'Settings',
-
 	settingsTextReset : 'Reset to Defaults',
-
 	errorViewTitle : 'Error',
-
 	errorViewLabelToggle : 'Toggle the error view',
-
 	debugBarLabelToggle : 'Toggle the debug bar',
-
 	debugBarLabelViewsToggle : 'Toggle the debug views',
-
 	debugBarLabelWatchAdd : 'Add a new watch',
-
 	debugBarLabelWatchAll : 'Watch all',
 
 	debugBarLabelWatchClear : 'Clear all watches',
@@ -1973,83 +1947,71 @@ const Translations = {
       
       restartTitle : 'GOBBLEY' });
 
-	Translations.addProfile('Português', 'pt', { 
-       /****************
+
+	Translations.addProfile('Português', 'pt', {        
+      /****************
        PORTUEGUESE
         locale/pt-BR.js – Português (Brazil)
         Localization by: Janos Biro (https://janosbiro.itch.io/).
         Copyright © 2018–2025 Thomas Michael Edwards <thomasmedwards@gmail.com>. All rights reserved.
-        Use of this source code is governed by a BSD 2-clause "Simplified" License, which may be found in the LICENSE file.
-
-        For more information about the guidelines used to create this localization, see:
-            http://www.motoslave.net/sugarcube/2/docs/#guide-localization
-
+        BSD 2-clause "Simplified" License
         ******************/
 
         textAbort : 'Abortar',
-
         textAborting : 'Abortando',
-
         textCancel : 'Cancelar',
-
         textClear : 'Limpar',
-
         textClose : 'Fechar',
-
         textDelete : 'Apagar',
-
         textExport : 'Exportar',
 
         // In lowercase, if possible.
         textIdentity : 'jogo',
-
         textImport : 'Importar',
-
         textLoad : 'Carregar',
-
         textOff : 'Desligado',
-
         textOk : 'OK',
-
         textOn : 'Ligado',
-
         textSave : 'Salvar',
-
-        // (noun) chance to act (in a game), moment, period
         textTurn : 'Turno',
 
-        // NOTE: `passage` is supplied locally.
         errorNonexistentPassage : 'a passagem "{passage}" não existe',
-
         warningNoStorage : 'Todas as APIs de armazenamento utilizáveis estão ausentes. As possíveis causas são uma configuração de cookie de terceiros desativada, que também afeta o Web Storage, ou um modo de navegação privada.',
-
         warningNoWebStorage : 'A API de armazenamento na Web está ausente, portanto, este {textIdentity} está sendo executado em um modo degradado. Talvez você consiga continuar, mas algumas partes podem não funcionar corretamente.',
-
         warningDegraded : 'Alguns recursos necessários para dar suporte a esse {textIdentity} estão ausentes, portanto, ele está sendo executado em um modo degradado. Talvez você consiga continuar, mas algumas partes podem não funcionar corretamente.',
-
         warningNoSaves : 'Alguns recursos necessários para suportar salvamentos estão ausentes, portanto, os salvamentos foram desativados para esta sessão.',
-
         saveErrorDisallowed : 'No momento, não é permitido salvar.',
-
         saveErrorDecodeFail : 'incapaz de decodificar o salvamento, provavelmente devido a corrupção',
-
         saveErrorDiskLoadFail : 'falha ao carregar o arquivo salvo do disco',
-
         saveErrorIdMismatch : 'o salvamento é do {textIdentity} errado',
-
         saveErrorInvalidData : 'o salvamento está sem os dados necessários, provavelmente devido a corrupção',
-
         saveErrorNonexistent : 'o salvamento não existe',
-
         uiBarLabelToggle : 'Alternar a barra da interface do usuário',
-
         uiBarLabelBackward : 'Retroceder no histórico do {textIdentity}',
-
         uiBarLabelForward : 'Avançar no histórico do {textIdentity}',
-
-        // [DEPRECATED]
         uiBarLabelJumpto : 'Ir para um ponto específico no histórico do {textIdentity}',
 
+      /**************
+		CUSTOM SETTINGS.
+		**************/
+      settingLanguageHeader: 'Idioma',
+      settingLanguageLabel: 'Alterar idioma 📝 ',
+
+      settingSoundHeader:  "Som 🔈",
+      settingSoundDesc: "Use os botões deslizantes para controlar o volume do áudio.",
+      settingMuteLabel: 'Silenciar áudio. 🔇',
+      settingMuteDesc: '"On" significa mudo',
+      settingBgmVolumeLabel: 'Volume da música. 🎵',
+      settingFXVolumeLabel: 'Volume dos efeitos sonoros. 🔔',
+      settingVisualsHeader: 'Vídeos & Imagens',
+      settingVisualsHeaderDesc: '"Pode ser necessário recarregar a página ou avançar para a próxima página do jogo para ver as alterações."',
+      settingEnableVideoLabel: 'Mostrar vídeos de fundo 🎥',
+      settingEnableVideoDesc: "'Desligado' desativará os vídeos de fundo. Você pode querer fazer isso para reduzir o movimento ou para que o jogo carregue mais rápido.",
+      settingShowMotionLabel: 'Mostrar movimento e animações 💥',
+      settingShowMotionDesc: "'Desligado' reduzirá as animações no jogo. Também desativa os vídeos de fundo. (Essa configuração também tenta respeitar as preferências de movimento do seu sistema operacional.)",
+      settingTextSizeLabel: 'Tamanho do texto 🔍', 
+      
+      
 
         /**************
             Dialogs.
@@ -2155,11 +2117,9 @@ const Translations = {
     
     });
    
-   // call the init function
+   // INTIATLIZE TRANSLATIONS
    Translations.init();
-
    setup.Translations = Translations;
-
 
 
 /*********************/
