@@ -1722,7 +1722,6 @@ const Translations = {
 
     
     const storedLangName = recall('lang', profiles[0].name);
-    console.log("Recallend lang,", storedLangName);
     const profile = this.profiles[storedLangName] || profilesList[0];
     this.active = profile;
     
@@ -1733,11 +1732,10 @@ const Translations = {
 
     
     $('html').attr('data-lang', profile.name);
-    
+    document.documentElement.setAttribute("lang", profile.suffix);
     
     if(profile.l10nStrings && typeof profile.l10nStrings == 'object') {
     	for(const name in profile.l10nStrings) {
-          	if(name == 'textOn'){console.log("found textOn");}
          	l10nStrings[name] = profile.l10nStrings[name]; 
         }
     }
@@ -2126,7 +2124,7 @@ const Translations = {
 /*     HTML MAGIC    */
 /*********************/
 // Set the document language
-document.documentElement.setAttribute("lang", 'en');
+//document.documentElement.setAttribute("lang", 'en');
 
 // Remove an empty header injected by the engine
 //document.getElementById('ui-dialog-title').remove();
