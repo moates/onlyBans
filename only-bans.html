@@ -1657,6 +1657,8 @@ console.log("gallery,", $isGalleryMode);
 /*********************/
 /*    TRANSLATION    */
 /*********************/
+
+
 // Adapted an incredible tool from Maliface!! 
 // https://github.com/MalifaciousGames/Mali-s-Scripts/blob/main/sugarcube-scripts/translations-api/translations-api.js
 
@@ -1680,11 +1682,13 @@ const Translations = {
 
   
   change() {
+    console.log("Translation CHANGE()");
    	const selected = settings[this.settingName];
     
     if(this.active && selected && this.active.name != selected){
-      console.log("Lang changed to:", selected);
+      console.log("Lang changed by user to:", selected);
       
+      console.log("Memorizing language", selected);
       memorize('lang', selected);
       
       
@@ -1721,23 +1725,57 @@ const Translations = {
     }  
   },
 
+	
+  	BCPtoName(BCPcodes) {
+      //takes a BCP47 code, finds closest language in existing profiles 
+      if (!BCPcodes || !BCPcodes.length) return;
+      
+      const profiles = 	 Object.values(this.profiles);
+      const  profilesBySuffix = Object.fromEntries(profiles.map(profile => [profile.suffix, profile]));	
+    
+      for(let code of BCPcodes){    
+        if (typeof code !== 'string') continue;
+        try {
+        	const BCPlang = new Intl.Locale(code).language || '';
+            if (BCPlang in profilesBySuffix){
+              console.log("Found translation profile matching user preferences", code, profilesBySuffix[BCPlang].name);
+              
+              
+              return profilesBySuffix[BCPlang].name; 
+            }
+        }        
+        catch (e) {
+          console.warn('Invalid BCP47 tag encountered: "${code}"', e);
+        }
+      }
+      
+      console.log("Found no browser languages matching our available translations.");
+      return ''; //no matches 
+    },
+
   
   init() {
+    const defaultName = "English";
 	const profiles = Object.values(this.profiles);
     if (!profiles.length) return; // no profiles
 
+    var gameLang = '';
+    const storedLangName = recall('lang'); // set by past user in Settings
+    const browserLangOptions = navigator.languages || [navigator.language]; 
+    const browserLangName = this.BCPtoName(browserLangOptions); //browser preference
     
-    const storedLangName = recall('lang', profiles[0].name);
-    const profile = this.profiles[storedLangName] || profilesList[0];
+    // try previous Settings lang, then browser preference, else default to English
+    if(storedLangName) { gameLang = storedLangName; console.log("Using stored lang preference", storedLangName);}
+    else if(browserLangName){ gameLang = browserLangName; console.log("Using browser preference", browserLangName);}
+    else{ gameLang = 'English'; console.log("Using default lang");}
+    //const gameLang = storedLangName || browserLangName || 'English'; 
+
+    const profile = this.profiles[gameLang] || this.profiles[0];
     this.active = profile;
-    
     settings[this.settingName] = profile.name;
     
     
 	this.suffixTester = new RegExp(`-(${profiles.map(p => p.suffix).join('|')})$`);
-
-    
-    $('html').attr('data-lang', profile.name);
     document.documentElement.setAttribute("lang", profile.suffix);
     
     if(profile.l10nStrings && typeof profile.l10nStrings == 'object') {
@@ -1774,7 +1812,6 @@ const Translations = {
  	/*****************************************************
  	*************** 	LANGUAGE PROFILES	***************
  	*****************************************************/
-
 
    	Translations.addProfile('English', 'en', { 
     
@@ -2059,6 +2096,7 @@ const Translations = {
     });
    
    // INTIATLIZE TRANSLATIONS
+console.log("Initializing Translations");
    Translations.init();
    setup.Translations = Translations;
 
@@ -2633,6 +2671,8 @@ $(document).on(':passagedisplay', function (ev) {
 });
 
 
+
+
 /*********************/
 /* BACKGROUND VIDEO  */
 /*********************/
@@ -2748,7 +2788,6 @@ Photo.prototype.getPostOutcome = function(outcomeDistribution) {
 }
 
 
-
 /* DEBUG UTILITIES */
 
 /* Spit out all passage names */
@@ -2853,7 +2892,9 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 
 
 &lt;h2&gt;&lt;&lt;back &quot;Take me back to the game.&quot;&gt;&gt;&lt;/h2&gt;
-</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="125,50" size="100,100">/* PLAY MODES */
+</tw-passagedata><tw-passagedata pid="7" name="StoryInit" tags="" position="125,50" size="100,100">&lt;&lt;script&gt;&gt;console.log(&quot;Start of StoryInit&quot;);&lt;&lt;/script&gt;&gt;
+
+/* PLAY MODES */
 /* &lt;&lt;$isGalleryMode&gt;&gt; is controlled by Javascript, disables some features */ 
 /* &lt;&lt;$isQATestMode&gt;&gt; is controlled by the Javascript */
 
