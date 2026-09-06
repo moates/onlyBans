@@ -1683,8 +1683,8 @@ const Translations = {
       
       
       setTimeout(() => {
-        //Engine.restart();
-      	window.location.reload(); 
+      	//window.location.reload(); 
+        Engine.restart(); //Need this to reinitialize StoryVars
       }, 50);
       
     }
@@ -4991,7 +4991,58 @@ E agora cabe a você
 
 
 
-</tw-passagedata><tw-passagedata pid="126" name="StoryVars-pt" tags="" position="175,150" size="100,100">&lt;&lt;set $playerName to &#39;@PORTYGUESE&#39;&gt;&gt;
+</tw-passagedata><tw-passagedata pid="126" name="StoryVars-pt" tags="" position="175,150" size="100,100">&lt;&lt;set $playerName to &#39;@DliciaDoce&#39;&gt;&gt;
+
+&lt;&lt;set $ritualOffering to &quot;mouse&quot;&gt;&gt;
+&lt;&lt;set $ritualOfferingPrepend to &quot;um&quot;&gt;&gt;
+
+
+
+/* STATS */
+&lt;&lt;set $shadowBanFacts to [
+	  &#39;&quot;Estamos reduzindo a disseminação de posts que são inapropriados, mas que não vão contra as diretrizes, limitando sua recomendação em nossas páginas Explorar e hashtags. Por exemplo, um post sexualmente sugestivo ainda aparecerá no Feed se você seguir a conta que o posta, mas esse tipo de conteúdo pode não aparecer para a comunidade mais ampla.&quot; –Instagram&#39;,
+		&#39;Um shadowban garante que conteúdos que as plataformas consideram inapropriado, de alto risco ou de baixo valor seja invisível para outros usuários, mas ainda permite que uma conta permaneça na plataforma para gerar receita publicitária com o indivíduo que sofreu o shadowban.&#39;,
+		  &#39;Você pode sofrer shadowban por seguir outros profissionais do sexo. 73% dos profissionais do sexo já tiveram o conteúdo de seus amigos suprimido de suas linhas do tempo pelas plataformas de rede social.&#39;,
+		  &#39;59% dos profissionais do sexo descobriram que seu nome de usuário não aparece nas buscas.&#39;,
+		  &#39;55% das pessoas que já fizeram trabalho sexual evitam palavras específicas para evitar shadowban. Você pode sofrer shadowban por usar frases e hashtags banidas, como #garotaasiatica, #garotascomcurvas, ou #lesbica.&#39;
+	  ] &gt;&gt;
+      
+ &lt;&lt;set $tooSexyFacts to [
+	&quot;42% dos profissionais do sexo afirmaram já ter recebido um aviso de que sua conta de rede social está prestes a ser excluída.&quot;, 
+	&quot;67% dos profissionais do sexo já tiveram um post removido das redes sociais.&quot;,
+	&quot;Contas de usuários plus size são sinalizadas por nudez excessiva e solicitação sexual com mais frequência do que contas de usuários magros. Mulheres racializadas e pessoas queer sofrem punições e policiamento das plataformas com mais frequência do que suas contrapartes brancas e cishétero.&quot; ,
+  	&quot;42% dos profissionais do sexo afirmaram já ter recebido um aviso de que sua conta de rede social está prestes a ser excluída.&quot;, 
+	&quot;67% dos profissionais do sexo já tiveram um post removido das redes sociais.&quot;,
+	&quot;Contas de usuários plus size são sinalizadas por nudez excessiva e solicitação sexual com mais frequência do que contas de usuários magros. Mulheres racializadas e pessoas queer sofrem punições e policiamento das plataformas com mais frequência do que suas contrapartes brancas e cishétero.&quot; ,
+    ] &gt;&gt;
+
+
+&lt;&lt;set $noReasonFacts to [
+	&quot;77% das pessoas que já fizeram trabalho sexual evitam postar conteúdo por medo de serem expulsas, sofrerem shadowban ou enfrentarem ações legais.&quot;,
+	&quot;68% das pessoas que já fizeram trabalho sexual tiveram conteúdo que não viola nenhuma política de mídia sensível marcado como mídia sensível em seu perfil.&quot;,
+	&quot;74% das pessoas que já fizeram trabalho sexual estão percebendo tendências na supressão de informações nas redes sociais.&quot;,
+    &quot;77% das pessoas que já fizeram trabalho sexual evitam postar conteúdo por medo de serem expulsas, sofrerem shadowban ou enfrentarem ações legais.&quot;,
+	&quot;68% das pessoas que já fizeram trabalho sexual tiveram conteúdo que não viola nenhuma política de mídia sensível marcado como mídia sensível em seu perfil.&quot;,
+	&quot;74% das pessoas que já fizeram trabalho sexual estão percebendo tendências na supressão de informações nas redes sociais.&quot;,
+	 ] &gt;&gt;
+     
+     
+&lt;&lt;set $tipMessages to [
+	&quot;Vem cá bebê 🔥😘&quot;,
+	&quot;🔥Que corpo lindo, gostoso, perfeito🔥&quot;,
+	&quot;Delícia de corpo docinho ❤️&quot;,
+	&quot;Mora onde amor?&quot;,
+	&quot;Amei seu pé&quot;,
+	&quot;Ai se eu te pego!!!!!! 🔥🔥🔥👅👅👅😈&quot;,
+	&quot;Você é maravilhosa minha princesa🔥👅&quot;,
+	&quot;Comia até desmaiar !!!&quot;,
+	&quot;🍒💜🌹linda🐰meu amor🌹💜🍒&quot;,
+	&quot;Gostosura! Te quero demais 🔥🔥🔥👿👿👿😍😘&quot;,
+	&quot;Manda foto de agora??&quot;, 
+	] &gt;&gt;
+
+
+
 </tw-passagedata><tw-passagedata pid="127" name="StoryPhotos" tags="" position="75,275" size="100,100">
 &lt;&lt;set $photoPool to {
 	&quot;default&quot; : new Photo(),
@@ -5098,99 +5149,99 @@ E agora cabe a você
 	&quot;jp&quot; : new Photo(&quot;jp&quot;,
 			&quot;1_JP&quot;,
 			&quot;high&quot;,
-			&quot;PT- A person with medium dark skin, buzzed hair, and a mustache. The person is kneeling in an orange fishnet body stocking and a matching banana hammock. Nipples are faintly visible.&quot;,
-			&quot;A flirty vaporwave photo of a person with medium dark skin, buzzed hair, and a mustache. The person is kneeling in an orange fishnet body stocking and a matching banana hammock. Nipples are faintly visible.&quot;,
+			&quot;Uma pessoa com pele médio-escura, cabelo raspado e bigode. A pessoa está ajoelhada vestindo uma meia-calça laranja de rede e uma cueca banana combinando. Os mamilos estão vagamente visíveis.&quot;,
+			&quot;Uma foto sedutora em vaporwave de uma pessoa com pele médio-escura, cabelo raspado e bigode. A pessoa está ajoelhada vestindo uma meia-calça laranja de rede e uma cueca banana combinando. Os mamilos estão vagamente visíveis.&quot;,
 			&quot;J.P. (Themme)&quot;,
-			&quot;PT I&#39;m a trans diasporic person by way of the Dominican Republic. These pictures were flagged on Instagram, and I&#39;m currently on probation, with my account near deletion.&quot;),
+			&quot;Sou uma pessoa trans diaspórica, vinda da República Dominicana. Estas fotos foram sinalizadas no Instagram e, atualmente, estou em condicional, com a minha conta prestes a ser excluída.&quot;),
 			
 	&quot;quin&quot; : new Photo(&quot;quin&quot;,
 			&quot;3_Quin&quot;,
 			&quot;medium&quot;,
-			&quot;PT A light-skinned, tattooed, thin femme lies chest-down on a cushion with their butt lifted slightly into the air. They are wearing strong eyelines, a nose ring, and pink thong bodysuit lingerie with a few bows. No nipples or genitals are in view.&quot;,
-			&quot;PT A flirty vaporwave photo of a light-skinned, tattooed, thin femme lies chest-down on a cushion with their butt lifted slightly into the air. They are wearing strong eyelines, a nose ring, and pink thong bodysuit lingerie with a few bows. No nipples or genitals are in view.&quot;,
+			&quot;Uma pessoa de pele clara, tatuada e magra está deitada de bruços sobre uma almofada, com a bunda ligeiramente levantada no ar. Está usando delineador forte, um piercing no nariz e uma lingerie rosa com alguns laços. Nenhum mamilo nem genitália está visível.&quot;,
+			&quot;Uma foto sedutora em vaporwave de uma pessoa de pele clara, tatuada e magra está deitada de bruços sobre uma almofada, com a bunda ligeiramente levantada no ar. Está usando delineador forte, um piercing no nariz e uma lingerie rosa com alguns laços. Nenhum mamilo nem genitália está visível.&quot;,
 			&quot;Quin&quot;,
-			&quot;PT I&#39;m a gay, non-binary, Latinx sex worker. I’ve been working for 9 years and have been flagged so many times that I can&#39;t keep count. My personal account of 10 years was taken away from me.&quot;
+			&quot;Sou profissional do sexo gay, não binárie e Latinx. Trabalho há 9 anos e já me sinalizaram tantas vezes que perdi a conta. Minha conta pessoal de 10 anos foi tirada de mim.&quot;
 			),
 			
 	&quot;stonerdomme&quot; : new Photo(&quot;stonerdomme&quot;,
 			&quot;4_Stonerdomme&quot;,
 			&quot;medium&quot;,
-			&quot;PT Stonerdomme (they/them) holds up two peace signs to the camera with their legs spread. Dressed in yellow lingerie, Stonerdomme is a Black, dark-skinned fat person with pink and purple-dyed natural hair, a belly, curves, and a devilish smirk.&quot;,
-			&quot;PT A flirty vaporwave graphic. Stonerdomme (they/them) holds up two peace signs to the camera with their legs spread. Dressed in yellow lingerie, Stonerdomme is a Black, dark-skinned fat person with pink and purple-dyed natural hair, a belly, curves, and a devilish smirk.&quot;,
+			&quot;Stonerdomme (elu/delu) faz dois sinais de paz para a câmera com as pernas abertas. Usando lingerie amarela, Stonerdomme é uma pessoa negra, de pele escura e gorda, com cabelo natural pintado de rosa e roxo, barriga, curvas e um sorriso diabólico.&quot;,
+			&quot;Uma foto sedutora em vaporwave. Stonerdomme (elu/delu) faz dois sinais de paz para a câmera com as pernas abertas. Usando lingerie amarela, Stonerdomme é uma pessoa negra, de pele escura e gorda, com cabelo natural pintado de rosa e roxo, barriga, curvas e um sorriso diabólico.&quot;,
 			&quot;Stonerdomme&quot;,
-			&quot;PT I&#39;m Black, pansexual, and non-binary. This image was used against me in a Twitter debate. Someone reported my content and they banned me.&quot;	
+			&quot;Sou uma pessoa negra, pansexual e não binária. Esta imagem foi usada contra mim em um debate no Twitter. Alguém denunciou meu conteúdo e me baniram.&quot;	
 		),
 		
 	&quot;fae&quot; : new Photo(&quot;fae&quot;,
 			&quot;12_Fae&quot;,
 			&quot;low&quot;,
-			&quot;PT A Black, light skinned femme with tight curly hair, glasses, and dark lipstick gazes listlessly at the camera. They are wearing a leather chest harness and fishnet tights. Their arms cover most of their flat chest, but the faint outline of a nipple is visible.&quot;,
-			&quot;PT A flirty vaporwave photo of a Black, light skinned femme with tight curly hair, glasses, and dark lipstick gazes listlessly at the camera. They are wearing a leather chest harness and fishnet tights. Their arms cover most of their flat chest, but the faint outline of a nipple is visible.&quot;,
-			&quot;PT Fae Brite&quot;,
-			&quot;PT I&#39;m AMAB (assigned male at birth) and non-binary so it&#39;s frustrating to have my body policed in a way where the more feminine I look, the more incriminating it is and thus more of a liability.&quot;
+			&quot;Uma pessoa feminina em negra de pele clara, cabelos cacheados e apertados, óculos e batom escuro olha apaticamente para a câmera. Está usando um arnês de couro no peito e meias arrastão. Seus braços cobrem a maior parte do seu peito plano, mas o contorno tênue de um mamilo é visível.&quot;,
+			&quot;Uma foto sedutora em vaporwave de uma pessoa feminina em negra de pele clara, cabelos cacheados e apertados, óculos e batom escuro olha apaticamente para a câmera. Está usando um arnês de couro no peito e meias arrastão. Seus braços cobrem a maior parte do seu peito plano, mas o contorno tênue de um mamilo é visível.&quot;,
+			&quot;Fae Brite&quot;,
+			&quot;Sou DHAN (designade homem ao nascer) e não binárie, então é frustrante ter o meu corpo policiado de forma que quanto mais feminine pareço, mais incriminatório é e, portanto, mais um fardo.&quot;
 		),
 	
 	&quot;amala&quot; : new Photo(&quot;amala&quot;,
 			&quot;5_Amala&quot;,
 			&quot;low&quot;,
-			&quot;PT Amala Azul leans shirtless toward the camera with one hand covering both breasts. Amala is Black and wear a checkered skirt, hoop earrings, a head scarf, and fantastic eyebrows. No nipples are showing.&quot;,
-			&quot;PT A flirty vaporwave photo. Someone leans shirtless toward the camera with one hand covering both breasts. Amala is Black and wear a checkered skirt, hoop earrings, a head scarf, and fantastic eyebrows. No nipples are showing.&quot;,
+			&quot;Amala Azul inclina-se sem camisa em direção à câmera, com uma mão cobrindo ambos os seios. Amala é uma pessoa negra e está usando uma saia xadrez, brincos de argola, um lenço na cabeça e sobrancelhas fantásticas. Nenhum mamilo está à mostra.&quot;,
+			&quot;Uma foto sedutora em vaporwave. Uma pessoa inclina-se sem camisa em direção à câmera, com uma mão cobrindo ambos os seios. Amala é uma pessoa negra e está usando uma saia xadrez, brincos de argola, um lenço na cabeça e sobrancelhas fantásticas. Nenhum mamilo está à mostra..&quot;,
 			&quot;Amala Azul&quot;,
-			&quot;PT I&#39;m a Black, queer, non-binary, and disabled sex worker. This photo was deleted for violating community guidelines, and I was threatened with account deletion if I continued. I no longer promote on Instagram due to the immense censorship and whorephobia.&quot;
+			&quot;Sou profissional do sexo negre, queer, não binárie e com deficiência. Esta foto foi excluída por violar as diretrizes da comunidade, e ameaçaram excluir minha conta se eu continuasse. Não divulgo mais no Instagram por conta da imensa censura e putafobia.&quot;
 	),	
 	
 	&quot;nimina&quot; : new Photo(&quot;nimina&quot;,
 			&quot;6_Nimina&quot;,
 			&quot;low&quot;,
-			&quot;A medium-skinned, large person with a bright green wig winks and holds two peace signs up. They are wearing a sleeveless velvety pink top with the word Angel, glasses, impeccable stilleto nails, dimple piercings, and a studded leather collar. There is a small amount of cleavage visible.&quot;,
-			&quot;Flirty vaporwave. A medium-skinned, large person with a bright green wig winks and holds two peace signs up. They are wearing a sleeveless velvety pink top with the word Angel, glasses, impeccable stilleto nails, dimple piercings, and a studded leather collar. There is a small amount of cleavage visible.&quot;,
+			&quot;Uma pessoa grande, de tom de pele médio, com uma peruca verde brilhante, pisca e faz dois sinais de paz. Está usando uma blusa rosa aveludada sem manga com a palavra Angel, óculos, unhas impecáveis, piercings nas bochechas e uma gargantilha de couro com tachas. Há um pequeno decote visível.&quot;,
+			&quot;Uma foto sedutora em vaporwave.Uma pessoa grande, de tom de pele médio, com uma peruca verde brilhante, pisca e faz dois sinais de paz. Está usando uma blusa rosa aveludada sem manga com a palavra Angel, óculos, unhas impecáveis, piercings nas bochechas e uma gargantilha de couro com tachas. Há um pequeno decote visível.&quot;,
 			&quot;Nimina Harley&quot;,
-			&quot;This image was deleted only minutes after uploading, and I am fully dressed. I’m queer and a person of color.&quot;
+			&quot;Esta imagem foi excluída minutos após ser publicada, e estou totalmente com roupa. Sou queer e uma pessoa racializada.&quot;
 	),
 	
 	&quot;hellbait&quot; : new Photo(&quot;hellbait&quot;,
 			&quot;11_Hellbait&quot;,
 			&quot;medium&quot;,
-			&quot;A pale-skinned Vietnamese woman with long black hair and half bleached bangs holds two black butt plugs to her head like alien antennae. A yellow Tellytubby toy sits on her lap. She is topless, wearing high-waisted black lace underwear. Her hair fully covers her breasts. Her mouth is held open with a metal gag device, tongue out, as she gazes directly at you.&quot;,
-			&quot;Flirty vaporwave photo of a pale-skinned Vietnamese woman with long black hair and half bleached bangs holds two black butt plugs to her head like alien antennae. A yellow Tellytubby toy sits on her lap. She is topless, wearing high-waisted black lace underwear. Her hair fully covers her breasts. Her mouth is held open with a metal gag device, tongue out, as she gazes directly at you.&quot;,
+			&quot;Uma mulher vietnamita de pele clara, cabelo longo preto e franja parcialmente descolorida segura dois plugs anais pretos na cabeça como antenas alienígenas. Um Tellytubby amarelo de brinquedo está em seu colo. Ela está sem camisa, vestindo uma calcinha preta de renda de cintura alta. Seu cabelo cobre totalmente os seios. Sua boca está aberta com uma mordaça de metal, língua para fora, enquanto ela olha diretamente para você.&quot;,
+			&quot;Uma foto sedutora em vaporwave de uma mulher vietnamita de pele clara, cabelo longo preto e franja parcialmente descolorida segura dois plugs anais pretos na cabeça como antenas alienígenas. Um Tellytubby amarelo de brinquedo está em seu colo. Ela está sem camisa, vestindo uma calcinha preta de renda de cintura alta. Seu cabelo cobre totalmente os seios. Sua boca está aberta com uma mordaça de metal, língua para fora, enquanto ela olha diretamente para você.&quot;,
 			&quot;Hellbait&quot;,
-			&quot;I&#39;m Vietnamese and queer. My image was removed for &#39;sexual activity&#39; on Instagram. For the next two weeks, I did not show up in search results or on my followers&#39; feeds at all.&quot;	
+			&quot;Sou vietnamita e queer. Minha imagem foi removida do Instagram por “atividade sexual”. Nas duas semanas seguintes, não apareci em resultados de pesquisa nem nos feeds dos meus seguidores.&quot;	
 	),
 	
 	&quot;karren&quot; : new Photo(&quot;karren&quot;,
 			&quot;9_Karren1&quot;,
 			&quot;high&quot;,
-			&quot;Karren is a thin, shirtless woman with has light skin, dark hair, and a perfect manicure. She sultrily slides one hand under sheer tights into her crotch. The portion of her face above the lips has been cropped off of the intimate monochrome image.&quot;,
-			&quot;A flirty vaporwave stylized photo. Karren is a thin, shirtless woman with has light skin, dark hair, and a perfect manicure. She sultrily slides one hand under sheer tights into her crotch. The portion of her face above the lips has been cropped off of the intimate image.&quot;,
+			&quot;Karren é uma mulher magra, sem camisa, de pele clara, cabelo escuro e uma manicure perfeita. Ela desliza sensualmente uma mão sob meias transparentes até sua virilha. A parte do rosto acima dos lábios foi cortada da imagem monocromática íntima.&quot;,
+			&quot;Uma foto sedutora em vaporwave. Uma mulher magra, sem camisa, de pele clara, cabelo escuro e uma manicure perfeita. Ela desliza sensualmente uma mão sob meias transparentes até sua virilha. A parte do rosto acima dos lábios foi cortada da imagem monocromática íntima.&quot;,
 			&quot;Karren&quot;,
-			&quot;I am an erotic artist in the Philippines using photography and collage to express myself. Censorship on almost all platforms has made it difficult for me to pursue my art.&quot;	
+			&quot;Sou uma artista erótica nas Filipinas e uso a fotografia e a colagem para me expressar. A censura em quase todas as plataformas tem dificultado a minha atividade artística.&quot;	
 	),
 	
 	&quot;karren2&quot; : new Photo(&quot;karren2&quot;,
 			&quot;10_Karren2&quot;,
 			&quot;high&quot;,
-			&quot;Karren is a voluptuous, tan skinned woman standing at an angle slightly away from the camera. She is shirtless with dark brief underwear. One nipple is visible.&quot;,
-			&quot;A flirty vaporwave-styled photo. A voluptuous, tan skinned woman standing at an angle slightly away from the camera. She is shirtless with dark brief underwear. One nipple is visible.&quot;,
+			&quot;Karren é uma mulher voluptuosa, de pele bronzeada, virada ligeiramente de costas para a câmera. Ela está sem camisa, com uma calcinha escura. Um mamilo está visível.&quot;,
+			&quot;Uma foto sedutora em vaporwave. Uma mulher voluptuosa, de pele bronzeada, virada ligeiramente de costas para a câmera. Ela está sem camisa, com uma calcinha escura. Um mamilo está visível.&quot;,
 			&quot;Karren&quot;,
-			&quot;I am an erotic artist in the Philippines using photography and collage to express myself. Censorship on almost all platforms has made it difficult for me to pursue my art.&quot;
+			&quot;Sou uma artista erótica nas Filipinas e uso a fotografia e a colagem para me expressar. A censura em quase todas as plataformas tem dificultado a minha atividade artística.&quot;
 	),
 	
 	&quot;lync2&quot; : new Photo(&quot;lync2&quot;,
 			&quot;8_Lync2&quot;,
 			&quot;high&quot;,
-			&quot;A naked, thin, muscular Black man stares into the camera. The image is cropped at the edge of his groin, revealing the faintest suggestion of genitals. Both nipples are visible. Watermarked with RoyMayh.&quot;,
-			&quot;Flirty, vaporwave styled. A naked, thin, muscular Black man stares into the camera. The image is cropped at the edge of his groin, revealing the faintest suggestion of genitals. Both nipples are visible.&quot;,
+			&quot;Um homem negro, magro, musculoso e nu olha para a câmera. A imagem está cortada na borda de sua virilha, revelando a mais leve sugestão de genitália. Ambos os mamilos estão visíveis. Com marca d&amp;#39;água RoyMayh.&quot;,
+			&quot;Uma foto sedutora em vaporwave. Um homem negro, magro, musculoso e nu olha para a câmera. A imagem está cortada na borda de sua virilha, revelando a mais leve sugestão de genitália. Ambos os mamilos estão visíveis. Com marca d&amp;#39;água RoyMayh.&quot;,
 			&quot;Lync Johnson&quot;,
-			&quot;This image was deleted by Instagram.  I had to crop or edit the photo in order to successfully repost it.&quot;
+			&quot;Esta imagem foi excluída pelo Instagram.  Tive que cortar ou editar a foto para poder repostá-la com sucesso.&quot;
 	),
 	
 	&quot;lync&quot; : new Photo(&quot;lync&quot;,
 			&quot;7_Lync1&quot;,
 			&quot;high&quot;,
-			&quot;A thin, muscular Black man stares into the camera. One hand lifts up his shirt above his nipple. The other hand reaches down into his pants, revealing the edge of public hair. Watermarked RoyMayh.&quot;,
-			&quot;Flirty, vaporwave stylized. A thin, muscular Black man stares into the camera. One hand lifts up his shirt above his nipple. The other hand reaches down into his pants, revealing the edge of public hair.&quot;,
+			&quot;Um homem negro magro e musculoso olha fixamente para a câmera. Uma mão levanta sua camisa acima do mamilo. A outra mão desce até as calças, revelando a borda dos pelos pubianos. Com marca d&amp;#39;água RoyMayh.&quot;,
+			&quot;Uma foto sedutora em vaporwave. Um homem negro magro e musculoso olha fixamente para a câmera. Uma mão levanta sua camisa acima do mamilo. A outra mão desce até as calças, revelando a borda dos pelos pubianos. Com marca d&amp;#39;água RoyMayh.&quot;,
 			&quot;Lync Johnson&quot;,
-			&quot;This image was deleted by Instagram.  I had to crop or edit the photo in order to successfully repost it.&quot;
+			&quot;Esta imagem foi excluída pelo Instagram.  Tive que cortar ou editar a foto para poder repostá-la com sucesso.&quot;
 	),
 }&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
