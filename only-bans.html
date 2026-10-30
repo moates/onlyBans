@@ -2561,7 +2561,7 @@ Macro.add("photogrid", {
 						_wikiString = '<<link '+ '"'+_imgObj.toVaporHTML('selector-photo')+'"'
 							+ " " + _photoOutcome                      		
 							+'>>  <<set $currentPhoto to '+ '"' + _imgKey+'"'
-							+'>>  <<run $availablePhotos.delete('+ '"' +_imgKey+'"'
+							+'>>  <<run $availablePhotos.deleteAll('+ '"' +_imgKey+'"'
 							+')>>	<</link>>';
 					}
 					$photoColumn.wiki(_wikiString);				
