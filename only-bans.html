@@ -2739,8 +2739,9 @@ Photo.prototype.toJSON = function() {
 	//required for macro compatability
 	//copied from Sugarcube docs 
 	// http://www.motoslave.net/sugarcube/2/docs/#guide-tips-non-generic-object-types
-	return JSON.reviveWrapper(String.format(
-		'new Photo({0},{1},{2},{3},{4},{5},{6}, {7})',
+  	
+  	return Serial.createReviver(String.format(
+      'new Photo({0},{1},{2},{3},{4},{5},{6}, {7})',
 		JSON.stringify(this.key),
 		JSON.stringify(this.filename),
 		JSON.stringify(this.riskLevel),
@@ -2748,7 +2749,7 @@ Photo.prototype.toJSON = function() {
 		JSON.stringify(this.vaporAlt),
 		JSON.stringify(this.model),
 		JSON.stringify(this.context),
-	));
+      ));
 };
 
 Photo.prototype.toHTML = function(CSSclass) {
@@ -4071,7 +4072,7 @@ Carteira: US$&lt;&lt;print $income&gt;&gt;
 Semana: $numWeek
 &lt;&lt;if $isQATestMode&gt;&gt;Current Passage: &lt;&lt;print passage()&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="About-pt" tags="" position="400,550" size="100,100">&lt;&lt;back &quot;Voltar ao jogo.&quot;&gt;&gt;
 
-&lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;&lt;h2&gt; Página Inicial &lt;/h2&gt;TEste jogo está disponível em &lt;a href=&quot;https://www.onlybansgame.com&quot;&gt;www.onlybansgame.com&lt;/a&gt;.
+&lt;&lt;browserwindow &quot;&quot; &quot;browser-lightpink-lightpink&quot;&gt;&gt;&lt;h2&gt; Página Inicial &lt;/h2&gt;Teste jogo está disponível em &lt;a href=&quot;https://www.onlybansgame.com&quot;&gt;www.onlybansgame.com&lt;/a&gt;.
 
 &lt;h2&gt;Sobre o Jogo&lt;/h2&gt;&quot;Criado por uma equipe de profissionais do sexo e pessoas aliadas, Criado por uma equipe de profissionais do sexo e pessoas aliadas, OnlyBans é um jogo interativo que examina criticamente o policiamento de corpos marginalizados e trabalho sexual a fim de ensinar às pessoas, com empatia, a respeito da discriminação enfrentada por profissionais do sexo online. Jogadores se deparam com algoritmos de moderação de conteúdo, shadowbanning, políticas de &quot;&quot;nome verdadeiro&quot;&quot;, software de reconhecimento facial e outras ameaças baseadas em experiências reais de profissionais do sexo. Baseado na pesquisa de &lt;a href=&quot;&quot;https://hackinghustling.org/posting-into-the-void-content-moderation/&quot;&quot;&gt;&quot;&quot;&quot;&quot;&quot;&quot;Hacking//Hustling&quot;&quot;&quot;&quot;&quot;&quot;&lt;/a&gt; e envolvendo imagens e histórias reais das próprias pessoas trabalhadoras sexuais, OnlyBans oferece uma visão especulativa de como comunidades marginalizadas podem se unir para protestar contra essas políticas injustas e criar alternativas melhores.
 
