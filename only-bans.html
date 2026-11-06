@@ -1684,7 +1684,7 @@ const Translations = {
 
   
   change() {
-    console.log("Translation CHANGE()");
+    //console.log("Translation CHANGE()");
    	const selected = settings[this.settingName];
     
     if(this.active && selected && this.active.name != selected){
@@ -2098,19 +2098,11 @@ const Translations = {
     });
    
    // INTIATLIZE TRANSLATIONS
-console.log("Initializing Translations");
+	//console.log("Initializing Translations");
    Translations.init();
    setup.Translations = Translations;
 
 
-/*********************/
-/*     HTML MAGIC    */
-/*********************/
-// Set the document language
-//document.documentElement.setAttribute("lang", 'en');
-
-// Remove an empty header injected by the engine
-//document.getElementById('ui-dialog-title').remove();
 
 /*********************/
 /*     TEXT DELAY    */
@@ -2183,7 +2175,7 @@ Macro.add("type2", {
 Macro.add("chat", {
 	tags: null,
 	handler: function () {
-		console.log(this.args);
+		//console.log(this.args);
 		var _speed = '40ms';
 		var _fromWho = (this.args.length > 0) ? this.args[0] : 'from-them';
 		var _delay = (this.args.length > 1) ? this.args[1] : '50ms';
@@ -2691,7 +2683,7 @@ Macro.add("backgroundvideo", {
 				// I can't figure out how to make autoplay work with proper DOM injection
 				var _src1 = '<source type="video/mp4" src=' + '"' +'images\\'+_vidName+'.mp4' +'"' +'>';
 				var _track = '<track src="' + 'images\\default.vtt' + '" ' + 'kind="descriptions" srclang="en" label="English" >';
-					var _bkgVideoOpen = '<video autoplay loop muted id="bgvid">';	
+					var _bkgVideoOpen = '<video autoplay loop muted playsinline id="bgvid">';	
 					var _bkgVideoClose ='</video>';			
 					var _bgvideo = _bkgVideoOpen + _src1 + _track + _bkgVideoClose;
 
