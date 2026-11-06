@@ -3017,7 +3017,7 @@ The OnlyBans narrative is inspired by contributions gathered in workshops we hel
 &lt;&lt;include &quot;StoryPhotos&quot;&gt;&gt;  /*populates photoPool with correct language*/
 
 &lt;&lt;set $availablePhotos to clone(Object.keys($photoPool))&gt;&gt;
-&lt;&lt;run $availablePhotos.delete(&quot;default&quot;) &gt;&gt;
+&lt;&lt;run $availablePhotos.deleteAll(&quot;default&quot;) &gt;&gt;
 
 
 
@@ -3620,7 +3620,7 @@ You get a DM from a sex worker you follow...
 	&lt;&lt;script&gt;&gt;
 	let sv = State.variables;
 	for (let _i = 0; _i &lt; sv.viewedLessons.length; _i++){		
-		sv.lessonNumbers.delete(sv.viewedLessons[_i]);
+		sv.lessonNumbers.deleteAll(sv.viewedLessons[_i]);
 	}
 	
 	let _ln = sv.lessonNumbers.random();
@@ -4475,7 +4475,7 @@ Você aprende algumas ferramentas de redução de danos digital que serão útei
 	&lt;&lt;script&gt;&gt;
 	let sv = State.variables;
 	for (let _i = 0; _i &lt; sv.viewedLessons.length; _i++){		
-		sv.lessonNumbers.delete(sv.viewedLessons[_i]);
+		sv.lessonNumbers.deleteAll(sv.viewedLessons[_i]);
 	}
 	
 	let _ln = sv.lessonNumbers.random();
