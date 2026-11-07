@@ -2532,7 +2532,9 @@ Macro.add("photogrid", {
 					var _imgObj = _photoPool[_queuedPhotos[_i]];					
 					var _photoOutcome = "newFans";	//default outcome
 					_photoOutcome = _imgObj.getPostOutcome(_riskDists[_imgObj.riskLevel]);
-					
+					//TEMP: PHOTO ROUTING LOGIC TEST
+                  console.log(_imgObj, _photoOutcome);
+                  
 					if (_i % _nColumns === 0){ 
 						//every nth photos, start a new column
 						$photoColumn = $(document.createElement("div"))
@@ -2764,13 +2766,10 @@ Photo.prototype.getPostOutcome = function(outcomeDistribution) {
 	Object.keys(outcomeDistribution).forEach(function(key){		
 		_min = _cap;
 		_cap += outcomeDistribution[key];
-		
+      
 		if (_rando <= _cap && _rando > _min) {
-			_outcome = key;			
-		}
-		else{
-		  	_outcome = "newFans"
-          
+			_outcome = key;	
+          return;
 		}
 	});	
   
@@ -2779,7 +2778,7 @@ Photo.prototype.getPostOutcome = function(outcomeDistribution) {
 		console.log("Error: Random math error in getPostOutcome. Min: ", _min, "Cap:", _cap, "random: ", _rando, "Distibrution: ", outcomeDistribution); 
     }
   
-	return _outcome;	
+	return _outcome;
 }
 
 
@@ -3123,7 +3122,7 @@ Let&#39;s count your money!
 
 	&lt;&lt;if _hasEnoughMoney&gt;&gt;&lt;&lt;include &quot;got-money-ending&quot;&gt;&gt;
 	&lt;&lt;else&gt;&gt;&lt;&lt;include &quot;not-enough-money-ending&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
-</tw-passagedata><tw-passagedata pid="15" name="photo-selection" tags="music-outsideclub background-pink-light bookmark" position="600,800" size="200,100">&lt;&lt;silently&gt;&gt;
+</tw-passagedata><tw-passagedata pid="15" name="photo-selection" tags="music-outsideclub background-pink-light bookmark" position="600,825" size="200,100">&lt;&lt;silently&gt;&gt;
   &lt;&lt;run $availablePhotos.shuffle()&gt;&gt;
   [[dummy-&gt;newFans]] 
   [[dummy-&gt;noReasonBan]] 
@@ -4239,7 +4238,7 @@ Isso parece completamente injusto, mas você não é o primeiro profissional do 
 	&lt;&lt;include &quot;permaban-transition&quot;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 	Bem, isso é um saco, mas &lt;&lt;link &quot;vamos pesquisar um pouco?&quot; &quot;community-support&quot; &gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="80" name="toSexyBan-pt" tags="" position="1075,1200" size="100,100">&lt;&lt;silently&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="80" name="tooSexyBan-pt" tags="" position="1075,1200" size="100,100">&lt;&lt;silently&gt;&gt;
 	&lt;&lt;set $numPhotosFlagged += 1&gt;&gt;	
 	&lt;&lt;audio &quot;bad&quot; play&gt;&gt;
     [[dummy-&gt;too-sexy-real-story]] 
@@ -4269,7 +4268,7 @@ Você não conquistou novos fãs e não ganhou dinheiro.
   &lt;em&gt;	&lt;&lt;print $photoPool[$currentPhoto].context &gt;&gt;&lt;/em&gt;
   &lt;&lt;print &quot; -&quot;+$photoPool[$currentPhoto].model &gt;&gt;
 	
-	Real-world fact: _currentStat
+	Um fato: _currentStat
 &lt;&lt;/browserwindow&gt;&gt;
 
 &lt;&lt;if $wasSuspended&gt;&gt;
